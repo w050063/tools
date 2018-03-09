@@ -2,7 +2,7 @@
 # host init scripts
 
 packages_install(){
-yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet bash-completion
+yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet bash-completion net-tools bind-utils tcpdump lsof
 }
 
 pip_setup(){
