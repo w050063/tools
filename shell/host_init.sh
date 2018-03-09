@@ -1,6 +1,8 @@
 #!/bin/env bash
+# host init scripts
+
 packages_install(){
-    yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet bash-completion
+yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet bash-completion
 }
 
 pip_setup(){
@@ -12,6 +14,14 @@ index-url = http://mirrors.aliyun.com/pypi/simple/
 trusted-host=mirrors.aliyun.com
 EOF
 pip install pip --upgrade
+}
+
+sublist3r_install(){
+mkdir -p /data0/src
+cd /data0/src
+git clone https://github.com/aboul3la/Sublist3r.git
+cd Sublist3r/
+pip install -r requirements.txt
 }
 
 main(){
