@@ -1,8 +1,13 @@
 #!/bin/env bash
 # host init scripts
 
+yum_setup(){
+yum install -y wget
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+}
 packages_install(){
-yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet bash-completion net-tools bind-utils tcpdump lsof
+yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet bash-completion net-tools bind-utils tcpdump lsof vim wget
 }
 
 pip_setup(){
@@ -25,6 +30,7 @@ pip install -r requirements.txt
 }
 
 main(){
+yum_setup
 packages_install
 pip_setup
 }
