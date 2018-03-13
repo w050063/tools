@@ -1,6 +1,14 @@
 #!/bin/env bash
 # host init scripts
 
+. /etc/init.d/functions
+
+RED_COLOR='\E[1;31m'
+GREEN_COLOR='\E[1;32m'
+YELLOW_COLOR='\E[1;33m'
+BLUE_COLOR='\E[1;34m'
+RES='\E[0m'
+
 base_dir="/data0/src"
 
 yum_setup(){
@@ -10,7 +18,7 @@ wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 }
 
 packages_install(){
-yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet bash-completion net-tools bind-utils tcpdump lsof vim screen
+yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet lrzsz bash-completion net-tools bind-utils tcpdump lsof vim screen
 }
 
 pip_setup(){
