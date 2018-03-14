@@ -11,6 +11,13 @@ RES='\E[0m'
 
 base_dir="/data0/src"
 
+iptables_setup(){
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+setenforce 0
+}
+
 yum_setup(){
 yum install -y wget
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
@@ -51,6 +58,7 @@ git config --global user.email 1455975151@qq.com
 }
 
 main(){
+iptables_setup
 yum_setup
 packages_install
 pip_setup
