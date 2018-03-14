@@ -8,5 +8,5 @@ spec:
   accessModes:
     - ReadWriteOnce
   nfs:
-    path: /gv0
-    server: master
+    server: node1
+    path: "/data/www-data"
