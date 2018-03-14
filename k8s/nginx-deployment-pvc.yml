@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-deployment-pvc
 spec:
   replicas: 3
   template:
@@ -19,7 +19,6 @@ spec:
         - mountPath: "/usr/share/nginx/html"
           name: nginx-storage
       volumes:
-      - name: mypd
+      - name: nginx-storage
         persistentVolumeClaim:
           claimName: myclaim
-~                               
