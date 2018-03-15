@@ -1,0 +1,7 @@
+---
+- hosts: local
+  remote_user: root
+  become: no
+
+  roles:
+    - common

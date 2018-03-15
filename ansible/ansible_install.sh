@@ -10,3 +10,7 @@ trusted-host=mirrors.aliyun.com
 EOF
 pip install pip --upgrade
 pip install ansible
+
+mkdir ~/.ssh
+ssh-keygen -q -N "" -t rsa -b 2048 -f /root/.ssh/id_rsa
+cp -r ../ansible /etc/
