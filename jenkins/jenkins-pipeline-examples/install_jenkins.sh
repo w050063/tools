@@ -1,9 +1,6 @@
-pip install robotframework
-pip install robotframework-selenium2library
-wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
-sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-sudo apt-get update
-sudo apt-get install -y jenkins
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum install -y jenkins
 sudo service jenkins restart
 sleep 10
 while [[ ! -f /var/lib/jenkins/config.xml ]]; do sleep 2; done;
@@ -35,4 +32,4 @@ java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin pipeline-rest-
 sudo service jenkins restart
 sleep 10
 while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
-java -jar jenkins-cli.jar -s http://localhost:8080 create-job pipeline < /home/vagrant/jenkins-pipeline-examples/pipeline.xml
+java -jar jenkins-cli.jar -s http://localhost:8080 create-job pipeline < pipeline.xml
