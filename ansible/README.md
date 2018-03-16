@@ -7,10 +7,10 @@
 - ~/.ssh/keys/hibernate-keys-aws.pem
 
 ### Ansible Install
-sh ansible_install.sh
+- sh ansible_install.sh
 
 ### ansible-playbook use
-ansible-playbook -i hosts site.yml
-ansible-playbook -i hosts site.yml --limit remote
-ansible-playbook -i hosts site.yml --limit remote --list-hosts
-ansible-playbook -i hosts site.yml --limit remote --tags "generate-script"
+- ansible-playbook -i hosts site.yml
+- ansible-playbook -i hosts site.yml --limit remote
+- ansible-playbook -i hosts site.yml --limit remote --list-hosts
+- ansible-playbook -i hosts site.yml --limit remote --tags "generate-script"
