@@ -9,7 +9,7 @@
 ### Ansible Install
 - sh ansible_install.sh
 
-### ansible-playbook use
+### Ansible Playbook
 - ansible-playbook -i hosts site.yml
 - ansible-playbook -i hosts site.yml --limit remote
 - ansible-playbook -i hosts site.yml --limit remote --list-hosts
