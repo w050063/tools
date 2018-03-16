@@ -5,7 +5,7 @@
 
 ### 准备工作：密钥
 - ~/.ssh/keys/hibernate-keys-aws.pem
-
+> 注意：修改key权限为600
 ### Ansible Install
 - sh ansible_install.sh
 
