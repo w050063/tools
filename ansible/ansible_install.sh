@@ -11,6 +11,6 @@ EOF
 pip install pip --upgrade
 pip install ansible
 
-mkdir ~/.ssh
+mkdir -p ~/.ssh/keys/
 ssh-keygen -q -N "" -t rsa -b 2048 -f /root/.ssh/id_rsa
-cp -r ../ansible /etc/
+\cp -r ../ansible /etc/

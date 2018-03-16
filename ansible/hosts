@@ -1,2 +1,5 @@
 [local]
 127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 hostname=local.mdslq.cn
+
+[remote]
+193.112.50.123 ansible_ssh_host=193.112.50.123 ansible_ssh_port=22 ansible_ssh_private_key_file=~/.ssh/keys/ssh_key_01 hostname=master.mdslq.cn
