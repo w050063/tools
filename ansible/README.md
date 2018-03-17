@@ -16,3 +16,6 @@
 - ansible-playbook -i hosts site.yml --limit remote --tags "generate-script"
 
 ### 声明
+### 参考
+https://github.com/manala/ansible-roles
+https://github.com/kuailemy123/Ansible-roles
