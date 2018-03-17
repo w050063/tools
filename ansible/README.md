@@ -14,3 +14,5 @@
 - ansible-playbook -i hosts site.yml --limit remote
 - ansible-playbook -i hosts site.yml --limit remote --list-hosts
 - ansible-playbook -i hosts site.yml --limit remote --tags "generate-script"
+
+### 声明
