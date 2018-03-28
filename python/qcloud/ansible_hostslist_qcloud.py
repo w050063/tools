@@ -35,7 +35,7 @@ def main():
         os = i['OsName']
         cpu = i['CPU']
         mem = i['Memory']
-        info = "%s %s qq" % (wanip,name,)
+        info = '{0: <15} {1: >10}\t{2}'.format(lanip,"ansible_ssh_host="+lanip,"ansible_ssh_port=22")
         print info
 
 if __name__ == '__main__':
