@@ -4,7 +4,7 @@ import json
 import yaml
 import sys
 
-conf_file="api.yaml"
+conf_file="api-prod.yml"
 module = 'cvm'
 action = 'DescribeInstances'
 
@@ -25,6 +25,7 @@ def main():
     config = read_config(conf_file)
     params = {'Limit':100}
     json_results = request_put(module,config,action,params)
+    #print json_results
     for i in json_results['Response']['InstanceSet']:
         name = i['InstanceName']
         wanip = i['PublicIpAddresses'][0]
