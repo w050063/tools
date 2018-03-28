@@ -4,7 +4,7 @@ import json
 import yaml
 import sys
 
-conf_file="api.yaml"
+conf_file="api-prod.yml"
 
 class MyApi:
 
@@ -37,6 +37,10 @@ class MyApi:
         json_results = self.request_put()
         return json_results
 
+    def cdn_flush(self):
+        json_results = self.request_put()
+        return json_results
+
 def read_config(conf_file):
     f = open(conf_file)
     conf_yaml = yaml.load(f)
@@ -49,9 +53,12 @@ def main():
     params = {'Limit':100}
     module = 'lb'
     action = 'DescribeLoadBalancers'
+    module = 'cdn'
+    action = 'RefreshCdnDir'
+    params = {'dirs.0':"http://loveworldres.worldoflove.cn/dev/"}
     s1 = MyApi(config,module,action,params)
     print s1.module
-    a = s1.lb_list()
+    a = s1.cdn_flush()
     print a
 
 if __name__ == '__main__':
