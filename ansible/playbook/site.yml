@@ -1,0 +1,3 @@
+---
+- import_playbook: rsync_install.yml
+- import_playbook: yum_install.yml
