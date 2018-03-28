@@ -3,6 +3,8 @@ from QcloudApi.qcloudapi import QcloudApi
 import json
 import yaml
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 conf_file="api-prod.yml"
 module = 'cvm'
