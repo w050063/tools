@@ -6,3 +6,7 @@
 - https://github.com/hibernate/ci.hibernate.org
 - https://github.com/maxfields2000/dockerjenkins_tutorial
 - https://github.com/GoogleCloudPlatform/kube-jenkins-imager
+
+### 插件
+- user build vars
+- build-name-setter
