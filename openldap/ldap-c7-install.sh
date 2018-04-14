@@ -74,3 +74,16 @@ URI     ldap://127.0.0.1
 EOF
 systemctl restart slapd
 
+## phpldapadmin
+291 $servers->setValue('server','name','ldap.worldoflove.cn');
+298 $servers->setValue('server','host','127.0.0.1');
+301 $servers->setValue('server','port',389);
+305 $servers->setValue('server','base',array('dc=worldoflove,dc=cn'));
+323 $servers->setValue('login','auth_type','session');
+332 $servers->setValue('login','bind_id','cn=Manager,dc=worldoflove,dc=cn');
+337 $servers->setValue('login','bind_pass','123456');
+340 $servers->setValue('server','tls',false);
+397 $servers->setValue('login','attr','dn');
+398 //$servers->setValue('login','attr','uid');  
+
+397\398行可能会引起报错Failed to Authenticate to server
