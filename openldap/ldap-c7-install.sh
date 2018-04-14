@@ -1,3 +1,8 @@
+sudo systemctl disable firewalld
+sudo systemctl stop firewalld
+setenforce 0
+sed -i.bak 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
 yum -y install openldap-servers openldap-clients migrationtools openldap 
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG 
 chown ldap:ldap /var/lib/ldap/DB_CONFIG
