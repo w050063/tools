@@ -8,7 +8,6 @@ repo_version="mysql57-community-release-el7-11.noarch.rpm"
 if [ ! -f ${data_dir}/${repo_version} ]
 then
     cd ${data_dir} && wget https://repo.mysql.com/${repo_version}
-    cd ${data_dir} && wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/mysql.sql
 fi
 
 rpm -ivh ${data_dir}/${repo_version}
@@ -23,6 +22,9 @@ yum install -y mysql-community-server
 systemctl start mysqld.service
 systemctl status mysqld.service
 
+
+rm -f ${data_dir}/mysql.sql
+cd ${data_dir} && wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/mysql.sql
 mysql -uroot < ${data_dir}/mysql.sql
 mysql -uroot -p 123456 -h 127.0.0.1 -e "select user,host,password from mysql.user;"
 mysql -uroot -p 123456 -h 127.0.0.1 -e "select version();"
