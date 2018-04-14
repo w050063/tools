@@ -30,3 +30,6 @@ sudo yum makecache
 yum install -y gitlab-ce
 sed -i "s#external_url 'http://gitlab.example.com'#external_url 'http://${ip}'#g" /etc/gitlab/gitlab.rb
 gitlab-ctl reconfigure
+
+url:http://192.168.200.102
+root:12345678
