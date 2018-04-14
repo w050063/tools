@@ -5,6 +5,11 @@ jdk_version="jdk-8u161-linux-x64.rpm"
 
 [ ! -d ${data_dir} ] && mkdir -p ${data_dir}
 
+sudo systemctl disable firewalld
+sudo systemctl stop firewalld
+setenforce 0
+sed -i.bak 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
 if [ ! -f ${data_dir}/${jdk_version} ]
 then
     # cd ${data_dir} && wget http://${jdk_version}
