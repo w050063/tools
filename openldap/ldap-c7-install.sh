@@ -19,8 +19,12 @@ sed -i 's/my-domain/worldoflove/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\
 sed -i 's/com/cn/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{1\}monitor.ldif               
 
 slaptest -u
+grep -q "BASE    dc=worldoflove,dc=cn" /etc/openldap/ldap.conf
+[ ! $? -eq 0 ] && cat >>/etc/openldap/ldap.conf<<EOF
+BASE    dc=worldoflove,dc=cn
+URI     ldap://127.0.0.1
+EOF
 systemctl restart slapd
-
 netstat -lt | grep ldap
 
 cd /etc/openldap/schema/
@@ -73,13 +77,6 @@ ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -
 
 #查看指定用户信息
 ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=madongsheng)"
-
-grep -q "BASE    dc=worldoflove,dc=cn" /etc/openldap/ldap.conf
-[ ! $? -eq 0 ] && cat >>/etc/openldap/ldap.conf<<EOF
-BASE    dc=worldoflove,dc=cn
-URI     ldap://127.0.0.1
-EOF
-systemctl restart slapd
 
 ## phpldapadmin
 291 $servers->setValue('server','name','ldap.worldoflove.cn');
