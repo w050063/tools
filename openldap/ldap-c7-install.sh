@@ -58,3 +58,19 @@ ldapadd -x -W -D "cn=Manager,dc=worldoflove,dc=cn" -f /root/groups.ldif
 ldapsearch -x -b "cn=Manager,dc=worldoflove,dc=cn" -H ldap://127.0.0.1
 systemctl stop firewalld
 setenforce 0
+
+# 查看用户信息
+ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=*)"
+
+# 查看组信息
+ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(cn=madongsheng)"
+
+#查看指定用户信息
+ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=madongsheng)"
+
+cat >>/etc/openldap/ldap.conf<<EOF
+BASE    dc=worldoflove,dc=cn
+URI     ldap://127.0.0.1
+EOF
+systemctl restart slapd
+
