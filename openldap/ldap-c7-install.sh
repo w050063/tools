@@ -91,3 +91,7 @@ ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -
 398 //$servers->setValue('login','attr','uid');  
 
 397\398行可能会引起报错Failed to Authenticate to server
+
+## jenkins
+ldap://192.168.200.101:389
+cn=Manager,dc=worldoflove,dc=cn
