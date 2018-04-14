@@ -5,9 +5,25 @@ app_version="gitlab-ce-10.6.4-ce.0.el7.x86_64.rpm"
 
 [ ! -d ${data_dir} ] && mkdir -p ${data_dir}
 
-if [ ! -f ${data_dir}/${app_version} ]
-then
-    cd ${data_dir} && wget https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/${app_version}
-fi
+sudo yum install -y curl policycoreutils-python openssh-server
+sudo systemctl enable sshd
+sudo systemctl start sshd
+sudo firewall-cmd --permanent --add-service=http
+sudo systemctl reload firewalld
 
-rpm -ivh ${data_dir}/${app_version}
+sudo yum install -y postfix
+sudo systemctl enable postfix
+sudo systemctl start postfix
+
+
+# curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
+cat>/etc/yum.repos.d/gitlab-ce.repo<<EOF
+[gitlab-ce]
+name=Gitlab CE Repository
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el$releasever/
+gpgcheck=0
+enabled=1
+EOF
+
+sudo yum makecache
+sudo EXTERNAL_URL="http://192.168.200.102" yum install -y gitlab-ce
