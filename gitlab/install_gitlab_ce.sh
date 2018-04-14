@@ -6,6 +6,9 @@ ip="192.168.200.102"
 
 [ ! -d ${data_dir} ] && mkdir -p ${data_dir}
 
+sudo systemctl disable firewalld
+sudo systemctl stop firewalld
+
 sudo yum install -y curl policycoreutils-python openssh-server
 sudo systemctl enable sshd
 sudo systemctl start sshd
