@@ -8,6 +8,8 @@ ip="192.168.200.102"
 
 sudo systemctl disable firewalld
 sudo systemctl stop firewalld
+setenforce 0
+sed -i.bak 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
 sudo yum install -y curl policycoreutils-python openssh-server
 sudo systemctl enable sshd
