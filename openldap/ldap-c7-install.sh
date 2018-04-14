@@ -99,3 +99,25 @@ User search filter-----uid={0}
 Manager DN-------------cn=Manager,dc=worldoflove,dc=cn
 Manager Password-------123456
 最后测试LDAP测试，使用madongsheng:123456即可
+
+## gitlab
+https://docs.gitlab.com/ee/administration/auth/ldap.html
+
+## open-falcon
+/home/work/open-falcon/dashboard/rrd/config.py
+# ldap config
+LDAP_ENABLED = os.environ.get("LDAP_ENABLED",True)
+LDAP_SERVER = os.environ.get("LDAP_SERVER","192.168.200.101:389")
+LDAP_BASE_DN = os.environ.get("LDAP_BASE_DN","dc=worldoflove,dc=cn")
+LDAP_BINDDN_FMT = os.environ.get("LDAP_BINDDN_FMT","uid=%s,dc=worldoflove,dc=cn")
+LDAP_SEARCH_FMT = os.environ.get("LDAP_SEARCH_FMT","uid=%s")
+LDAP_ATTRS = ["cn","mail","telephoneNumber"]
+LDAP_TLS_START_TLS = False
+LDAP_TLS_CACERTDIR = ""
+LDAP_TLS_CACERTFILE = "/etc/openldap/certs/ca.crt"
+LDAP_TLS_CERTFILE = ""
+LDAP_TLS_KEYFILE = ""
+LDAP_TLS_REQUIRE_CERT = True
+LDAP_TLS_CIPHER_SUITE = ""
+
+
