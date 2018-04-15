@@ -92,7 +92,7 @@ ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -
 
 397\398行可能会引起报错Failed to Authenticate to server
 
-## jenkins
+## LDAP + jenkins
 Server-----------------ldap://192.168.200.101:389
 root DN----------------dc=worldoflove,dc=cn
 User search filter-----uid={0}
@@ -100,10 +100,10 @@ Manager DN-------------cn=Manager,dc=worldoflove,dc=cn
 Manager Password-------123456
 最后测试LDAP测试，使用madongsheng:123456即可
 
-## gitlab
+## LDAP + gitlab
 https://docs.gitlab.com/ee/administration/auth/ldap.html
 
-## open-falcon
+## LDAP + open-falcon
 https://www.jianshu.com/p/8e9d9978f596
 
 /home/work/open-falcon/dashboard/rrd/config.py
@@ -122,4 +122,5 @@ LDAP_TLS_KEYFILE = ""
 LDAP_TLS_REQUIRE_CERT = True
 LDAP_TLS_CIPHER_SUITE = ""
 
+## LDAP + Zabbix
 
