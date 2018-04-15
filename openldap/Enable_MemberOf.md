@@ -56,8 +56,8 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f refint2.ldif
 ``` bash
 # slappasswd -h {SHA} -s 123456
 {SHA}fEqNCco3Yq9h5ZUglD3CZJT4lBs=
-# cat add_user.ldif
-dn: uid=john,ou=people,dc=worldoflove,dc=cn
+# cat add_user.ldif 
+dn: uid=john,ou=People,dc=worldoflove,dc=cn
 cn: John Doe
 givenName: John
 sn: Doe
@@ -78,12 +78,12 @@ userPassword: {SHA}fEqNCco3Yq9h5ZUglD3CZJT4lBs=
 ```
 ### Adding a group
 ``` bash
-# cat add_group.ldif
+# cat add_group.ldif 
 dn: cn=mygroup,ou=groups,dc=worldoflove,dc=cn
 objectClass: groupofnames
 cn: mygroup
 description: All users
-member: uid=john,ou=people,dc=worldoflove,dc=cn
+member: uid=john,ou=People,dc=worldoflove,dc=cn
 # ldapadd -x -D "cn=Manager,dc=worldoflove,dc=cn" -W -f add_group.ldif
 ```
 ### Taking it for a test-run
