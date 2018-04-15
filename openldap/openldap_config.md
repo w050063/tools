@@ -61,3 +61,7 @@ LDAP_TLS_REQUIRE_CERT = True
 LDAP_TLS_CIPHER_SUITE = ""
 ```
 ## LDAP + Zabbix
+## LDAP + confluence
+## LDAP + OpenVPN
+## LDAP + vsftpd
+## LDAP + SVN
