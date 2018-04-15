@@ -75,16 +75,20 @@ objectClass: person
 loginShell: /bin/bash
 userPassword: {SHA}fEqNCco3Yq9h5ZUglD3CZJT4lBs=
 # ldapadd -x -D "cn=Manager,dc=worldoflove,dc=cn" -W -f add_user.ldif
+nter LDAP Password: 
+adding new entry "uid=john,ou=People,dc=worldoflove,dc=cn"
 ```
 ### Adding a group
 ``` bash
 # cat add_group.ldif 
-dn: cn=mygroup,ou=groups,dc=worldoflove,dc=cn
+dn: cn=mygroup,ou=Groups,dc=worldoflove,dc=cn
 objectClass: groupofnames
 cn: mygroup
 description: All users
 member: uid=john,ou=People,dc=worldoflove,dc=cn
 # ldapadd -x -D "cn=Manager,dc=worldoflove,dc=cn" -W -f add_group.ldif
+Enter LDAP Password: 
+adding new entry "cn=mygroup,ou=Groups,dc=worldoflove,dc=cn"
 ```
 ### Taking it for a test-run
 ``` bash
