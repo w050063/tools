@@ -1,10 +1,12 @@
 ## LDAP + jenkins
+``` bash
 Server-----------------ldap://192.168.200.101:389
 root DN----------------dc=worldoflove,dc=cn
 User search filter-----uid={0}
 Manager DN-------------cn=Manager,dc=worldoflove,dc=cn
 Manager Password-------123456
 最后测试LDAP测试，使用madongsheng:123456即可
+```
 
 ## LDAP + gitlab
 https://docs.gitlab.com/ee/administration/auth/ldap.html
@@ -41,7 +43,7 @@ EOS
 
 ## LDAP + open-falcon
 https://www.jianshu.com/p/8e9d9978f596
-
+``` bash
 /home/work/open-falcon/dashboard/rrd/config.py
 # ldap config
 LDAP_ENABLED = os.environ.get("LDAP_ENABLED",True)
@@ -57,5 +59,5 @@ LDAP_TLS_CERTFILE = ""
 LDAP_TLS_KEYFILE = ""
 LDAP_TLS_REQUIRE_CERT = True
 LDAP_TLS_CIPHER_SUITE = ""
-
+```
 ## LDAP + Zabbix
