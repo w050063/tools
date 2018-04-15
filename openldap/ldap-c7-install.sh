@@ -104,6 +104,8 @@ Manager Password-------123456
 https://docs.gitlab.com/ee/administration/auth/ldap.html
 
 ## open-falcon
+https://www.jianshu.com/p/8e9d9978f596
+
 /home/work/open-falcon/dashboard/rrd/config.py
 # ldap config
 LDAP_ENABLED = os.environ.get("LDAP_ENABLED",True)
