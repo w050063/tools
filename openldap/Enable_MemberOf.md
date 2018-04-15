@@ -56,7 +56,7 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f refint2.ldif
 ``` bash
 # slappasswd -h {SHA} -s 123456
 {SHA}fEqNCco3Yq9h5ZUglD3CZJT4lBs=
-[root@linux-node02 schema]# cat add_user.ldif
+# cat add_user.ldif
 dn: uid=john,ou=people,dc=worldoflove,dc=cn
 cn: John Doe
 givenName: John
