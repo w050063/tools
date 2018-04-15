@@ -92,7 +92,7 @@ adding new entry "cn=mygroup,ou=Groups,dc=worldoflove,dc=cn"
 ```
 ### Taking it for a test-run
 ``` bash
-# ldapsearch -x -LLL -H ldap:/// -b uid=john,ou=people,dc=worldoflove,dc=cn dn memberof
+# ldapsearch -x -LLL -H ldap:/// -b uid=john,ou=People,dc=worldoflove,dc=cn dn memberof
 dn: uid=john,ou=People,dc=worldoflove,dc=cn
 ```
 And it should yield this result
