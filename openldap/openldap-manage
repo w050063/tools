@@ -7,3 +7,12 @@ Re-enter new password:
 Enter LDAP Password: 
 ```
 ### LDAP用户自行修改密码
+```
+# slapd -V
+@(#) $OpenLDAP: slapd 2.4.40 (Nov 19 2015 21:55:20) $
+        mockbuild@worker1.bsys.centos.org:/builddir/build/BUILD/openldap-2.4.40/openldap-2.4.40/servers/slapd
+# vim cn\=config/olcDatabase\=\{2\}hdb.ldif 
+olcRootPW: 1234567
+# systemctl restart slapd
+测试即可
+```
