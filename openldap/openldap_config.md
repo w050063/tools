@@ -98,7 +98,7 @@ ldap_servers: ldap://ldap.dev.worldoflove.cn:389
 ldap_default_domain:worldoflove.cn
 ldap_search_base:dc=worldoflove,dc=cn
 ldap_bind_dn:cn=Manager,dc=worldoflove,dc=cn
-ldap_password:yKE77DYzs2tI_G
+ldap_password:xxxx
 ldap_deref: never
 ldap_restart: yes
 ldap_scope: sub
