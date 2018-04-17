@@ -65,3 +65,53 @@ LDAP_TLS_CIPHER_SUITE = ""
 ## LDAP + OpenVPN
 ## LDAP + vsftpd
 ## LDAP + SVN
+### 方案：SASL+LDAP+SVN
+参考地址：https://segmentfault.com/a/1190000006010725
+``` bash
+# apt-get install sasl2-bin
+# grep -vE "^$|^#" /etc/default/saslauthd
+START=yes                             // 修改
+DESC="SASL Authentication Daemon"
+NAME="saslauthd"
+MECHANISMS="ldap"                     // 修改
+MECH_OPTIONS=""
+THREADS=5
+OPTIONS="-c -m /var/run/saslauthd"
+# cat /etc/saslauthd.conf 
+ldap_servers: ldap://ldap.dev.worldoflove.cn:389
+ldap_default_domain:worldoflove.cn
+ldap_search_base:dc=worldoflove,dc=cn
+ldap_bind_dn:cn=Manager,dc=worldoflove,dc=cn
+ldap_password:yKE77DYzs2tI_G
+ldap_deref: never
+ldap_restart: yes
+ldap_scope: sub
+ldap_use_sasl: no
+ldap_start_tls: no
+ldap_version: 3
+ldap_auth_method: bind
+ldap_mech: DIGEST-MD5
+ldap_filter:uid=%u
+ldap_password_attr:userPassword
+ldap_timeout: 10
+ldap_cache_ttl: 30
+ldap_cache_mem: 32786
+# /etc/init.d/saslauthd start
+# /etc/init.d/saslauthd status
+#  testsaslauthd -u lifeng -p 'lifeng'
+0: OK "Success."
+# testsaslauthd -u lifeng -p 'lifeng'
+0: NO "authentication failed"            # ldap_filter:uid=%u  修改为这个即可
+# cat /etc/sasl/svn.conf
+pwcheck_method:saslauthd
+mech_list: plain login
+# grep -vE "^$|^#" svnserve.conf
+[general]
+anon-access = none
+auth-access = write
+password-db = passwd
+authz-db = authz
+[sasl]
+use-sasl = true
+```
+
