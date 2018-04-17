@@ -68,6 +68,22 @@ LDAP_TLS_CIPHER_SUITE = ""
 ### 方案：SASL+LDAP+SVN
 参考地址：https://segmentfault.com/a/1190000006010725
 ``` bash
+# svnserve --version                  // 确定svn版本支持SASL
+svnserve, version 1.8.10 (r1615264)
+   compiled Aug 21 2014, 13:44:15 on x86_64-pc-linux-gnu
+
+Copyright (C) 2014 The Apache Software Foundation.
+This software consists of contributions made by many people;
+see the NOTICE file for more information.
+Subversion is open source software, see http://subversion.apache.org/
+
+The following repository back-end (FS) modules are available:
+
+* fs_fs : Module for working with a plain file (FSFS) repository.
+* fs_base : Module for working with a Berkeley DB repository.
+
+Cyrus SASL authentication is available.
+
 # apt-get install sasl2-bin
 # grep -vE "^$|^#" /etc/default/saslauthd
 START=yes                             // 修改
