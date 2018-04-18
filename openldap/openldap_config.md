@@ -131,3 +131,20 @@ authz-db = authz
 use-sasl = true
 ```
 ## LDAP+Samba
+``` bash
+security = user
+passdb backend = ldapsam:ldap://127.0.0.1/
+ldap suffix = "dc=worldoflove,dc=cn"
+ldap group suffix = "cn=Group"
+ldap user suffix = "ou=People"
+ldap admin dn = "cn=Manager,dc=worldoflove,dc=cn"
+ldap delete dn = no
+pam password change = yes
+ldap passwd sync = yes
+ldap ssl = no
+
+smbpasswd -a laige
+
+samba
+https://www.cnblogs.com/lemon-le/p/6207695.html
+```
