@@ -62,6 +62,9 @@ LDAP_TLS_CIPHER_SUITE = ""
 ```
 ## LDAP + Zabbix
 ## LDAP + confluence
+第一步：启用OpenLDAP的memberof功能，方法参考请点击[这里](https://raw.githubusercontent.com/mds1455975151/tools/master/openldap/Enable_MemberOf.md)
+第二步：配置Confluence
+第三步：配置组权限
 ## LDAP + OpenVPN
 ## LDAP + vsftpd
 ## LDAP + SVN
