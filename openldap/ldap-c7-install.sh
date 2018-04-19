@@ -14,6 +14,8 @@ systemctl start slapd && systemctl enable slapd
 sed -i 's/my-domain/worldoflove/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
 sed -i 's/com/cn/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif  
 sed -i '/olcRootDN/aolcRootPW: 123456' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
+sed -i '/olcRootPW/aolcAccess: {1}to * by dn.base="cn=Manager,dc=worldoflove,dc=cn" write by self write by * read' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
+sed -i '/olcRootPW/aolcAccess: {0}to attrs=userPassword by self write by dn.base="cn=Manager,dc=worldoflove,dc=cn" write by anonymous auth by * none' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
 
 sed -i 's/my-domain/worldoflove/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{1\}monitor.ldif               
 sed -i 's/com/cn/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{1\}monitor.ldif               
