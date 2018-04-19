@@ -67,7 +67,7 @@ LDAP_TLS_CIPHER_SUITE = ""
 站点管理--用户&安全--用户目录--添加目录
 
 第三步：配置组权限
-
+站点管理--用户&安全--全局权限
 ## LDAP + OpenVPN
 ## LDAP + vsftpd
 ## LDAP + SVN
