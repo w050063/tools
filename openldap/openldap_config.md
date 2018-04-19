@@ -62,12 +62,15 @@ LDAP_TLS_CIPHER_SUITE = ""
 ```
 ## LDAP + Zabbix
 ## LDAP + confluence
-第一步：启用OpenLDAP的memberof功能，方法参考请点击[这里](https://raw.githubusercontent.com/mds1455975151/tools/master/openldap/Enable_MemberOf.md)
-第二步：配置Confluence
+- 第一步：启用OpenLDAP的memberof功能，方法参考请点击[这里](https://raw.githubusercontent.com/mds1455975151/tools/master/openldap/Enable_MemberOf.md)
+- 第二步：配置Confluence
+```
 站点管理--用户&安全--用户目录--添加目录
-
-第三步：配置组权限
+```
+- 第三步：配置组权限
+```
 站点管理--用户&安全--全局权限
+```
 ## LDAP + OpenVPN
 ## LDAP + vsftpd
 ## LDAP + SVN
