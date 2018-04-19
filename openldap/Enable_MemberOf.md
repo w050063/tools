@@ -88,3 +88,18 @@ And it should yield this result
 dn: uid=john,ou=People,dc=worldoflove,dc=cn
 memberOf: cn=mygroup,ou=groups,dc=worldoflove,dc=cn
 ```
+
+### 如何给新组添加成员
+- 方案1：phpldapadmin
+域-->Group-->cn=mygroup组-->member-->点击赋值按钮新增条目
+
+- 方案2：修改member信息然后删除组重建
+``` 
+# cat add_group.ldif
+dn: cn=confluence-users-openldap,ou=Group,dc=worldoflove,dc=cn
+objectClass: groupofnames
+cn: confluence-users-openldap
+description: All users
+member: uid=dongsheng-test1,ou=People,dc=worldoflove,dc=cn
+member: uid=john,ou=People,dc=worldoflove,dc=cn
+```
