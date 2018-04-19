@@ -91,9 +91,9 @@ memberOf: cn=mygroup,ou=groups,dc=worldoflove,dc=cn
 
 ### 如何给新组添加成员
 - 方案1：phpldapadmin
-
+```
 域-->Group-->cn=mygroup组-->member-->点击赋值按钮新增条目
-
+```
 - 方案2：修改member信息然后删除组重建
 
 ``` 
