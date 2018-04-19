@@ -9,7 +9,8 @@ Manager Password-------123456
 ```
 
 ## LDAP + gitlab
-https://docs.gitlab.com/ee/administration/auth/ldap.html
+官网资料：https://docs.gitlab.com/ee/administration/auth/ldap.html
+高级设置：https://blog.csdn.net/tongdao/article/details/52538365
 ``` bash
 # cat /etc/gitlab/gitlab.rb | grep -A 24 ldap_servers
 ###! **Be careful not to break the indentation in the ldap_servers block. It is
