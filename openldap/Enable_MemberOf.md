@@ -4,41 +4,31 @@
 - https://blog.csdn.net/tongdao/article/details/52538365
 
 ## 测试过程
-### memberof_config.ldif
-``` bash
-# cat memberof_config.ldif
+### memberof.ldif 
+```
+# cat memberof.ldif 
 dn: cn=module,cn=config
 cn: module
-objectClass: olcModuleList
-olcModulePath: /usr/lib64/openldap
-olcModuleLoad: memberof.la
+objectclass: olcModuleList
+objectclass: top
+olcmoduleload: memberof.la
+olcmodulepath: /usr/lib64/openldap
 
-dn: olcOverlay={0}memberof,olcDatabase={1}hdb,cn=config
+dn: olcOverlay={0}memberof,olcDatabase={2}hdb,cn=config
 objectClass: olcConfig
 objectClass: olcMemberOf
 objectClass: olcOverlayConfig
 objectClass: top
 olcOverlay: memberof
-olcMemberOfDangling: ignore
-olcMemberOfRefInt: TRUE
-olcMemberOfGroupOC: groupOfNames
-olcMemberOfMemberAD: member
-olcMemberOfMemberOfAD: memberOf
-```
-### refint1.ldif 
-``` bash
-# cat refint1.ldif 
+
 dn: cn=module,cn=config
 cn: module
 objectclass: olcModuleList
 objectclass: top
-olcModuleLoad: refint.la
-olcModulePath: /usr/lib64/openldap
-```
-### refint2.ldif 
-``` bash
-# cat refint2.ldif 
-dn: olcOverlay={1}refint,olcDatabase={1}hdb,cn=config
+olcmoduleload: refint.la
+olcmodulepath: /usr/lib64/openldap
+
+dn: olcOverlay={1}refint,olcDatabase={2}hdb,cn=config
 objectClass: olcConfig
 objectClass: olcOverlayConfig
 objectClass: olcRefintConfig
@@ -46,11 +36,9 @@ objectClass: top
 olcOverlay: {1}refint
 olcRefintAttribute: memberof member manager owner
 ```
-### add memberof_config.ldif\refint1.ldif\refint2.ldif
+### add memberof.ldif
 ``` bash
-ldapadd -Y EXTERNAL -H ldapi:/// -f memberof_config.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -f refint1.ldif 
-ldapadd -Y EXTERNAL -H ldapi:/// -f refint2.ldif 
+ldapadd -Y EXTERNAL -H ldapi:/// -f memberof.ldif
 ```
 ### Adding a user
 ``` bash
