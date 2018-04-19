@@ -2,6 +2,7 @@
 ## 参考资料
 - http://www.adimian.com/blog/2014/10/how-to-enable-memberof-using-openldap/
 - https://blog.csdn.net/tongdao/article/details/52538365
+- **http://docs.blowb.org/install-essential-docker/openldap.html**
 
 ## 测试过程
 ### memberof.ldif 
