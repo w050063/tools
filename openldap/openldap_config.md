@@ -76,6 +76,20 @@ https://confluence.jetbrains.com/display/TCD10/LDAP+Integration
 ```
 参考资料：
 - https://www.cnblogs.com/solomonqbq/p/5938824.html
+FQA:
+```
+https://community.atlassian.com/t5/Jira-questions/JIRA-OpenLDAP-Test-get-user-s-memberships-Failed/qaq-p/226200 相同问题
+Test basic connection : Succeeded
+Test retrieve user : Succeeded
+Test user rename is configured and tracked : Succeeded
+Test get user's memberships : Failed
+Test retrieve group : Not performed
+Test get group members : Not performed
+Test user can authenticate : Succeeded
+ 
+答案1：
+https://confluence.atlassian.com/adminjiraserver073/connecting-to-an-ldap-directory-861253200.html?_ga=2.47348132.2015352131.1524042226-1638756934.1524042226#ConnectingtoanLDAPDirectory-MembershipSchemaSettings
+```
 
 ## LDAP + OpenVPN
 ## LDAP + vsftpd
