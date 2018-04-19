@@ -71,6 +71,9 @@ LDAP_TLS_CIPHER_SUITE = ""
 ```
 站点管理--用户&安全--全局权限
 ```
+参考资料：
+- https://www.cnblogs.com/solomonqbq/p/5938824.html
+
 ## LDAP + OpenVPN
 ## LDAP + vsftpd
 ## LDAP + SVN
