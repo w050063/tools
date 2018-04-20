@@ -19,6 +19,8 @@ yum-config-manager --enable mysql56-community >/dev/null 2>&1
 yum repolist enabled | grep mysql
 
 yum install -y mysql-community-server
+cd ${data_dir} && wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/my.cnf
+\cp my.cnf /etc/my.cnf
 systemctl start mysqld.service
 systemctl status mysqld.service
 
