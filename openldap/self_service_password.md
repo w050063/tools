@@ -16,7 +16,7 @@ openldap-2.4.44-5.el7.x86_64
 
 ## OpenLDAP安装配置
 [参考地址](https://github.com/mds1455975151/tools/blob/master/openldap/ldap-c7-install.sh)
-涉及个人用户修改密码的权限设置部分
+- 涉及个人用户修改密码的权限设置部分
 ``` bash 
 sed -i '/olcRootPW/aolcAccess: {1}to * by dn.base="cn=Manager,dc=worldoflove,dc=cn" write by self write by * read' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
 sed -i '/olcRootPW/aolcAccess: {0}to attrs=userPassword by self write by dn.base="cn=Manager,dc=worldoflove,dc=cn" write by anonymous auth by * none' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
