@@ -22,3 +22,14 @@ sed -i '/olcRootPW/aolcAccess: {1}to * by dn.base="cn=Manager,dc=worldoflove,dc=
 sed -i '/olcRootPW/aolcAccess: {0}to attrs=userPassword by self write by dn.base="cn=Manager,dc=worldoflove,dc=cn" write by anonymous auth by * none' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
 ```
 ## self_service_password安装配置
+### 下载RPM包
+https://ltb-project.org/documentation/self-service-password/1.2/start
+### 安装RPM
+
+### 配置httpd
+### 修改配置
+### 测试及验证
+
+``` bash
+
+```
