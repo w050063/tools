@@ -87,6 +87,17 @@ ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -
 #查看指定用户信息
 ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=madongsheng)"
 
+# 组划分
+管理组 manager
+策划组 planner
+程序组 programmer
+测试组 qa
+美术组 art
+运营组 operator
+市场组 marketer
+财务组 financial
+行政人事 administration
+
 ## phpldapadmin
 291 $servers->setValue('server','name','ldap.worldoflove.cn');
 298 $servers->setValue('server','host','127.0.0.1');
