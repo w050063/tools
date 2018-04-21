@@ -78,6 +78,9 @@ ldapadd -x -W -D "cn=Manager,dc=worldoflove,dc=cn" -f /root/groups.ldif
 
 ldapsearch -x -b "cn=Manager,dc=worldoflove,dc=cn" -H ldap://127.0.0.1
 
+slappasswd -s 123456
+{SSHA}q2mqrO8v8us+o8B/dpsV5kO5akevBpGw
+
 # 查看用户信息
 ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=*)"
 
@@ -111,6 +114,14 @@ ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -
 398 //$servers->setValue('login','attr','uid');  
 
 397\398行可能会引起报错Failed to Authenticate to server
+
+# 参考资料
+https://blog.csdn.net/ggsyu730/article/details/79151080
+https://www.server-world.info/en/note?os=CentOS_7&p=openldap
+https://www.longger.net/article/b6eccf27.html
+https://ltb-project.org/documentation/self-service-password/latest/install_rpm
+https://marc.xn--wckerlin-0za.ch/computer/setup-openldap-server-in-docker
+http://www.openldap.org/software/release/install.html
 
 # rpm -ql migrationtools
 /usr/share/doc/migrationtools-47
