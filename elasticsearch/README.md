@@ -6,7 +6,7 @@
 #### Search APIs
 #### Indices APIs
 #### cat APIs
-```
+``` text
 curl -X GET http://localhost:9200/_cat/indices?v		//获取索引列表
 curl -X GET http://localhost:9200/_cat/health?v			//获取状态
 curl -X GET http://localhost:9200/graylog_deflector		//获取指定索引信息graylog_deflector
