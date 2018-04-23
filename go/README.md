@@ -15,3 +15,9 @@ source /etc/profile
 go env
 mkdir -p /data0/workspaces/go
 ```
+### Go Get问题
+``` bash
+https://github.com/MXi4oyu/golang.org
+源：go get golang.org/x/tools/cmd/goimports
+新：go get github.com/MXi4oyu/golang.org/x/toos/cmd/goimports
+```
