@@ -5,7 +5,7 @@ tar -zxf go1.10.1.linux-amd64.tar.gz -C /usr/local/
 cat>>/etc/profile<<EOF
 
 # setup go path env
-export PATH=$PATH:/usr/local/go/bin
+export PATH=\$PATH:/usr/local/go/bin
 export GOPATH="/data0/workspaces/go"
 EOF
 source /etc/profile
