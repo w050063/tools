@@ -4,7 +4,7 @@
 ### Go环境安装
 ``` bash
 wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
-tar -zxf go1.10.1.linux-amd64.tar.gz -C /usr/local/go
+tar -zxf go1.10.1.linux-amd64.tar.gz -C /usr/local/
 cat>>/etc/profile<<EOF
 
 # setup go path env
