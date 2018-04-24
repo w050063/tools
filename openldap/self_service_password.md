@@ -73,6 +73,15 @@ $ldap_fullname_attribute = "cn";
 $ldap_filter = "(&(objectClass=account)($ldap_login_attribute={login}))";
 $keyphrase = "247029c9123274c78ab8160965f4d29f";  //否则有报错提醒
 ```
+### 设置邮箱验证及短信验证
+需求：OpenLDAP用户信息需要添加Telephone及Email信息
+``` bash 
+# ldapadd -x -D "cn=Manager,dc=worldoflove,dc=cn" -W -f users_dongsheng-test2.ldif 
+Enter LDAP Password: 
+adding new entry "uid=dongsheng-test2,ou=People,dc=worldoflove,dc=cn"
+ldap_add: Object class violation (65)
+        additional info: attribute 'email' not allowed
+```
 ### 测试及验证
 略
 ### 参考资料
