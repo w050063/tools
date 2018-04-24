@@ -76,11 +76,21 @@ $keyphrase = "247029c9123274c78ab8160965f4d29f";  //否则有报错提醒
 ### 设置邮箱验证及短信验证
 需求：OpenLDAP用户信息需要添加Telephone及Email信息
 ``` bash 
+直接添加所需信息会报如下错误
 # ldapadd -x -D "cn=Manager,dc=worldoflove,dc=cn" -W -f users_dongsheng-test2.ldif 
 Enter LDAP Password: 
 adding new entry "uid=dongsheng-test2,ou=People,dc=worldoflove,dc=cn"
 ldap_add: Object class violation (65)
-        additional info: attribute 'email' not allowed
+        additional info: attribute 'email' not allowed
+解决办法：
+在用户信息中添加ObjectClass: inetOrgPerson信息，然后去掉objectClass: account信息
+同时还需要考虑已经接入的系统的影响把之前查询account的修改为查询posixAccount，由于新增ObjectClass: inetOrgPerson还要求必须添加sn: dongsheng-test2属性
+对比修改前后信息
+sn: dongsheng-test2             //新增
+ObjectClass: inetOrgPerson      //新增
+objectClass: account            //删除
+mail: 1455975151@qq.com         //邮箱
+telexNumber: 13693645328        //手机
 ```
 ### 测试及验证
 略
