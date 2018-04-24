@@ -91,6 +91,7 @@ ObjectClass: inetOrgPerson      //新增
 objectClass: account            //删除
 mail: 1455975151@qq.com         //邮箱
 telexNumber: 13693645328        //手机
+参考资料：https://stackoverflow.com/questions/28262168/openldap-add-mail-attribute-to-users
 ```
 ### 测试及验证
 略
