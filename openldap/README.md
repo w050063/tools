@@ -1,1 +1,15 @@
-
+# OpenLDAP知识
+- ~~部署及相关文档资料~~
+- 监控
+- ~~数据备份~~
+- 系统接入
+    - ~~SVN~~ 
+    - ~~NAS~~
+    - ~~jenkins~~
+    - TeamCity
+    - ~~confluence wik~~
+    - ~~GitLab~~
+    - Open-Falcon
+- 日常管理
+    - 用户增删改查
+- ~~域用户自助修改密码self-service-password~~
