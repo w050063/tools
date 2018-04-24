@@ -13,3 +13,5 @@
 - 日常管理
     - 用户增删改查
 - ~~域用户自助修改密码self-service-password~~
+- 账号添加属性总结，例如：mail,tel等
+- self-service-password设置邮件及短信密码找回功能
