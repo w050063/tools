@@ -19,6 +19,8 @@ fi
 
 ldap_username=$1
 ldap_uid=$2
+ldap_user_mail="test@lemongrassmedia.cn"
+ldap_user_tel="00000000000"
 
 #groupadd -g 1002 -f manager
 #groupadd -g 1003 -f planner
@@ -45,6 +47,12 @@ getent passwd |grep $ldap_username >users_$ldap_username
 getent shadow |grep $ldap_username >/root/shadow
 sed -i.bak 's#/etc/shadow#/root/shadow#g' /usr/share/migrationtools/migrate_passwd.pl
 /usr/share/migrationtools/migrate_passwd.pl users_$ldap_username > users_${ldap_username}.ldif
+
+sed -i "/objectClass: posixAccount/isn: ${ldap_username}" users_${ldap_username}.ldif
+sed -i 's/objectClass: account/objectClass: inetOrgPerson/g' users_${ldap_username}.ldif
+sed -i '/homeDirectory/adescription: users' users_${ldap_username}.ldif
+sed -i "/homeDirectory/amail: ${ldap_user_mail}" users_${ldap_username}.ldif
+sed -i "/homeDirectory/atelexNumber: ${ldap_user_tel}" users_${ldap_username}.ldif
 userdel -r $ldap_username
 
 ldapadd -x -W -D "cn=Manager,dc=worldoflove,dc=cn" -f users_${ldap_username}.ldif
