@@ -1,5 +1,5 @@
 #!/bin/env bash
-
+# example: sh ldap_add_user.sh dongsheng-test3 1058
 if [ ! $# -eq 2 ]
 then
     echo -e "Usages: $0 ldap_username ldap_uid"
