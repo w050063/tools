@@ -51,8 +51,8 @@ LoadModule dontdothat_module  modules/mod_dontdothat.so
 
     AuthType Basic
     AuthName "Subversion repository"
-    AuthzSVNAccessFile /opt/svn/test/authz
-    AuthUserFile /opt/svn/test/password
+    AuthzSVNAccessFile /opt/svn/test/conf/authz
+    AuthUserFile /opt/svn/test/conf/httpd_passwd
     Require valid-user
 </Location>
 
