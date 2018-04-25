@@ -1,6 +1,7 @@
 # SVN 知识总结
 - https://www.cnblogs.com/eastson/p/6051269.html
 - https://blog.csdn.net/wanglei_storage/article/details/52663328
+- http://www.bubuko.com/infodetail-2220484.html
 
 # svn + httpd + openldap
 ``` bash
