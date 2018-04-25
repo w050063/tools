@@ -84,6 +84,10 @@ adding new entry "cn=mygroup,ou=Groups,dc=worldoflove,dc=cn"
 # ldapsearch -x -LLL -H ldap:/// -b uid=john,ou=People,dc=worldoflove,dc=cn dn memberof
 dn: uid=john,ou=People,dc=worldoflove,dc=cn
 # ldapsearch -x -LLL -H ldap:/// -b ou=Group,dc=worldoflove,dc=cn dn memberof       # Group组有多少子组
+# ldapsearch -x -LLL -H ldap:/// -b cn=qa,ou=Group,dc=worldoflove,dc=cn dn member   # qa组里面的成员
+dn: cn=qa,ou=Group,dc=worldoflove,dc=cn
+member: uid=xxx,ou=People,dc=worldoflove,dc=cn
+member: uid=xxx,ou=People,dc=worldoflove,dc=cn
 ```
 And it should yield this result
 ``` bash
