@@ -1,11 +1,19 @@
 # SVN 知识总结
 - https://www.cnblogs.com/eastson/p/6051269.html
 - https://blog.csdn.net/wanglei_storage/article/details/52663328
-- http://www.bubuko.com/infodetail-2220484.html
+- [修复svn hook导致的字符集错误](http://www.bubuko.com/infodetail-2220484.html)
 
 # svn + httpd + openldap
 ``` bash
 #!/bin/env bash
+# 由于svn hook导致的字符集错误，直接安装1.8+的版本，非系统默认版本
+cat>/etc/yum.repos.d/wandisco-svn.repo<<EOF
+[WandiscoSVN]
+name=Wandisco SVN Repo
+baseurl=http://opensource.wandisco.com/centos/$releasever/svn-1.8/RPMS/$basearch/
+enabled=1
+gpgcheck=0
+EOF
 yum install -y httpd svn mod_dav_svn mod_ldap
 cp /etc/httpd/conf.modules.d/10-subversion.conf /etc/httpd/conf.d/subversion.conf
 cat>/etc/httpd/conf.d/subversion.conf<<EOF
@@ -38,6 +46,14 @@ chown apache.apache -R /opt/svn
 # svn + httpd
 ``` bash
 #!/bin/env bash
+# 由于svn hook导致的字符集错误，直接安装1.8+的版本，非系统默认版本
+cat>/etc/yum.repos.d/wandisco-svn.repo<<EOF
+[WandiscoSVN]
+name=Wandisco SVN Repo
+baseurl=http://opensource.wandisco.com/centos/$releasever/svn-1.8/RPMS/$basearch/
+enabled=1
+gpgcheck=0
+EOF
 yum install -y httpd svn mod_dav_svn
 cp /etc/httpd/conf.modules.d/10-subversion.conf /etc/httpd/conf.d/subversion.conf
 
@@ -76,5 +92,4 @@ guest:$apr1$vX1RIUq6$OKS1bqKZSptzsPDYUOJ5x.
 [/]
 admin = rw
 guest = r
-
 ```
