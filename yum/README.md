@@ -39,6 +39,14 @@ failovermethod=priority
 enabled=1
 gpgcheck=0
 EOF
+# cat >/etc/yum.repos.d/local.repo<<EOF
+[local]
+name=local repo
+baseurl=file:///data0/repo/
+failovermethod=priority
+enabled=1
+gpgcheck=0
+EOF
 # yum remove -y tree
 # yum install -y tree
 ```
