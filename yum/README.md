@@ -28,7 +28,7 @@ EOF
 # systemctl start nginx
 # sed -i 's/keepcache=0/keepcache=1/g' /etc/yum.conf
 # yum install -y tree
-# \cp /var/cache/yum/x86_64/7/base/packages/tree-1.6.0-10.el7.x86_64.rpm /data0/repo/
+# \cp /var/cache/yum/x86_64/7/os/packages/tree-1.6.0-10.el7.x86_64.rpm /data0/repo/
 # yum install -y createrepo
 # cd /data0/repo && createrepo /data0/repo/
 # cat >/etc/yum.repos.d/local.repo<<EOF
