@@ -3,12 +3,10 @@
 ``` bash
 wget https://nodejs.org/dist/v8.10.0/node-v8.10.0-linux-x86.tar.gz
 tar -zxf node-v8.10.0-linux-x86.tar.gz -C /usr/local/
-cd /usr/local/
-ln -s node-v8.10.0-linux-x86/ node
+cd /usr/local/ && ln -s node-v8.10.0-linux-x86/ node
 cat>/etc/profile<<EOF
 
-set for nodejs
-
+# set for nodejs
 export NODE_HOME=/usr/local/node
 export PATH=$NODE_HOME/bin:$PATH
 EOF
