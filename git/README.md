@@ -1,10 +1,17 @@
 ###
 ## Git 常用指令
+``` text
 git status  查看修改文件
 git add config.js   添加准备提交的文件(添加到本地)
 git commit -m "update test"
-git config --global user.email "1455975151@qq.com"	git添加邮箱
-git config --global user.name "mds1455975151"	git添加用户
+
+git config --global user.name "mds1455975151"	      //全局git添加用户
+git config --global user.email "1455975151@qq.com"	//全局git添加邮箱
+
+
+git config --local user.name "dongsheng.ma"                       //单个仓库git添加用户
+git config --local user.email "dongsheng.ma@lemongrassmedia.cn"   //单个仓库git添加邮箱
+
 git commit -m "update test"
 git pull  更新别人的到本地
 git push  提交到网络
@@ -17,3 +24,4 @@ git branch -d dev  删除本地dev分支
 git push origin --delete dev  删除本地分支传送到远端
 git stash   保存当前修改
 git stash pop  将修改恢复
+```
