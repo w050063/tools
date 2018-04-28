@@ -10,3 +10,11 @@ Java HotSpot(TM) Client VM (build 25.144-b01, mixed mode, sharing)
 // 解压到某个目录就可以使用
 > 双击D:\apache-jmeter-4.0\bin\jmeter.bat
 ```
+
+## 应用思路
+- 开发jar包工具
+- 定义变量
+- json转自用项目协议
+- 根据项目需要编写.jmx配置
+
+## 参考资料
