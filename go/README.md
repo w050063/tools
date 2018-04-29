@@ -24,3 +24,8 @@ https://github.com/MXi4oyu/golang.org
 源：go get golang.org/x/tools/cmd/goimports
 新：go get github.com/MXi4oyu/golang.org/x/toos/cmd/goimports
 ```
+
+### 模块
+- https://github.com/golang/lint
+
+### 参考资料
