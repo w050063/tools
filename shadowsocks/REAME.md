@@ -81,14 +81,15 @@ cd polipo
 make all
 make install
 
-# cat /etc/polipo/config
+# mkdir -p /etc/polipo/
+# cat>/etc/polipo/config<<EOF
 socksParentProxy = "127.0.0.1:1080"
 socksProxyType = socks5
 logFile = /var/log/polipo
 logLevel = 99
 logSyslog = true
 
-# /root/polipo/polipo -c /etc/polipo/config
+# polipo -c /etc/polipo/config
 # ss -lntup|grep polipo
 tcp LISTEN 0 128 127.0.0.1:8123 *:* users:(("polipo",23399,5))
 export http_proxy=http://localhost:8123
