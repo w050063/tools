@@ -64,7 +64,7 @@ or
 pip install supervisord
 # /etc/supervisord.conf
 [program:shadowsocks]
-command=ssserver -c /etc/shadowsocks.json
+command=sslocal -c /etc/shadowsocks.json
 autostart=true
 autorestart=true
 user=root
