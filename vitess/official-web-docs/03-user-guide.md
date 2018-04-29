@@ -2,12 +2,15 @@
 ## Introduction 介绍
 - Contents
 - Platform support 平台支持
+
 我们不断测试Ubuntu 14.04（Trusty）和Debian 8（Jessie）。其他Linux发行版也应该可以工作。
 
 - Database support 数据库支持
+
 Vitess支持MySQL 5.6， MariaDB 10.0以及MySQL 5.7等新版本.Vitess还支持Percona对这些版本的变体。
 
   - Relational capabilities 关系能力
+
 Vitess试图充分利用底层MySQL实例的功能。在这方面，任何可以传递给单个密钥空间，碎片或碎片集的查询将按原样发送到MySQL服务器。
 
 只要关系和约束位于一个分片（或未分片的密钥空间）内，这种方法就可以利用MySQL的全部功能。
@@ -15,6 +18,7 @@ Vitess试图充分利用底层MySQL实例的功能。在这方面，任何可以
 对于超越碎片关系，Vitess提供通过支持VSchema。
 
   - Schema management 模式管理
+
 Vitess支持多种功能，用于查看您的架构并验证片段中的平板电脑或密钥空间中的所有碎片之间的一致性。
 
 另外，Vitess支持 创建，修改或删除数据库表的数据定义语句。Vitess在每个分片中的主平板电脑上执行模式更改，然后这些更改通过复制传播到从属平板电脑。Vitess不支持其他类型的DDL语句，例如影响存储过程或授权的DDL语句。
@@ -24,6 +28,7 @@ Vitess支持多种功能，用于查看您的架构并验证片段中的平板�
 有关 更多信息，请参阅本指南的“ 架构管理”部分。
 
 - Supported clients 支持的客户端
+
 VTGate服务器是应用程序用于连接Vitess的主要入口点。
 
 VTGate了解MySQL二进制协议。因此，任何可以直接与MySQL交谈的客户端也可以使用Vitess。
