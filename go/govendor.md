@@ -29,6 +29,7 @@ GitHub地址：https://github.com/kardianos/govendor
 
 常见的命令如下，格式为 govendor COMMAND。
 通过指定包类型，可以过滤仅对指定包进行操作。
+
 | 命令      | 功能 |
 | --------- | -------- |
 | init			|初始化 vendor 目录                                             |
