@@ -36,3 +36,5 @@ tcp LISTEN 0 128 127.0.0.1:8123 *:* users:(("polipo",23399,5))
 export http_proxy=http://localhost:8123
 curl ip.gs
 ```
+## 参考资料
+- https://www.cnblogs.com/thatsit/p/6481820.html?utm_source=itdadao&utm_medium=referral
