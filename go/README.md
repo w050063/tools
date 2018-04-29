@@ -16,6 +16,7 @@ go env
 mkdir -p /data0/workspaces/go
 ```
 ### Go Get问题
+- [代理方案](https://blog.csdn.net/wdy_yx/article/details/53045084)
 ``` bash
 https://github.com/MXi4oyu/golang.org
 源：go get golang.org/x/tools/cmd/goimports
