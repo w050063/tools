@@ -25,7 +25,7 @@ wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 }
 
 packages_install(){
-yum install -y gcc gcc-c++ autoconf automake python-devel python-pip git tree nmap telnet lrzsz unzip bash-completion net-tools bind-utils tcpdump lsof vim screen dos2unix
+yum install -y gcc gcc-c++ autoconf automake python-devel python-pip python-virtualenv git tree nmap telnet lrzsz unzip bash-completion net-tools bind-utils tcpdump lsof vim screen dos2unix
 }
 
 pip_setup(){
