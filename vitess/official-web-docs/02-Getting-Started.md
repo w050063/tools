@@ -445,16 +445,13 @@ vitess$ make docker_base
 另外，Vitess需要下面列出的软件和库。
 - 安装Go 1.9+。
 - 安装MariaDB 10.0或 MySQL 5.6。您可以使用任何安装方法（src / bin / rpm / deb），但一定要包含客户端开发头文件（libmariadbclient-dev或libmysqlclient-dev）。
-
-Vitess开发团队目前正在对MariaDB 10.0.21和MySQL 5.6.27进行测试。
-
-如果您正在安装MariaDB，请注意您必须安装10.0或更高版本。如果您正在使用apt-get，请确认您的存储库提供了安装该版本的选项。您也可以直接从mariadb.org下载源代码。
-
-如果您在MySQL 5.6中使用Ubuntu 14.04，则默认安装可能会丢失文件/usr/share/mysql/my-default.cnf。它会显示为类似的错误Could not find my-default.cnf。如果遇到这个问题，只需添加以下内容：
-``` bash
-[mysqld]
-sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
-```
+  Vitess开发团队目前正在对MariaDB 10.0.21和MySQL 5.6.27进行测试。
+  如果您正在安装MariaDB，请注意您必须安装10.0或更高版本。如果您正在使用apt-get，请确认您的存储库提供了安装该版本的选项。您也可以直接从mariadb.org下载源代码。
+  如果您在MySQL 5.6中使用Ubuntu 14.04，则默认安装可能会丢失文件/usr/share/mysql/my-default.cnf。它会显示为类似的错误Could not find my-default.cnf。如果遇到这个问题，只需添加以下内容：
+  ``` bash
+  [mysqld]
+  sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+  ```
 - 卸载或禁用AppArmor。某些版本的MySQL带有Vitess工具尚未识别的默认AppArmor配置。当Vitess通过该mysqlctl工具初始化MySQL实例时，这会导致各种权限失败。这只是测试环境的一个问题。如果AppArmor在生产中是必需的，则可以在不通过mysqlctl的情况下适当地配置MySQL实例。
 ``` bash
 $ sudo service apparmor stop
