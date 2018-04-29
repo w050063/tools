@@ -1,13 +1,17 @@
 # getting-started 入门
 ## Contents 内容
   本节说明如何在Kubernetes上运行Vitess。它还提供了使用Google Container Engine启动Kubernetes集群的步骤。
+
   如何您已经在其他支出的平台之一运行Kubernetes v1.0+,则可以跳过这些gcloud步骤。这些kubectl步骤将适用于任何Kubernetes集群。
 ## Prerequisites 先决条件
   要完成本指南中的练习，您必须将etcd-operator安装在您计划运行Vitess的同一命名空间中。
+
   您还必须在本地安装Go 1.9+,Vitess的vtctlclient工具和kubectl。以下各节介绍如何在您的环境中进行设置。
 ### Install Go 1.9+
   您需要安装Go 1.9+来构建该vtctlclient工具，该工具向Vitess发布命令。
+
   安装Go之后，请确保您的GOPATH环境变量设置为工作区的根目录。最常见的设置是，并且该值应该标识非root用户具有写入权限的目录。GOPATH=$HOME/go
+
   另外，确保包含在你的。有关设置Go工作区的更多信息，请参阅 如何编写Go代码。$GOPATH/bin$PATH
 ### Build and install vtctlclient 构建并安装vtctlclient
 该vtctlclient工具向Vitess发布命令。
