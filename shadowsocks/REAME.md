@@ -88,7 +88,7 @@ socksProxyType = socks5
 logFile = /var/log/polipo
 logLevel = 99
 logSyslog = true
-
+EOF
 # polipo -c /etc/polipo/config
 # ss -lntup|grep polipo
 tcp LISTEN 0 128 127.0.0.1:8123 *:* users:(("polipo",23399,5))
