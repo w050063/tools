@@ -2,9 +2,9 @@
 ## Introduction 介绍
 - Contents
 - Platform support 平台支持
-
-我们不断测试Ubuntu 14.04（Trusty）和Debian 8（Jessie）。其他Linux发行版也应该可以工作。
-
+``` text
+  我们不断测试Ubuntu 14.04（Trusty）和Debian 8（Jessie）。其他Linux发行版也应该可以工作。
+```
 - Database support 数据库支持
 
 Vitess支持MySQL 5.6， MariaDB 10.0以及MySQL 5.7等新版本.Vitess还支持Percona对这些版本的变体。
