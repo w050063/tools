@@ -560,13 +560,13 @@ vitess$ make docker_base
   # on OS X, this is the correct value:
   # export VT_MYSQL_ROOT=/usr/local/opt/mysql56
   ```
-请注意，该命令表示mysql应该在位置找到可执行文件/usr/local/mysql/bin/mysql。
+  请注意，该命令表示mysql应该在位置找到可执行文件/usr/local/mysql/bin/mysql。
 
 - 运行mysqld --version并确认您正在运行MariaDB或MySQL的正确版本。MariaDB和MySQL的值应该是10或更高。
 
-使用下面的命令构建Vitess。请注意，该 bootstrap.sh脚本需要下载一些依赖项。如果你的机器需要代理服务器访问Internet，您将需要设置常用的环境变量（例如http_proxy， https_proxy，no_proxy）。
+  使用下面的命令构建Vitess。请注意，该 bootstrap.sh脚本需要下载一些依赖项。如果你的机器需要代理服务器访问Internet，您将需要设置常用的环境变量（例如http_proxy， https_proxy，no_proxy）。
 
-运行boostrap.sh脚本：
+  运行boostrap.sh脚本：
   ``` bash
   ./bootstrap.sh
   ### example output:
@@ -580,7 +580,6 @@ vitess$ make docker_base
   . ./dev.env
   make build
   ```
-
 #### Run Tests 运行测试
 
 注意：如果您使用的是etcd，请设置以下环境变量：
