@@ -97,5 +97,10 @@ curl ip.gs
 ```
 - Proxychains
 
+## 设置代理
+``` bash
+export http_proxy=http://localhost:8123
+unset http_proxy
+```
 ## 参考资料
 - https://www.cnblogs.com/thatsit/p/6481820.html?utm_source=itdadao&utm_medium=referral
