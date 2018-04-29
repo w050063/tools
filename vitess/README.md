@@ -13,6 +13,13 @@
 - **vitess**
 - TDDL
 - OneProxy
+
+## 实践操作
+- 初始化机器
+- go环境
+- MySQL环境
+- jdk安装
+- 
 ## 参考资料
 - http://jixiuf.github.io/blog/go_vitess_start.html/
 - https://github.com/jixiuf/vitess-build-patch
