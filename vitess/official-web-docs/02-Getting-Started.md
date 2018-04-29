@@ -628,9 +628,6 @@ make site_test
     > 一些较大的测试在磁盘上使用高达4GB的临时空间。
 
 #### Start a Vitess cluster  启动Vitess集群
-##### Run a Client Application  运行客户端应用横向
-##### Try Vitess resharding 尝试Vitess重新粉碎
-##### Tear down the cluster 清理集群
 
 在完成上面构建Vitess的指示后，可以使用Github repo中的示例脚本在本地机器上启动Vitess集群。这些脚本使用ZooKeeper作为锁定服务。Vitess发行版中包含ZooKeeper。
 
@@ -693,9 +690,10 @@ vitess/examples/local$ ./vtctld-up.sh
 所述vtctld服务器还接受来自命令vtctlclient工具，其用于管理群集。请注意，RPC的端口（在本例中15999）与Web UI端口（15000）不同。这些端口可以使用命令行标志进行配置，如演示vtctld-up.sh。
 
 为了方便起见，我们将lvtctl.sh在示例命令中使用脚本，以避免每次都输入vtctld地址。
-
+``` bash
 # List available commands
 vitess/examples/local$ ./lvtctl.sh help
+```
 - 启动vttablets
 
 该vttablet-up.sh脚本会引出三个vttablets，并根据脚本文件顶部设置的变量将它们分配给一个keyspace和shard。
@@ -780,9 +778,10 @@ vitess/examples/local$ ./lvtctl.sh RebuildVSchemaGraph
 - 启动vtgate
 
 Vitess使用vtgate将每个客户端查询路由到正确的vttablet。这个本地示例运行单个vtgate实例，但真正的部署可能会运行多个vtgate实例来共享负载。
-
+``` bash
 vitess/examples/local$ ./vtgate-up.sh
-运行客户端应用程序
+```
+##### Run a Client Application  运行客户端应用横向
 
 该client.py文件是一个简单的示例应用程序，它连接到vtgate并执行一些查询。要运行它，您需要：
 
@@ -791,7 +790,7 @@ vitess/examples/local$ ./vtgate-up.sh
 要么
 
 使用client.sh包装脚本，它临时设置环境然后运行client.py。
-
+``` bash
 vitess/examples/local$ ./client.sh
 ### example output:
 # Inserting into master...
@@ -800,31 +799,28 @@ vitess/examples/local$ ./client.sh
 # (15L, 1462519383758071808L, 'V is for speed')
 # (42L, 1462510369213753088L, 'V is for speed')
 # ...
+```
 在Java，PHP和Go的同一目录中也有示例客户端。请参阅每个示例文件顶部的注释以获取使用说明。
-
-尝试Vitess重新粉碎
+##### Try Vitess resharding 尝试Vitess重新粉碎
 
 现在您已经完成了一个完整的Vitess堆栈，您可能想要继续使用 Horizo​​ntal Sharding工作流指南 或Horizo​​ntal Sharding codelab （如果您希望通过命令手动运行每个步骤）来尝试 动态重新分片。
 
 如果是这样，你可以跳过拆除指南，因为拆分指南在这里提取。如果不是，继续下面的清理步骤。
 
-撕下群集
+##### Tear down the cluster 清理集群
 
 每个-up.sh脚本都有相应的-down.sh脚本来停止服务器。
-
+``` bash
 vitess/examples/local$ ./vtgate-down.sh
 vitess/examples/local$ ./vttablet-down.sh
 vitess/examples/local$ ./vtctld-down.sh
 vitess/examples/local$ ./zk-down.sh  # If you use Etcd, run ./etcd-down.sh
+```
 请注意，这些-down.sh脚本将留下任何创建的数据文件。如果您已完成此示例数据，则可以清除以下内容VTDATAROOT：
-
+``` bash
 $ cd $VTDATAROOT
 /path/to/vtdataroot$ rm -rf *
-
-
-
-
-
+```
 
 ### Troubleshooting 故障排除
 
