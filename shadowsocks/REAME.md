@@ -18,6 +18,7 @@ EOF
 sslocal -c /etc/shadowsocks.json
 
 安装polipo将socks5协议转为http协议
+yum install -y texinfo
 git clone https://github.com/jech/polipo.git
 cd polipo
 make all
