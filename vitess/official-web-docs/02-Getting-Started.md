@@ -538,29 +538,28 @@ $ sudo update-rc.d -f apparmor remove
   ``` bash
   export GODEBUG=netdns=go
   ```
-
 #### Build Vitess  构建Vitess
 
 - 导航到您想要下载Vitess源代码的目录并克隆Vitess Github回购。完成后，导航到该src/vitess.io/vitess目录。
-``` bash
-cd $WORKSPACE
-git clone https://github.com/vitessio/vitess.git \
-    src/vitess.io/vitess
-cd src/vitess.io/vitess
-```
+  ``` bash
+  cd $WORKSPACE
+  git clone https://github.com/vitessio/vitess.git \
+      src/vitess.io/vitess
+  cd src/vitess.io/vitess
+  ```
 - 设置MYSQL_FLAVOR环境变量。为您的数据库选择适当的值。该值区分大小写。
-``` bash
-export MYSQL_FLAVOR=MariaDB
-# or (mandatory for OS X)
-# export MYSQL_FLAVOR=MySQL56
-```
+  ``` bash
+  export MYSQL_FLAVOR=MariaDB
+  # or (mandatory for OS X)
+  # export MYSQL_FLAVOR=MySQL56
+  ```
 - 如果您选择的数据库安装在除了以外的位置/usr/bin，请将该VT_MYSQL_ROOT变量设置为MariaDB安装的根目录。例如，如果安装了MariaDB /usr/local/mysql，请运行以下命令。
-``` bash
-export VT_MYSQL_ROOT=/usr/local/mysql
+  ``` bash
+  export VT_MYSQL_ROOT=/usr/local/mysql
 
-# on OS X, this is the correct value:
-# export VT_MYSQL_ROOT=/usr/local/opt/mysql56
-```
+  # on OS X, this is the correct value:
+  # export VT_MYSQL_ROOT=/usr/local/opt/mysql56
+  ```
 请注意，该命令表示mysql应该在位置找到可执行文件/usr/local/mysql/bin/mysql。
 
 - 运行mysqld --version并确认您正在运行MariaDB或MySQL的正确版本。MariaDB和MySQL的值应该是10或更高。
@@ -568,41 +567,41 @@ export VT_MYSQL_ROOT=/usr/local/mysql
 使用下面的命令构建Vitess。请注意，该 bootstrap.sh脚本需要下载一些依赖项。如果你的机器需要代理服务器访问Internet，您将需要设置常用的环境变量（例如http_proxy， https_proxy，no_proxy）。
 
 运行boostrap.sh脚本：
-``` bash
-./bootstrap.sh
-### example output:
-# skipping zookeeper build
-# go install golang.org/x/tools/cmd/cover ...
-# Found MariaDB installation in ...
-# creating git pre-commit hooks
-#
-# source dev.env in your shell before building
-# Remaining commands to build Vitess
-. ./dev.env
-make build
-```
+  ``` bash
+  ./bootstrap.sh
+  ### example output:
+  # skipping zookeeper build
+  # go install golang.org/x/tools/cmd/cover ...
+  # Found MariaDB installation in ...
+  # creating git pre-commit hooks
+  #
+  # source dev.env in your shell before building
+  # Remaining commands to build Vitess
+  . ./dev.env
+  make build
+  ```
 
 #### Run Tests 运行测试
 
 注意：如果您使用的是etcd，请设置以下环境变量：
-``` bash
-export VT_TEST_FLAGS='--topo-server-flavor=etcd2'
-```
+  ``` bash
+  export VT_TEST_FLAGS='--topo-server-flavor=etcd2'
+  ```
 注意：如果您使用consul，请设置以下环境变量：
-``` bash
-export VT_TEST_FLAGS='--topo-server-flavor=consul'
-```
+  ``` bash
+  export VT_TEST_FLAGS='--topo-server-flavor=consul'
+  ```
 
 运行时的默认目标make test包含一整套旨在帮助Vitess开发人员验证代码更改的测试。这些测试通过在本地计算机上启动许多服务器来模拟小型Vitess集群。为此，他们需要大量资源; 建议至少使用8GB RAM和SSD来运行测试。
 
 一些测试需要额外的包。例如，在Ubuntu上：
-``` bash
-$ sudo apt-get install chromium-browser mvn xvfb
-```
+  ``` bash
+  $ sudo apt-get install chromium-browser mvn xvfb
+  ```
 如果您只想检查Vitess是否在您的环境中工作，则可以运行一组较轻的测试：
-``` bash
-make site_test
-```
+  ``` bash
+  make site_test
+  ```
 - 常见测试问题
 
 尝试make test在动力不足的机器上运行完整的开发人员测试套件（）通常会导致失败。如果您在运行较轻的测试集时仍然看到相同的失败（make site_test），请在vitess@googlegroups.com 论坛上告诉开发团队 。
@@ -622,10 +621,10 @@ make site_test
   > 这些错误可能表明机器内存耗尽，并且尝试分配更多RAM时服务器崩溃。一些较重的测试需要高达8GB的RAM。
 
   - Connection refused in zkctl test
-  >此错误可能表示机器没有安装Java Runtime，如果您将ZooKeeper用作锁定服务器，则这是一项要求。
+  > 此错误可能表示机器没有安装Java Runtime，如果您将ZooKeeper用作锁定服务器，则这是一项要求。
 
   - Running out of disk space
-    > 一些较大的测试在磁盘上使用高达4GB的临时空间。
+  > 一些较大的测试在磁盘上使用高达4GB的临时空间。
 
 #### Start a Vitess cluster  启动Vitess集群
 
@@ -633,83 +632,81 @@ make site_test
 
 - 检查系统设置
 
-一些Linux发行版的默认文件描述符限制对数据库服务器来说太低。这个问题可能会在数据库崩溃时显示消息“打开的文件过多”。
-
+> 一些Linux发行版的默认文件描述符限制对数据库服务器来说太低。这个问题可能会在数据库崩溃时显示消息“打开的文件过多”。
 检查系统范围的file-max设置以及用户特定的 ulimit值。我们建议将它们设置在100K以上以确保安全。确切的程序 可能因您的Linux发行版而异。
 
 - 配置环境变量
 
-如果您仍然在用于运行构建命令的终端窗口中，则可以跳到下一步，因为环境变量已经设置。
-
+> 如果您仍然在用于运行构建命令的终端窗口中，则可以跳到下一步，因为环境变量已经设置。
 如果您将此示例适用于您自己的部署，则运行脚本之前所需的唯一环境变量是VTROOT和VTDATAROOT。
 
 设置VTROOT为Vitess源代码树的父级。例如，如果你跑make build进去$HOME/vt/src/vitess.io/vitess，那么你应该设置：
-``` bash
-export VTROOT=$HOME/vt
-```
+  ``` bash
+  export VTROOT=$HOME/vt
+  ```
 设置VTDATAROOT到您想要存储数据文件和日志的目录。例如：
-``` bash
-export VTDATAROOT=$HOME/vtdataroot
-```
+  ``` bash
+  export VTDATAROOT=$HOME/vtdataroot
+  ```
 - 启动ZooKeeper或Etcd
 
 Vitess集群中的服务器通过查找存储在分布式锁定服务中的动态配置数据来相互找到对方。以下脚本创建一个小型ZooKeeper集群：
-``` bash
-$ cd $VTROOT/src/vitess.io/vitess/examples/local
-vitess/examples/local$ ./zk-up.sh
-### example output:
-# Starting zk servers...
-# Waiting for zk servers to be ready...
-```
+  ``` bash
+  $ cd $VTROOT/src/vitess.io/vitess/examples/local
+  vitess/examples/local$ ./zk-up.sh
+  ### example output:
+  # Starting zk servers...
+  # Waiting for zk servers to be ready...
+  ```
 在ZooKeeper集群运行之后，我们只需告诉每个Vitess进程如何连接到ZooKeeper。然后，每个进程都可以通过ZooKeeper进行协调来找到所有其他的Vitess进程。
 
 我们的每个脚本自动使用TOPOLOGY_FLAGS环境变量指向全局ZooKeeper实例。全局实例依次被配置为指向本地实例。在我们的示例脚本中，它们都托管在相同的ZooKeeper服务中。
 
 如果您想将Etcd用作分布式锁定服务，则以下脚本将创建一个Etcd实例：
-``` bash
-$ cd $VTROOT/src/vitess.io/vitess/examples/local
-vitess/examples/local$ source ./topo-etcd2.sh
-vitess/examples/local$ ./etcd-up.sh
-### example output:
-# enter etcd2 env
-# etcdmain: etcd Version: 3.X.X
-# ...
-# etcd start done...
-```
+  ``` bash
+  $ cd $VTROOT/src/vitess.io/vitess/examples/local
+  vitess/examples/local$ source ./topo-etcd2.sh
+  vitess/examples/local$ ./etcd-up.sh
+  ### example output:
+  # enter etcd2 env
+  # etcdmain: etcd Version: 3.X.X
+  # ...
+  # etcd start done...
+  ```
 - 启动vtctld
 
 该vtctld服务器提供了显示所有存储在ZooKeeper的协调信息的Web界面。
-``` bash
-vitess/examples/local$ ./vtctld-up.sh
-# Starting vtctld
-# Access vtctld web UI at http://localhost:15000
-# Send commands with: vtctlclient -server localhost:15999 ...
-```
+  ``` bash
+  vitess/examples/local$ ./vtctld-up.sh
+  # Starting vtctld
+  # Access vtctld web UI at http://localhost:15000
+  # Send commands with: vtctlclient -server localhost:15999 ...
+  ```
 打开http://localhost:15000以验证 vtctld正在运行。目前还没有任何信息，但菜单应该出现，这表明 vtctld正在运行。
 
 所述vtctld服务器还接受来自命令vtctlclient工具，其用于管理群集。请注意，RPC的端口（在本例中15999）与Web UI端口（15000）不同。这些端口可以使用命令行标志进行配置，如演示vtctld-up.sh。
 
 为了方便起见，我们将lvtctl.sh在示例命令中使用脚本，以避免每次都输入vtctld地址。
-``` bash
-# List available commands
-vitess/examples/local$ ./lvtctl.sh help
-```
+  ``` bash
+  # List available commands
+  vitess/examples/local$ ./lvtctl.sh help
+  ```
 - 启动vttablets
 
 该vttablet-up.sh脚本会引出三个vttablets，并根据脚本文件顶部设置的变量将它们分配给一个keyspace和shard。
-``` bash
-vitess/examples/local$ ./vttablet-up.sh
-# Output from vttablet-up.sh is below
-# Starting MySQL for tablet test-0000000100...
-# Starting vttablet for test-0000000100...
-# Access tablet test-0000000100 at http://localhost:15100/debug/status
-# Starting MySQL for tablet test-0000000101...
-# Starting vttablet for test-0000000101...
-# Access tablet test-0000000101 at http://localhost:15101/debug/status
-# Starting MySQL for tablet test-0000000102...
-# Starting vttablet for test-0000000102...
-# Access tablet test-0000000102 at http://localhost:15102/debug/status
-```
+  ``` bash
+  vitess/examples/local$ ./vttablet-up.sh
+  # Output from vttablet-up.sh is below
+  # Starting MySQL for tablet test-0000000100...
+  # Starting vttablet for test-0000000100...
+  # Access tablet test-0000000100 at http://localhost:15100/debug/status
+  # Starting MySQL for tablet test-0000000101...
+  # Starting vttablet for test-0000000101...
+  # Access tablet test-0000000101 at http://localhost:15101/debug/status
+  # Starting MySQL for tablet test-0000000102...
+  # Starting vttablet for test-0000000102...
+  # Access tablet test-0000000102 at http://localhost:15102/debug/status
+  ```
 此命令完成后，刷新vtctld Web UI，您应该看到一个名为test_keyspace单个分片的密钥空间0。这是一个未硬化的密钥空间。
 
 如果您点击分片框，您会看到该分片中的平板电脑列表。请注意，此时平板电脑不健康是正常现象，因为您尚未初始化它们。
