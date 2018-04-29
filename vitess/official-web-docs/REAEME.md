@@ -42,13 +42,13 @@ Vitess自2011年以来一直服务于所有的YouTube数据库流量，并且现
  下图说明了Vitess的组件：
  略
 - Topology 拓扑
- 该拓扑服务是一个元数据存储，其中包含有关于运行的服务器，分片方案，并复制图形信息。该拓扑由一个一致的数据存储支持。您可以使用vtctl(命令行)和vtctld（web）来浏览拓扑。
+ >该拓扑服务是一个元数据存储，其中包含有关于运行的服务器，分片方案，并复制图形信息。该拓扑由一个一致的数据存储支持。您可以使用vtctl(命令行)和vtctld（web）来浏览拓扑。
  在Kubernetes中，数据库存储是etcd。Vitess源代码还附带Apache ZooKeeper支持。
 - vtgate 
- vtgate是一个轻型代理服务器，可将流量路由到正确的vttablet（s）并将合并结果返回给客户端。它是应用程序向其发送查询的服务器。因此，客户端可以非常简单，因为它只需要能够找到一个vtgate实例。
+ >vtgate是一个轻型代理服务器，可将流量路由到正确的vttablet（s）并将合并结果返回给客户端。它是应用程序向其发送查询的服务器。因此，客户端可以非常简单，因为它只需要能够找到一个vtgate实例。
  为了路由查询，vtgate考虑了分片方案，所需的延迟以及水平扩展及其基础MySQL实例的可用性。
 - vttablet
- vttablet是位于MySQL数据库之前的代理服务器。Vitess实现对每个MySQL实例都有一个vttablet。
+ >vttablet是位于MySQL数据库之前的代理服务器。Vitess实现对每个MySQL实例都有一个vttablet。
  vttablet执行的任务是尝试最大化吞吐量，并保护MySQL免受有害查询的影响。其功能包括连接池，查询重写，查询重复。另外vttablet执行vtctl启动的管理任务，并提供用于过滤复制和数据导出的流服务。
 - vtctl
 - vtctld
