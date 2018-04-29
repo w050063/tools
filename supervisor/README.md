@@ -6,6 +6,7 @@
 ``` bash
 yum install -y python-pip
 pip install supervisor
+mkdir -p /etc/supervisord/conf.d/
 echo_supervisord_conf >/etc/supervisor/supervisord.conf
 mkdir -p /etc/supervisord/conf.d/
 sed -i 's#;[include]#[include]#g' /etc/supervisor/supervisord.conf
