@@ -464,9 +464,9 @@ vitess$ make docker_base
   重新启动，以确保AppArmor完全禁用。
 
 - 从下面列出的选项中选择一项锁定服务。技术上可以使用另一台锁服务器，但插件目前仅适用于ZooKeeper，etcd和consul。
-  - ZooKeeper 3.4.10默认包含在内。
-  - 安装etcd v3.0 +。如果你使用etcd，记得etcd在你的路径中包含命令。
-  - 安装领事。如果你使用领事，记得consul在你的路径中包含命令。
+  - ZooKeeper 3.4.10 is included by default.
+  - Install etcd v3.0+. If you use etcd, remember to include the etcd command on your path.
+  - Install Consul. If you use consul, remember to include the consul command on your path.
 
 - 安装构建和运行Vitess所需的以下其他工具：
   - make
