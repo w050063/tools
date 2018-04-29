@@ -456,12 +456,12 @@ vitess$ make docker_base
   sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
   ```
 - 卸载或禁用AppArmor。某些版本的MySQL带有Vitess工具尚未识别的默认AppArmor配置。当Vitess通过该mysqlctl工具初始化MySQL实例时，这会导致各种权限失败。这只是测试环境的一个问题。如果AppArmor在生产中是必需的，则可以在不通过mysqlctl的情况下适当地配置MySQL实例。
-``` bash
-$ sudo service apparmor stop
-$ sudo service apparmor teardown
-$ sudo update-rc.d -f apparmor remove
-```
-重新启动，以确保AppArmor完全禁用。
+  ``` bash
+  $ sudo service apparmor stop
+  $ sudo service apparmor teardown
+  $ sudo update-rc.d -f apparmor remove
+  ```
+  重新启动，以确保AppArmor完全禁用。
 
 - 从下面列出的选项中选择一项锁定服务。技术上可以使用另一台锁服务器，但插件目前仅适用于ZooKeeper，etcd和consul。
   - ZooKeeper 3.4.10默认包含在内。
