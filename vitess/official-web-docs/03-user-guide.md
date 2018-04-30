@@ -42,6 +42,8 @@ VTGate了解MySQL二进制协议。因此，任何可以直接与MySQL交谈的�
 Vitess目前为Java（JDBC）和Go（数据库/ sql）提供基于gRPC的连接器。所有其他人都可以使用本地MySQL驱动程序。Java和Go的本地MySQL驱动程序也应该可以工作。
 ```
 - Backups
+> Vitess支持将数据备份到网络挂载（例如NFS）或BLOB存储。备份存储通过可插拔界面实现，目前我们有Google Cloud Storage，Amazon S3和Ceph可用的插件。
+有关使用Vitess创建和恢复数据备份的更多信息，请参阅本指南的备份数据部分。
 
 ## Backing Up Data  备份数据
 ## Reparenting  重排根
