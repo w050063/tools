@@ -22,7 +22,7 @@ nutcracker -c /etc/nutcracker.yml
 
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/supervisor/install_supervisor.sh
 sh install_supervisor.sh
-cat>nutcracker.ini<<EOF
+cat>/etc/supervisord.d/nutcracker.ini<<EOF
 [program:nutcracker]  
 directory = /usr/bin/ 
 command = /usr/bin/nutcracker -c /etc/nutcracker.yml
