@@ -1,5 +1,10 @@
 # Redis知识总结
 ## Redis概述
+## Redis日常使用
+``` text
+127.0.0.1:6381> dbsize  // 查看key数量
+(integer) 3112
+```
 ## Redis多实例
 ``` bash
 cp /etc/redis-6380.conf /etc/redis-6381.conf
