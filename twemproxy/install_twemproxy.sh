@@ -1,5 +1,6 @@
 #!/bin/env bash
 
+install_twemproxy(){
 yum install -y autoconf automake libtool
 git clone https://github.com/twitter/twemproxy.git
 cd twemproxy/
@@ -18,8 +19,10 @@ nutcracker -c /etc/nutcracker.yml
 yum install -y redis
 systemctl enable redis
 systemctl start redis
-nutcracker -c /etc/nutcracker.yml 
+nutcracker -c /etc/nutcracker.yml
+}
 
+config_supervisor(){
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/supervisor/install_supervisor.sh
 sh install_supervisor.sh
 cat>/etc/supervisord.d/nutcracker.ini<<EOF
@@ -33,4 +36,11 @@ autorestart=true
 stderr_logfile=/var/log/nutcracker_err.log  
 stdout_logfile=/var/log/nutcracker_out.log 
 EOF
+systemctl restart supervisord.service
+}
+
+main(){
+install_twemproxy
+config_supervisor
+}
 
