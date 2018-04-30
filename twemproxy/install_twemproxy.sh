@@ -44,3 +44,5 @@ install_twemproxy
 config_supervisor
 }
 
+main
+
