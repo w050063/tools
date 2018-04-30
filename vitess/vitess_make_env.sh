@@ -1,5 +1,5 @@
 #!/bin/env bash 
-
+// 务必解决翻墙问题 or 直接购买海外机器进行操作
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/shell/host_init.sh
 sh host_init.sh
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/go/go_install.sh
