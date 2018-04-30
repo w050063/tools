@@ -11,3 +11,26 @@ autoreconf -fvi
 # ./configure --enable-debug=full
 make
 src/nutcracker -h
+cd src/ && install nutcracker /usr/bin/
+cp ../conf/nutcracker.yml /etc/nutcracker.yml
+vim /etc/nutcracker.yml 
+nutcracker -c /etc/nutcracker.yml
+yum install -y redis
+systemctl enable redis
+systemctl start redis
+nutcracker -c /etc/nutcracker.yml 
+
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/supervisor/install_supervisor.sh
+sh install_supervisor.sh
+cat>nutcracker.ini<<EOF
+[program:nutcracker]  
+directory = /usr/bin/ 
+command = /usr/bin/nutcracker -c /etc/nutcracker.yml
+priority=1  
+numprocs=1  
+autostart=true  
+autorestart=true
+stderr_logfile=/var/log/nutcracker_err.log  
+stdout_logfile=/var/log/nutcracker_out.log 
+EOF
+
