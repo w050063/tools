@@ -1,6 +1,9 @@
 #!/bin/env bash
 
 source_install(){
+yum install -y gcc gcc-c++ automake autoconf
+yum install -y unzip curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
+
 # wget https://github.com/git/git/archive/git-2.7.4.zip
 wget -O git-2.7.4.zip https://codeload.github.com/git/git/zip/v2.7.4
 unzip git-2.7.4.zip
