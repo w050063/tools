@@ -5,6 +5,7 @@
 ## FQA
 - [2016-06-17 09:12:29.376] nc_redis.c:1092 parsed unsupported command 'keys'
 > twemproxy代理redis的情况，不支持一些指令。这里错误说的是Keys指令不支持
+支持Redis的命令：https://github.com/twitter/twemproxy/blob/master/notes/redis.md
 
 - 大量TIME_WAIT
 ``` bash 
