@@ -31,3 +31,4 @@
 ## 参考资料
 - http://jixiuf.github.io/blog/go_vitess_start.html/
 - https://github.com/jixiuf/vitess-build-patch
+- http://www.cnblogs.com/davygeek/p/6433296.html
