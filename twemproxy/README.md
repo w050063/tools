@@ -14,7 +14,7 @@
 可以通过进程启动时使用-c or --conf-file指定YAML文件进行配置。配置文件用于指定twemproxy管理的每个池中的服务器池和服务器。
 
 - **listen：** 监听地址和端口或该服务器池的sock文件的绝对路径(/var/run/nutcracker.sock)
-- **hash：**散列函数名称
+- **hash：** 散列函数名称
   - one_at_a_time
   - md5
   - crc16
@@ -27,17 +27,22 @@
   - hsieh
   - murmur
   - jenkins
-- **hash_tag：**
-- **timeout**
-- **backlog**
-- **redis**
-- **redis_auth**
-- **redis_db**
-- **server_connections**
-- **auto_eject_hosts**
-- **server_retry_timeout**
-- **server_failure_limit**
-- **servers**
+- **hash_tag：** 一个两个字符的字符串，它指定用于散列的密钥部分，例如："{}" or "$$"。只要标签中的部分密钥一直，hash_tag就可以将不同的密钥映射到统一服务器
+- **distribution:** 密钥分配模式，可能的值是：
+  - ketama
+  - modula
+  - random
+- **timeout：** 等待建立到服务器的连接或从服务器接收响应的超时值（以毫米为单位）。默认情况下，我们无限期地等待。
+- **backlog：** TCP参数，默认512
+- **preconnect：** 一个布尔值，用于控制twemproxy是否应在进程启动时预先连接此池中的所有服务器，默认false.
+- **redis：** 一个布尔值，用于控制服务器池是否使用redis或memcached协议，默认false.
+- **redis_auth：** 在连接时向Redis服务器进行身份认证
+- **redis_db：** 在池服务器上使用的数据库编号。默认为0，注意：Twemproxy将始终以客户端DB 0的身份呈现给客户端.
+- **server_connections：** 可以向每个服务器打开的最大连接数。默认情况下，我们最多打开1个服务器连接。
+- **auto_eject_hosts：** 一个布尔值，用于控制服务连续server_failure_limit次失败时是否应暂时弹出。查看有关信息的活跃建议。默认为false。
+- **server_retry_timeout：** 当auto_eject_host设置为true时，在临时弹出的服务器上重试之前等待的超时值（以毫秒为单位）。默认为30000毫秒。
+- **server_failure_limit：** 当auto_eject_host设置为true时，服务器上导致临时弹出的连续失败次数。默认为2。
+- **servers：** 此服务器池的服务器地址，端口和权重（name:port:weight or ip:port:weight）列表
 
 ## FQA
 - [2016-06-17 09:12:29.376] nc_redis.c:1092 parsed unsupported command 'keys'
