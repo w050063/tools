@@ -26,7 +26,7 @@
 
   - https://github.com/coreos/etcd/releases/download/v3.1.0-rc.1/etcd-v3.1.0-rc.1-linux-amd64.tar.gz
 
-  - https://releases.hashicorp.com/consul/0.7.2/consul_0.7.2_linux_amd64.zip
+  - https://releases.hashicorp.com/consul/0.7.2/consul_0.7.2_linux_amd64.zip
 
 ## 参考资料
 - http://jixiuf.github.io/blog/go_vitess_start.html/
