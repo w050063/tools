@@ -1,6 +1,11 @@
 # twemproxy知识总结
+
 ## twemproxy概述
 - GitHub地址：https://github.com/twitter/twemproxy
+
+## twemproxy安装及配置说明
+安装：
+配置案例：https://github.com/twitter/twemproxy/blob/v0.4.1/conf/nutcracker.yml
 
 ## FQA
 - [2016-06-17 09:12:29.376] nc_redis.c:1092 parsed unsupported command 'keys'
