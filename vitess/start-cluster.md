@@ -29,7 +29,7 @@ Starting vtctld...
 Access vtctld web UI at http://linux-node01:15000
 Send commands with: vtctlclient -server linux-node01:15999 ...
 //未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot  使用普通用户启动
-#  ./vttablet-up.sh   
+# ./vttablet-up.sh 
 enter zk2 env
 Starting MySQL for tablet test-0000000100...
 Resuming from existing vttablet dir:
@@ -46,6 +46,21 @@ Resuming from existing vttablet dir:
 Starting MySQL for tablet test-0000000104...
 Resuming from existing vttablet dir:
     /data0/workspaces/go/vtdataroot/vt_0000000104
+E0501 09:29:00.906744   81118 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000103/mysql.sock
+E0501 09:29:00.906760   81119 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000104/mysql.sock
+E0501 09:29:00.907342   81117 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000102/mysql.sock
+E0501 09:29:00.907572   81115 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock
+E0501 09:29:00.937445   81116 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000101/mysql.sock
+Starting vttablet for test-0000000100...
+Access tablet test-0000000100 at http://192.168.47.100:15100/debug/status
+Starting vttablet for test-0000000101...
+Access tablet test-0000000101 at http://192.168.47.100:15101/debug/status
+Starting vttablet for test-0000000102...
+Access tablet test-0000000102 at http://192.168.47.100:15102/debug/status
+Starting vttablet for test-0000000103...
+Access tablet test-0000000103 at http://192.168.47.100:15103/debug/status
+Starting vttablet for test-0000000104...
+Access tablet test-0000000104 at http://192.168.47.100:15104/debug/status
 
 报错信息1：
 E0501 09:10:01.517581   71126 mysqld.go:605] mysql_install_db failed: /bin/mysql_install_db: exit status 1, output: WARNING: Could not write to config file //my.cnf: 权限不够
