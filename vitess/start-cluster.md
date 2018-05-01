@@ -3,6 +3,7 @@
 # export VTROOT=$GOPATH
 # export VTDATAROOT=$GOPATH/vtdataroot
 # export MYSQL_FLAVOR=MySQL56
+# export VT_MYSQL_ROOT=/usr
 
 // 普通用户添加到root组
 # usermod vitess -G root
