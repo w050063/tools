@@ -74,12 +74,6 @@ If you are using a binary release, you must either be at the top
 level of the extracted archive, or pass the --basedir option
 pointing to that location.
 
-报错信息2：
-E0501 09:10:17.646974   66514 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000101/mysql.sock
-E0501 09:10:17.822627   66517 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000104/mysql.sock
-E0501 09:10:17.822773   66516 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000103/mysql.sock
-E0501 09:10:17.823468   66515 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000102/mysql.sock
-E0501 09:10:18.054757   66513 mysqlctl.go:260] failed start mysql: deadline exceeded waiting for mysqld socket file to appear: /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock
 
 MySQL报错信息
 180501 09:13:48 mysqld_safe Logging to '/data0/workspaces/go/vtdataroot/vt_0000000100/error.log'.
@@ -159,4 +153,6 @@ MySQL报错信息
 2018-05-01 09:13:50 80405 [Note] 
 180501 09:13:50 mysqld_safe mysqld from pid file /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.pid ended
 
+使用软链接暂时修复该问题
+ln -s /usr/share /share
 ```
