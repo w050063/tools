@@ -486,15 +486,309 @@ vitess/examples/local$ ./sharded-vtworker.sh SplitClone test_keyspace/0
 
 接下来，它将暂停一个rdonly（离线处理）平板电脑上的复制，以充当数据的一致快照。应用程序可以继续运行而无需停机，因为实时流量由不受影响的副本和主平板电脑提供。其他批处理作业也将不受影响，因为它们将仅由剩余的未暂停rdonly平板电脑提供服务。
 
-#### Check filtered replication
-#### Check copied data integrity
-#### Switch over to new shards
-#### Remove original shard
-#### Tear down and clean up
+#### Check filtered replication 检查过滤的复制
+一旦从暂停的快照中复制完成，vtworker 将从源分片过滤的复制打开 到每个目标分片。这使得目标分片能够赶上自快照以来持续从应用流入的更新。
+
+当目标分片被追上时，他们将继续复制新的更新。您可以通过查看每个分片的内容来查看此内容，因为您将新消息添加到留言簿应用中的各个页面。碎片0将会看到所有的消息，而新的碎片只会看到生活在该碎片上的页面的消息。
+``` bash
+# See what's on shard test_keyspace/0:
+vitess/examples/local$ ./lvtctl.sh ExecuteFetchAsDba test-0000000100 "SELECT * FROM messages"
+# See what's on shard test_keyspace/-80:
+vitess/examples/local$ ./lvtctl.sh ExecuteFetchAsDba test-0000000200 "SELECT * FROM messages"
+# See what's on shard test_keyspace/80-:
+vitess/examples/local$ ./lvtctl.sh ExecuteFetchAsDba test-0000000300 "SELECT * FROM messages"
+```
+您可以再次运行客户端脚本，在各种页面上添加一些消息，并查看它们如何路由。
+
+#### Check copied data integrity  检查复制的数据的完整性
+该vtworker间歇法的另一种模式，将比较源和目标，以确保所有的数据存在且正确的。以下命令将针对每个目标分片运行差异：
+``` bash
+vitess/examples/local$ ./sharded-vtworker.sh SplitDiff test_keyspace/-80
+vitess/examples/local$ ./sharded-vtworker.sh SplitDiff test_keyspace/80-
+```
+如果发现任何差异，将会打印。如果一切都很好，你应该看到这样的事情：
+```
+I0416 02:10:56.927313      10 split_diff.go:496] Table messages checks out (4 rows processed, 1072961 qps)
+```
+
+#### Switch over to new shards 切换到新的shards
+现在我们已经准备好切换到新碎片的服务。该MigrateServedTypes 命令可以让你做这一个 平板电脑类型的时间，甚至一个单元格 在一个时间。这个过程可以在任何时候回滚，直到主机切换。
+``` bash
+vitess/examples/local$ ./lvtctl.sh MigrateServedTypes test_keyspace/0 rdonly
+vitess/examples/local$ ./lvtctl.sh MigrateServedTypes test_keyspace/0 replica
+vitess/examples/local$ ./lvtctl.sh MigrateServedTypes test_keyspace/0 master
+```
+在主移植过程中，原始分片大师将首先停止接受更新。然后，该流程将等待新的分片大师在允许他们开始投放之前完全赶上过滤的复制。由于过滤的复制一直伴随着实时更新，所以主控制器不可用时应该只有几秒钟的时间。
+
+主流量迁移时，已过滤的复制将停止。数据更新将在新分片中显示，但不会显示在原始分片上。亲自查看：向留言簿页面添加一条消息，然后检查数据库内容：
+```
+# See what's on shard test_keyspace/0
+# (no updates visible since we migrated away from it):
+vitess/examples/local$ ./lvtctl.sh ExecuteFetchAsDba test-0000000100 "SELECT * FROM messages"
+# See what's on shard test_keyspace/-80:
+vitess/examples/local$ ./lvtctl.sh ExecuteFetchAsDba test-0000000200 "SELECT * FROM messages"
+# See what's on shard test_keyspace/80-:
+vitess/examples/local$ ./lvtctl.sh ExecuteFetchAsDba test-0000000300 "SELECT * FROM messages"
+```
+
+#### Remove original shard  删除原来的shard
+现在所有的流量都是由新的分片服务的，我们可以删除原来的分片。为此，我们使用unsharded示例中的脚本：vttablet-down.sh
+
+> vitess/examples/local$ ./vttablet-down.sh
+然后，我们可以删除现在为空的分片：
+
+> vitess/examples/local$ ./lvtctl.sh DeleteShard -recursive test_keyspace/0
+然后，您应该在vtctld 拓扑页面或输出中 看到碎片0的平板电脑已经消失。lvtctl.sh ListAllTablets test
+
+
+#### Tear down and clean up 关闭并清理
+由于您已经通过运行从原始未展开的示例中清除了平板电脑，因此已将该步骤替换 为清理新的分片平板电脑。./vttablet-down.sh./sharded-vttablet-down.sh
+``` bash
+vitess/examples/local$ ./vtgate-down.sh
+vitess/examples/local$ ./sharded-vttablet-down.sh
+vitess/examples/local$ ./vtctld-down.sh
+vitess/examples/local$ ./zk-down.sh
+```
 
 ### Sharding in Kubernetes (Tutorial, automated) Kubernetes中分片（教程、自动化）
 ### Sharding in Kubernetes (Tutorial, manual) Kubernetes中分片（教程、手册）
 ## Topology Service 拓扑服务
+### Contents 内容
+本节介绍拓扑服务，这是Vitess体系结构的关键部分。该服务暴露给所有Vitess进程，并用于存储有关Vitess集群的小部分配置数据，并提供集群范围的锁。他还支持守护和主选举。
+
+具体而言，拓扑服务功能由锁定服务器实现，在本文档的其余部分中称为拓扑服务器。我们使用插件实现，并且我们支持多个锁服务(Zookeeper,etcd,Consul,...)作为服务的后端。
+### Requirements and usage 要求和用法
+拓扑服务用于存储有关Keyspaces, the Shards, the Tablets, the Replication Graph, and the Serving Graph。我们存储每个对象的小数据结构（几百字节）。
+
+拓扑服务器的主要合同是高度可用和一致的。据了解，它会产生更高的延迟成本和非常低的吞吐量。
+
+我们从不使用拓扑服务器作为RPC机制，也不将其用作日志的存储系统。我们永远不会依赖于拓扑服务器能够快速响应并快速为每个查询提供服务。
+
+拓扑服务器还必须支持Watch界面，以在节点上发生某些情况时发出信号。这用于例如知道键空间拓扑结构何时改变（例如用于重新分解）。
+
+#### Global vs local 全局 vs 本地
+我们区分拓扑服务器的两个实例：全局实例和每个单元本地实例：
+
+- Global实例用于存储关于不经常更改的拓扑的全局数据，例如关于Keyspaces和Shards的信息。数据独立于单个实例和单元，并且需要在单元完全停顿的情况下存活。
+- 每个单元有一个Local实例，它包含特定于单元的信息，并且还汇总了来自global + local单元的数据，以便客户更容易地找到数据。Vitess本地进程不应该使用全局拓扑实例，而应该尽可能使用本地拓扑服务器中的汇总数据。
+
+全局实例可能会停止一段时间，并且不会影响本地单元（这是一个例外，如果需要处理重新启动，则可能不起作用）。如果本地实例发生故障，则仅影响本地平板电脑（然后该单元通常状态不佳，不应使用）。
+
+此外，Vitess进程不会使用全局或本地拓扑服务器来为单个查询服务。他们只使用拓扑服务器在启动时和后台获取拓扑信息，但不能直接提供查询。
+
+#### Recovery 恢复
+如果本地拓扑服务器死亡并且无法恢复，则可能会被清除。然后需要重新启动该单元中的所有平板电脑，以便重新初始化其拓扑记录（但不会丢失任何MySQL数据）。
+
+如果全局拓扑服务器死亡并且无法恢复，则这是更大的问题。所有的Keyspace / Shard对象都必须重新创建。然后细胞应该恢复。
+
+### Global data 全局数据
+#### Keyspace
+Keyspace对象包含各种信息，主要是关于分片：Keyspace如何分片，分片密钥列的名称是什么，此Keyspace是否提供数据，如何分割传入的查询，...
+
+整个Keyspace都可以锁定。例如，当我们改变哪个碎片服务于Keyspace内部时，我们在重新利用时使用这个。这样我们保证只有一个操作会同时更改密钥空间数据。
+
+#### Shard 分片
+shard包含Keyspace数据的一个子集。全局拓扑中的碎片记录包含：
+
+- 该碎片的主平板别名（具有MySQL主设备）。
+- Keyspace中这个碎片覆盖的分片键范围。
+- 如果需要，平板电脑会为每个单元格提供这个碎片服务器（主服务器，副本服务器，批处理...）。
+- 如果在过滤的复制过程中，源碎片正在从此复制。
+- 在此碎片中包含平板电脑的单元格列表。
+- 碎片全球平板电脑控制，如黑名单表中没有平板电脑应该在这个碎片服务。
+
+碎片可以被锁定。我们在影响Shard记录或Shard内多个平板电脑（如重新设置）的操作中使用此操作，因此多个作业不会同时更改数据。
+
+#### VSchema data VSchema数据
+VSchema数据包含VTGate V3 API的分片和路由信息。
+
+### Local data  本地数据
+本节介绍存储在拓扑服务器的本地实例（每个单元）中的数据结构。
+
+#### Tablets
+平板电脑记录有关于平板电脑内运行的单个vttablet进程的许多信息（以及MySQL进程）：
+
+- 唯一标识Tablet的Tablet Alias（单元+唯一ID）。
+- 平板电脑的主机名，IP地址和端口映射。
+- 当前的平板电脑类型（主，副本，批处理，备用...）。
+- 这款平板电脑是Keyspace / Shard的一部分。
+- 该平板电脑提供的分片键范围。
+- 用户指定的标签映射（例如按照安装数据进行存储）。
+
+平板电脑可以在运行之前创建平板电脑记录（通过或将参数传递给vttablet进程）。平板电脑记录更新的唯一方法是以下之一：vtctl InitTabletinit_*
+
+- vttablet进程本身在运行时拥有该记录，并且可以更改它。
+- 在初始阶段，在平板电脑启动之前。
+- 关机后，当平板电脑被删除。
+- 如果平板电脑无响应，则可能会在重新启动时被迫空闲以使其不健康。
+
+#### Replication graph 复制视图
+复制图表允许我们在给定的Cell / Keyspace /碎片中查找平板电脑。它用于包含有关哪个平板电脑从其他平板电脑复制的信息，但这太复杂了，无法维护。现在它只是一个平板电脑列表。
+
+#### Serving graph 服务视图
+服务图是客户用来查找Keyspace的每个单元格拓扑的。它是全球数据的汇总（Keyspace + Shard）。vtgates仅打开少量这些对象并快速获得所需的所有对象。
+
+- SrvKeyspace
+
+  这是一个Keyspace的当地代表。它包含有关用于获取数据的碎片的信息（但不包括关于每个碎片的信息）：
+
+  - 分区映射由平板电脑类型（主设备，副本设备，批处理...）键入，值为用于服务的分片列表。
+  - 它还包含全局Keyspace字段，复制用于快速访问。
+
+它可以通过运行来重建。平板电脑在单元中启动时会自动重建，并且该单元/键空间的SrvKeyspace尚不存在。在水平和垂直分割期间它也将被改变。vtctl RebuildKeyspaceGraph
+
+- SrvVSchema
+
+这是VSchema的本地汇总。它包含单个对象中所有键空间的VSchema。
+
+它可以通过运行来重建。它在使用时自动重建（除非被标志阻止）。vtctl RebuildVSchemaGraphvtctl ApplyVSchema
+
+### Workflows involving the Topology Server 涉及拓扑服务器的工作流程
+The Topology Server涉及许多Vitess工作流程。
+
+tablet初始化后，我们创建tablet记录，并将tablet添加到复制图。如果它是Shard的主人，我们也会更新全局Shard记录。
+
+管理工具需要为给定的Keyspace/shard查找tablet：首先，我们得到Shard的Tablets单元列表（全局拓扑碎片记录包含这些），然后我们使用Cell / Keyspace / Shard的复制图表来查找所有的tablet，然后我们可以读取每个tablet的记录
+
+当一个shard被重新设定时，我们需要用新的主别名来更新全局shard记录。
+
+查找tablet以提供数据分两个阶段完成：vtgate维护与所有可能的tablet的健康状况检查连接，并报告它们所服务的键空间/分片/平板电脑类型。vtgate也读取SrvKeyspace对象，以找出碎片映射。有了这两条信息，vtgate可以将查询路由到正确的vttablet。
+
+在重新划分事件期间，我们也改变了拓扑结构。水平分割将更改全局碎片记录和本地SrvKeyspace记录。垂直分割将改变全局Keyspace记录和本地SrvKeyspace记录。
+
+### Exploring the data in a Topology Server 浏览拓扑服务器中的数据
+我们存储每个对象的proto3二进制数据。
+
+在所有实现中，我们使用以下路径作为数据：
+
+Global Cell：
+- CellInfo path： cells/<cell name>/CellInfo
+- Keyspace: keyspaces/<keyspace>/Keyspace
+- Shard: keyspaces/<keyspace>/shards/<shard>/Shard
+- VSchema: keyspaces/<keyspace>/VSchema
+
+Local Cell：
+- Tablet： tablets/<cell>-<uid>/Tablet
+- Replication Graph： keyspaces/<keyspace>/shards/<shard>/ShardReplication
+- SrvKeyspace： keyspaces/<keyspace>/SrvKeyspace
+- SrvVSchema： SvrVSchema
+
+该实用程序可以在使用该选项时解码这些文件 ：vtctl TopoCat-decode_proto
+
+``` bash
+TOPOLOGY="-topo_implementation zk2 -topo_global_server_address global_server1,global_server2 -topo_global_root /vitess/global"
+
+$ vtctl $TOPOLOGY TopoCat -decode_proto -long /keyspaces/*/Keyspace
+path=/keyspaces/ks1/Keyspace version=53
+sharding_column_name: "col1"
+path=/keyspaces/ks2/Keyspace version=55
+sharding_column_name: "col2"
+```
+该vtctld网络工具还包含一个拓扑浏览器（使用Topology 左侧选项卡）。它将显示解码后的各种原始文件。
+
+### Implementations 实现
+#### Zookeeper zk2 implementation
+#### etcd etcd2 implementation (new version of etcd)
+#### Consul consul implementation
+### Running in only one cell  只在一个cell中运行
+拓扑服务旨在分布在多个单元中，并且能够承受单个单元中断。但是，通常的用法是在一个单元/区域中运行Vitess集群。本部分介绍如何执行此操作，以及稍后升级到多个单元/区域。
+
+如果在单个单元中运行，则同一拓扑服务可用于全局数据和本地数据。本地单元记录仍需要创建，只需使用相同的服务器地址，非常重要的是，使用不同的根节点路径。
+
+在这种情况下，只需运行3台服务器进行拓扑服务仲裁就足够了。例如，3个etcd服务器。并且将他们的地址用于本地小区。让我们使用一个简短的单元名称，就像local在那个拓扑服务器中的本地数据稍后将被移动到另一个拓扑服务那样，它将具有真实的单元名称。
+
+#### Extending to more cells 扩展到更多的细胞
+为了在多个单元中运行，需要将当前拓扑服务分成全局实例和每个单元一个本地实例。而初始设置有3个拓扑服务器（用于全局和本地数据），我们推荐在所有单元（用于全局拓扑数据）和每个单元3个本地服务器（用于每单元拓扑数据）上运行5个全局服务器。
+
+要迁移到这样的设置，首先在第二个单元中添加3个本地服务器，并像第一个单元那样运行。现在可以在第二个单元格中启动平板电脑和vtgates，并且可以正常使用。vtctl AddCellinfo
+
+然后，可以使用命令行参数为vtgate配置一组单元格以查看平板电脑。然后它可以使用所有单元格中的所有平板电脑来路由流量。注意这是访问另一个单元中的主设备所必需的。-cells_to_watch
+
+在扩展到两个单元后，原始拓扑服务包含全局拓扑数据和第一个单元拓扑数据。我们之后的对称配置将是将原始服务分为两个：全局数据只包含全局数据（分布在两个单元中），而本地数据则包含原始单元。为了实现这一分割：
+
+- 在该原始单元中启动一个新的本地拓扑服务（该单元中有3个本地服务器）。
+- 选择与该单元不同的名称local。
+- 使用配置它。vtctl AddCellInfo
+- 确保所有vtgates都可以看到新的本地单元格（再次使用 ）。-cells_to_watch
+- 重新启动所有vttablets在该新的单元格中，而不是local之前使用的单元名称。
+- 使用删除所有提到的所有keyspaces细胞。vtctl RemoveKeyspaceCelllocal
+- 使用删除全局配置为 电池。vtctl RemoveCellInfolocal
+- 删除旧的本地服务器根目录中全局拓扑服务中的所有剩余数据。
+
+分割完成后，配置完全对称：
+
+- 全球拓扑服务，所有单元中都有服务器。仅包含有关Keyspaces，Shards和VSchema的全局拓扑数据。通常它在所有单元中有5个服务器。
+- 一个到每个单元的本地拓扑服务，服务器只在该单元中。只包含有关平板电脑的本地拓扑数据，并且为了有效访问而汇总全局数据。通常，它在每个单元中有3个服务器。
+
+### Migration between implementations 实现之间的迁移
+我们提供topo2topo二进制文件以在一个实现与另一个拓扑服务之间迁移。
+
+这种情况下的流程是：
+
+从一个稳定的拓扑开始，不要重新分解或重新进行。
+配置新拓扑服务，使其至少具有源拓扑服务的所有单元。确保它正在运行。
+topo2topo用正确的标志运行程序。， ，描述源（旧）拓扑服务。，，描述目标（新）拓扑服务。-from_implementation-from_root-from_server-to_implementation-to_root-to_server
+使用新的拓扑服务标志运行每个密钥空间。vtctl RebuildKeyspaceGraph
+运行使用新的拓扑服务标志。vtctl RebuildVSchemaGraph
+vtgate使用新的拓扑服务标志重新启动全部。随着拓扑被复制，它们将像以前一样看到相同的密钥空间/碎片/平板电脑/ vschema。
+vttablet使用新的拓扑服务标志重新启动全部。他们可能会使用相同的端口，但他们会在启动时更新新拓扑，并且可以从vtgate中看到。
+vtctld使用新拓扑服务标志重新启动所有进程。因此UI也显示新数据。
+从不推荐使用zookeeper到zk2 拓扑的示例命令是：
+``` bash
+# Let's assume the zookeeper client config file is already
+# exported in $ZK_CLIENT_CONFIG, and it contains a global record
+# pointing to: global_server1,global_server2
+# an a local cell cell1 pointing to cell1_server1,cell1_server2
+#
+# The existing directories created by Vitess are:
+# /zk/global/vt/...
+# /zk/cell1/vt/...
+#
+# The new zk2 implementation can use any root, so we will use:
+# /vitess/global in the global topology service, and:
+# /vitess/cell1 in the local topology service.
+
+# Create the new topology service roots in global and local cell.
+zk -server global_server1,global_server2 touch -p /vitess/global
+zk -server cell1_server1,cell1_server2 touch -p /vitess/cell1
+
+# Store the flags in a shell variable to simplify the example below.
+TOPOLOGY="-topo_implementation zk2 -topo_global_server_address global_server1,global_server2 -topo_global_root /vitess/global"
+
+# Reference cell1 in the global topology service:
+vtctl $TOPOLOGY AddCellInfo \
+  -server_address cell1_server1,cell1_server2 \
+  -root /vitess/cell1 \
+  cell1
+
+# Now copy the topology. Note the old zookeeper implementation doesn't need
+# any server or root parameter, as it reads ZK_CLIENT_CONFIG.
+topo2topo \
+  -from_implementation zookeeper \
+  -to_implementation zk2 \
+  -to_server global_server1,global_server2 \
+  -to_root /vitess/global \
+
+# Rebuild SvrKeyspace objects in new service, for each keyspace.
+vtctl $TOPOLOGY RebuildKeyspaceGraph keyspace1
+vtctl $TOPOLOGY RebuildKeyspaceGraph keyspace2
+
+# Rebuild SrvVSchema objects in new service.
+vtctl $TOPOLOGY RebuildVSchemaGraph
+
+# Now restart all vtgate, vttablet, vtctld processes replacing:
+# -topo_implementation zookeeper
+# With:
+# -topo_implementation zk2
+# -topo_global_server_address global_server1,global_server2
+# -topo_global_root /vitess/global
+#
+# After this, the ZK_CLIENT_CONF file and environment variables are not needed
+# any more.
+```
+
+#### Migration using the Tee implementation
+
 ## Transport Security Model 传输安全模型
 ## Launching  发射
 ### Scalability Philosophy  可扩展性哲学
