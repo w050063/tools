@@ -7,7 +7,7 @@ newrelic_appname=`echo ${time_flag}|md5sum|awk '{print $1}'`
 install_newrelic(){
 rpm -Uvh http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
 yum install -y newrelic-php5
-newrelic-install install
+echo ${license_key}|newrelic-install install
 
 cp /etc/php.d/newrelic.ini{,.`date +%Y%m%d`}
 cat >/etc/php.d/newrelic.ini<<EOF
@@ -20,6 +20,8 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 newrelic.daemon.port = "@newrelic-daemon"
 newrelic.transaction_tracer.threshold = "10ms"
 EOF
+\cp /etc/newrelic/newrelic.cfg.template /etc/newrelic/newrelic.cfg
+
 }
 
 main(){
