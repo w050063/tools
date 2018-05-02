@@ -27,6 +27,10 @@ sed -i 's$#pidfile=$pidfile=/var/run/newrelic-daemon.pid$g' /etc/newrelic/newrel
 sed -i 's$#logfile=/var/log/newrelic/newrelic-daemon.log$logfile=/var/log/newrelic/newrelic-daemon.log$g' /etc/newrelic/newrelic.cfg
 sed -i 's$#utilization.detect_aws=true$utilization.detect_aws=true$g' /etc/newrelic/newrelic.cfg
 /etc/init.d/newrelic-daemon restart
+/etc/init.d/newrelic-daemon restart
+/etc/init.d/newrelic-daemon restart
+systemctl restart php-fpm.service
+systemctl restart nginx.service 
 }
 
 main(){
