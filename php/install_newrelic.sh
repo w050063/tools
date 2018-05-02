@@ -5,6 +5,7 @@ license_key="cfc8926965a3111ec0b28e5a69f114d657a40074"
 newrelic_appname=`echo ${time_flag}|md5sum|awk '{print $1}'`
 
 install_newrelic(){
+# yum install -y php php-fpm
 rpm -Uvh http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
 yum install -y newrelic-php5
 echo ${license_key}|newrelic-install install
@@ -21,7 +22,11 @@ newrelic.daemon.port = "@newrelic-daemon"
 newrelic.transaction_tracer.threshold = "10ms"
 EOF
 \cp /etc/newrelic/newrelic.cfg.template /etc/newrelic/newrelic.cfg
-
+sed -i 's$#port="/tmp/.newrelic.sock"$port="@newrelic-daemon"$g' /etc/newrelic/newrelic.cfg
+sed -i 's$#pidfile=$pidfile=/var/run/newrelic-daemon.pid$g' /etc/newrelic/newrelic.cfg
+sed -i 's$#logfile=/var/log/newrelic/newrelic-daemon.log$logfile=/var/log/newrelic/newrelic-daemon.log$g' /etc/newrelic/newrelic.cfg
+sed -i 's$#utilization.detect_aws=true$utilization.detect_aws=true$g' /etc/newrelic/newrelic.cfg
+/etc/init.d/newrelic-daemon restart
 }
 
 main(){
