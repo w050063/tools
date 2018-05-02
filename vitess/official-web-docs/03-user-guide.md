@@ -934,4 +934,4 @@ Here is a short list of all the basic workflows Vitess supports:
 - Backup/Restore 备份/恢复
 - Schema Management / Schema Swap  架构管理/架构交换
 - Resharding / Horizontal Resharding Tutorial 重新分片 / 水平分片教程
-- Upgrading 升级
+- Upgrading 升级user-guide/server-configurationuser-guide/server-configurationuser-guide
