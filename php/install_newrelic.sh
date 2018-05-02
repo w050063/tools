@@ -1,4 +1,5 @@
 #!/bin/env bash
+# os: CentOS 7
 
 time_flag=`date +%Y%m%d%H%M%S`
 license_key="cfc8926965a3111ec0b28e5a69f114d657a40074"
