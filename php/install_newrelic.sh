@@ -32,6 +32,9 @@ sed -i 's$#utilization.detect_aws=true$utilization.detect_aws=true$g' /etc/newre
 /etc/init.d/newrelic-daemon restart
 systemctl restart php-fpm.service
 systemctl restart nginx.service 
+
+# or 
+# /usr/bin/newrelic-daemon --agent --pidfile /var/run/newrelic-daemon.pid --logfile /var/log/newrelic/newrelic-daemon.log --port @newrelic-daemon --tls --define utilization.detect_aws=true --define utilization.detect_azure=true --define utilization.detect_gcp=true --define utilization.detect_pcf=true --define utilization.detect_docker=true -no-pidfile
 }
 
 main(){
