@@ -52,11 +52,63 @@ Vitess有几个组件可以让你的应用程序避免这种复杂性：
 - 在本地服务器上运行Vitess
 - 备份数据
 - 重新分配 - Vitess中主要实例的基本分配
-## Step 2: Connect your application to your database
-### Migrating production data to Vitess
-## Step 3: Vertical sharding (scaling to multiple keyspaces)
-### Scaling keyspaces with Vitess
-## Step 4: Horizontal sharding (partitioning your data)
-## Related tasks
-### Data processing input / output
-### Query log analysis
+## Step 2: Connect your application to your database 将您的应用程序连接到您的数据库
+显然，你的应用程序需要能够调用你的数据库。因此，我们将直接解释如何修改应用程序以通过vtgate连接到数据库。
+
+从2.1版开始，VTGate支持MySQL协议。所以，应用程序只需要改变它连接的地方。对于那些使用Java或Go的用户，我们另外提供了可以使用gRPC与VTGate进行通信的库。使用提供的库允许您使用绑定变量发送查询，这在MySQL协议中本质上是不可能的。
+
+### Unit testing database interactions 单元测试数据库交互
+vttest库和可执行文件提供了一个单元测试环境，使您可以启动一个假群集，充当生产环境的精确副本以用于测试目的。在假群集中，单个数据库实例承载所有碎片。
+
+### Migrating production data to Vitess 将生产数据迁移到Vitess
+将数据迁移到Vitess数据库的最简单方法是对现有数据进行备份，在Vitess集群上进行恢复，然后从那里开始。但是，这需要一些停机时间。
+
+另一个更复杂的方法是实时迁移，它需要你的应用程序支持直接的MySQL访问和Vitess访问。在这种方法中，您可以启用从源数据库到Vitess主数据库的MySQL复制。这将使您能够快速迁移并几乎不会停机。
+
+请注意，此路径高度依赖于源设置。因此，尽管Vitess提供了辅助工具，但它并未提供支持此类迁移的通用方法。
+
+最后的选择是将Vitess直接部署到现有的MySQL实例上，并慢慢迁移应用程序流量以转移到使用Vitess。
+
+相关的Vitess文档：
+- 模式管理
+- 运输安全模型
+## Step 3: Vertical sharding (scaling to multiple keyspaces) 垂直分片(缩放到多个keyspaces)
+通常，放大的第一步是垂直分区，在这个分区中可以识别属于一组的表并将它们移动到不同的密钥空间中。密钥空间是一个分布式数据库，通常，此时数据库是未分层的。也就是说，在扩展到多个密钥空间之前，您可能需要水平分割数据（步骤4）。
+
+将表分成多个密钥空间的好处是并行访问数据（提高性能），并为每个较小的密钥空间准备水平分片。而且，在将数据分成多个密钥空间时，您应该着眼于以下几点：
+
+- 密钥空间内的所有表共享一个公用密钥。这将使步骤4中描述的未来水平分割更加方便。
+- 连接主要在密钥空间内。（密钥间的连接代价很高。）
+- 涉及多个密钥空间中数据的事务也很昂贵，这种事务并不常见。
+
+### Scaling keyspaces with Vitess 使用Vitess缩放keyspaces
+几个vtctl函数 - vtctl是用于管理数据库拓扑的Vitess命令行工具 - 支持垂直分割密钥空间的功能。在此过程中，可以将一组表从一个现有的密钥空间移动到一个新的密钥空间，而不需要读取停机时间并且只需几秒钟就可以写入停机时间。
+相关的Vitess文档：
+- vtctl参考指南
+
+## Step 4: Horizontal sharding (partitioning your data) 水平分割（分割你的数据）
+扩展数据的下一步是水平分区，即对数据进行分区以提高可伸缩性和性能的过程。分片是密钥空间内数据的水平分区。每个分片都有一个主实例和副本实例，但数据在分片之间不重叠。
+
+为了执行水平分片，您需要确定将用于决定每个表的目标分片的列。这被称为主Vindex，它类似于NoSQL分片密钥，但提供了额外的灵活性。关于这种主要vindexes和其他分片元数据的决定存储在VSchema中。
+
+Vitess提供强大的重新分片支持，包括更新密钥空间的分片方案和动态重组数据以匹配新方案。在重新分片期间，Vitess会复制，验证并保持数据在新分片上保持最新，而现有分片将继续提供实时读取和写入流量。当您准备好切换时，只需几秒钟的只读停机时间即可进行迁移。
+
+相关的Vitess文档：
+- VSchema参考指南
+- 拆分
+- 水平分片（Codelab）
+- 分解在Kubernetes（Codelab）
+## Related tasks 相关任务
+除了上面讨论的四个步骤之外，随着应用程序的成熟，您可能还需要完成以下部分或全部内容。
+
+### Data processing input / output 数据输入/输出
+Hadoop是一个框架，可以使用简单的编程模型在计算机集群中分布式处理大型数据集。
+
+Vitess提供了一个Hadoop InputSource，可用于任何Hadoop MapReduce作业甚至连接到Spark。Vitess InputSource接受简单的SQL查询，将查询拆分为小块，并尽可能跨数据库实例，分片等并行化数据读取。
+
+### Query log analysis 查询日志分析
+数据库查询日志可以帮助您监视和提高应用程序的性能。
+
+为此，每个vttablet实例都提供运行时统计信息，可通过平板电脑的网页访问平板电脑正在运行的查询。这些统计信息可以很容易地检测到缓慢的查询，这些查询通常会由于缺少或不匹配的表索引而受到阻碍。定期查看这些查询有助于维护大型数据库安装的整体运行状况。
+
+每个vttablet实例还可以提供所有正在运行的查询的流。如果Vitess集群与日志集群共处一处，则可以实时转储此数据，然后运行更高级的查询分析。
