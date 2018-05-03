@@ -39,7 +39,8 @@ Vitess自2011年以来一直服务于所有的YouTube数据库流量，并且现
  根据您的应用程序的当前状态，您可以通过许多不同的流程实现完整的Vitess实施。例如：如果您要从头开始构建服务，那么使用Vitess的第一步就是定义数据库拓扑。但是，如果您需要扩展现有数据库，则可能首先部署连接代理。
  Vitess工具和服务器旨在为您提供帮助，无论您是从一组完整的数据库开始，还是从小规模开始，随着时间的推移开始扩展。对于较小的实现，连接池和查询重写等vttablet功能可帮助您从现有硬件中获得更多。Vitess的自动化工具为大型实施提供了额外的好处。
  下图说明了Vitess的组件：
- 略
+ ![image](https://github.com/mds1455975151/tools/blob/master/vitess/official-web-docs/images/VitessOverview.png)
+ 
 - Topology 拓扑
  >该拓扑服务是一个元数据存储，其中包含有关于运行的服务器，分片方案，并复制图形信息。该拓扑由一个一致的数据存储支持。您可以使用vtctl(命令行)和vtctld（web）来浏览拓扑。
  在Kubernetes中，数据库存储是etcd。Vitess源代码还附带Apache ZooKeeper支持。
