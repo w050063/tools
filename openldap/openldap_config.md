@@ -182,4 +182,4 @@ https://www.cnblogs.com/lemon-le/p/6207695.html
 
 ## LDAP + GrayLog
 ![images](https://github.com/mds1455975151/tools/blob/master/openldap/images/01.png)
-![images](https://github.com/mds1455975151/tools/blob/master/openldap/images/01.png)
+![images](https://github.com/mds1455975151/tools/blob/master/openldap/images/02.png)
