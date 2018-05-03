@@ -19,6 +19,9 @@
   
 ## 客户端
 - [PHP](https://packagist.org/packages/vitess/php-client)
+- [Java]
+- [Python]
+- [Go]
 
 ## 常见MySQL水平扩展架构
 - [mysql-proxy](https://github.com/mysql/mysql-proxy)
