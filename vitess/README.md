@@ -13,6 +13,8 @@
 - **vitess**
 - TDDL
 - OneProxy
+- [dble](https://github.com/actiontech/dble)
+- [网易cetus](https://github.com/Lede-Inc/cetus)
 
 ## 实践操作
 - 初始化机器
