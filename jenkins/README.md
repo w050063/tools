@@ -10,3 +10,6 @@
 ### 插件
 - user build vars
 - build-name-setter
+
+### 自定义主题
+- https://wiki.jenkins.io/display/JENKINS/Simple+Theme+Plugin
