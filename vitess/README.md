@@ -10,7 +10,7 @@
 - heisenberg
 - [Atlas](https://github.com/Qihoo360/Atlas)
 - Oceanus
-- **vitess**
+- **[YouTube开源vitess]**(https://github.com/vitessio/vitess)
 - TDDL
 - OneProxy
 - [dble](https://github.com/actiontech/dble)
