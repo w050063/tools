@@ -12,7 +12,7 @@
 - Oceanus
 - **[YouTube开源vitess](https://github.com/vitessio/vitess)**
 - TDDL
-- OneProxy
+- [非开源OneProxy](https://github.com/mark-neil-wang/OneProxy)
 - [dble](https://github.com/actiontech/dble)
 - [网易cetus](https://github.com/Lede-Inc/cetus)
 
