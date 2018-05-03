@@ -17,7 +17,7 @@ Manager Password-------123456
 ###! **Be careful not to break the indentation in the ldap_servers block. It is
 ###!   in yaml format and the spaces must be retained. Using tabs will not work.**
 
-gitlab_rails['ldap_enabled'] = true 
+gitlab_rails['ldap_enabled'] = true
 
 ###! **remember to close this block with 'EOS' below**
 gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
@@ -88,7 +88,7 @@ Test get user's memberships : Failed
 Test retrieve group : Not performed
 Test get group members : Not performed
 Test user can authenticate : Succeeded
- 
+
 答案1：
 https://confluence.atlassian.com/adminjiraserver073/connecting-to-an-ldap-directory-861253200.html?_ga=2.47348132.2015352131.1524042226-1638756934.1524042226#ConnectingtoanLDAPDirectory-MembershipSchemaSettings
 ```
@@ -124,7 +124,7 @@ MECHANISMS="ldap"                     // 修改
 MECH_OPTIONS=""
 THREADS=5
 OPTIONS="-c -m /var/run/saslauthd"
-# cat /etc/saslauthd.conf 
+# cat /etc/saslauthd.conf
 ldap_servers: ldap://ldap.dev.worldoflove.cn:389
 ldap_default_domain:worldoflove.cn
 ldap_search_base:dc=worldoflove,dc=cn
@@ -179,3 +179,7 @@ smbpasswd -a laige
 samba
 https://www.cnblogs.com/lemon-le/p/6207695.html
 ```
+
+## LDAP + GrayLog
+![images](https://github.com/mds1455975151/tools/blob/master/openldap/images/01.png)
+![images](https://github.com/mds1455975151/tools/blob/master/openldap/images/01.png)
