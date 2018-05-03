@@ -18,10 +18,10 @@
   - https://releases.hashicorp.com/consul/0.7.2/consul_0.7.2_linux_amd64.zip
   
 ## 客户端
-- [PHP](https://packagist.org/packages/vitess/php-client)
-- [Java]
-- [Python]
-- [Go]
+- [PHP](https://github.com/pixelfederation/vitess-php-pdo)
+- [Java]()
+- [Python]()
+- [Go]()
 
 ## 常见MySQL水平扩展架构
 - [mysql-proxy](https://github.com/mysql/mysql-proxy)
@@ -40,3 +40,4 @@
 - http://jixiuf.github.io/blog/go_vitess_start.html/
 - https://github.com/jixiuf/vitess-build-patch
 - http://www.cnblogs.com/davygeek/p/6433296.html
+- [Intro.pdf](https://github.com/mds1455975151/tools/blob/master/vitess/official-web-docs/pdf/Vitess%20-%20Percona%20Live%202016.pdf)
