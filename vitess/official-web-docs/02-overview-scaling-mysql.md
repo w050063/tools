@@ -24,9 +24,10 @@ Vitess位于你的应用程序和你的MySQL数据库之间。它查看传入的
 - 避免将过多的逻辑以存储过程，外键或触发器的形式推入数据库。这些操作会过度征税数据库并阻碍扩展。
 
 ## Step 1: Setting up a database cluster 设置数据库集群
-从一开始，计划创建一个具有主实例和一对只读副本（或从属）的数据库集群。如果主服务器不可用，副本将能够接管，并且他们也可能处理只读流量。你也想安排定期的数据备份。
+从一开始，计划创建 a master instance和一对 read-only replicas (or slaves) 的数据库集群。如果master不可用，副本将能够接管，并且他们也可能处理只读流量。你也想安排定期的数据备份。
 
-值得注意的是，主管理是数据可靠性的一个复杂和关键的挑战。在任何给定时间，分片只有一个主实例，并且所有副本实例都从中复制。您的应用程序（如果您使用的是应用程序层中的组件或Vitess）需要能够轻松识别用于写入操作的主实例，并认识到主服务器可能会随时更改。同样，无论有无Vitess，您的应用程序都应该能够无缝地适应新上线的新副本或旧副本不可用。
+值得注意的是，主管理是数据可靠性的一个复杂和关键的挑战。在任何给定时间，a shard只有one master instance，并且all replica instances都从中复制。您的应用程序（如果您使用的是应用程序层中的组件或Vitess）需要能够轻松识别用于写入操作的主实例，并认识到主服务器可能会随时更改。同样，无论有无Vitess，您的应用程序都应该能够无缝地适应新上线的新副本或旧副本不可用。
+
 ### Keep routing logic out of your application 保证路由逻辑不在您的应用程序中
 Vitess设计的核心原则是您的数据库和数据管理实践应随时准备好支持您的应用程序的增长。因此，您可能还没有立即需要将数据存储到多个数据中心，分割数据库，甚至定期进行备份。但是当这些需求出现时，你想确保你有一个简单的途径来实现它们。请注意，您可以在Kubernetes群集中或本地硬件上运行Vitess。
 
@@ -35,23 +36,25 @@ Vitess设计的核心原则是您的数据库和数据管理实践应随时准�
 Vitess有几个组件可以让你的应用程序避免这种复杂性：
 - 每个MySQL实例都与一个vttablet进程配对，该进程提供连接池，查询重写和查询重复等功能。
 - 您的应用程序向vtgate发送查询，vtgate是一种将流量路由到正确vttablet的轻型代理，然后将合并结果返回给应用程序。
-- 该拓扑服务 - Vitess支持动物园管理员，ETCD和领事-数据库系统维护配置数据。Vitess依靠服务来知道在哪里根据分片方案和各个MySQL实例的可用性来路由查询。
+- 该拓扑服务 - Vitess supports Zookeeper, etcd and Consul-数据库系统维护配置数据。Vitess依靠服务来知道在哪里根据the sharding scheme(分片方案)和各个MySQL实例的可用性来路由查询。
 - 该vtctl和vtctld工具提供了命令行和Web界面的系统。
 
 ![image](https://github.com/mds1455975151/tools/blob/master/vitess/official-web-docs/images/VitessOverview.png)
 
 直接设置这些组件 - 例如，编写自己的拓扑服务或自己的vtgate实现 - 将需要大量特定于给定配置的脚本。这也会产生一个系统，这个系统很难支持而且代价高昂。此外，虽然任何一个组件本身都可用于限制复杂性，但您需要全部组件来尽可能简化应用程序，同时优化性能。
-#### 可选的功能来实现
-- 推荐。Vitess拥有识别或更改主人的基本支持，但并不打算完全解决此功能。因此，我们建议使用其他程序（如Orchestrator）来监视服务器的运行状况，并在必要时更改主数据库。（在分片数据库中，每个分片都有一个主分片。）
 
-- 推荐。您应该有一种方法来监视数据库拓扑并根据需要设置警报。Vitess组件通过导出大量运行时变量（如过去几分钟内的QPS），错误率和查询延迟来促进此监控。变量以JSON格式导出，Vitess也支持InfluxDB插件。
+#### Optional functionality to implement 可选的功能来实现
+- Recommended推荐。Vitess拥有识别或更改master的基本支持，但并不打算完全解决此功能。因此，我们建议使用其他程序（如Orchestrator）来监视服务器的运行状况，并在必要时更改主数据库。（In a sharded database, each shard has a master.）
 
-- 可选。使用Kubernetes脚本作为基础，您可以使用其他配置管理系统（如Puppet）或框架（如Mesos或AWS映像）运行Vitess组件。
-#### 其他相关的Vitess文档
+- Recommended推荐。您应该有一种方法来监视数据库拓扑并根据需要设置警报。Vitess组件通过导出大量运行时变量（如过去几分钟内的QPS），错误率和查询延迟来促进此监控。变量以JSON格式导出，Vitess也支持InfluxDB插件。
+
+- 可选。使用Kubernetes脚本作为基础，您可以使用其他配置管理系统（如Puppet）或框架（like Mesos or AWS images）运行Vitess组件。
+#### Related Vitess documentation 其他相关的Vitess文档
 - 在Kubernetes上运行Vitess
 - 在本地服务器上运行Vitess
 - 备份数据
 - 重新分配 - Vitess中主要实例的基本分配
+
 ## Step 2: Connect your application to your database 将您的应用程序连接到您的数据库
 显然，你的应用程序需要能够调用你的数据库。因此，我们将直接解释如何修改应用程序以通过vtgate连接到数据库。
 
