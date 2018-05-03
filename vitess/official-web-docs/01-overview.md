@@ -1,8 +1,8 @@
 ## Overview 概述
-  Vitess是用于部署，扩展和管理大型MySQL实例集群的数据库解决方案。它的架构可以像在专用硬件上那样有效的在公有云或私有云架构中运行。它结合并扩展了许多重要的MySQL功能和NoSQL数据库的可扩展性。Vitess可以帮助你解决如下问题：
-- 允许您对MySQL数据库进行分片来扩展MySQL数据库，同时将应用程序更改保持在最低延迟下
+  Vitess是用于deploying, scaling and managing大型MySQL实例集群的数据库解决方案。它的架构可以像在专用硬件上那样有效的在公有云或私有云架构中运行。它结合并扩展了许多重要的MySQL功能和NoSQL数据库的可扩展性。Vitess可以帮助你解决如下问题：
+- 允许您对MySQL数据库进行shard来Scaling a MySQL database，同时将应用程序更改保持在最低延迟下
 - 从裸机迁移至私有云或公有云
-- 部署和管理大量的MySQL实例
+- Deploying and managing a large number of MySQL instances.
 
 Vitess包含使用本地查询协议的兼容JDBC和Go数据库驱动程序。此外它还实现了几乎与任何其他语言兼容的MySQL服务器协议。
 Vitess自2011年以来一直服务于所有的YouTube数据库流量，并且现在已被许多企业用于满足其生产需求。
@@ -25,9 +25,9 @@ Vitess自2011年以来一直服务于所有的YouTube数据库流量，并且现
   - 基于web的管理GUI
   - 设计用于多个数据中心/地区
  - Sharding 拆分
-  - 几乎无缝的动态重新分片
-  - 垂直和水平分片支持
-  - 多种分片方案，能够插入自定义分片
+  - Virtually seamless dynamic re-sharding 几乎无缝的动态重新分片
+  - Vertical and Horizontal sharding support 垂直和水平分片支持
+  - Multiple sharding schemes, with the ability to plug-in custom ones 多种分片方案，能够插入自定义分片
 ### Comparisons to other storage options 与其他存储选项进行比较
 以下各节将Vitess与两种常见的替代方法进行比较，一个是vanilla MySQL实现一个NoSQL实现。
 - Vitess vs. Vanilla MySQL
@@ -36,34 +36,43 @@ Vitess自2011年以来一直服务于所有的YouTube数据库流量，并且现
  略
 ### Architecture 架构
  Vitess平台由许多服务器进程，命令行实用程序和基于web的实用程序组成，并由一致的元数据存储提供支持。
+
  根据您的应用程序的当前状态，您可以通过许多不同的流程实现完整的Vitess实施。例如：如果您要从头开始构建服务，那么使用Vitess的第一步就是定义数据库拓扑。但是，如果您需要扩展现有数据库，则可能首先部署连接代理。
+
  Vitess工具和服务器旨在为您提供帮助，无论您是从一组完整的数据库开始，还是从小规模开始，随着时间的推移开始扩展。对于较小的实现，连接池和查询重写等vttablet功能可帮助您从现有硬件中获得更多。Vitess的自动化工具为大型实施提供了额外的好处。
+
  下图说明了Vitess的组件：
- 
+
  ![image](https://github.com/mds1455975151/tools/blob/master/vitess/official-web-docs/images/VitessOverview.png)
 - Topology 拓扑
- >该拓扑服务是一个元数据存储，其中包含有关于运行的服务器，分片方案，并复制图形信息。该拓扑由一个一致的数据存储支持。您可以使用vtctl(命令行)和vtctld（web）来浏览拓扑。
- 在Kubernetes中，数据库存储是etcd。Vitess源代码还附带Apache ZooKeeper支持。
+  > 该拓扑服务是一个元数据存储，其中包含有关于running servers, the sharding scheme,，并the replication graph。该拓扑由一个一致的数据存储支持。您可以使用vtctl(命令行)和vtctld（web）来浏览拓扑。
+
+  > 在Kubernetes中，数据库存储是etcd。Vitess源代码还附带Apache ZooKeeper支持。
 
 - vtgate
- >vtgate是一个轻型代理服务器，可将流量路由到正确的vttablet（s）并将合并结果返回给客户端。它是应用程序向其发送查询的服务器。因此，客户端可以非常简单，因为它只需要能够找到一个vtgate实例。
- 为了路由查询，vtgate考虑了分片方案，所需的延迟以及水平扩展及其基础MySQL实例的可用性。
+  > vtgate是一个轻型代理服务器，可将流量路由到正确的vttablet（s）并将合并结果返回给客户端。它是应用程序向其发送查询的服务器。因此，客户端可以非常简单，因为它只需要能够找到一个vtgate实例。
+
+  >为了路由查询，vtgate考虑了分片方案，所需的延迟以及水平扩展及其基础MySQL实例的可用性。
 
 - vttablet
- >vttablet是位于MySQL数据库之前的代理服务器。Vitess实现对每个MySQL实例都有一个vttablet。
- vttablet执行的任务是尝试最大化吞吐量，并保护MySQL免受有害查询的影响。其功能包括连接池，查询重写，查询重复。另外vttablet执行vtctl启动的管理任务，并提供用于过滤复制和数据导出的流服务。
+  > vttablet是位于MySQL数据库之前的代理服务器。Vitess实现对每个MySQL实例都有一个vttablet。
+
+  > vttablet执行的任务是尝试最大化吞吐量，并保护MySQL免受有害查询的影响。其功能包括连接池，查询重写，查询重复。另外vttablet执行vtctl启动的管理任务，并提供用于过滤复制和数据导出的流服务。
 
 - vtctl
   > vtctl是用于管理Vitess集群的命令行工具。它允许人或应用程序轻松地与Vitess实现进行交互。使用vtctl，您可以识别主数据库和副本数据库，创建表，启动故障转移，执行分片（和重新分片）操作等等。
-  当vtctl执行操作时，它根据需要更新锁服务器。其他Vitess服务器观察这些变化并作出相应的反应。例如，如果您使用vtctl故障转移到新的主数据库，vtgate会看到更改并将将来的写操作指向新的主数据库。
+
+  > 当vtctl执行操作时，它根据需要更新锁服务器。其他Vitess服务器观察这些变化并作出相应的反应。例如，如果您使用vtctl故障转移到新的主数据库，vtgate会看到更改并将将来的写操作指向新的master。
 
 - vtctld
-  >vtctld是一个HTTP服务器，可让您浏览存储在锁定服务器中的信息。这对于故障排除或获取服务器及其当前状态的高级概述很有用。
+  > vtctld是一个HTTP服务器，可让您浏览存储在锁定服务器中的信息。这对于故障排除或获取服务器及其当前状态的高级概述很有用。
 
 - vtworker
-  >vtworker承载长时间运行的进程。它支持插件架构并提供库，以便您可以轻松选择要使用的平板电脑。插件可用于以下类型的作业：
+
+  vtworker承载长时间运行的进程。它支持插件架构并提供库，以便您可以轻松选择要使用的平板电脑。插件可用于以下类型的作业：
   - 在分片分割和连接过程中重新划分不同的作业检查数据完整性
   - 垂直分割不同作业检查垂直分割和连接期间的数据完整性
+
   vtworker还允许您轻松添加其他验证过程。例如，如果一个密钥空间中的索引表引用了另一个密钥空间中的数据，则可以执行内嵌式完整性检查以验证外键类似关系或跨分片完整性检查。
 
 - Other support tools
