@@ -30,23 +30,23 @@ explicit-exit-notify 1
 
 # vim server.conf
 port 1194
-proto tcp　　　　#指定TCP协议(使用TCP协议如果连接上VPN后网络很慢，可以更改成使用UDP协议)
-dev tun　　　　# 采用路由隧道模式
+proto tcp　　　　# 指定TCP协议(使用TCP协议如果连接上VPN后网络很慢，可以更改成使用UDP协议)
+dev tun　　　　  # 采用路由隧道模式
 ca ca.crt
 cert server.crt
 key server.key　　　　# This file should be kept secret 服务器密钥
-dh dh2048.pem　　　　# 密钥交换协议文件
+dh dh2048.pem　　　　 # 密钥交换协议文件
 topology subnet
 server 10.8.0.0 255.255.255.0　　　　# 给客户端分配地址池，注意：不能和VPN服务器内网网段相同
 ifconfig-pool-persist ipp.txt
 push "route 0.0.0.0 0.0.0.0"　　　　 # 定义网关
 push "route 192.168.0.0 255.255.255.0"　　　　# 推送vpn服务器内网网段给客户端
-push "redirect-gateway def1 bypass-dhcp"
+push "redirect-gateway def1 bypass-dhcp"     # 使vpn作为客户端的通信的网关，客户端通过vpn来上网(涉及连接到内网然后在访问生产环境的情况)
 push "dhcp-option DNS 223.5.5.5"
 push "dhcp-option DNS 114.114.114.114"
-;client-to-client     # 这里为了安全起见，我禁止了客户端间的互访
-;duplicate-cn　　　　# 正式环境下建议注释掉，因为会有安全隐患
-keepalive 10 120　　　　# 存活时间，10秒ping一次,120 如未收到响应则视为断线
+;client-to-client       # 这里为了安全起见，我禁止了客户端间的互访
+;duplicate-cn　　　　    # 正式环境下建议注释掉，因为会有安全隐患
+keepalive 10 120　　　　 # 存活时间，10秒ping一次,120 如未收到响应则视为断线
 tls-auth ta.key 0　　　　# 第二个参数在服务器端应该为'0'，在客户端应该为'1'。
 cipher AES-256-CBC　　　　# 选择一个密码加密算法。
 comp-lzo　　　　# 传输数据压缩
