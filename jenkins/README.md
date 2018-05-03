@@ -13,3 +13,4 @@
 
 ### 自定义主题
 - https://wiki.jenkins.io/display/JENKINS/Simple+Theme+Plugin
+- http://afonsof.com/jenkins-material-theme/
