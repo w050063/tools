@@ -8,7 +8,7 @@
 - [mycat](https://github.com/MyCATApache/Mycat-Server)
 - [cobar](https://github.com/alibaba/cobar)
 - [Atlas](https://github.com/Qihoo360/Atlas)
-- Oceanus
+- [58同城Oceanus](https://github.com/58code/Oceanus)
 - **[YouTube开源vitess](https://github.com/vitessio/vitess)**
 - TDDL
 - [heisenberg](https://github.com/brucexx/heisenberg)
