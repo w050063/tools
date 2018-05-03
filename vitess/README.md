@@ -40,6 +40,11 @@
 - [dble](https://github.com/actiontech/dble)
 - [网易cetus](https://github.com/Lede-Inc/cetus)
 
+## FQA
+- Vitess+RDS
+
+  - https://github.com/vitessio/vitess/issues/2518
+  
 ## 参考资料
 - http://jixiuf.github.io/blog/go_vitess_start.html/
 - https://github.com/jixiuf/vitess-build-patch
