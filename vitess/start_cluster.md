@@ -29,7 +29,34 @@ enter zk2 env
 Starting vtctld...
 Access vtctld web UI at http://linux-node01:15000
 Send commands with: vtctlclient -server linux-node01:15999 ...
-//未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot  使用普通用户启动
+# 未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot  
+# 使用普通用户启动
+chmod -R 777 /data0/workspaces/go/
+su - vitess
+export VTROOT=$GOPATH
+export VTDATAROOT=$GOPATH/vtdataroot
+export MYSQL_FLAVOR=MySQL56
+export VT_MYSQL_ROOT=/usr
+cd $VTROOT/src/vitess.io/vitess/examples/local
+
+# 启动参数
+vtctld   -topo_implementation zk2 
+         -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
+         -topo_global_root /vitess/global   
+         -cell test   
+         -web_dir /data0/workspaces/go/src/vitess.io/vitess/web/vtctld   
+         -web_dir2 /data0/workspaces/go/src/vitess.io/vitess/web/vtctld2/app   
+         -workflow_manager_init   
+         -workflow_manager_use_election   
+         -service_map 'grpc-vtctl'   
+         -backup_storage_implementation file   
+         -file_backup_storage_root /data0/workspaces/go/vtdataroot/backups   
+         -log_dir /data0/workspaces/go/vtdataroot/tmp   
+         -port 15000   
+         -grpc_port 15999   
+         -pid_file /data0/workspaces/go/vtdataroot/tmp/vtctld.pid      
+         > /data0/workspaces/go/vtdataroot/tmp/vtctld.out 2>&1 &
+
 # ./vttablet-up.sh 
 enter zk2 env
 Starting MySQL for tablet test-0000000100...
