@@ -180,48 +180,180 @@ test_keyspace
 - ThrottlerSetMaxRate
 - UpdateThrottlerConfiguration
 
-Schema, Version, Permissions
-ApplySchema
-ApplyVSchema
-CopySchemaShard
-GetPermissions
-GetSchema
-GetVSchema
-RebuildVSchemaGraph
-ReloadSchema
-ReloadSchemaKeyspace
-ReloadSchemaShard
-ValidatePermissionsKeyspace
-ValidatePermissionsShard
-ValidateSchemaKeyspace
-ValidateSchemaShard
-ValidateVersionKeyspace
-ValidateVersionShard
-Serving Graph
-GetSrvKeyspace
-GetSrvKeyspaceNames
-GetSrvVSchema
-Shards
-CreateShard
-DeleteShard
-EmergencyReparentShard
-GetShard
-InitShardMaster
-ListBackups
-ListShardTablets
-PlannedReparentShard
-RemoveBackup
-RemoveShardCell
-SetShardServedTypes
-SetShardTabletControl
-ShardReplicationFix
-ShardReplicationPositions
-SourceShardAdd
-SourceShardDelete
-TabletExternallyReparented
-ValidateShard
-WaitForFilteredReplication
-Tablets
+``` bash
+
+```
+### Schema, Version, Permissions 架构，版本，权限
+- ApplySchema
+  将模式更改应用于每个master节点上的指定keyspaces，并行运行在所有shard上。然后这些更改通过复制传播到slave。
+- ApplyVSchema
+- CopySchemaShard
+- GetPermissions
+  显示tablet的权限
+- GetSchema
+- GetVSchema
+  显示Vtgate路由模式
+- RebuildVSchemaGraph
+- ReloadSchema
+- ReloadSchemaKeyspace
+- ReloadSchemaShard
+- ValidatePermissionsKeyspace
+- ValidatePermissionsShard
+- ValidateSchemaKeyspace
+- ValidateSchemaShard
+- ValidateVersionKeyspace
+- ValidateVersionShard
+``` bash
+```
+## Serving Graph 服务视图
+- GetSrvKeyspace
+  输出包含有关srvkeyspace信息的json数据结构
+- GetSrvKeyspaceNames
+  输出keyspace名称列表
+- GetSrvVSchema
+``` bash
+ ./lvtctl.sh GetSrvKeyspace test test_keyspace
+{
+  "partitions": [
+    {
+      "served_type": 1,
+      "shard_references": [
+        {
+          "name": "0",
+          "key_range": null
+        }
+      ]
+    },
+    {
+      "served_type": 2,
+      "shard_references": [
+        {
+          "name": "0",
+          "key_range": null
+        }
+      ]
+    },
+    {
+      "served_type": 3,
+      "shard_references": [
+        {
+          "name": "0",
+          "key_range": null
+        }
+      ]
+    }
+  ],
+  "sharding_column_name": "",
+  "sharding_column_type": 0,
+  "served_from": [
+  ]
+}
+./lvtctl.sh GetSrvKeyspaceNames test
+test_keyspace
+./lvtctl.sh GetSrvVSchema test
+{
+  "keyspaces": {
+    "test_keyspace": {
+      "sharded": false,
+      "vindexes": {
+      },
+      "tables": {
+      }
+    }
+  }
+}
+```
+
+# Shards 分片
+- CreateShard
+  创建指定的shard
+- DeleteShard
+  删除指定的shard,在递归模式下，它也会删除属于shard下的所有tablets。否则，shard必须没有剩余下tablets.
+
+- EmergencyReparentShard
+  把the shard给新的master,假定old master已经死了，没有回应。
+
+- GetShard
+  输出包含关于shard的信息的json结构
+``` bash
+ ./lvtctl.sh GetShard test_keyspace/0
+{
+  "master_alias": {
+    "cell": "test",
+    "uid": 100
+  },
+  "key_range": null,
+  "served_types": [
+    {
+      "tablet_type": 1,
+      "cells": [
+      ]
+    },
+    {
+      "tablet_type": 2,
+      "cells": [
+      ]
+    },
+    {
+      "tablet_type": 3,
+      "cells": [
+      ]
+    }
+  ],
+  "source_shards": [
+  ],
+  "cells": [
+    "test"
+  ],
+  "tablet_controls": [
+  ]
+}
+```
+- InitShardMaster
+  设置shard的初始化主数据。将提供的master设备的shard从设备中的所有其他tablets。警告：这可能会导致已经复制的分片上的数据丢失。应该使用PlannedReparentShard或EmergencyReparentShard。
+
+- ListBackups
+  列出shard的所有备份
+``` bash
+./lvtctl.sh ListBackups test_keyspace/0
+2018-05-04.084656.test-0000000102
+```
+- ListShardTablets
+  列出指定shard中的所有tablets
+``` bash
+ ./lvtctl.sh ListShardTablets test_keyspace/0
+test-0000000100 test_keyspace 0 master 192.168.47.100:15100 192.168.47.100:17100 []
+test-0000000101 test_keyspace 0 restore 192.168.47.100:15101 192.168.47.100:17101 []
+test-0000000102 test_keyspace 0 restore 192.168.47.100:15102 192.168.47.100:17102 []
+test-0000000103 test_keyspace 0 restore 192.168.47.100:15103 192.168.47.100:17103 []
+test-0000000104 test_keyspace 0 restore 192.168.47.100:15104 192.168.47.100:17104 []
+```
+- PlannedReparentShard
+  把shard交给new master,或者远离 old master，old and new master都需要启动并运行
+- RemoveBackup
+  删除BackupStorage的备份
+``` bash
+ ./lvtctl.sh ListBackups test_keyspace/0
+2018-05-04.084656.test-0000000102
+./lvtctl.sh RemoveBackup test_keyspace/0 2018-05-04.084656.test-0000000102
+./lvtctl.sh ListBackups test_keyspace/0
+```
+- RemoveShardCell
+从shard的cell中删除
+``` bash
+```
+- SetShardServedTypes
+- SetShardTabletControl
+- ShardReplicationFix
+- ShardReplicationPositions
+- SourceShardAdd
+- SourceShardDelete
+- TabletExternallyReparented
+- ValidateShard
+- WaitForFilteredReplication
+``` bash
+```
+# Tablets
 Backup
 ChangeSlaveType
 DeleteTablet
@@ -242,13 +374,15 @@ Sleep
 StartSlave
 StopSlave
 UpdateTabletAddrs
-Topo
-TopoCat
-Workflows
-WorkflowAction
-WorkflowCreate
-WorkflowDelete
-WorkflowStart
-WorkflowStop
-WorkflowTree
-WorkflowWait
+
+## Topo
+- TopoCat
+
+## Workflows
+- WorkflowAction
+- WorkflowCreate
+- WorkflowDelete
+- WorkflowStart
+- WorkflowStop
+- WorkflowTree
+- WorkflowWait
