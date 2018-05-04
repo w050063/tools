@@ -11,7 +11,10 @@
   - https://raw.githubusercontent.com/mds1455975151/tools/master/go/go_install.sh
   
 - MySQL环境
+  - https://github.com/mds1455975151/tools/blob/master/mysql/install_mysql.sh
+  
 - JDK安装
+  - 
 - 下载Vitess源码并编译
   - https://codeload.github.com/vitessio/vitess/tar.gz/v2.1.1
 
