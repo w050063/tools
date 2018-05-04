@@ -2,17 +2,17 @@
 # 务必解决翻墙问题 or 直接购买海外机器进行操作
 
 init_host(){
-wget https://raw.githubusercontent.com/mds1455975151/tools/master/shell/host_init.sh
+[ ! -f host_init.sh ] && wget https://raw.githubusercontent.com/mds1455975151/tools/master/shell/host_init.sh
 sh host_init.sh
 }
 
 install_go(){
-wget https://raw.githubusercontent.com/mds1455975151/tools/master/go/go_install.sh
+[ ! -f go_install.sh ] && wget https://raw.githubusercontent.com/mds1455975151/tools/master/go/go_install.sh
 sh go_install.sh
 }
 
 install_mysql(){
-wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
+[ ! -f install_mysql.sh ] && wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
 sh install_mysql.sh
 }
 
