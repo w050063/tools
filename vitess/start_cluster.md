@@ -233,5 +233,6 @@ MySQL报错信息
 ln -s /usr/share /share
 
  for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
+ for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
  localhost:21811,localhost:21812,localhost:21813
 ```
