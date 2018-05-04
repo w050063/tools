@@ -67,7 +67,14 @@
 - grpc_port=15991(vtgate)
 - mysql_server_port=15306(vtgate)
 ```
-  
+- 概念和MySQL概念映射
+
+``` text
+- cell -- MySQL实例
+- shard -- MySQL集群
+- keyspace -- 一个数据库
+```
+
 ## 参考资料
 - http://jixiuf.github.io/blog/go_vitess_start.html/
 - https://github.com/jixiuf/vitess-build-patch
