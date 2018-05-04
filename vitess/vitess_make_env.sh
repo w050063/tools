@@ -12,7 +12,7 @@ sh go_install.sh
 }
 
 install_mysql(){
-wget https://github.com/mds1455975151/tools/blob/master/mysql/install_mysql.sh
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
 sh install_mysql.sh
 }
 
