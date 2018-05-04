@@ -7,22 +7,37 @@
     yum: name=subversion state=latest
     
   - name: rm /etc/init.d/svnserve
-    command: rm -rf /etc/init.d/svnserve
+    command: rm -f /etc/init.d/svnserve
     
   - name: copy svn to /etc/init.d/
-    copy: src=/data/ansible/svn/files/svn dest=/etc/init.d/svn mode=0744
+    copy: 
+	   src: files/svn/svn 
+	   dest: /etc/init.d/svn 
+	   mode: 0755
+      owner: root
+      group: root
     
   - name: mk svn dir
     command: mkdir -p {{item}}
     with_items:
-        - /data/svn
-        - /data/svn/conf
+        - /data0/svn
+        - /data0/svn/conf
         
   - name: copy autorized files
-    copy: src=/data/ansible/svn/files/authz dest=/data/svn/conf/authz
-    
+    copy: 
+	   src: files/svn/authz 
+	   dest: /data0/svn/conf/authz
+	   mode: 0644
+      owner: root
+      group: root
+	  
   - name: copy pasword files
-    copy: src=/data/ansible/svn/files/passwd dest=/data/svn/conf/passwd
+    copy: 
+      src: files/svn/passwd
+	   dest: /data0/svn/conf/passwd
+	   mode: 0644
+      owner: root
+      group: root
     
   - name: reboot svn server
     command: service svn restart
