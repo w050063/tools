@@ -62,6 +62,10 @@
 - port_base=$[15000 + $uid_base]
 - grpc_port_base=$[16000 + $uid_base](vttablet)
 - mysql_port_base=$[17000 + $uid_base](vttablet+MySQL)
+
+- web_port=15001(vtgate)
+- grpc_port=15991(vtgate)
+- mysql_server_port=15306(vtgate)
 ```
   
 ## 参考资料
