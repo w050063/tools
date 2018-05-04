@@ -5,6 +5,8 @@
 
 ## 实践操作
 - 初始化机器
+  - https://raw.githubusercontent.com/mds1455975151/tools/master/shell/host_init.sh
+  
 - Go环境
 - MySQL环境
 - JDK安装
