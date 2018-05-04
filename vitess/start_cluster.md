@@ -137,7 +137,27 @@ vttablet
          -db-config-filtered-dbname vt_test_keyspace     
          -db-config-filtered-charset utf8     
          > /data0/workspaces/go/vtdataroot/vt_0000000100/vttablet.out 2>&1 &
- 
+
+# vtgate启动参数 
+vtgate   
+      -topo_implementation zk2 
+      -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
+      -topo_global_root /vitess/global   
+      -log_dir /data0/workspaces/go/vtdataroot/tmp   
+      -port 15001   
+      -grpc_port 15991   
+      -mysql_server_port 15306   
+      -mysql_server_socket_path /tmp/mysql.sock   
+      -mysql_auth_server_static_file ./mysql_auth_server_static_creds.json   
+      -cell test   
+      -cells_to_watch test   
+      -tablet_types_to_wait MASTER,REPLICA   
+      -gateway_implementation discoverygateway   
+      -service_map 'grpc-vtgateservice'   
+      -pid_file /data0/workspaces/go/vtdataroot/tmp/vtgate.pid         
+      > /data0/workspaces/go/vtdataroot/tmp/vtgate.out 2>&1 &
+
+
 报错信息1：
 E0501 09:10:01.517581   71126 mysqld.go:605] mysql_install_db failed: /bin/mysql_install_db: exit status 1, output: WARNING: Could not write to config file //my.cnf: 权限不够
 
