@@ -156,4 +156,7 @@ MySQL报错信息
 
 使用软链接暂时修复该问题
 ln -s /usr/share /share
+
+ for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
+ localhost:21811,localhost:21812,localhost:21813
 ```
