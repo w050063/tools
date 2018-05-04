@@ -8,6 +8,8 @@
   - https://raw.githubusercontent.com/mds1455975151/tools/master/shell/host_init.sh
   
 - Go环境
+  - https://raw.githubusercontent.com/mds1455975151/tools/master/go/go_install.sh
+  
 - MySQL环境
 - JDK安装
 - 下载Vitess源码并编译
