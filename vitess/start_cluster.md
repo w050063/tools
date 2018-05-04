@@ -90,6 +90,54 @@ Access tablet test-0000000103 at http://192.168.47.100:15103/debug/status
 Starting vttablet for test-0000000104...
 Access tablet test-0000000104 at http://192.168.47.100:15104/debug/status
 
+# MySQL启动参数
+mysqlctl -log_dir /data0/workspaces/go/vtdataroot/tmp     
+         -tablet_uid 100         
+         -db-config-dba-uname vt_dba     
+         -db-config-dba-charset utf8     
+         -mysql_port 17100     
+         init -init_db_sql_file /data0/workspaces/go/config/init_db.sql &
+# vttablet 启动参数
+vttablet 
+         -topo_implementation zk2 
+         -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
+         -topo_global_root /vitess/global     
+         -log_dir /data0/workspaces/go/vtdataroot/tmp     
+         -tablet-path test-0000000100     
+         -tablet_hostname      
+         -init_keyspace test_keyspace     
+         -init_shard 0     
+         -init_tablet_type replica     
+         -health_check_interval 5s     
+         -enable_semi_sync     
+         -enable_replication_reporter     
+         -backup_storage_implementation file     
+         -file_backup_storage_root /data0/workspaces/go/vtdataroot/backups     
+         -restore_from_backup     
+         -port 15100     
+         -grpc_port 16100     
+         -service_map 'grpc-queryservice,grpc-tabletmanager,grpc-updatestream'     
+         -pid_file /data0/workspaces/go/vtdataroot/vt_0000000100/vttablet.pid     
+         -vtctld_addr http://192.168.47.100:15000/              
+         -db-config-dba-uname vt_dba     
+         -db-config-dba-charset utf8     
+         -db-config-app-uname vt_app     
+         -db-config-app-dbname vt_test_keyspace     
+         -db-config-app-charset utf8     
+         -db-config-appdebug-uname vt_appdebug     
+         -db-config-appdebug-dbname vt_test_keyspace     
+         -db-config-appdebug-charset utf8     
+         -db-config-allprivs-uname vt_allprivs     
+         -db-config-allprivs-dbname vt_test_keyspace     
+         -db-config-allprivs-charset utf8     
+         -db-config-repl-uname vt_repl     
+         -db-config-repl-dbname vt_test_keyspace     
+         -db-config-repl-charset utf8     
+         -db-config-filtered-uname vt_filtered     
+         -db-config-filtered-dbname vt_test_keyspace     
+         -db-config-filtered-charset utf8     
+         > /data0/workspaces/go/vtdataroot/vt_0000000100/vttablet.out 2>&1 &
+ 
 报错信息1：
 E0501 09:10:01.517581   71126 mysqld.go:605] mysql_install_db failed: /bin/mysql_install_db: exit status 1, output: WARNING: Could not write to config file //my.cnf: 权限不够
 
