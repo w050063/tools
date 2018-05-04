@@ -11,9 +11,9 @@
     
   - name: copy svn to /etc/init.d/
     copy: 
-	   src: files/svn/svn 
-	   dest: /etc/init.d/svn 
-	   mode: 0755
+      src: files/svn/svn 
+      dest: /etc/init.d/svn
+      mode: 0755
       owner: root
       group: root
     
@@ -24,18 +24,18 @@
         - /data0/svn/conf
         
   - name: copy autorized files
-    copy: 
-	   src: files/svn/authz 
-	   dest: /data0/svn/conf/authz
-	   mode: 0644
+    copy:
+      src: files/svn/authz
+      dest: /data0/svn/conf/authz
+      mode: 0644
       owner: root
       group: root
 	  
   - name: copy pasword files
     copy: 
       src: files/svn/passwd
-	   dest: /data0/svn/conf/passwd
-	   mode: 0644
+      dest: /data0/svn/conf/passwd
+      mode: 0644
       owner: root
       group: root
     
