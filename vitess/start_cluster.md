@@ -1,12 +1,12 @@
 # start cluster
 ``` bash
-# export VTROOT=$GOPATH
-# export VTDATAROOT=$GOPATH/vtdataroot
-# export MYSQL_FLAVOR=MySQL56
-# export VT_MYSQL_ROOT=/usr
+export VTROOT=$GOPATH
+export VTDATAROOT=$GOPATH/vtdataroot
+export MYSQL_FLAVOR=MySQL56
+export VT_MYSQL_ROOT=/usr
 
-// 普通用户添加到root组
-# usermod vitess -G root
+# 普通用户添加到root组
+usermod vitess -G root
 
 # mkdir -p /data0/workspaces/go/vtdataroot
 # cd $VTROOT/src/vitess.io/vitess/examples/local
