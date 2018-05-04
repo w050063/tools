@@ -52,7 +52,10 @@
 
   - https://github.com/vitessio/vitess/issues/2518
 - 常用端口
-  - vtctld_web_port=15000
+
+  - vtctld_web_port=15000(vtctld)
+  - grpc_port=15999(vtctld)
+  
 ## 参考资料
 - http://jixiuf.github.io/blog/go_vitess_start.html/
 - https://github.com/jixiuf/vitess-build-patch
