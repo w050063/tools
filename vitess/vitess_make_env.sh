@@ -28,6 +28,8 @@ git clone https://github.com/vitessio/vitess.git src/vitess.io/vitess
 cd src/vitess.io/vitess
 export MYSQL_FLAVOR=MySQL56
 ./bootstrap.sh
+source dev.env
+make build
 # 开始编译环境准备
 }
 
