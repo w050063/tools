@@ -56,6 +56,12 @@
   - vtctld_web_port=15000(vtctld)
   - grpc_port=15999(vtctld)
   
+  - uid_base=${UID_BASE:-'100'}         # 未指定则为100
+  - port_base=$[15000 + $uid_base]
+  - grpc_port_base=$[16000 + $uid_base](vttablet)
+  - mysql_port_base=$[17000 + $uid_base](vttablet+MySQL)
+
+  
 ## 参考资料
 - http://jixiuf.github.io/blog/go_vitess_start.html/
 - https://github.com/jixiuf/vitess-build-patch
