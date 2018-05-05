@@ -1,15 +1,104 @@
 # start cluster
 ``` bash
+# 普通用户添加到root组
+usermod vitess -G root
+chmod -R 777 /data0/workspaces/go/
+cat >>/etc/profile<<EOF
+# vitess env setup
+
 export VTROOT=$GOPATH
 export VTDATAROOT=$GOPATH/vtdataroot
 export MYSQL_FLAVOR=MySQL56
 export VT_MYSQL_ROOT=/usr
+EOF
 
-# 普通用户添加到root组
-usermod vitess -G root
+source /etc/profile
 
-# mkdir -p /data0/workspaces/go/vtdataroot
-# cd $VTROOT/src/vitess.io/vitess/examples/local
+su - vitess   # 使用普通用户操作
+mkdir -p /data0/workspaces/go/vtdataroot
+cd $VTROOT/src/vitess.io/vitess/examples/local
+./zk-up.sh 
+./vtctld-up.sh    # 未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot
+./vttablet-up.sh
+./lvtctl.sh InitShardMaster -force test_keyspace/0 test-100
+./lvtctl.sh ListAllTablets test
+./lvtctl.sh ApplySchema -sql "$(cat create_test_table.sql)" test_keyspace
+./lvtctl.sh Backup test-0000000102
+./lvtctl.sh ListBackups test_keyspace/0
+./lvtctl.sh RebuildVSchemaGraph
+./vtgate-up.sh
+./client.sh
+
+# 每个-up.sh脚本都有相应的-down.sh脚本来停止服务器。
+./vtgate-down.sh
+./vttablet-down.sh
+./vtctld-down.sh
+./zk-down.sh
+cd $VTDATAROOT
+rm -rf *
+
+for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
+for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
+localhost:21811,localhost:21812,localhost:21813
+```
+
+# 如何登陆到MySQL实例，并查看想内容并进行管理？
+> 使用默认MySQL命令连接到MySQL实例，有些内容及权限无法获取(原因未知)
+
+``` bash 
+./lvtctl.sh ExecuteFetchAsDba test-0000000100 "SELECT VERSION()"
+mysql -S /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock -u vt_dba 
+$ mysql -S /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock -u vt_dba
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 168
+Server version: 5.6.40-log MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| _vt                |
+| mysql              |
+| performance_schema |
+| vt_test_keyspace   |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> show master status\G;
+*************************** 1. row ***************************
+             File: vt-0000000100-bin.000001
+         Position: 7667
+     Binlog_Do_DB: 
+ Binlog_Ignore_DB: 
+Executed_Gtid_Set: 53136e2c-504d-11e8-a929-000c2933cf1a:1-19
+1 row in set (0.00 sec)
+
+ERROR: 
+No query specified
+mysql> show slave hosts;
++------------+------+-------+-----------+--------------------------------------+
+| Server_id  | Host | Port  | Master_id | Slave_UUID                           |
++------------+------+-------+-----------+--------------------------------------+
+| 1864487013 |      | 17101 | 846590132 | 531f845a-504d-11e8-a929-000c2933cf1a |
+| 1195076531 |      | 17104 | 846590132 | 530d7564-504d-11e8-a929-000c2933cf1a |
+|  797034261 |      | 17102 | 846590132 | 531f70d5-504d-11e8-a929-000c2933cf1a |
+| 1178748316 |      | 17103 | 846590132 | 531a46e1-504d-11e8-a929-000c2933cf1a |
++------------+------+-------+-----------+--------------------------------------+
+4 rows in set (0.00 sec)
+
+```
+
+# FQA
+``` bash 
 # ./zk-up.sh 
 enter zk2 env
 Starting zk servers...
@@ -24,38 +113,6 @@ root      55706  55697  9 15:24 pts/1    00:00:00 java -server -DZOO_LOG_DIR=/da
 root      55708  55695  9 15:24 pts/1    00:00:00 java -server -DZOO_LOG_DIR=/data0/workspaces/go/vtdataroot/zk_002/logs -cp /data0/workspaces/go/dist/vt-zookeeper-3.4.10/lib/zookeeper-3.4.10-fatjar.jar:/usr/local/lib/zookeeper-3.4.10-fatjar.jar:/usr/share/java/zookeeper-3.4.10.jar org.apache.zookeeper.server.quorum.QuorumPeerMain /data0/workspaces/go/vtdataroot/zk_002/zoo.cfg
 root      55711  55694  9 15:24 pts/1    00:00:00 java -server -DZOO_LOG_DIR=/data0/workspaces/go/vtdataroot/zk_001/logs -cp /data0/workspaces/go/dist/vt-zookeeper-3.4.10/lib/zookeeper-3.4.10-fatjar.jar:/usr/local/lib/zookeeper-3.4.10-fatjar.jar:/usr/share/java/zookeeper-3.4.10.jar org.apache.zookeeper.server.quorum.QuorumPeerMain /data0/workspaces/go/vtdataroot/zk_001/zoo.cfg
 root      55834   1624  0 15:24 pts/1    00:00:00 grep --color=auto zk
-# ./vtctld-up.sh 
-enter zk2 env
-Starting vtctld...
-Access vtctld web UI at http://linux-node01:15000
-Send commands with: vtctlclient -server linux-node01:15999 ...
-# 未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot  
-# 使用普通用户启动
-chmod -R 777 /data0/workspaces/go/
-su - vitess
-export VTROOT=$GOPATH
-export VTDATAROOT=$GOPATH/vtdataroot
-export MYSQL_FLAVOR=MySQL56
-export VT_MYSQL_ROOT=/usr
-cd $VTROOT/src/vitess.io/vitess/examples/local
-
-# 启动参数
-vtctld   -topo_implementation zk2 
-         -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
-         -topo_global_root /vitess/global   
-         -cell test   
-         -web_dir /data0/workspaces/go/src/vitess.io/vitess/web/vtctld   
-         -web_dir2 /data0/workspaces/go/src/vitess.io/vitess/web/vtctld2/app   
-         -workflow_manager_init   
-         -workflow_manager_use_election   
-         -service_map 'grpc-vtctl'   
-         -backup_storage_implementation file   
-         -file_backup_storage_root /data0/workspaces/go/vtdataroot/backups   
-         -log_dir /data0/workspaces/go/vtdataroot/tmp   
-         -port 15000   
-         -grpc_port 15999   
-         -pid_file /data0/workspaces/go/vtdataroot/tmp/vtctld.pid      
-         > /data0/workspaces/go/vtdataroot/tmp/vtctld.out 2>&1 &
 
 # ./vttablet-up.sh 
 enter zk2 env
@@ -90,6 +147,24 @@ Access tablet test-0000000103 at http://192.168.47.100:15103/debug/status
 Starting vttablet for test-0000000104...
 Access tablet test-0000000104 at http://192.168.47.100:15104/debug/status
 
+# vtctld启动参数
+vtctld   -topo_implementation zk2 
+         -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
+         -topo_global_root /vitess/global   
+         -cell test   
+         -web_dir /data0/workspaces/go/src/vitess.io/vitess/web/vtctld   
+         -web_dir2 /data0/workspaces/go/src/vitess.io/vitess/web/vtctld2/app   
+         -workflow_manager_init   
+         -workflow_manager_use_election   
+         -service_map 'grpc-vtctl'   
+         -backup_storage_implementation file   
+         -file_backup_storage_root /data0/workspaces/go/vtdataroot/backups   
+         -log_dir /data0/workspaces/go/vtdataroot/tmp   
+         -port 15000   
+         -grpc_port 15999   
+         -pid_file /data0/workspaces/go/vtdataroot/tmp/vtctld.pid      
+         > /data0/workspaces/go/vtdataroot/tmp/vtctld.out 2>&1 &
+         
 # MySQL启动参数
 mysqlctl -log_dir /data0/workspaces/go/vtdataroot/tmp     
          -tablet_uid 100         
@@ -251,8 +326,4 @@ MySQL报错信息
 
 使用软链接暂时修复该问题
 ln -s /usr/share /share
-
- for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
- for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
- localhost:21811,localhost:21812,localhost:21813
 ```
