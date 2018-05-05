@@ -44,11 +44,18 @@
 - 分库分表带来的问题
 
   - 自动扩缩容
+  
   - 数据一致性
+  
   - 性能
+  
   - 自增列
+  
   - 事务
+  
   - 管理工具（包括监控、性能分析、数据迁移、数据校验与修复、日常报表、问题排查等工具）
+  
+  
 ## 参考资料
 - [分库分表概念](https://www.cnblogs.com/junwangzhe/p/6420049.html)
 - [数据库分库分表的应用场景及解决方案](https://blog.csdn.net/sunhuiliang85/article/details/78418546)
