@@ -39,24 +39,15 @@ export MYSQL_FLAVOR=MySQL56
 export VT_MYSQL_ROOT=/usr
 cd $VTROOT/src/vitess.io/vitess/examples/local
 
-# 启动参数
-vtctld   -topo_implementation zk2 
-         -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
-         -topo_global_root /vitess/global   
-         -cell test   
-         -web_dir /data0/workspaces/go/src/vitess.io/vitess/web/vtctld   
-         -web_dir2 /data0/workspaces/go/src/vitess.io/vitess/web/vtctld2/app   
-         -workflow_manager_init   
-         -workflow_manager_use_election   
-         -service_map 'grpc-vtctl'   
-         -backup_storage_implementation file   
-         -file_backup_storage_root /data0/workspaces/go/vtdataroot/backups   
-         -log_dir /data0/workspaces/go/vtdataroot/tmp   
-         -port 15000   
-         -grpc_port 15999   
-         -pid_file /data0/workspaces/go/vtdataroot/tmp/vtctld.pid      
-         > /data0/workspaces/go/vtdataroot/tmp/vtctld.out 2>&1 &
+ for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
+ for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
+ localhost:21811,localhost:21812,localhost:21813
+# ./lvtctl.sh InitShardMaster -force test_keyspace/0 test-100
+# ./vttablet-up.sh 
+```
 
+# FQA
+``` bash 
 # ./vttablet-up.sh 
 enter zk2 env
 Starting MySQL for tablet test-0000000100...
@@ -90,6 +81,24 @@ Access tablet test-0000000103 at http://192.168.47.100:15103/debug/status
 Starting vttablet for test-0000000104...
 Access tablet test-0000000104 at http://192.168.47.100:15104/debug/status
 
+# vtctld启动参数
+vtctld   -topo_implementation zk2 
+         -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
+         -topo_global_root /vitess/global   
+         -cell test   
+         -web_dir /data0/workspaces/go/src/vitess.io/vitess/web/vtctld   
+         -web_dir2 /data0/workspaces/go/src/vitess.io/vitess/web/vtctld2/app   
+         -workflow_manager_init   
+         -workflow_manager_use_election   
+         -service_map 'grpc-vtctl'   
+         -backup_storage_implementation file   
+         -file_backup_storage_root /data0/workspaces/go/vtdataroot/backups   
+         -log_dir /data0/workspaces/go/vtdataroot/tmp   
+         -port 15000   
+         -grpc_port 15999   
+         -pid_file /data0/workspaces/go/vtdataroot/tmp/vtctld.pid      
+         > /data0/workspaces/go/vtdataroot/tmp/vtctld.out 2>&1 &
+         
 # MySQL启动参数
 mysqlctl -log_dir /data0/workspaces/go/vtdataroot/tmp     
          -tablet_uid 100         
@@ -251,8 +260,4 @@ MySQL报错信息
 
 使用软链接暂时修复该问题
 ln -s /usr/share /share
-
- for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
- for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
- localhost:21811,localhost:21812,localhost:21813
 ```
