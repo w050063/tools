@@ -31,6 +31,52 @@ cd $VTROOT/src/vitess.io/vitess/examples/local
 
 ./lvtctl.sh ExecuteFetchAsDba test-0000000100 "SELECT VERSION()"
 mysql -S /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock -u vt_dba 
+$ mysql -S /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock -u vt_dba
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 168
+Server version: 5.6.40-log MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| _vt                |
+| mysql              |
+| performance_schema |
+| vt_test_keyspace   |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> show master status\G;
+*************************** 1. row ***************************
+             File: vt-0000000100-bin.000001
+         Position: 7667
+     Binlog_Do_DB: 
+ Binlog_Ignore_DB: 
+Executed_Gtid_Set: 53136e2c-504d-11e8-a929-000c2933cf1a:1-19
+1 row in set (0.00 sec)
+
+ERROR: 
+No query specified
+mysql> show slave hosts;
++------------+------+-------+-----------+--------------------------------------+
+| Server_id  | Host | Port  | Master_id | Slave_UUID                           |
++------------+------+-------+-----------+--------------------------------------+
+| 1864487013 |      | 17101 | 846590132 | 531f845a-504d-11e8-a929-000c2933cf1a |
+| 1195076531 |      | 17104 | 846590132 | 530d7564-504d-11e8-a929-000c2933cf1a |
+|  797034261 |      | 17102 | 846590132 | 531f70d5-504d-11e8-a929-000c2933cf1a |
+| 1178748316 |      | 17103 | 846590132 | 531a46e1-504d-11e8-a929-000c2933cf1a |
++------------+------+-------+-----------+--------------------------------------+
+4 rows in set (0.00 sec)
 
 
 # 每个-up.sh脚本都有相应的-down.sh脚本来停止服务器。
