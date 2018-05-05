@@ -43,7 +43,7 @@ Vitess自2011年以来一直服务于所有的YouTube数据库流量，并且现
 
  下图说明了Vitess的组件：
 
- ![image](https://github.com/mds1455975151/tools/blob/master/vitess/official-web-docs/images/VitessOverview.png)
+ ![image](https://github.com/mds1455975151/tools/blob/master/vitess/docs/images/VitessOverview.png)
 - Topology 拓扑
   > 该拓扑服务是一个元数据存储，其中包含有关于running servers, the sharding scheme,，并the replication graph。该拓扑由一个一致的数据存储支持。您可以使用vtctl(命令行)和vtctld（web）来浏览拓扑。
 
