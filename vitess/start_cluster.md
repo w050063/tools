@@ -1,15 +1,49 @@
 # start cluster
 ``` bash
+# 普通用户添加到root组
+usermod vitess -G root
+chmod -R 777 /data0/workspaces/go/
+cat >>/etc/profile<<EOF
+# vitess env setup
+
 export VTROOT=$GOPATH
 export VTDATAROOT=$GOPATH/vtdataroot
 export MYSQL_FLAVOR=MySQL56
 export VT_MYSQL_ROOT=/usr
+EOF
 
-# 普通用户添加到root组
-usermod vitess -G root
+source /etc/profile
 
-# mkdir -p /data0/workspaces/go/vtdataroot
-# cd $VTROOT/src/vitess.io/vitess/examples/local
+su - vitess   # 使用普通用户操作
+mkdir -p /data0/workspaces/go/vtdataroot
+cd $VTROOT/src/vitess.io/vitess/examples/local
+./zk-up.sh 
+./vtctld-up.sh    # 未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot
+./vttablet-up.sh
+./lvtctl.sh InitShardMaster -force test_keyspace/0 test-100
+./lvtctl.sh ListAllTablets test
+./lvtctl.sh ApplySchema -sql "$(cat create_test_table.sql)" test_keyspace
+./lvtctl.sh Backup test-0000000102
+./lvtctl.sh ListBackups test_keyspace/0
+./lvtctl.sh RebuildVSchemaGraph
+./vtgate-up.sh
+./client.sh
+
+# 每个-up.sh脚本都有相应的-down.sh脚本来停止服务器。
+./vtgate-down.sh
+./vttablet-down.sh
+./vtctld-down.sh
+./zk-down.sh
+cd $VTDATAROOT
+rm -rf *
+
+for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
+for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
+localhost:21811,localhost:21812,localhost:21813
+```
+
+# FQA
+``` bash 
 # ./zk-up.sh 
 enter zk2 env
 Starting zk servers...
@@ -24,30 +58,7 @@ root      55706  55697  9 15:24 pts/1    00:00:00 java -server -DZOO_LOG_DIR=/da
 root      55708  55695  9 15:24 pts/1    00:00:00 java -server -DZOO_LOG_DIR=/data0/workspaces/go/vtdataroot/zk_002/logs -cp /data0/workspaces/go/dist/vt-zookeeper-3.4.10/lib/zookeeper-3.4.10-fatjar.jar:/usr/local/lib/zookeeper-3.4.10-fatjar.jar:/usr/share/java/zookeeper-3.4.10.jar org.apache.zookeeper.server.quorum.QuorumPeerMain /data0/workspaces/go/vtdataroot/zk_002/zoo.cfg
 root      55711  55694  9 15:24 pts/1    00:00:00 java -server -DZOO_LOG_DIR=/data0/workspaces/go/vtdataroot/zk_001/logs -cp /data0/workspaces/go/dist/vt-zookeeper-3.4.10/lib/zookeeper-3.4.10-fatjar.jar:/usr/local/lib/zookeeper-3.4.10-fatjar.jar:/usr/share/java/zookeeper-3.4.10.jar org.apache.zookeeper.server.quorum.QuorumPeerMain /data0/workspaces/go/vtdataroot/zk_001/zoo.cfg
 root      55834   1624  0 15:24 pts/1    00:00:00 grep --color=auto zk
-# ./vtctld-up.sh 
-enter zk2 env
-Starting vtctld...
-Access vtctld web UI at http://linux-node01:15000
-Send commands with: vtctlclient -server linux-node01:15999 ...
-# 未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot  
-# 使用普通用户启动
-chmod -R 777 /data0/workspaces/go/
-su - vitess
-export VTROOT=$GOPATH
-export VTDATAROOT=$GOPATH/vtdataroot
-export MYSQL_FLAVOR=MySQL56
-export VT_MYSQL_ROOT=/usr
-cd $VTROOT/src/vitess.io/vitess/examples/local
 
- for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
- for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
- localhost:21811,localhost:21812,localhost:21813
-# ./lvtctl.sh InitShardMaster -force test_keyspace/0 test-100
-# ./vttablet-up.sh 
-```
-
-# FQA
-``` bash 
 # ./vttablet-up.sh 
 enter zk2 env
 Starting MySQL for tablet test-0000000100...
