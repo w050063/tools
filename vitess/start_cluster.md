@@ -29,6 +29,23 @@ cd $VTROOT/src/vitess.io/vitess/examples/local
 ./vtgate-up.sh
 ./client.sh
 
+# 每个-up.sh脚本都有相应的-down.sh脚本来停止服务器。
+./vtgate-down.sh
+./vttablet-down.sh
+./vtctld-down.sh
+./zk-down.sh
+cd $VTDATAROOT
+rm -rf *
+
+for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
+for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
+localhost:21811,localhost:21812,localhost:21813
+```
+
+# 如何登陆到MySQL实例，并查看想内容并进行管理？
+> 使用默认MySQL命令连接到MySQL实例，有些内容及权限无法获取(原因未知)
+
+``` bash 
 ./lvtctl.sh ExecuteFetchAsDba test-0000000100 "SELECT VERSION()"
 mysql -S /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock -u vt_dba 
 $ mysql -S /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock -u vt_dba
@@ -78,18 +95,6 @@ mysql> show slave hosts;
 +------------+------+-------+-----------+--------------------------------------+
 4 rows in set (0.00 sec)
 
-
-# 每个-up.sh脚本都有相应的-down.sh脚本来停止服务器。
-./vtgate-down.sh
-./vttablet-down.sh
-./vtctld-down.sh
-./zk-down.sh
-cd $VTDATAROOT
-rm -rf *
-
-for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
-for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
-localhost:21811,localhost:21812,localhost:21813
 ```
 
 # FQA
