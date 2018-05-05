@@ -74,6 +74,7 @@
 - cell -- MySQL实例
 - shard -- MySQL集群
 - keyspace -- 一个数据库
+- vttablet -- MySQL实例
 ```
 
 ## 参考资料
