@@ -51,7 +51,6 @@ mysql> select * from reparent_journal;
 在这种情况下，the old master's tablet type转换为 spare。如果在the old master上启用运行状况检查，它可能会重新加入集群，作为下一次运行状况检查的副本。要启用健康检查，请target_tablet_type在启动tablet时设置参数。该参数表示tablet在健康状态下尝试使用哪种类型的tablet。当它不健康时，tablet类型更改为spare。
 
 实践记录：
-
 ``` bash
 # su - vitess
 $ cd $VTROOT
@@ -108,133 +107,232 @@ mysql> insert into messages values(1,1,'test');
 # $ for i in `seq 0 1 4`;do mysql -S /data0/workspaces/go/vtdataroot/vt_000000010${i}/mysql.sock -u vt_dba -e "select * from vt_test_keyspace.messages;";done
 ```
 #### EmergencyReparentShard: Emergency reparenting 计划外reparenting
+EmergencyReparentShard当前master不可用时，该命令用于强制重新映射到new master。该命令假定无法从当前master数据中检索数据，因为数据无效或无法正常工作。
 
-### External Reparenting
-### Fixing Replication
+因此，该命令根本不依赖当前的master将数据复制到new master。相反，它确保了被选master是所有可用slaves中最先进的复制。
 
-## Schema Management 模式管理
-### Contents 内容
-- MySQL数据库模，这是各个MySQL实例的模式
-- VSchema，它表述了所有keyspaces，以及他们的分片
+**重要提示：** 在调用此命令之前，您必须首先确定具有最高级复制位置的slave，因为必须将该slave指定为new master。您可以使用该vtctl ShardReplicationPositions 命令确定shard的slave的当前复制位置。
+``` bash
+$ ./lvtctl.sh ShardReplicationPositions  test_keyspace/0
+test-0000000101 test_keyspace 0 master 192.168.47.100:15101 192.168.47.100:17101 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000102 test_keyspace 0 replica 192.168.47.100:15102 192.168.47.100:17102 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000100 test_keyspace 0 replica 192.168.47.100:15100 192.168.47.100:17100 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000103 test_keyspace 0 rdonly 192.168.47.100:15103 192.168.47.100:17103 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000104 test_keyspace 0 rdonly 192.168.47.100:15104 192.168.47.100:17104 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+```
 
-工作流程VSchema如下：
-- 使用该ApplyVschema命令为每个密钥空间应用VSchema 。这将VSchemas保存在全局的topo服务器中。
-- 执行RebuildVSchemaGraph针对每个小区（或所有细胞）。该命令将组合的VSchema的非规范化版本传播到所有指定的单元格。这种传播的主要目的是最小化每个单元与全局拓扑的依赖关系。只将变化推送到特定单元格的功能可以让您在变更之前确保变化良好，然后将其部署到任意位置。
+该命令执行以下操作：
+- 1、确定所有slave tablets上的当前复制位置，并确认备选master tablet具有最高级的复制位置。
+- 2、设置被选tablet成为new master。除了将其tablet type类型更改为master，被选master还可以执行其新状态可能需要的任何其他更改。
+- 3、通过以下步骤确保复制功能正常运行：
+  - 1、在被选master tablet上，Vitess在测试表中插入条目，然后更新MasterAlias全局Shard对象的记录 。
+  - 2、并行地在每个slave上，不包括old master，Vitess设置主设备并等待测试条目复制到从设备。（在调用该命令之前尚未复制的从属片剂将保留其当前状态，并且在重新设置过程后不会开始复制。）
 
-### Reviewing your schema 检查您的模式
-本节介绍vtctl命令，让你查看架构并验证器在tablet或shards上的一致性
-- GetSchema
+实践记录
+``` bash
+./lvtctl.sh ListAllTablets test
+test-0000000100 test_keyspace 0 replica 192.168.47.100:15100 192.168.47.100:17100 []
+test-0000000101 test_keyspace 0 master 192.168.47.100:15101 192.168.47.100:17101 []
+test-0000000102 test_keyspace 0 replica 192.168.47.100:15102 192.168.47.100:17102 []
+test-0000000103 test_keyspace 0 rdonly 192.168.47.100:15103 192.168.47.100:17103 []
+test-0000000104 test_keyspace 0 rdonly 192.168.47.100:15104 192.168.47.100:17104 []
+$ ./lvtctl.sh ShardReplicationPositions  test_keyspace/0
+test-0000000101 test_keyspace 0 master 192.168.47.100:15101 192.168.47.100:17101 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000102 test_keyspace 0 replica 192.168.47.100:15102 192.168.47.100:17102 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000100 test_keyspace 0 replica 192.168.47.100:15100 192.168.47.100:17100 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000103 test_keyspace 0 rdonly 192.168.47.100:15103 192.168.47.100:17103 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000104 test_keyspace 0 rdonly 192.168.47.100:15104 192.168.47.100:17104 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-19,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+$ ./lvtctl.sh EmergencyReparentShard -h
+Usage: EmergencyReparentShard -keyspace_shard=<keyspace/shard> -new_master=<tablet alias>
 
-  该命令显示tablet或tablet的子集的完整模式。
+Reparents the shard to the new master. Assumes the old master is dead and not responsding.
 
-- ValidateSchemaShard
+  -keyspace_shard string
+        keyspace/shard of the shard that needs to be reparented
+  -new_master string
+        alias of a tablet that should be the new master
+  -wait_slave_timeout duration
+        time to wait for slaves to catch up in reparenting (default 30s)
+$ ./lvtctl.sh EmergencyReparentShard -keyspace_shard=test_keyspace/0 -new_master=test-100
+$ ./lvtctl.sh ListAllTablets test   
+test-0000000100 test_keyspace 0 master 192.168.47.100:15100 192.168.47.100:17100 []
+test-0000000102 test_keyspace 0 replica 192.168.47.100:15102 192.168.47.100:17102 []
+test-0000000103 test_keyspace 0 rdonly 192.168.47.100:15103 192.168.47.100:17103 []
+test-0000000104 test_keyspace 0 rdonly 192.168.47.100:15104 192.168.47.100:17104 []
+$  mysql -S /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock -u vt_dba                                                                          Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 497
+Server version: 5.6.40-log MySQL Community Server (GPL)
 
-  验证是否具有相同的架构
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
 
-- ValidateSchemaKeyspace
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
 
-  略
-- GetVSchema
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-  显示指定密钥空间的全局VSchema
+mysql> use vt_test_keyspace
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
 
-- GetSrvVSchema
+Database changed
+mysql> insert into messages values(2,2,'test');   
+Query OK, 1 row affected (0.01 sec)
 
-  显示给定单元格多的组合VSchema
+$ ./lvtctl.sh ShardReplicationPositions  test_keyspace/0
+test-0000000100 test_keyspace 0 master 192.168.47.100:15100 192.168.47.100:17100 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-23,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000102 test_keyspace 0 replica 192.168.47.100:15102 192.168.47.100:17102 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-23,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000103 test_keyspace 0 rdonly 192.168.47.100:15103 192.168.47.100:17103 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-23,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+test-0000000104 test_keyspace 0 rdonly 192.168.47.100:15104 192.168.47.100:17104 [] MySQL56/53136e2c-504d-11e8-a929-000c2933cf1a:1-23,531f845a-504d-11e8-a929-000c2933cf1a:1-4 0
+```
+### External Reparenting 额外的Reparenting
+当另一个工具处理更改a shard's master tablet的过程时，会发生External reparenting。之后，该工具需要调用该vtctl TabletExternallyReparented 命令以确保相应地更新the topology server, replication graph, and serving graph are updated accordingly.。
 
-### Changing your schema  改变您的模式
-- ApplySchema
+该命令执行以下操作：
+- 1、Locks the shard in the global topology server。
+- 2、Reads the Shard object from the global topology server.。
+- 3、读取shard复制图中的所有the tablets。Vitess允许在这一步中进行部分读取，这意味着只要包含新主数据的数据中心可用，即使数据中心停机，Vitess也会继续运行。
+- 4、确保新主设备的状态已正确更新，并确保新主设备不是另一台服务器的MySQL从设备。它运行MySQL show slave status命令，最终旨在确认reset slave已在平板电脑上执行的MySQL命令。
+- 5、更新每个从属的拓扑服务器记录和复制图以反映新的主服务器。如果旧主人在此步骤中没有成功返回，Vitess将其平板电脑类型更改spare为确保它不会干扰正在进行的操作。
+- 6、更新Shard对象以指定新的主控。
 
-  Vitess架构修改功能的设计考虑了以下几个目标：
-  - 启动传播到整个服务器的简单更新
-  - 最少的人际交往
-  - 通过针对临时数据库测试更改来最大限度的减少错误
-  - 对于大多数模式更新，确保非常少的停机时间(或无停机时间)
-  - 不要在拓扑服务器中存储永久架构数据。
+TabletExternallyReparented在以下情况下该命令失败：
+- 全局拓扑服务器不可用于锁定和修改。在这种情况下，操作完全失败。
 
-请注意：目前，Vitess仅支持 创建，修改或删除数据库表的数据定义语句。例如，ApplySchema不影响存储过程或赠款。
+在任何取决于外部补救的系统中，主动重新配置可能是一种危险的做法。您可以通过从设置为vtctld的 --disable_active_reparents标志开始禁用活动补救true。（vtctld启动后不能设置标志。）
 
-该ApplySchema 命令将架构更改应用于每台主平板电脑上指定的密钥空间，并行运行在所有碎片上。然后通过复制将更改传播到从服务器。命令格式是： ApplySchema {-sql=<sql> || -sql_file=<filename>} <keyspace>
+### Fixing Replication 修复复制
+重新启动后，如果A tablet在重新启动操作运行但不久后恢复时不可用，则该tablet可能会成为孤儿。在这种情况下，您可以使用该vtctl ReparentTablet 命令手动将tablet的主设备重置为当前shard master设备 。然后，您可以通过调用vtctl StartSlave 命令停止tablet上的复制。
 
-当该ApplySchema操作实际将模式更改应用于指定的密钥空间时，它将执行以下步骤：
-- 它发现属于密钥空间的碎片，包括如果发生重新划分事件时新添加的碎片 。
-- 它验证SQL语法并确定模式更改的影响。如果变化的范围太大，Vitess会拒绝它。有关更多详细信息，请参阅允许的模式更改部分
-- 它使用飞行前检查来确保在更改实际应用于实时数据库之前模式更新会成功。在这个阶段，Vitess将当前模式复制到临时数据库中，在那里应用更改以验证它，并检索生成的模式。通过这样做，Vitess可以验证更改是否成功，而无需实际接触实时数据库表。
-- 它在每个分片中的主平板电脑上应用SQL命令。
+实践记录
+``` bash
+./lvtctl.sh ReparentTablet -h
+Usage: ReparentTablet <tablet alias>
 
-以下示例命令将user_table.sql 文件中的SQL应用于用户密钥空间：
+Reparent a tablet to the current master in the shard. This only works if the current slave position matches the last known reparent action.
+$ ./lvtctl.sh ListAllTablets test                                             
+test-0000000100 test_keyspace 0 master 192.168.47.100:15100 192.168.47.100:17100 []
+test-0000000102 test_keyspace 0 replica 192.168.47.100:15102 192.168.47.100:17102 []
+test-0000000103 test_keyspace 0 rdonly 192.168.47.100:15103 192.168.47.100:17103 []
+test-0000000104 test_keyspace 0 rdonly 192.168.47.100:15104 192.168.47.100:17104 []
+$ ./lvtctl.sh ReparentTablet test-103
 
-> ApplySchema -sql_file=user_table.sql user
-
-**Permitted schema changes** 允许的模式更改
-
-该ApplySchema命令支持一组有限的DDL语句。此外，Vitess拒绝某些模式更改，因为较大的更改会减慢复制速度，并可能降低整个系统的可用性。
-
-以下列表标识了Vitess支持的DDL语句的类型：
-
-- CREATE TABLE
-- CREATE INDEX
-- CREATE VIEW
-- ALTER TABLE
-- ALTER VIEW
-- RENAME TABLE
-- DROP TABLE
-- DROP INDEX
-- DROP VIEW
-
-此外，Vitess在评估潜在变化的影响时应用以下规则：
-- DROP 无论表的大小如何，总是允许使用语句。
-- ALTER 只有在分片主平板电脑上的表格具有100,000行或更少的行时才允许使用语句。
-- 对于所有其他声明，碎片主平板电脑上的表格必须有200万行或更少。
-
-如果模式更改因为影响太多的行而被拒绝，您可以指定标志来告诉跳过此检查。但是，我们不建议这样做。相反，您应该遵循模式交换流程应用大型模式更改。-allow_long_unavailabilityApplySchema
-
-- ApplyVSchema
-
-  该ApplyVSchema 命令将指定的VSchema应用于密钥空间。VSchema可以被指定为字符串或文件。
-
-- RebuildVSchemaGraph
-
-  该RebuildVSchemaGraph 命令将全局VSchema传播到特定单元格或指定单元格的列表。
-
-### VSchema Guide VSchema 用户指南
-#### Contents
-VSchema代表Vitess Schema。与包含有关表的元数据的传统数据库模式相比，VSchema包含有关如何在密钥空间和分片中组织表的方式的元数据。简而言之，它包含使Vitess看起来像单个数据库服务器所需的信息。
-
-例如，VSchema将包含关于分片表的分片键的信息。当应用程序使用引用密钥的WHERE子句发出查询时，将使用VSchema信息将查询路由到适当的分片。
-#### Sharding Model 分片模型
-在Vitess中，a keyspace被keyspace ID范围分割。每行都被分配一个密钥空间ID，这个密钥空间ID就像街道地址一样，它决定了该行所在的分片。在某些方面，可以说这keyspace ID相当于NoSQL分片密钥。但是，有一些差异：
-
-- 这keyspace ID是Vitess内部的一个概念。该应用程序不需要知道任何有关它。
-- 没有存储实际的物理列keyspace ID。该值根据需要进行计算。
-
-这种差异足够重要，我们不把密钥空间ID称为分片密钥。我们稍后将介绍主要Vindex的概念，它更紧密地重新排列NoSQL分片密钥。
-
-映射到keyspace ID碎片，然后映射到碎片，使我们能够灵活地重新保存数据，同时keyspace ID保持最小的中断，因为每行的数据在整个过程中保持不变。
-#### Vindex
-- The Primary Vindex
-- Secondary Vindexes
-- Unique and NonUnique Vindex
-- Functional and Lookup Vindex
-- Shared Vindexes
-- Orthogonality
-- How vindexes are used
-- Predefined Vindexes
-#### Sequences
-#### VSchema
-- Unsharded Table
-- Sharded Table With Simple Primary Vindex
-- Specifying A Sequence
-- Specifying A Secondary Vindex
-- Advanced usage
-#### Roadmap
-
-### Schema Swap (Tutorial)  架构交互（教程）
-#### Contents 内容
-本节描述如何在不中断正在进行的操作的情况下，在Vitess / MySQL中应用长时间运行的模式更改。大型数据库长时间运行更改ALTER TABLE的示例（例如添加列）OPTIMIZE TABLE或大规模数据更改（例如填充列或清除值）。
-
-如果模式更改不是长时间运行的，请改用更简单的vtctl ApplySchema。
-#### Overview 概述
-
-#### Prerequisites 先决条件
-#### Schema Swap Steps
+# 操作复制
+[vitess@linux-node01 local]$ ./lvtctl.sh StopSlave test-103    
+[vitess@linux-node01 local]$  mysql -S /data0/workspaces/go/vtdataroot/vt_0000000103/mysql.sock -u vt_dba -e "show slave status\G;"
+*************************** 1. row ***************************
+               Slave_IO_State:
+                  Master_Host: 192.168.47.100
+                  Master_User: vt_repl
+                  Master_Port: 17100
+                Connect_Retry: 10
+              Master_Log_File: vt-0000000100-bin.000001
+          Read_Master_Log_Pos: 10324
+               Relay_Log_File: vt-0000000103-relay-bin.000002
+                Relay_Log_Pos: 432
+        Relay_Master_Log_File: vt-0000000100-bin.000001
+             Slave_IO_Running: No
+            Slave_SQL_Running: No
+              Replicate_Do_DB:
+          Replicate_Ignore_DB:
+           Replicate_Do_Table:
+       Replicate_Ignore_Table:
+      Replicate_Wild_Do_Table:
+  Replicate_Wild_Ignore_Table:
+                   Last_Errno: 0
+                   Last_Error:
+                 Skip_Counter: 0
+          Exec_Master_Log_Pos: 10324
+              Relay_Log_Space: 644
+              Until_Condition: None
+               Until_Log_File:
+                Until_Log_Pos: 0
+           Master_SSL_Allowed: No
+           Master_SSL_CA_File:
+           Master_SSL_CA_Path:
+              Master_SSL_Cert:
+            Master_SSL_Cipher:
+               Master_SSL_Key:
+        Seconds_Behind_Master: NULL
+Master_SSL_Verify_Server_Cert: No
+                Last_IO_Errno: 0
+                Last_IO_Error:
+               Last_SQL_Errno: 0
+               Last_SQL_Error:
+  Replicate_Ignore_Server_Ids:
+             Master_Server_Id: 846590132
+                  Master_UUID: 53136e2c-504d-11e8-a929-000c2933cf1a
+             Master_Info_File: /data0/workspaces/go/vtdataroot/vt_0000000103/master.info
+                    SQL_Delay: 0
+          SQL_Remaining_Delay: NULL
+      Slave_SQL_Running_State:
+           Master_Retry_Count: 86400
+                  Master_Bind:
+      Last_IO_Error_Timestamp:
+     Last_SQL_Error_Timestamp:
+               Master_SSL_Crl:
+           Master_SSL_Crlpath:
+           Retrieved_Gtid_Set:
+            Executed_Gtid_Set: 53136e2c-504d-11e8-a929-000c2933cf1a:1-23,
+531f845a-504d-11e8-a929-000c2933cf1a:1-4
+                Auto_Position: 1
+[vitess@linux-node01 local]$ ./lvtctl.sh StartSlave test-103                       
+[vitess@linux-node01 local]$  mysql -S /data0/workspaces/go/vtdataroot/vt_0000000103/mysql.sock -u vt_dba -e "show slave status\G;"
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.47.100
+                  Master_User: vt_repl
+                  Master_Port: 17100
+                Connect_Retry: 10
+              Master_Log_File: vt-0000000100-bin.000001
+          Read_Master_Log_Pos: 10324
+               Relay_Log_File: vt-0000000103-relay-bin.000003
+                Relay_Log_Pos: 432
+        Relay_Master_Log_File: vt-0000000100-bin.000001
+             Slave_IO_Running: Yes
+            Slave_SQL_Running: Yes
+              Replicate_Do_DB:
+          Replicate_Ignore_DB:
+           Replicate_Do_Table:
+       Replicate_Ignore_Table:
+      Replicate_Wild_Do_Table:
+  Replicate_Wild_Ignore_Table:
+                   Last_Errno: 0
+                   Last_Error:
+                 Skip_Counter: 0
+          Exec_Master_Log_Pos: 10324
+              Relay_Log_Space: 925
+              Until_Condition: None
+               Until_Log_File:
+                Until_Log_Pos: 0
+           Master_SSL_Allowed: No
+           Master_SSL_CA_File:
+           Master_SSL_CA_Path:
+              Master_SSL_Cert:
+            Master_SSL_Cipher:
+               Master_SSL_Key:
+        Seconds_Behind_Master: 0
+Master_SSL_Verify_Server_Cert: No
+                Last_IO_Errno: 0
+                Last_IO_Error:
+               Last_SQL_Errno: 0
+               Last_SQL_Error:
+  Replicate_Ignore_Server_Ids:
+             Master_Server_Id: 846590132
+                  Master_UUID: 53136e2c-504d-11e8-a929-000c2933cf1a
+             Master_Info_File: /data0/workspaces/go/vtdataroot/vt_0000000103/master.info
+                    SQL_Delay: 0
+          SQL_Remaining_Delay: NULL
+      Slave_SQL_Running_State: Slave has read all relay log; waiting for the slave I/O thread to update it
+           Master_Retry_Count: 86400
+                  Master_Bind:
+      Last_IO_Error_Timestamp:
+     Last_SQL_Error_Timestamp:
+               Master_SSL_Crl:
+           Master_SSL_Crlpath:
+           Retrieved_Gtid_Set:
+            Executed_Gtid_Set: 53136e2c-504d-11e8-a929-000c2933cf1a:1-23,
+531f845a-504d-11e8-a929-000c2933cf1a:1-4
+                Auto_Position: 1
+                
+```
