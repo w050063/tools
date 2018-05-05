@@ -2,6 +2,7 @@
 ## Vitess概述
 - 官网文档地址：https://vitess.io/overview/
 - GitHub仓库地址：https://github.com/vitessio/vitess
+- godoc地址：https://godoc.org/github.com/youtube/vitess
 
 ## 实践操作
 - 初始化机器
