@@ -29,6 +29,10 @@ cd $VTROOT/src/vitess.io/vitess/examples/local
 ./vtgate-up.sh
 ./client.sh
 
+./lvtctl.sh ExecuteFetchAsDba test-0000000100 "SELECT VERSION()"
+mysql -S /data0/workspaces/go/vtdataroot/vt_0000000100/mysql.sock -u vt_dba 
+
+
 # 每个-up.sh脚本都有相应的-down.sh脚本来停止服务器。
 ./vtgate-down.sh
 ./vttablet-down.sh
