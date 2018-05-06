@@ -1,8 +1,9 @@
 ## Backing Up Data  备份数据
 ### Contents 内容
   本文档介绍如何使用Vitess创建和恢复数据备份。Vitess使用备份有两个目的：
-  - 提供数据的时间点备份
-  - 在现有shard中创建新数据
+  - 提供数据的时间点备份 一个tablet的data
+  - 在存在的shard下初始化一个新tablets
+
 ### Prerequisites 先决条件
 
 Vitess将数据备份存储在备份存储服务上，这是一个可插拔的接口。
@@ -13,7 +14,7 @@ Vitess将数据备份存储在备份存储服务上，这是一个可插拔的�
   - Amazon S3
   - Ceph
 
-在备份和恢复tablet之前，你需要确保tablet知道您正在是的备份存储系统。为此，请在动可访问存储备份位置的vttablet时使用以下命令行标识。
+在备份和恢复tablet之前，你需要确保tablet知道您正在使用的备份存储系统。为此，请在启动tablet时设置可访问存储备份位置的vttablet时使用以下命令行标识。
 
 > 略
 
@@ -37,11 +38,11 @@ Vitess将数据备份存储在备份存储服务上，这是一个可插拔的�
   - 6、将其切换回原来的类型。在此之后，它很可能会落后于复制，并且不会被vtgate用于服务，直到数据同步完成。
 
 ### Restoring a backup 恢复备份
-tablet启动时，Vitess会检查-restore_from_backup命令行标志的值，以确定是否将备份还原到该tablet.
+当一个tablet启动时，Vitess会检查-restore_from_backup命令行标志的值，以确定是否将备份还原到该tablet.
   - 如果标志存在，Vitess尝试在启动tablet时从备份系统恢复最新的备份
-  - 如果标志不存在，Vitess不会尝试将备份恢复到tablet，这相当于在新的分片中启动新的tablet
+  - 如果标志不存在，Vitess不会尝试将备份恢复到tablet，这相当于在新的shard中启动新的tablet
 
-正如前提条件部分所述，该标志通常在碎片中的所有平板电脑上始终处于启用状态。如果Vitess在备份存储系统中找不到备份，它就会将vttablet作为新的平板电脑启动。
+正如前提条件部分所述，该标志通常在shard中的所有tablets上始终处于启用状态。如果Vitess在备份存储系统中找不到备份，它就会将vttablet作为新的tablet启动。
 ``` bash
 vttablet ... -backup_storage_implementation=file \
              -file_backup_storage_root=/nfs/XXX \
@@ -57,7 +58,7 @@ vtctl提供两个用于管理备份的命令：
 > RemoveBackup <keyspace/shard> <backup name>
 
 ### Bootstrapping a new tablet 初始化新tablet
-初始化新tablet与恢复现有tablet几乎完全相同。唯一需要注意的tablet在拓扑中注册自己时指定了它的密钥空间，分片和tablet类型。具体而言，确保设置了以下vttablet参数：
+初始化新tablet与恢复现有tablet几乎完全相同。唯一需要注意的tablet在拓扑中注册自己时指定了它的keyspace，shard和tablet type。具体而言，确保设置了以下vttablet参数：
 ``` bash
 -init_keyspace <keyspace>
 -init_shard <shard>
@@ -66,7 +67,7 @@ vtctl提供两个用于管理备份的命令：
 自动tablet将从备份中恢复数据，然后通过重新启动复制来应用备份后发生的更改。
 
 ### Backup Frequency 备份频率
-我们建议定期备份，例如你应该为它设置一个cron作业。
+我们建议定期备份，例如你应该为它设置一个cron job。
 
 要确定创建备份的正确频率，请考虑保留复制日志的时间量，并在备份操作失败的情况下留出足够的时间来调查和解决问题。
 
