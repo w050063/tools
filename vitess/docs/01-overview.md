@@ -101,7 +101,9 @@ NoSQL解决方案具有定制API，从而导致定制架构，应用程序和工
 
 ### Vitess on Kubernetes 运行与Kubernetes上的Vitess
 Kubernetes是Docker容器的开源协调系统，Vitess可以作为Kubernetes感知的云本地分布式数据库运行。
+
 Kubernetes在计算集群的节点上处理调度，主动管理这些节点上的工作负载，并将包含应用程序的容器分组，以便于管理和发现。这为Vitess在YouTube上运行的前身Kubernetes提供了一个类似的开源环境。
+
 运行Vitess最简单的方法是通过Kubernetes。但是，这不是要求，还会使用其他类型的部署。
 ### History
 自2011年以来，Vitess一直是YouTube基础设施的基本组成部分，本节简要总结了导致Vitess创建的事件序列：  
