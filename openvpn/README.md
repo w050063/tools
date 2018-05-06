@@ -1,4 +1,8 @@
 # OpenVPN资料总结
+## OpenVPN安装部署
+- https://github.com/Nyr/openvpn-install
+
+## OpenVPN配置参数说明
 ``` bash
 # cat /etc/redhat-release 
 CentOS Linux release 7.2.1511 (Core) 
