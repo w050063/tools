@@ -7,3 +7,6 @@
   
 - 忽略robots.txt协议
   > wget -m -e robots=off http://www.example.com/
+
+- 网站禁用wget情况处理
+  > wget -m -e robots=off -U "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6" "http://www.example.com/"
