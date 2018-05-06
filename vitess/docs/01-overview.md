@@ -31,6 +31,7 @@ Vitess自2011年以来一直服务于所有的YouTube数据库流量，并且现
 ### Comparisons to other storage options 与其他存储选项进行比较
 以下各节将Vitess与两种常见的替代方法进行比较，一个是vanilla MySQL实现一个NoSQL实现。
 - Vitess vs. Vanilla MySQL
+
 普通Mysql|Vitess
 :------|:----
 每个MySQL连接的内存开销在256KB到近3MB之间，具体的取决于你使用的MySQL版本;随着用户数量的增长，必须要添加RAM以支持其他连接，但是增加RAM并不能带来查询速度的提高。另外，获取更多连接的同时会增加CPU的成本。                  |Vitess基于gRPC协议创建的都是轻量级的连接，Vitess连接池功能使用Go的并发支持将这些轻量级连接映射到一个小型的MySQL连接池;因此，Vitess可以轻松处理数千个连接。
@@ -40,6 +41,7 @@ Vitess自2011年以来一直服务于所有的YouTube数据库流量，并且现
 MySQL集群可以具有针对不同工作负载的自定义数据库配置，例如用于写入的主库、为web客户端提供的快速只读从库、为批处理作业提供的较慢的只读副本等等。如果数据库具有水平分片，则需要为每个分片重复设置，应用程序需要编写逻辑来确认如何找到正确的数据库。|Vitess使用支持数据一致性的存储系统来存储拓扑结构，例如etcd或ZooKeeper。这意味着集群视图始终是最新的，并且对于不同的客户端都是一致的；Vitess还提供了一个代理，可以将查询有效地路由到最合适的MySQL实例。
 
 - Vitess vs. NoSQL
+
 如果你考虑一个NoSQL解决方案主要是出于对MySQL的可扩展性的担忧，那么Vitess可能是您的应用程序最佳的选择。虽然NoSQL为非结构化数据提供了极大的支持，但Vitess仍然提供了NoSQL数据存储中不可用的几个优点：
 
 NoSQL|Vitess
