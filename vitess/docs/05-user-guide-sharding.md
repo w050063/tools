@@ -1,9 +1,24 @@
 ## Sharding 拆分
 ### Horizontal Sharding (Tutorial, automated) 水平分片（教程、自动化）
 #### Contents 内容
-  本节向您展示如果使用水平重用工作流程在现有未分散Vitess密钥空间中应用基于范围的分片过程的示例。在这个案例中，我们将从1个shard重新生成2个shard.
+  本节向您展示如果使用水平重用工作流程在现有未分散Vitess密钥空间中应用基于范围的分片过程的示例。在这个案例中，我们将从1个shard重新生成2个shard  -80和 80-.
 
 #### Overview 概述
+水平重新划分过程主要包含以下步骤（每个步骤是工作流中的一个阶段）：
+
+1、将模式从原始分片复制到目标分片。（阶段：CopySchemaShard）
+
+2、使用称为vtworker （阶段：SplitClone）的批处理过程复制数据。 更多细节
+
+3、检查过滤的复制（阶段：WaitForFilteredReplication）。 更多细节
+
+4、在模式下使用vtworker批处理过程检查复制的数据完整性，以比较源数据和目标数据。（阶段：SplitDiff）
+
+5、迁移原始碎片中的所有服务rdonly平板电脑。（阶段：MigrateServedTypeRdonly）
+
+6、迁移原始分片中的所有服务副本平板电脑。（阶段：MigrateServedTypeReplica）
+
+7、迁移原始分片中的所有服务主平板电脑。（阶段：MigrateServedTypeMaster） 更多细节
 
 #### Prerequisites 先决条件
 您应该完成入门教程(请在尝试Vitess重新划分之前完成所有步骤)，并且已经离开集群运行。然后在运行重新分片过程之前按照如下步骤操作：
@@ -38,6 +53,128 @@
 启动工作流程的另一种方式是通过vtctlclient命令，在执行命令之后，您还可以在vtctld UI 工作流程部分可视化工作流程：
 
 > vitess/examples/local$ ./lvtctl.sh WorkflowCreate -skip_start=false horizontal_resharding -keyspace=test_keyspace -vtworkers=localhost:15033 -enable_approvals=true
+
+``` bash
+[vitess@linux-node01 local]$ ./lvtctl.sh WorkflowCreate -skip_start=false horizontal_resharding -keyspace=test_keyspace -vtworkers=localhost:15033 -enable_approvals=false
+uuid: 0b806e3f-51c8-11e8-be68-000c2933cf1a
+[vitess@linux-node01 local]$ I0507 15:27:06.529291  102937 instance.go:133] Starting worker...
+I0507 15:27:06.530982  102937 logutil.go:31] log: Connected to 127.0.0.1:21813
+I0507 15:27:06.535510  102937 logutil.go:31] log: Authenticated: id=244101965884751886, timeout=30000
+I0507 15:27:06.535865  102937 zk_conn.go:296] zk conn: session for addr localhost:21811,localhost:21812,localhost:21813 event: {EventSession StateHasSession  <nil> 127.0.0.1:21813}
+I0507 15:27:06.544222  102937 split_clone.go:588] Found overlapping shards: &{Left:[master_alias:<cell:"test" uid:200 > key_range:<end:"\200" > cells:"test"  master_alias:<cell:"test" uid:300 > key_range:<start:"\200" > cells:"test" ] Right:[master_alias:<cell:"test" uid:100 > served_types:<tablet_type:MASTER > served_types:<tablet_type:REPLICA > served_types:<tablet_type:RDONLY > cells:"test" ]}
+I0507 15:27:06.545895  102937 split_clone.go:748] Finding a MASTER tablet for each destination shard...
+I0507 15:27:06.548992  102937 logutil.go:31] log: Connected to 127.0.0.1:21813
+I0507 15:27:06.553095  102937 logutil.go:31] log: Authenticated: id=244101965884751887, timeout=30000
+I0507 15:27:06.553168  102937 zk_conn.go:296] zk conn: session for addr localhost:21811,localhost:21812,localhost:21813 event: {EventSession StateHasSession  <nil> 127.0.0.1:21813}
+I0507 15:27:06.647007  102937 split_clone.go:768] Using tablet test-0000000200 as destination master for test_keyspace/-80
+I0507 15:27:06.647164  102937 split_clone.go:768] Using tablet test-0000000300 as destination master for test_keyspace/80-
+I0507 15:27:06.647227  102937 split_clone.go:770] NOTE: The used master of a destination shard might change over the course of the copy e.g. due to a reparent. The HealthCheck module will track and log master changes and any error message will always refer the actually used master address.
+I0507 15:27:06.647305  102937 split_clone.go:782] Waiting 1m0s for 1 test_keyspace/-80 RDONLY tablet(s)
+I0507 15:27:06.647834  102937 split_clone.go:460] Online clone will be run now.
+I0507 15:27:06.647905  102937 split_clone.go:782] Waiting 1m0s for 1 test_keyspace/0 RDONLY tablet(s)
+I0507 15:27:06.667760  102937 split_clone.go:852] Source tablet 0 has 1 tables to copy
+I0507 15:27:06.667956  102937 chunk.go:85] table=messages: Not splitting the table into multiple chunks because it has only 3 rows.
+I0507 15:27:06.668060  102937 split_clone.go:782] Waiting 2h0m0s for 1 test_keyspace/0 RDONLY tablet(s)
+I0507 15:27:06.672069  102937 split_clone.go:782] Waiting 2h0m0s for 1 test_keyspace/-80 RDONLY tablet(s)
+I0507 15:27:06.756537  102937 split_clone.go:476] Online clone finished after 0s.
+I0507 15:27:06.756589  102937 split_clone.go:483] Offline clone will be run now.
+I0507 15:27:07.530004  102937 command.go:161] Working on: test_keyspace/0
+State: cloning the data (online)
+Running:
+Comparing source and destination using: no online source tablets currently in use
+ETA: 2018-05-07 15:27:08.392133114 +0800 CST m=+358.732266926
+messages: copy done, processed 3 rows
+I0507 15:27:07.758022  102937 topo_utils.go:125] Adding tag[worker]=http://linux-node01:15032/ to tablet test-0000000103
+I0507 15:27:07.763709  102937 topo_utils.go:145] Changing tablet test-0000000103 to 'DRAINED'
+I0507 15:27:07.795550  102937 healthcheck.go:564] HealthCheckUpdate(Type Change): test-0000000103, tablet: test-103 (192.168.47.100), target test_keyspace/0 (RDONLY) => test_keyspace/0 (DRAINED), reparent time: 0
+I0507 15:27:07.799433  102937 split_clone.go:715] Using tablet test-0000000103 as source for test_keyspace/0
+I0507 15:27:07.810264  102937 split_clone.go:852] Source tablet 0 has 1 tables to copy
+I0507 15:27:07.810420  102937 chunk.go:85] table=messages: Not splitting the table into multiple chunks because it has only 3 rows.
+I0507 15:27:07.814138  102937 split_clone.go:782] Waiting 2h0m0s for 1 test_keyspace/-80 RDONLY tablet(s)
+I0507 15:27:07.820545  102937 split_clone.go:1087] Making and populating blp_checkpoint table
+I0507 15:27:07.820572  102937 split_clone.go:1087] Making and populating blp_checkpoint table
+I0507 15:27:07.847506  102937 split_clone.go:1110] Setting SourceShard on shard test_keyspace/-80 (tables: [])
+I0507 15:27:07.896458  102937 split_clone.go:1110] Setting SourceShard on shard test_keyspace/80- (tables: [])
+I0507 15:27:07.923740  102937 split_clone.go:1135] Refreshing state on tablet test-0000000300
+I0507 15:27:07.923797  102937 split_clone.go:1135] Refreshing state on tablet test-0000000200
+I0507 15:27:07.933077  102937 split_clone.go:512] Offline clone finished after 0s.
+I0507 15:27:07.992355  102937 cleaner.go:98] action StartSlaveAction successful on test-0000000103
+I0507 15:27:08.003845  102937 cleaner.go:98] action TabletTagAction successful on test-0000000103
+I0507 15:27:08.023109  102937 cleaner.go:98] action TabletTagAction successful on test-0000000103
+I0507 15:27:08.061125  102937 healthcheck.go:564] HealthCheckUpdate(Type Change): test-0000000103, tablet: test-103 (192.168.47.100), target test_keyspace/0 (DRAINED) => test_keyspace/0 (RDONLY), reparent time: 0
+I0507 15:27:08.102144  102937 cleaner.go:98] action ChangeSlaveTypeAction successful on test-0000000103
+I0507 15:27:08.123881  102937 command.go:152] Working on: test_keyspace/0
+State: done
+Success:
+
+Online Clone Result:
+messages: copy done, processed 3 rows
+
+Offline Clone Result:
+messages: copy done, processed 3 rows
+I0507 15:27:08.171995  102937 instance.go:133] Starting worker...
+I0507 15:27:08.275523  102937 topo_utils.go:125] Adding tag[worker]=http://linux-node01:15032/ to tablet test-0000000203
+I0507 15:27:08.281134  102937 topo_utils.go:145] Changing tablet test-0000000203 to 'DRAINED'
+I0507 15:27:08.401795  102937 topo_utils.go:125] Adding tag[worker]=http://linux-node01:15032/ to tablet test-0000000103
+I0507 15:27:08.409698  102937 topo_utils.go:145] Changing tablet test-0000000103 to 'DRAINED'
+I0507 15:27:08.432706  102937 split_diff.go:270] Stopping master binlog replication on cell:"test" uid:200
+I0507 15:27:08.437994  102937 split_diff.go:297] Stopping slave cell:"test" uid:103  at a minimum of MySQL56/3c21c6dc-51c6-11e8-b2c2-000c2933cf1a:1-10
+I0507 15:27:08.446600  102937 split_diff.go:317] Restarting master cell:"test" uid:200  until it catches up to [position:"MySQL56/3c21c6dc-51c6-11e8-b2c2-000c2933cf1a:1-10" ]
+I0507 15:27:08.454646  102937 split_diff.go:327] Waiting for destination tablet cell:"test" uid:203  to catch up to MySQL56/92f810d6-51c6-11e8-b2c4-000c2933cf1a:1-12
+I0507 15:27:08.464563  102937 split_diff.go:343] Restarting filtered replication on master cell:"test" uid:200
+I0507 15:27:08.466995  102937 split_diff.go:365] Gathering schema information...
+I0507 15:27:08.472860  102937 split_diff.go:387] Got schema from source cell:"test" uid:103
+I0507 15:27:08.475066  102937 split_diff.go:376] Got schema from destination cell:"test" uid:203
+I0507 15:27:08.475113  102937 split_diff.go:396] Diffing the schema...
+I0507 15:27:08.475230  102937 split_diff.go:402] Schema match, good.
+I0507 15:27:08.476126  102937 split_diff.go:432] Running the diffs...
+I0507 15:27:08.476271  102937 split_diff.go:458] Starting the diff on table messages
+I0507 15:27:08.476476  102937 diff_utils.go:198] SQL query for test-0000000103/messages: SELECT `page`, `time_created_ns`, `message` FROM `messages` ORDER BY `page`, `time_created_ns`
+I0507 15:27:08.480787  102937 diff_utils.go:198] SQL query for test-0000000203/messages: SELECT `page`, `time_created_ns`, `message` FROM `messages` ORDER BY `page`, `time_created_ns`
+I0507 15:27:08.484983  102937 split_diff.go:513] Table messages checks out (3 rows processed, 71722 qps)
+I0507 15:27:08.489795  102937 cleaner.go:98] action StartSlaveAction successful on test-0000000203
+I0507 15:27:08.492855  102937 cleaner.go:98] action StartSlaveAction successful on test-0000000103
+I0507 15:27:08.495467  102937 cleaner.go:98] action TabletTagAction successful on test-0000000103
+I0507 15:27:08.498154  102937 cleaner.go:98] action TabletTagAction successful on test-0000000103
+I0507 15:27:08.508936  102937 cleaner.go:98] action ChangeSlaveTypeAction successful on test-0000000103
+I0507 15:27:08.512227  102937 cleaner.go:98] action TabletTagAction successful on test-0000000203
+I0507 15:27:08.515163  102937 cleaner.go:98] action TabletTagAction successful on test-0000000203
+I0507 15:27:08.525888  102937 cleaner.go:98] action ChangeSlaveTypeAction successful on test-0000000203
+I0507 15:27:08.525917  102937 command.go:152] Working on: test_keyspace/-80
+State: done
+Success.
+I0507 15:27:08.533867  102937 instance.go:133] Starting worker...
+I0507 15:27:08.637604  102937 topo_utils.go:125] Adding tag[worker]=http://linux-node01:15032/ to tablet test-0000000304
+I0507 15:27:08.643626  102937 topo_utils.go:145] Changing tablet test-0000000304 to 'DRAINED'
+I0507 15:27:08.764138  102937 topo_utils.go:125] Adding tag[worker]=http://linux-node01:15032/ to tablet test-0000000104
+I0507 15:27:08.769731  102937 topo_utils.go:145] Changing tablet test-0000000104 to 'DRAINED'
+I0507 15:27:08.789657  102937 split_diff.go:270] Stopping master binlog replication on cell:"test" uid:300
+I0507 15:27:08.793546  102937 split_diff.go:297] Stopping slave cell:"test" uid:104  at a minimum of MySQL56/3c21c6dc-51c6-11e8-b2c2-000c2933cf1a:1-10
+I0507 15:27:08.800327  102937 split_diff.go:317] Restarting master cell:"test" uid:300  until it catches up to [position:"MySQL56/3c21c6dc-51c6-11e8-b2c2-000c2933cf1a:1-10" ]
+I0507 15:27:08.805637  102937 split_diff.go:327] Waiting for destination tablet cell:"test" uid:304  to catch up to MySQL56/c6af08b2-51c6-11e8-b2c6-000c2933cf1a:1-12
+I0507 15:27:08.815004  102937 split_diff.go:343] Restarting filtered replication on master cell:"test" uid:300
+I0507 15:27:08.816854  102937 split_diff.go:365] Gathering schema information...
+I0507 15:27:08.824256  102937 split_diff.go:387] Got schema from source cell:"test" uid:104
+I0507 15:27:08.825142  102937 split_diff.go:376] Got schema from destination cell:"test" uid:304
+I0507 15:27:08.825181  102937 split_diff.go:396] Diffing the schema...
+I0507 15:27:08.825206  102937 split_diff.go:402] Schema match, good.
+I0507 15:27:08.826479  102937 split_diff.go:432] Running the diffs...
+I0507 15:27:08.826561  102937 split_diff.go:458] Starting the diff on table messages
+I0507 15:27:08.826602  102937 diff_utils.go:198] SQL query for test-0000000104/messages: SELECT `page`, `time_created_ns`, `message` FROM `messages` ORDER BY `page`, `time_created_ns`
+I0507 15:27:08.830894  102937 diff_utils.go:198] SQL query for test-0000000304/messages: SELECT `page`, `time_created_ns`, `message` FROM `messages` ORDER BY `page`, `time_created_ns`
+I0507 15:27:08.835993  102937 split_diff.go:513] Table messages checks out (2 rows processed, 54634 qps)
+I0507 15:27:08.841668  102937 cleaner.go:98] action StartSlaveAction successful on test-0000000304
+I0507 15:27:08.848810  102937 cleaner.go:98] action StartSlaveAction successful on test-0000000104
+I0507 15:27:08.853320  102937 cleaner.go:98] action TabletTagAction successful on test-0000000104
+I0507 15:27:08.856233  102937 cleaner.go:98] action TabletTagAction successful on test-0000000104
+I0507 15:27:08.868803  102937 cleaner.go:98] action ChangeSlaveTypeAction successful on test-0000000104
+I0507 15:27:08.871521  102937 cleaner.go:98] action TabletTagAction successful on test-0000000304
+I0507 15:27:08.875076  102937 cleaner.go:98] action TabletTagAction successful on test-0000000304
+I0507 15:27:08.884144  102937 cleaner.go:98] action ChangeSlaveTypeAction successful on test-0000000304
+I0507 15:27:08.884211  102937 command.go:152] Working on: test_keyspace/80-
+State: done
+Success.
+```
 
 创建重新分片工作流程时，程序会自动检测源分片和目标分片，并为重新分片过程创建任务。创建完成后，单击工作流节点，即可看到子节点列表。每个子节点代表工作流中的一个阶段（每个阶段代表概述中提到的一个步骤）。进一步点击一个阶段节点，你可以在这个阶段检查任务。例如，在“CopySchemaShard”阶段，它包括将模式复制到2个目标碎片的任务，因此您可以看到任务节点“碎片-80”和“碎片80-”。你应该看到一个类似这样的页面 。
 
@@ -95,7 +232,7 @@ vitess/examples/local$ ./zk-down.sh
 ```
 
 #### Reference 参考
-- Details in SplitClone phase  SplitClone阶段详细信息
+- Details in SplitClone phase  SplitClone阶段详细信息l
 - Details in WaitForFilteredReplication phase WaitForFilteredReplication阶段详细信息
 - Details in MigrateServedTypeMaster phase MigrateServedTypeMaster阶段详细信息
 
