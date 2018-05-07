@@ -19,7 +19,7 @@
 
     - tablet_hostname 变量修改为公有云内网IP地址
   
-    - vtctld_addr变量修改为公有云公网IP地址
+    - vtctld_addr变量修改为公有云内网IP地址
   
     > 点击实例的status，进入详情页面显示为内网IP地址，无法正常查看参数需要解决
 
