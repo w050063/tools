@@ -69,6 +69,13 @@ cat vschema.json
 
 ./vtworker-up.sh
 ./lvtctl.sh WorkflowCreate -skip_start=false horizontal_resharding -keyspace=test_keyspace -vtworkers=localhost:15033 -enable_approvals=true
+
+./lvtctl.sh ExecuteFetchAsDba test-100 "SELECT * FROM messages"
+./lvtctl.sh ExecuteFetchAsDba test-200 "SELECT * FROM messages"
+./lvtctl.sh ExecuteFetchAsDba test-300 "SELECT * FROM messages"
+
+./vttablet-down.sh
+./lvtctl.sh DeleteShard -recursive test_keyspace/0
 ```
 
 # 如何登陆到MySQL实例，并查看想内容并进行管理？
@@ -261,6 +268,19 @@ vtgate  
       -pid_file /data0/workspaces/go/vtdataroot/tmp/vtgate.pid         
       > /data0/workspaces/go/vtdataroot/tmp/vtgate.out 2>&1 &
 
+# vtworker 启动参数
+vtworker   
+      -topo_implementation zk2 
+      -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
+      -topo_global_root /vitess/global   
+      -cell test   
+      -log_dir /data0/workspaces/go/vtdataroot/tmp   
+      -alsologtostderr   
+      -service_map=grpc-vtworker   
+      -grpc_port 15033   
+      -port 15032   
+      -pid_file /data0/workspaces/go/vtdataroot/tmp/vtworker.pid   
+      -use_v3_resharding_mode &
 
 报错信息1：
 E0501 09:10:01.517581   71126 mysqld.go:605] mysql_install_db failed: /bin/mysql_install_db: exit status 1, output: WARNING: Could not write to config file //my.cnf: 权限不够
