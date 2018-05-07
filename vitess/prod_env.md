@@ -9,7 +9,7 @@
 - MySQL环境安装，但是不用启动
 - env.sh
 
-   - 修改hostname参数为公有云内网IP地址
+    - 修改hostname参数为公有云内网IP地址
   
 - vtctld-up.sh
 
