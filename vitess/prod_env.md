@@ -4,6 +4,9 @@
 - vtgate
 - vttablet
 - zookeeper
+### 日常管理
+- Vitess + RDS
+
 ### 故障转移/恢复
 ### 备份/恢复
 ### 架构管理/架构交换
