@@ -2,7 +2,7 @@
 ## 资源评估
 ### 服务器配置
 - vtgate
-- VTTablet
+- vttablet
 - zookeeper
 ### 故障转移/恢复
 ### 备份/恢复
