@@ -3,7 +3,7 @@
 ### 服务器配置
 - vtgate
 - vttablet
-- zookeeper
+- Topology(zookeeper)
 ### 日常管理
 - Vitess + RDS
 
