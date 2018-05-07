@@ -184,6 +184,14 @@ Access tablet test-0000000103 at http://192.168.47.100:15103/debug/status
 Starting vttablet for test-0000000104...
 Access tablet test-0000000104 at http://192.168.47.100:15104/debug/status
 
+zk启动参数
+zkctl 
+  -zk.myid 1 
+  -zk.cfg 1@10.0.0.13:28881:38881:21811,2@10.0.0.13:28882:38882:21812,3@10.0.0.13:28883:38883:21813 
+  -log_dir /data0/workspaces/go/vtdataroot/tmp start     
+  > /data0/workspaces/go/vtdataroot/tmp/zkctl_1.out 2>&1 &
+  
+  
 # vtctld启动参数
 vtctld   -topo_implementation zk2 
          -topo_global_server_address localhost:21811,localhost:21812,localhost:21813 
