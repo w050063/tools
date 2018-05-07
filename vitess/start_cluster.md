@@ -40,6 +40,35 @@ rm -rf *
 for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "show databases;" ;done
 for i in `seq 0 4`;do mysql -P 1710$i -p123456 -e "create database 1700${i}_t1;" ;done
 localhost:21811,localhost:21812,localhost:21813
+
+# 设置shard
+cat vschema.json
+{
+  "sharded": true,
+  "vindexes": {
+    "hash": {
+      "type": "hash"
+    }
+  },
+  "tables": {
+    "messages": {
+      "column_vindexes": [
+        {
+          "column": "page",
+          "name": "hash"
+        }
+      ]
+    }
+  }
+}
+./lvtctl.sh ApplyVSchema -vschema "$(cat vschema.json)" test_keyspace
+./sharded-vttablet-up.sh
+
+./lvtctl.sh InitShardMaster -force test_keyspace/-80 test-200
+./lvtctl.sh InitShardMaster -force test_keyspace/80- test-300
+
+./vtworker-up.sh
+./lvtctl.sh WorkflowCreate -skip_start=false horizontal_resharding -keyspace=test_keyspace -vtworkers=localhost:15033 -enable_approvals=true
 ```
 
 # 如何登陆到MySQL实例，并查看想内容并进行管理？
