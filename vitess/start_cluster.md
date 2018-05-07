@@ -73,6 +73,9 @@ cat vschema.json
 ./lvtctl.sh ExecuteFetchAsDba test-100 "SELECT * FROM messages"
 ./lvtctl.sh ExecuteFetchAsDba test-200 "SELECT * FROM messages"
 ./lvtctl.sh ExecuteFetchAsDba test-300 "SELECT * FROM messages"
+
+./vttablet-down.sh
+./lvtctl.sh DeleteShard -recursive test_keyspace/0
 ```
 
 # 如何登陆到MySQL实例，并查看想内容并进行管理？
