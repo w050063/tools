@@ -69,6 +69,10 @@ cat vschema.json
 
 ./vtworker-up.sh
 ./lvtctl.sh WorkflowCreate -skip_start=false horizontal_resharding -keyspace=test_keyspace -vtworkers=localhost:15033 -enable_approvals=true
+
+./lvtctl.sh ExecuteFetchAsDba test-100 "SELECT * FROM messages"
+./lvtctl.sh ExecuteFetchAsDba test-200 "SELECT * FROM messages"
+./lvtctl.sh ExecuteFetchAsDba test-300 "SELECT * FROM messages"
 ```
 
 # 如何登陆到MySQL实例，并查看想内容并进行管理？
