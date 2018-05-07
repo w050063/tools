@@ -16,7 +16,7 @@ EOF
 source /etc/profile
 
 su - vitess   # 使用普通用户操作
-mkdir -p /data0/workspaces/go/vtdataroot
+mkdir -p $GOPATH/vtdataroot
 cd $VTROOT/src/vitess.io/vitess/examples/local
 ./zk-up.sh 
 ./vtctld-up.sh    # 未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot
