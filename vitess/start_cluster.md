@@ -1,6 +1,7 @@
 # start cluster
 ``` bash
 # 普通用户添加到root组
+useradd vitess
 usermod vitess -G root
 chmod -R 777 /data0/workspaces/go/
 cat >>/etc/profile<<EOF
