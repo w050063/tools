@@ -39,6 +39,9 @@ cd $VTROOT/src/vitess.io/vitess/examples/local
 ./lvtctl.sh RebuildVSchemaGraph
 ./vtgate-loveworld-up.sh loveworld 15002 15992 15307
 ./client.sh
+
+for i in `seq 0 4`;do mysql -uvt_dba -S /data0/workspaces/go/vtdataroot/vt_000000020${i}/mysql.sock -e "show databases;" ;done
+mysql -uvt_dba -S /data0/workspaces/go/vtdataroot/vt_0000000200/mysql.sock -e "show slave hosts;"
 ```
 
 ### 日常管理
