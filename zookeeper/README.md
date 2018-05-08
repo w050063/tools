@@ -2,7 +2,7 @@
 ## zookeeper概述
 ## zookeeper部署安装
 ``` bash
-wget zookeeper-3.4.10.tar.gz 
+wget http://ftp.cuhk.edu.hk/pub/packages/apache.org/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz
 tar -zxf zookeeper-3.4.10.tar.gz 
 cd zookeeper-3.4.10/
 ./zkCli.sh -server 127.0.0.1:21811
