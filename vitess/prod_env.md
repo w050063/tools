@@ -34,7 +34,8 @@
     - xxx_publish
     
 - 创建vttablet loveworld
-
+- client.sh脚本，通用修改
+- vtctld web ui(Dashboard-loveworld-显示1 Not serving如何解决？)
 
 ### 故障转移/恢复
 ### 备份/恢复
