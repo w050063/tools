@@ -27,6 +27,14 @@
 - Vitess + RDS
 - ~~创建cell~~
 
+    - xxx_develop
+    
+    - xxx_master
+    
+    - xxx_publish
+    
+- 创建vttablet loveworld
+
 
 ### 故障转移/恢复
 ### 备份/恢复
