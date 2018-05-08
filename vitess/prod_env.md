@@ -56,7 +56,7 @@ mysql -uvt_dba -S /data0/workspaces/go/vtdataroot/vt_0000000200/mysql.sock -e "s
 ./vtgate-down.sh
 ./vttablet-down.sh
 ./vttablet-loveworld-down.sh test 200
-./vtgate-loveworld-down.sh 15306
+./vtgate-loveworld-down.sh 15307
 ./vtctld-down.sh
 ./zk-down.sh
 cd $VTDATAROOT
