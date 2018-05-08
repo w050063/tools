@@ -21,7 +21,7 @@ cd $VTROOT/src/vitess.io/vitess/examples/local
 ./zk-up.sh 
 ./vtctld-up.sh    # 未启动 排查错误日志目录：/data0/workspaces/go/vtdataroot
 ./vttablet-up.sh
-./lvtctl.sh InitShardMaster -force test_keyspace/0 test-100  # 修改keyspace 及 
+./lvtctl.sh InitShardMaster -force test_keyspace/0 test-100  # 修改keyspace name及 cell-xxx
 ./lvtctl.sh ListAllTablets test                              # test为cell名称，根据需要修改该变量
 ./lvtctl.sh ApplySchema -sql "$(cat create_test_table.sql)" test_keyspace
 ./lvtctl.sh Backup test-0000000102
