@@ -13,5 +13,7 @@ ruby 2.0.0p598 (2014-11-13) [x86_64-linux]
 # ./configure
 # make && make install
 # yum install -y gem
+# gem sources --add http://gems.ruby-china.org/ --remove https://rubygems.org/(http)
+# gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/(https)
 ```
 ## 参考资料
