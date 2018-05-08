@@ -23,7 +23,7 @@ cd $VTROOT/src/vitess.io/vitess/examples/local
 ./vttablet-up.sh
 ./lvtctl.sh InitShardMaster -force test_keyspace/0 test-100  # 修改keyspace name及 cell-xxx
 ./lvtctl.sh ListAllTablets test                              # test为cell名称，根据需要修改该变量
-./lvtctl.sh ApplySchema -sql "$(cat create_test_table.sql)" test_keyspace
+./lvtctl.sh ApplySchema -sql "$(cat create_test_table.sql)" test_keyspace   # sql文件里面不能包含注释性信息
 ./lvtctl.sh Backup test-0000000102
 ./lvtctl.sh ListBackups test_keyspace/0
 ./lvtctl.sh RebuildVSchemaGraph
@@ -77,6 +77,10 @@ cat vschema.json
 
 ./vttablet-down.sh
 ./lvtctl.sh DeleteShard -recursive test_keyspace/0
+
+注释：
+1、sql语句中不能带有注释性信息
+E0508 10:13:56.561864    3779 main.go:61] Remote error: rpc error: code = Unknown desc = schema change works for DDLs only, but get non DDL statement
 ```
 
 # 如何登陆到MySQL实例，并查看想内容并进行管理？
