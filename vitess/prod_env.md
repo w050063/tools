@@ -22,6 +22,24 @@
     - vtctld_addr变量修改为公有云内网IP地址
   
     > 点击实例的status，进入详情页面显示为内网IP地址，无法正常查看参数需要解决
+    
+``` bash
+su - vitess   # 使用普通用户操作
+mkdir -p $GOPATH/vtdataroot
+cd $VTROOT/src/vitess.io/vitess/examples/local
+./zk-up.sh                      # 启动过忽略
+./cell_create.sh loveworld      # 创建项目用cell
+./vtctld-up.sh                  # 启动过忽略 排查错误日志目录：/data0/workspaces/go/vtdataroot
+./vttablet-loveworld-up.sh loveworld loveworld_develop 0 200
+./lvtctl.sh InitShardMaster -force loveworld_develop/0 loveworld-200  # 修改keyspace name及 cell-xxx
+./lvtctl.sh ListAllTablets loveworld                                  # test为cell名称，根据需要修改该变量
+./lvtctl.sh ApplySchema -sql "$(cat database_loveworld.sql)" loveworld_develop    # sql文件里面不能包含注释性信息
+./lvtctl.sh Backup loveworld-0000000202
+./lvtctl.sh ListBackups loveworld_develop/0
+./lvtctl.sh RebuildVSchemaGraph
+./vtgate-loveworld-up.sh loveworld 15002 15992 15307
+./client.sh
+```
 
 ### 日常管理
 - Vitess + RDS
