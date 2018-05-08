@@ -42,6 +42,16 @@ cd $VTROOT/src/vitess.io/vitess/examples/local
 
 for i in `seq 0 4`;do mysql -uvt_dba -S /data0/workspaces/go/vtdataroot/vt_000000020${i}/mysql.sock -e "show databases;" ;done
 mysql -uvt_dba -S /data0/workspaces/go/vtdataroot/vt_0000000200/mysql.sock -e "show slave hosts;"
+
+./vttablet-loveworld-up.sh test loveworld_develop 0 200
+./lvtctl.sh InitShardMaster -force loveworld_develop/0 test-200
+./lvtctl.sh ListAllTablets test  
+./lvtctl.sh ApplySchema -sql "$(cat database_loveworld.sql)" loveworld_develop
+./lvtctl.sh Backup test-0000000202
+./lvtctl.sh ListBackups loveworld_develop/0
+./lvtctl.sh RebuildVSchemaGraph
+./vtgate-loveworld-up.sh test 15002 15992 15307
+./client.sh
 ```
 
 ### 日常管理
