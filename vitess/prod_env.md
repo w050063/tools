@@ -52,6 +52,15 @@ mysql -uvt_dba -S /data0/workspaces/go/vtdataroot/vt_0000000200/mysql.sock -e "s
 ./lvtctl.sh RebuildVSchemaGraph
 ./vtgate-loveworld-up.sh test 15002 15992 15307
 ./client.sh
+
+./vtgate-down.sh
+./vttablet-down.sh
+./vttablet-loveworld-down.sh test 200
+./vtgate-loveworld-down.sh 15992
+./vtctld-down.sh
+./zk-down.sh
+cd $VTDATAROOT
+rm -rf *
 ```
 
 ### 日常管理
