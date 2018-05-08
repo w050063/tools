@@ -49,7 +49,7 @@ mysql -uvt_dba -S /data0/workspaces/go/vtdataroot/vt_0000000200/mysql.sock -e "s
 ./lvtctl.sh ApplySchema -sql "$(cat database_loveworld.sql)" loveworld_develop
 ./lvtctl.sh Backup test-0000000202
 ./lvtctl.sh ListBackups loveworld_develop/0
-./lvtctl.sh RebuildVSchemaGraph
+./lvtctl.sh RebuildVSchemaGraph(有问题)
 ./vtgate-loveworld-up.sh test 15002 15992 15307
 ./client.sh
 
