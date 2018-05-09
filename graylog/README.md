@@ -20,6 +20,13 @@ Beats backend
 /var/spool/collector-sidecar/nxlog                          # 空目录      
 # graylog-collector-sidecar -service install               
 # systemctl start collector-sidecar
-# systemctl enable collector-sidecar     
+# systemctl enable collector-sidecar   
+# curl -u madongsheng:xxx --head 127.0.0.1:9000/api/system/
+HTTP/1.1 200 OK
+X-Graylog-Node-ID: c2442555-b465-4c88-95e7-2a0d68a1305c
+X-Runtime-Microseconds: 271411
+Content-Length: 391
+Content-Type: application/json
+Date: Wed, 09 May 2018 09:13:11 GMT
 ```
 ## 参考资料
