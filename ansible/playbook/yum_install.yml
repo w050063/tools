@@ -28,3 +28,5 @@
       - lsof 
       - vim 
       - dos2unix
+      - htop
+      - rsync

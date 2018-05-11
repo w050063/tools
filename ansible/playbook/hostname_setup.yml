@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: Set the hostname
+    hostname: name={{ hostname }}
+    tags:
+      - hostname

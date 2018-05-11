@@ -1,0 +1,11 @@
+---
+- import_playbook: hostname_setup.yml
+- import_playbook: graylog_install.yml
+- import_playbook: yum_install.yml
+- import_playbook: disk_data_mount.yml
+- import_playbook: pip_install.yml
+- import_playbook: rsync_install.yml
+- import_playbook: open-falcon.yml
+- import_playbook: rsync_sshkey.yml
+- import_playbook: gs_deploy.yml
+
