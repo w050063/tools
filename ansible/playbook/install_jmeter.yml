@@ -1,0 +1,27 @@
+---
+- import_playbook: install_openjdk.yml
+- import_playbook: install_yum.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: data tmp dir
+    file:
+      path: /data0/src/
+      mode: 0755
+      state: directory
+    tags: create_data_tmp_dir
+
+  - name: rsync apache-jmeter-4.0.zip
+    copy:
+      src: files/apache-jmeter-4.0.zip
+      dest: /data0/src/
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_jmeter_file
+ 
+  - name: unzip apache-jmeter-4.0.zip
+    shell: cd /data0/src/ && unzip apache-jmeter-4.0.zip -d /usr/local/
+    tags: unzip_jmeter

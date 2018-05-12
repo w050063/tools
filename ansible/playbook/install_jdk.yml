@@ -1,0 +1,15 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: rsysc jdk-8u161-linux-x64.rpm
+    copy:
+      src: files/jdk-8u161-linux-x64.rpm
+      dest: /data0/src/jdk-8u161-linux-x64.rpm
+      owner: root
+      group: root
+      mode: 0664
+    
+  - name: install jdk-8u161-linux-x64.rpm
+    shell: rpm -ivh /data0/src/jdk-8u161-linux-x64.rpm
