@@ -1,4 +1,8 @@
 # jmeter知识总结
+## jmeter概述
+官网：https://jmeter.apache.org/index.html
+GitHub地址：https://github.com/apache/jmeter
+
 ## jmeter部署安装
 ``` bash
 // Windows环境(依赖 Requires Java 8 or 9)
