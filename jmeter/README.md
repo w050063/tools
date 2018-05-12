@@ -16,7 +16,8 @@ server_port=1099
 server.rmi.localport=4000
 server.rmi.ssl.disable=true
 ```
-
+## FQA
+- [利用badboy进行脚本录制]()
 ## 应用思路
 - 开发jar包工具
 - 定义变量
@@ -24,3 +25,4 @@ server.rmi.ssl.disable=true
 - 根据项目需要编写.jmx配置
 
 ## 参考资料
+- http://www.cnblogs.com/imyalost/category/846346.html
