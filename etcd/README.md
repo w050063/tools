@@ -3,6 +3,14 @@
 - 官网地址：https://coreos.com/etcd/
 - GitHub地址：https://github.com/coreos/etcd/
 - 最新官网文档：https://coreos.com/etcd/docs/latest/v2/README.html
+## etcd使用场景
+和zk类似，etcd有很多应用场景，包括：
+- 配置管理
+- 服务注册与发现
+- 选主
+- 应用调度
+- 分布式队列
+- 分布式锁
 
 ## etcd安装部署
 ### 单机YUM安装
