@@ -10,6 +10,12 @@ Java HotSpot(TM) Client VM (build 25.144-b01, mixed mode, sharing)
 // 解压到某个目录就可以使用
 > 双击D:\apache-jmeter-4.0\bin\jmeter.bat
 ```
+### jmeter_slave启动要点
+``` bash
+server_port=1099
+server.rmi.localport=4000
+server.rmi.ssl.disable=true
+```
 
 ## 应用思路
 - 开发jar包工具
