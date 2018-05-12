@@ -2,4 +2,4 @@
 ## FQA
 - 1、界面语句修改
 
-  > Options-->Choose Language--> Chinese
+   > Options-->Choose Language--> Chinese
