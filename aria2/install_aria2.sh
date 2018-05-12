@@ -8,6 +8,7 @@ cd aria2-1.33.1/
 make && make install
 
 aria2c --enable-rpc --rpc-listen-all --rpc-allow-origin-all -c  --dir /root/downloads -D
+aria2c --conf-path aria2.conf --dir /root/downloads -D
 
 mkdir -p /data0/
 cd /data0/ && git clone https://github.com/ziahamza/webui-aria2
