@@ -25,3 +25,16 @@
   - name: unzip apache-jmeter-4.0.zip
     shell: cd /data0/src/ && unzip apache-jmeter-4.0.zip -d /usr/local/
     tags: unzip_jmeter
+
+  - name: rsync jmeter.properties
+    copy:
+      src: files/jmeter.properties
+      dest: /usr/local/apache-jmeter-4.0/bin/jmeter.properties
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_jmeter_conf
+
+  - name: start jmeter-server
+    shell: cd  /usr/local/apache-jmeter-4.0/bin/ && nohup sh jmeter-server &
+    tags: start_jmeter

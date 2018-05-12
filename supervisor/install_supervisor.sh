@@ -11,7 +11,7 @@ supervisord -c /etc/supervisord.conf
 }
 
 yum_install(){
-yum install -y supervisord
+yum install -y supervisor
 systemctl start supervisord.service 
 systemctl enable supervisord.service
 }
