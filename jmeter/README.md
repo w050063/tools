@@ -1,4 +1,8 @@
 # jmeter知识总结
+## jmeter概述
+- 官网：https://jmeter.apache.org/index.html
+- GitHub地址：https://github.com/apache/jmeter
+
 ## jmeter部署安装
 ``` bash
 // Windows环境(依赖 Requires Java 8 or 9)
@@ -10,7 +14,14 @@ Java HotSpot(TM) Client VM (build 25.144-b01, mixed mode, sharing)
 // 解压到某个目录就可以使用
 > 双击D:\apache-jmeter-4.0\bin\jmeter.bat
 ```
-
+### jmeter_slave启动要点
+``` bash
+server_port=1099
+server.rmi.localport=4000
+server.rmi.ssl.disable=true
+```
+## FQA
+- [利用badboy进行脚本录制]()
 ## 应用思路
 - 开发jar包工具
 - 定义变量
@@ -18,3 +29,4 @@ Java HotSpot(TM) Client VM (build 25.144-b01, mixed mode, sharing)
 - 根据项目需要编写.jmx配置
 
 ## 参考资料
+- http://www.cnblogs.com/imyalost/category/846346.html
