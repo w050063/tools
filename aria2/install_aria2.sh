@@ -9,9 +9,10 @@ make && make install
 
 aria2c --enable-rpc --rpc-listen-all --rpc-allow-origin-all -c  --dir /root/downloads -D
 
-git clone https://github.com/ziahamza/webui-aria2
-cd webui-aria2/
-python -m SimpleHTTPServer 9999 
+mkdir -p /data0/
+cd /data0/ && git clone https://github.com/ziahamza/webui-aria2
+cd webui-aria2/ && python -m SimpleHTTPServer 9999
+mkdir webui-aria2/logs
 }
 
 main(){
