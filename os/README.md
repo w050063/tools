@@ -9,7 +9,12 @@
 - 挂载iso文件
   ``` bash
   mount -o loop -t iso9660 /media/Linux/CentOS-6.5-i386-bin-DVD1.iso /mnt
-  ```
+  ```
+- 服务器性能排除
+  
+  - htop\top
+  
+  - nethogs
   
 ## Ubuntu
 
