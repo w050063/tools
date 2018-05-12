@@ -29,16 +29,16 @@ sh install_etcd.sh
 
 ### 验证
 ``` bash
-# etcdctl --endpoints "http://192.168.200.100:2379,http://192.168.200.101:2379,http://192.168.200.102:2379" cluster-health 
+# export ETCD_ENDPOINTS="http://192.168.200.100:2379,http://192.168.200.101:2379,http://192.168.200.102:2379"
+# etcdctl --endpoints=${ETCD_ENDPOINTS} cluster-health
 member 53a837086c146c is healthy: got healthy result from http://192.168.200.102:2379
 member 1742246ade150219 is healthy: got healthy result from http://192.168.200.101:2379
 member 96abf53cb727b756 is healthy: got healthy result from http://192.168.200.100:2379
 cluster is healthy
-# etcdctl --endpoints="http://192.168.200.100:2379,http://192.168.200.101:2379,http://192.168.200.102:2379" member list          
+# etcdctl --endpoints=${ETCD_ENDPOINTS} member list                                                                                     
 53a837086c146c: name=etcd3 peerURLs=http://192.168.200.102:2380 clientURLs=http://192.168.200.102:2379,http://192.168.200.102:4001 isLeader=true
 1742246ade150219: name=etcd2 peerURLs=http://192.168.200.101:2380 clientURLs=http://192.168.200.101:2379,http://192.168.200.101:4001 isLeader=false
 96abf53cb727b756: name=etcd1 peerURLs=http://192.168.200.100:2380 clientURLs=http://192.168.200.100:2379,http://192.168.200.100:4001 isLeader=false
-
 ```
 ## 日常管理
 
