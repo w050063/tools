@@ -41,10 +41,14 @@ cluster is healthy
 96abf53cb727b756: name=etcd1 peerURLs=http://192.168.200.100:2380 clientURLs=http://192.168.200.100:2379,http://192.168.200.100:4001 isLeader=false
 ```
 ## 日常管理
-### 管理工具
+### 管理工具etcdctl
 ``` bash
 curl http://192.168.200.100:2379/v2/members
 ```
+- 更新节点
+- 新增节点
+- 删除节点
+
 ### 节点迁移
 在生产环境中，不可避免遇到机器硬件故障。当遇到硬件故障发生的时候，我们需要快速恢复节点。ETCD集群可以做到在不丢失数据的，并且不改变节点ID的情况下，迁移节点。
 具体办法是：
@@ -54,6 +58,9 @@ curl http://192.168.200.100:2379/v2/members
 - 使用相同的配置，在新的节点上启动etcd进程
 
 ### 备份还原
+``` bash
+https://raw.githubusercontent.com/mds1455975151/tools/master/etcd/etcd_backup.sh
+```
 ### 监控报警
 ### 性能压测
 ## 参考资料
