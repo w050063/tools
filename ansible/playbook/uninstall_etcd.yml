@@ -1,0 +1,15 @@
+--- 
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: etcd install
+    yum: 
+      state: absent
+      name: etcd
+
+  - name: clean files
+    file: name={{ item }} state=absent
+    with_items:
+    - "/var/lib/etcd"
+    - "/etc/etcd/"
