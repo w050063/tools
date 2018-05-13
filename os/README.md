@@ -14,7 +14,7 @@
   
   - htop\top
   
-  - nethogs
+  - nethogs\iperf
   
 ## Ubuntu
 
