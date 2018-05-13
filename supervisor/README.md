@@ -4,6 +4,8 @@
 - 官网文档：http://supervisord.org/installing.html
 
 ## 实践
+- supervisord
+- supervisorctl
 
 ### 部署安装
 [install_supervisor.sh]()
