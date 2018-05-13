@@ -2,12 +2,15 @@
 ## curl常用案例
 - 发邮件
     - 确认curl版本是否支持smtp协议
-    > # curl-config --protocols | grep SMTP
+    
+    > # curl-config --protocols | grep SMTP
     
     - curl-config安装
-    > # yum install -y libcurl-devel
+   
+    > # yum install -y libcurl-devel
     
     - 使用语法
+    
     > # cat mail.txt
     From:dongsheng.ma@lemongrassmedia.cn
     To:1455975151@qq.com
