@@ -20,12 +20,13 @@ now_time='['$(date +"%Y-%m-%d %H:%M:%S")']'
 echo ${now_time} $1 | tee -a ${LOG_FILE}
 }
 
+timezone_setup(){
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+}
+
 iptables_setup(){
 systemctl stop firewalld.service
 systemctl disable firewalld.service
-
-systemctl stop NetworkManager.service
-systemctl disable NetworkManager.service
 
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 setenforce 0
@@ -71,6 +72,7 @@ git config --global user.email 1455975151@qq.com
 }
 
 main(){
+timezone_setup
 iptables_setup
 yum_setup
 packages_install
