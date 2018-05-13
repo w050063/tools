@@ -10,6 +10,15 @@ BLUE_COLOR='\E[1;34m'
 RES='\E[0m'
 
 base_dir="/data0/src"
+LOG_FILE=$(echo ${0}|awk -F '.' '{print $1}').log
+# BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+write_log(){
+# write log function
+
+now_time='['$(date +"%Y-%m-%d %H:%M:%S")']'
+echo ${now_time} $1 | tee -a ${LOG_FILE}
+}
 
 iptables_setup(){
 systemctl stop firewalld.service
