@@ -23,6 +23,10 @@ echo ${now_time} $1 | tee -a ${LOG_FILE}
 iptables_setup(){
 systemctl stop firewalld.service
 systemctl disable firewalld.service
+
+systemctl stop NetworkManager.service
+systemctl disable NetworkManager.service
+
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 setenforce 0
 }
