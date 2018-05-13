@@ -1,0 +1,14 @@
+--- 
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: ensure nginx is at the latest version
+    yum:
+      name: nginx
+      state: latest
+
+  - name: ensure nginx is running
+    service:
+      name: nginx
+      state: started
