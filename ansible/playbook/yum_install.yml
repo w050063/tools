@@ -1,0 +1,35 @@
+--- 
+- hosts: openstack
+  remote_user: ansible
+  sudo: yes
+  tasks:
+  - name: rpm install
+    yum: state=latest name={{item}}
+    with_items:
+      - lrzsz
+      - wget
+      - tree
+      - gcc
+      - gcc-c++
+      - automake
+      - autoconf
+      - python-pip
+      - python-devel
+      - libxslt-devel
+      - MySQL-python
+      - openssl-devel
+      - libudev-devel
+      - git
+      - libvirt-python
+      - libvirt
+      - qemu-kvm
+      - gedit
+      - python-numdisplay
+      - device-mapper
+      - bridge-utils
+      - libffi-devel
+      - libffi
+      - make
+      - libtool
+      - patch
+      

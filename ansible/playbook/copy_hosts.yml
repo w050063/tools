@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: copy /etc/hosts to client
+    copy: 
+      src=files/hosts 
+      dest=/etc/hosts 
+      backup=yes

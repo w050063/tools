@@ -1,0 +1,10 @@
+--- 
+- hosts: openstack
+  remote_user: ansible
+  sudo: yes
+  tasks:
+  - name: create work dir
+    shell:
+       mkdir -p /application/tools
+    tags: 
+      - create_work_dir
