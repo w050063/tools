@@ -47,5 +47,7 @@ port=*:9001
 
 2）编写supervisord-monitor配置文件
 ```
+## Ansible + Supervisor
+- [ansible supervisor](http://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html#supervisorctl-module)
 
 ## 参考资料
