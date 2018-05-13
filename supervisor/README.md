@@ -21,4 +21,30 @@
 ### 部署安装
 [install_supervisor.sh]()
 
+### supervisor集中管理的方案
+较成熟且靠谱的方案
+1）Django-Dashvisor（功能简陋，项目更新不及时）
+    Web-based dashboard written in Python. Requires Django 1.3 or 1.4.
+2）Nodervisor
+Web-based dashboard written in Node.js.
+项目地址：https://github.com/TAKEALOT/nodervisor
+
+3）Supervisord-Monitor
+    Web-based dashboard written in PHP.
+    
+4）SupervisorUI
+Another Web-based dashboard written in PHP.
+supervisord-monitor（改进版）
+https://github.com/mlazarov/supervisord-monitor
+
+supervisord-monitor（改进版）界面效果
+1）安装
+git clone https://github.com/mlazarov/supervisord-monitor.git
+修改配置文件supervisord.conf
+[inet_http_server]
+port=*:9001
+
+2）编写supervisord-monitor配置文件
+
+
 ## 参考资料
