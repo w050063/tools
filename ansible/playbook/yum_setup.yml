@@ -1,0 +1,18 @@
+--- 
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: clean /etc/yum.repos.d
+    shell: mkdir -p /etc/yum.repos.d/repo;mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/repo
+    tags: 
+      - clean
+
+  - name: setup aliyun yum
+    get_url: url=http://mirrors.aliyun.com/repo/Centos-6.repo dest=/etc/yum.repos.d/
+    tags: 
+      - setup_aliyun
+
+  - name: setup epel yum
+    get_url: url=http://mirrors.aliyun.com/repo/epel-6.repo   dest=/etc/yum.repos.d/
+    tags: 
+      - setup_epel
