@@ -3,9 +3,12 @@
 ## supervisor概述
 - 官网文档：http://supervisord.org/installing.html
 
-## 实践
+## 部署安装
+[install_supervisor.sh]()
+
+## 日常管理
 - supervisord
-  ``` bash
+  ``` text
   supervisorctl stop programxxx：停止某一个进程(programxxx)，programxxx为[program:chatdemon]里配置的值，这个示例就是chatdemon。
   supervisorctl start programxxx：启动某个进程
   supervisorctl restart programxxx：重启某个进程
@@ -18,10 +21,8 @@
 - supervisorctl
 - web管理界面(inet_http_server)
 
-### 部署安装
-[install_supervisor.sh]()
-
-### supervisor集中管理的方案
+## supervisor集中管理的方案
+``` text
 较成熟且靠谱的方案
 1）Django-Dashvisor（功能简陋，项目更新不及时）
     Web-based dashboard written in Python. Requires Django 1.3 or 1.4.
@@ -45,6 +46,6 @@ git clone https://github.com/mlazarov/supervisord-monitor.git
 port=*:9001
 
 2）编写supervisord-monitor配置文件
-
+```
 
 ## 参考资料
