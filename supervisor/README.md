@@ -4,7 +4,7 @@
 - 官网文档：http://supervisord.org/installing.html
 
 ## 部署安装
-[install_supervisor.sh]()
+- [install_supervisor.sh]()
 
 ## 日常管理
 - supervisord
