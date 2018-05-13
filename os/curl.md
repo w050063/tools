@@ -1,13 +1,14 @@
 # curl
 ## curl常用案例
 - 发邮件
-  ``` bash
-  1、确认curl版本是否支持smtp协议
-  # curl-config --protocols | grep SMTP
-  2、curl-config安装
-  # yum install -y libcurl-devel
-  3、使用语法
-  # cat mail.txt
+    - 确认curl版本是否支持smtp协议
+    > # curl-config --protocols | grep SMTP
+    
+    - curl-config安装
+    > # yum install -y libcurl-devel
+    
+    - 使用语法
+    > # cat mail.txt
     From:dongsheng.ma@lemongrassmedia.cn
     To:1455975151@qq.com
     Subject: curl发送邮件标题
