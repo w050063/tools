@@ -4,4 +4,11 @@
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/docker/install_docker_ce.sh
 sh install_docker_ce.sh
 ```
+
+## 快速启动docker应用
+- centos
+``` bash
+docker pull centos:7.2.1511
+docker run -d -it -p 20022:22 centos:7.2.1511 /bin/bash
+```
 ## 参考资料
