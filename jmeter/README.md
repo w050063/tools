@@ -23,6 +23,7 @@ server.rmi.ssl.disable=true
 ## FQA
 - [利用badboy进行脚本录制]()
 - jmeter部署架构
+
   - manager端->slave端(若干)
 
 ## 应用思路
