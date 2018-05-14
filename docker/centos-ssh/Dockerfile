@@ -5,7 +5,8 @@ FROM centos:7.2.1511
 MAINTAINER dongsheng.ma@lemongrassmedia.cn
 
 #PKG
-ADD epel-7.repo /etc/yum.repos.d/
+RUN rm -f /etc/yum.repos.d/*
+ADD epel-7.repo Centos-7.repo /etc/yum.repos.d/
 RUN yum install -y wget net-tools openssl-devel openssh-clients openssh-server supervisor && yum clean all
 
 #FOR SSH
