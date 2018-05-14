@@ -1,0 +1,40 @@
+mysql:
+  image: 'mysql:5.7.17'
+  restart: always
+  ports:
+    - '3306:3306'
+  volumes:
+    - /opt/docker/mysql/mysqlVolume:/var/lib/mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=123456
+
+redis:
+  image: 'redis'
+  restart: always
+  ports:
+    - '6379:6379'
+	
+web2:
+  image: nginx:1.12.1
+  expose:
+    - 80
+	
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  restart: always
+  ports:
+    - '9090:80'
+  links:
+    - mysql:db
+
+jenkins:
+  image: 'jenkins/jenkins:lts'
+  restart: always
+  ports:
+    - '8080:8080'
+    - '50000:50000'
+  volumes:
+    - /opt/docker/jenkins/:/var/lib/jenkins
+    - /usr/bin/docker:/usr/bin/docker
+    - /usr/bin/go:/usr/bin/go
+    - /usr/lib/golang:/usr/lib/golang
