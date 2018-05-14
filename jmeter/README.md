@@ -17,11 +17,12 @@ Java HotSpot(TM) Client VM (build 25.144-b01, mixed mode, sharing)
 Linux下启动jmeter-server
 jmeter -n -t baidu.jmx -r -l baidu.jtl
 
-1、将写好的jmx文件放到/root/workspace/jmeter/路径下
-2、配置jtest别名
-3、启动任务，例如：jtest baidu
-4、执行完成会生成jtl文件，并放置到/var/www/html/目录下，可以是其他web服务器的站点路径下
-5、通过web页面查看并分析结果
+1、安装并启动1个master端若干个slave端
+2、将写好的jmx文件放到master端的/root/workspace/jmeter/路径下
+3、配置jtest别名
+4、启动任务，例如：jtest baidu
+5、执行完成会生成jtl文件，并放置到/var/www/html/目录下，可以是其他web服务器的站点路径下
+6、通过web页面查看并分析结果
 
 别名设置方法
 alias jtestbg='function _jtest(){ nohup jmeter -r -n -t '/root/workspace/jmeter/'$1.jmx -l '/var/www/html/'$1-$(date '+%Y-%m-%d-%H:%M:%S').jtl -e -o '/var/www/html/'$1-$(date '+%Y-%m-%d--%H:%M:%S') & };_jtest'
