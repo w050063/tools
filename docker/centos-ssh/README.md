@@ -1,7 +1,8 @@
 ``` bash
 git clone https://github.com/mds1455975151/tools.git
 cd tools/docker/centos-ssh
-docker build . -t centos-ssh:7.2
+docker pull centos:7
+docker build . -t centos-ssh:7
 
 docker rm $(docker ps -a -q) 
 
