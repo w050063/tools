@@ -11,4 +11,8 @@ sh install_docker_ce.sh
 docker pull centos:7.2.1511
 docker run -d -it -p 20022:22 centos:7.2.1511 /bin/bash
 ```
+
+## FQA
+- Failed to get D-Bus connection: Operation not permitted
+
 ## 参考资料
