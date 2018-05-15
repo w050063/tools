@@ -1,14 +1,11 @@
-# Docker知识
-## Docker部署安装
+# docker-compose知识
+## docker-compose部署安装
 ``` bash
-wget https://raw.githubusercontent.com/mds1455975151/tools/master/docker/install_docker_ce.sh
-sh install_docker_ce.sh
+yum install -y docker-compose
 ```
 
-## 快速启动docker应用
-- centos
+## 快速启动docker-compose应用
 ``` bash
-docker pull centos:7.2.1511
-docker run -d -it -p 20022:22 centos:7.2.1511 /bin/bash
+docker-compose -f docker-compose-loveserver.yml
 ```
 ## 参考资料
