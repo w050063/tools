@@ -1,6 +1,10 @@
 # MySQL知识点
 ## MySQL概述
 ## MySQL安装部署
+``` bash
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
+sh install_mysql.sh
+```
 ## MySQL备份还原
 ## MySQL监控及故障处理
 ## MySQL批量管理
