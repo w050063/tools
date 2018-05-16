@@ -12,12 +12,31 @@
   ```
 - 文件描述符
 ``` bash
-cat >>/etc/security/limits.conf<<EOF
+# cat >>/etc/security/limits.conf<<EOF
 * hard nofile 102400   
 * soft nofile 102400
 * soft nproc  20240
 * hard nproc  30480
 EOF
+# ulimit -n
+10240
+# ulimit -a
+-t: cpu time (seconds)              unlimited
+-f: file size (blocks)              unlimited
+-d: data seg size (kbytes)          unlimited
+-s: stack size (kbytes)             8192
+-c: core file size (blocks)         0
+-m: resident set size (kbytes)      unlimited
+-u: processes                       31422
+-n: file descriptors                10240
+-l: locked-in-memory size (kbytes)  64
+-v: address space (kbytes)          unlimited
+-x: file locks                      unlimited
+-i: pending signals                 31422
+-q: bytes in POSIX msg queues       819200
+-e: max nice                        0
+-r: max rt priority                 0
+-N 15:                              unlimited
 ```
 - 服务器性能排除
   
