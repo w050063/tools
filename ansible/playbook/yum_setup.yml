@@ -2,8 +2,15 @@
 - hosts: all
   remote_user: root
   tasks:
+  - name: create repo file backup dir
+    file:
+      path: /etc/yum.repos.d/repo
+      mode: 0755
+      state: directory
+    tags: create_data_dir
+
   - name: clean /etc/yum.repos.d
-    shell: mkdir -p /etc/yum.repos.d/repo;mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/repo
+    shell: mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/repo
     tags: clean
 
   - name: setup aliyun yum CentOS 6.x
