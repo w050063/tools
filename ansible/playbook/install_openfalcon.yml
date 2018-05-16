@@ -1,6 +1,7 @@
 ---
 - hosts: all
   remote_user: root
+  gather_facts: false
   tasks:
   - name: check remote dir /data0/src
     file: path=/data0/src state=directory mode=0755

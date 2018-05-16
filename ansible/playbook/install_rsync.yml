@@ -1,6 +1,7 @@
---- 
+---
 - hosts: all
   remote_user: root
+  gather_facts: false
   tasks:
   - name: rsysc config file
     copy:
@@ -9,7 +10,7 @@
       owner: root
       group: root
       mode: 0664
-    
+
   - name: rsync start process
     shell: /usr/bin/rsync --daemon
 

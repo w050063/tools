@@ -1,7 +1,7 @@
 ---
-- hosts: gfs_client01_172.16.1.150
-  remote_user: ansible
-  sudo: yes
+- hosts: all
+  remote_user: root
+  gather_facts: false
   tasks:
   - name: remote copy decompress
-    unarchive: src=/home/ansible/script/yml_file/taobao1.tar.gz dest=/usr/local copy=yes 
+    unarchive: src=/home/ansible/script/yml_file/taobao1.tar.gz dest=/usr/local copy=yes

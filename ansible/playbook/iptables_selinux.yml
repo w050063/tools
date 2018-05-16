@@ -1,19 +1,19 @@
---- 
-- hosts: openstack
-  remote_user: ansible
-  sudo: yes
+---
+- hosts: all
+  remote_user: root
+  gather_facts: false
   tasks:
   - name: stop iptables
     shell: /etc/init.d/iptables stop;chkconfig iptables off
-    tags: 
+    tags:
       - iptables
 
   - name: stop selinux
-    shell: 
+    shell:
       /usr/sbin/setenforce 0;
       cp /etc/sysconfig/selinux{,.`date +%Y%m%d`};
       /bin/sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux;
-    tags: 
+    tags:
       - selinux
 
 #/etc/init.d/iptables status;chkconfig --list|grep iptables;cat /etc/sysconfig/selinux;getenforce

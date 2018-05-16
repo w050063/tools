@@ -1,7 +1,6 @@
 ---
-- hosts: gfs_client01_172.16.1.150
-  remote_user: ansible
-  sudo: yes
+- hosts: all
+  remote_user: root
   tasks:
   - name: copy local server to client remote dir
     template: src=/tmp/{{item}} dest=/tmp/
