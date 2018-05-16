@@ -1,8 +1,25 @@
 #Docker for CentoS
-FROM centos:7.2.1511
+FROM centos:7
 
 #Who
 MAINTAINER dongsheng.ma@lemongrassmedia.cn
+
+# systemctl
+ENV container docker
+
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
+systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+rm -f /lib/systemd/system/multi-user.target.wants/*;\
+rm -f /etc/systemd/system/*.wants/*;\
+rm -f /lib/systemd/system/local-fs.target.wants/*; \
+rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+rm -f /lib/systemd/system/basic.target.wants/*;\
+rm -f /lib/systemd/system/anaconda.target.wants/*;
+VOLUME [ "/sys/fs/cgroup" ]
+
+# time
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && ntpdate cn.pool.ntp.org
 
 #PKG
 RUN rm -f /etc/yum.repos.d/*
@@ -20,6 +37,7 @@ RUN echo "root:123456" | chpasswd
 #Supervisor
 ADD supervisord.conf /etc/supervisord.conf
 ADD sshd.ini /etc/supervisord.d/sshd.ini
+ADD init.ini /etc/supervisord.d/init.ini
 
 EXPOSE 22
 
