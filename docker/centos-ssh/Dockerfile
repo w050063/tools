@@ -18,13 +18,13 @@ rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 VOLUME [ "/sys/fs/cgroup" ]
 
-# time
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && ntpdate cn.pool.ntp.org
-
 #PKG
 RUN rm -f /etc/yum.repos.d/*
 ADD epel-7.repo Centos-7.repo /etc/yum.repos.d/
-RUN yum install -y wget net-tools openssl-devel openssh-clients openssh-server supervisor && yum clean all
+RUN yum install -y wget net-tools openssl-devel openssh-clients openssh-server supervisor ntpdate && yum clean all
+
+# time
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && ntpdate cn.pool.ntp.org
 
 #FOR SSH
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
