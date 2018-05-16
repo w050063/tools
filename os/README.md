@@ -10,6 +10,15 @@
   ``` bash
   mount -o loop -t iso9660 /media/Linux/CentOS-6.5-i386-bin-DVD1.iso /mnt
   ```
+- 文件描述符
+``` bash
+cat >>/etc/security/limits.conf<<EOF
+* hard nofile 102400   
+* soft nofile 102400
+* soft nproc  20240
+* hard nproc  30480
+EOF
+```
 - 服务器性能排除
   
   - htop\top
