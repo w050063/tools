@@ -30,6 +30,9 @@ SET GLOBAL sql_mode = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION
 
 NO_ZERO_IN_DATE,NO_ZERO_DATE
 
+
+A timestamp. The range is '1970-01-01 00:00:01' UTC to '2038-01-19 03:14:07' UTC.
+https://dev.mysql.com/doc/refman/5.7/en/date-and-time-type-overview.html
 ```
 
 ### SQL
