@@ -47,6 +47,34 @@ summary +    593 in 00:00:00 = 4297.1/s Avg:    11 Min:     0 Max:    30 Err:   
 summary =    600 in 00:00:06 =   95.6/s Avg:    12 Min:     0 Max:    66 Err:   300 (50.00%)
 Tidying up remote @ Mon May 14 14:16:04 CST 2018 (1526278564163)
 ... end of run
+
+
+
+loveutils cmd 根据日志文件生成jmx文件
+============================================
+go run main.go jmeter -t configs/loveworld.json -l /loveworldserver/storage/logs/laravel.log -u 2360272025537
+
+jmter cmd 测试命令（生成测试报告）
+============================================
+执行jmeter测试
+jmeter -n -t .\idip_exec.jmx -l .\report\idip_exec.jtl -e -o .\report\idip_exec
+
+getReport.bat
+============================================
+set/p report_name=test
+jmeter -g report\%report_name%.jtl -o report\%report_name%
+pause
+
+run.bat
+============================================
+@echo off
+set jmx_file=.\idip_exec.jmx
+set now=%DATE:~0,4%%DATE:~5,2%%DATE:~8,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+set log_file=.\report\report_%now%.jtl
+set report_path=report\%now%
+
+jmeter -n -t %jmx_file% -l %log_file% -e -o %report_path%
+pause
 ```
 ### jmeter_slave启动要点
 ``` bash
