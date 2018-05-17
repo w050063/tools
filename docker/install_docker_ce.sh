@@ -30,7 +30,7 @@ docker version
 }
 
 main(){
-install_repo
+#install_repo
 install_docker_ce
 }
 
