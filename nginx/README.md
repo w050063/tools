@@ -9,96 +9,106 @@
 ```
 ### 配置参数
 ``` bash
-[root@dev-huanqiu ~]# cat /usr/local/nginx/conf/nginx.conf
-user   www www;
-worker_processes 8;
-worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000;
-error_log   /www/log/nginx_error.log   crit;
-pid         /usr/local/nginx/nginx.pid;
+# cat /etc/nginx/nginx.conf
+# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
+
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid;
 worker_rlimit_nofile 65535;
- 
-events
-{
-   use epoll;
-   worker_connections 65535;
+
+# Load dynamic modules. See /usr/share/nginx/README.dynamic.
+include /usr/share/nginx/modules/*.conf;
+
+events {
+    use epoll;
+    worker_connections 65535;
 }
- 
-http
-{
-   include       mime.types;
-   default_type   application/octet-stream;
- 
-   charset   utf-8;
- 
-   server_names_hash_bucket_size 128;
-   client_header_buffer_size 2k;
-   large_client_header_buffers 4 4k;
-   client_max_body_size 8m;
- 
-   sendfile on;
-   tcp_nopush     on;
- 
-   keepalive_timeout 60;
- 
-   fastcgi_cache_path /usr/local/nginx/fastcgi_cache levels=1:2
-                 keys_zone=TEST:10m
-                 inactive=5m;
-   fastcgi_connect_timeout 300;
-   fastcgi_send_timeout 300;
-   fastcgi_read_timeout 300;
-   fastcgi_buffer_size 16k;
-   fastcgi_buffers 16 16k;
-   fastcgi_busy_buffers_size 16k;
-   fastcgi_temp_file_write_size 16k;
-   fastcgi_cache TEST;
-   fastcgi_cache_valid 200 302 1h;
-   fastcgi_cache_valid 301 1d;
-   fastcgi_cache_valid any 1m;
-   fastcgi_cache_min_uses 1;
-   fastcgi_cache_use_stale error timeout invalid_header http_500; 
-   open_file_cache max=204800 inactive=20s;
-   open_file_cache_min_uses 1;
-   open_file_cache_valid 30s; 
- 
-   tcp_nodelay on;
-   
-   gzip on;
-   gzip_min_length   1k;
-   gzip_buffers     4 16k;
-   gzip_http_version 1.0;
-   gzip_comp_level 2;
-   gzip_types       text/plain application/x-javascript text/css application/xml;
-   gzip_vary on;
- 
-   server
-   {
-     listen       8080;
-     server_name   huan.wangshibo.com;
-     index index.php index.htm;
-     root   /www/html/;
- 
-     location /status
-     {
-         stub_status on;
-     }
- 
-     location ~ .*\.(php|php5)?$
-     {
-         fastcgi_pass 127.0.0.1:9000;
-         fastcgi_index index.php;
-         include fcgi.conf;
-     }
- 
-     location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$
-     {
-       expires       30d;
-     }
- 
-     log_format   access   '$remote_addr - $remote_user [$time_local] "$request" '
-               '$status $body_bytes_sent "$http_referer" '
-               '"$http_user_agent" $http_x_forwarded_for';
-     access_log   /www/log/access.log   access;
-       }
+
+http {
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile            on;
+    tcp_nopush          on;
+    tcp_nodelay         on;
+    keepalive_timeout   65;
+    types_hash_max_size 2048;
+    server_tokens       off;
+
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
+
+    gzip on;
+    gzip_min_length   1k;
+    gzip_buffers     4 16k;
+    gzip_http_version 1.0;
+    gzip_comp_level 2;
+    gzip_types       text/plain application/x-javascript text/css application/xml;
+    gzip_vary on;
+
+    # Load modular configuration files from the /etc/nginx/conf.d directory.
+    # See http://nginx.org/en/docs/ngx_core_module.html#include
+    # for more information.
+    include /etc/nginx/conf.d/*.conf;
+
+    server {
+        listen       80 default_server;
+        listen       [::]:80 default_server;
+        server_name  _;
+        root         /usr/share/nginx/html;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        location / {
+        }
+
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+        }
+    }
+
+# Settings for a TLS enabled server.
+#
+#    server {
+#        listen       443 ssl http2 default_server;
+#        listen       [::]:443 ssl http2 default_server;
+#        server_name  _;
+#        root         /usr/share/nginx/html;
+#
+#        ssl_certificate "/etc/pki/nginx/server.crt";
+#        ssl_certificate_key "/etc/pki/nginx/private/server.key";
+#        ssl_session_cache shared:SSL:1m;
+#        ssl_session_timeout  10m;
+#        ssl_ciphers HIGH:!aNULL:!MD5;
+#        ssl_prefer_server_ciphers on;
+#
+#        # Load configuration files for the default server block.
+#        include /etc/nginx/default.d/*.conf;
+#
+#        location / {
+#        }
+#
+#        error_page 404 /404.html;
+#            location = /40x.html {
+#        }
+#
+#        error_page 500 502 503 504 /50x.html;
+#            location = /50x.html {
+#        }
+#    }
+
 }
 ```
 ## nginx禁止svn目录访问
