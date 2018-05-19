@@ -3,12 +3,18 @@
   remote_user: root
   gather_facts: false
   tasks:
-  - name: ensure nginx is at the latest version
-    yum:
-      name: nginx
-      state: latest
+  - name: nginx install
+    yum: state=latest name=nginx
 
-  - name: ensure nginx is running
-    service:
+  - name: Make sure a service is running
+    systemd: 
+      state: started 
       name: nginx
-      state: started
+    tags: nginx_service_running
+
+  - name: enable service etcd and ensure it is not masked
+    systemd:
+      name: nginx
+      enabled: yes
+      masked: no
+    tags: nginx_service_start
