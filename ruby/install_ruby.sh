@@ -22,6 +22,7 @@ make && make install
 
 #gem sources --add http://gems.ruby-china.org/ --remove https://rubygems.org/ # (http)
 gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/ # (https)
+gem update --system
 }
 
 main(){
