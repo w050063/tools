@@ -7,8 +7,10 @@ tar -zxf ruby-2.5.1.tar.gz
 cd ruby-2.5.1
 ./configure
 make && make install
+
+ruby -v
 yum install -y gem
-gem sources --add http://gems.ruby-china.org/ --remove https://rubygems.org/(http)
+gem sources --add http://gems.ruby-china.org/ --remove https://rubygems.org/ #(http)
 #gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/(https)
 }
 
