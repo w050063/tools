@@ -4,8 +4,8 @@
 - GitHub地址：https://github.com/apache/jmeter
 
 ## jmeter部署安装
+### Windows环境(依赖 Requires Java 8 or 9)
 ``` bash
-// Windows环境(依赖 Requires Java 8 or 9)
 >java -version
 java version "1.8.0_144"
 Java(TM) SE Runtime Environment (build 1.8.0_144-b01)
@@ -13,6 +13,20 @@ Java HotSpot(TM) Client VM (build 25.144-b01, mixed mode, sharing)
 >wget http://ftp.cuhk.edu.hk/pub/packages/apache.org//jmeter/binaries/apache-jmeter-4.0.tgz
 // 解压到某个目录就可以使用
 > 双击D:\apache-jmeter-4.0\bin\jmeter.bat
+```
+### Linux环境
+``` bash 
+yum install -y java-1.8.0-openjdk
+wget http://ftp.cuhk.edu.hk/pub/packages/apache.org//jmeter/binaries/apache-jmeter-4.0.tgz
+tar -zxf apache-jmeter-4.0.tgz -C /usr/local/
+cat>>/etc/profile<<EOF
+
+# JMETER bin PATH setup
+JMETER=/usr/local/apache-jmeter-4.0
+CLASSPATH=\$JMETER/lib/ext/ApacheJMeter_core.jar:\$JMETER/lib/jorphan.jar:\$JMETER/lib/logkit-2.0.jar:\$CLASSPATH
+export PATH=\$PATH:\$JMETER/bin
+EOF
+source /etc/profile
 
 Linux下启动jmeter-server
 jmeter -n -t baidu.jmx -r -l baidu.jtl
