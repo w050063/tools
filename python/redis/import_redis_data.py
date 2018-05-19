@@ -1,4 +1,3 @@
-``` python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import redis
@@ -23,4 +22,3 @@ f.close()
 end = time.clock()
  
 print "used:", end -start
-```
