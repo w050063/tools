@@ -14,6 +14,7 @@ cd ext/zlib
 ruby extconf.rb
 sed -i 's@$(top_srcdir)@../..@g' Makefile
 make && make install
+cd -
 
 cd ext/openssl
 ruby extconf.rb
