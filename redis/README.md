@@ -1,5 +1,11 @@
 # Redis知识总结
 ## Redis概述
+
+## Redis安装部署
+``` bash
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/redis/install_redis.sh
+sh install_redis.sh
+```
 ## Redis日常使用
 ``` text
 127.0.0.1:6381> dbsize  // 查看key数量

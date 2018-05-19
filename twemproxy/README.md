@@ -6,12 +6,14 @@
 - 其他相关项目
 
     - [nutcracker-web](https://github.com/kontera-technologies/nutcracker-web)
-  
-  
+
+
 ## twemproxy安装及配置说明
 ### twemproxy安装
-[install_twemproxy.sh](https://raw.githubusercontent.com/mds1455975151/tools/master/twemproxy/install_twemproxy.sh)
-
+``` bash
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/twemproxy/install_twemproxy.sh
+sh install_twemproxy.sh
+```
 ### twemproxy配置
 配置案例：https://github.com/twitter/twemproxy/blob/v0.4.1/conf/nutcracker.yml
 
@@ -55,8 +57,8 @@
 支持Redis的命令：https://github.com/twitter/twemproxy/blob/master/notes/redis.md
 
 - 大量TIME_WAIT
-``` bash 
-# netstat -tunlpa|grep 127.0.0.1:6379 |more 
+``` bash
+# netstat -tunlpa|grep 127.0.0.1:6379 |more
 tcp        0      0 127.0.0.1:6379          0.0.0.0:*               LISTEN      19641/twemproxy     
 tcp        0      0 127.0.0.1:56291         127.0.0.1:6379          TIME_WAIT   -                   
 tcp        0      0 127.0.0.1:34812         127.0.0.1:6379          TIME_WAIT   -                   
