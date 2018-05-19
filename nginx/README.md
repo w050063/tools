@@ -14,8 +14,8 @@ user   www www;
 worker_processes 8;
 worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000;
 error_log   /www/log/nginx_error.log   crit;
-pid         /usr/local/nginx/nginx.pid;
-~~worker_rlimit_nofile 65535;~~
+pid         /usr/local/nginx/nginx.pid;
+worker_rlimit_nofile 65535;
  
 events
 {
