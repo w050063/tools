@@ -12,6 +12,18 @@ sh install_mysql.sh
 ```
 
 ``` bash
+yum -y groupinstall 'Development tools'
+yum install -y libcurl-devel
+yum install -y openssl-devel
+yum install -y gperftools
+yum install -y mysql-devel # 补充 缺mysql-config
+
+mkdir -p /data0/dbproxy
+cd /data0/dbproxy
+git clone https://github.com/highras/fpnn.git infra-fpnn
+cd infra-fpnn
+make
+
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/supervisor/install_supervisor.sh
 sh install_supervisor.sh
 cat>/etc/supervisord.d/DBProxyMgr.ini<<EOF
