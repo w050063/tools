@@ -30,8 +30,8 @@ wget https://raw.githubusercontent.com/mds1455975151/tools/master/supervisor/ins
 sh install_supervisor.sh
 cat>/etc/supervisord.d/DBProxyMgr.ini<<EOF
 [program:DBProxyMgr]
-directory = /data0/dbproxy/infra-fp-mysql-dbproxy/DBProxy/
-command = /data0/dbproxy/infra-fp-mysql-dbproxy/DBProxyDBProxyMgr/DBProxyMgr DBProxy.conf
+directory = /data0/dbproxy/infra-fp-mysql-dbproxy/DBProxyMgr/DBPM
+command = /data0/dbproxy/infra-fp-mysql-dbproxy/DBProxyMgr/DBPM/DBProxyMgr DBProxy.conf
 priority=1
 numprocs=1
 autostart=true
