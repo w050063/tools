@@ -16,6 +16,8 @@ yum -y groupinstall 'Development tools'
 yum install -y libcurl-devel
 yum install -y openssl-devel
 yum install -y gperftools
+yum remove -y php-mysql
+yum install -y php-mysqlnd
 yum install -y mysql-devel # 补充 缺mysql-config
 
 mkdir -p /data0/dbproxy
