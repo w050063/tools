@@ -1,7 +1,7 @@
 ﻿-- 新项目模板只需替换root和dba账号密码即可
 
 -- 更新root密码 默认123456
-update mysql.user set password='*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' where user='root';
+update mysql.user set password='*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' where user='root' and host='127.0.0.1';
 
 -- 更新dba密码 默认123456
 GRANT ALL PRIVILEGES ON *.* TO 'dba'@'%' IDENTIFIED BY PASSWORD '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' WITH GRANT OPTION;
