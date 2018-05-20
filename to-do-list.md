@@ -10,3 +10,6 @@
 - redis集群
 - 负责CDN(阿里云、腾讯云、网宿)的配置及源站部署，域名管理以及SSL证书管理
 - MongoDB副本集
+
+## 简历筛选
+1、简历关键字提Hadoop，但是没有提到hdfs、spark、zookeeper、hbase、pig、hive且薪资要求不高
