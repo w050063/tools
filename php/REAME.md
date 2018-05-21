@@ -10,7 +10,7 @@
 ## FQA
 - 有可能影响PHP读写MySQL库
   ``` bash
-  php -i | grep Client
+  # php -i | grep Client
   Client API library version => 5.5.50-MariaDB
   Client API header version => 5.5.56-MariaDB
   Client API version => 5.5.50-MariaDB
