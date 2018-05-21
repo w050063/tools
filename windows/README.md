@@ -9,13 +9,13 @@
   "EnablePlainTextPassword"=dword:00000001
   ```
 - 获取系统MAC地址做mac地址绑定或者限速等等
-``` bat 
-# cat getinfo.bat
-ipconfig /all  >> getinfo.txt
+  ``` bat 
+  # cat getinfo.bat
+  ipconfig /all  >> getinfo.txt
 
-# cat getinfo.sh  # macos or linux
-ifconfig >> getinfo.txt
-```
+  # cat getinfo.sh  # macos or linux
+  ifconfig >> getinfo.txt
+  ```
 ## powershell
 ## windows下常用工具
 ## 参考资料
