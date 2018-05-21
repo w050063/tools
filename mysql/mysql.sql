@@ -2,6 +2,7 @@
 
 -- 更新root密码 默认123456
 update mysql.user set password='*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' where user='root' and host='127.0.0.1';
+update mysql.user set password='*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' where user='root' and host='localhost';
 
 -- 更新dba密码 默认123456
 GRANT ALL PRIVILEGES ON *.* TO 'dba'@'%' IDENTIFIED BY PASSWORD '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' WITH GRANT OPTION;
@@ -19,6 +20,7 @@ grant SELECT on dbproxy.* to 'dbproxy'@'%' identified by password '*6BB4837EB743
 -- GRANT SELECT, UPDATE, INSERT, DELETE ON loveworld.* TO 'loveworld'@'%' IDENTIFIED BY PASSWORD '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9';
 
 delete from mysql.user where user = '';
+delete from mysql.user where password = '';
 flush privileges;
 
 -- 应用授权案例
