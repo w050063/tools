@@ -6,6 +6,7 @@ redis_version="redis-3.2.10-2.el7.x86_64.rpm"
 
 [ ! -d ${data_dir} ] && mkdir -p ${data_dir}
 
+rpm_install(){
 if [ ! -f ${data_dir}/${redis_version} ] 
 then
     cd ${data_dir} && wget http://www.rpmfind.net/linux/epel/7/x86_64/Packages/r/${redis_version}
@@ -15,5 +16,18 @@ rpm -ivh ${data_dir}/${redis_version}
 sed -i.bak "s/# requirepass foobared/requirepass ${redis_passwd}/g" /etc/redis.conf
 systemctl start redis
 systemctl enable redis
+}
 
-echo "keys *" |redis-cli -h 127.0.0.1 -a "${redis_passwd}"
+yum_install(){
+yum install -y redis
+sed -i.bak "s/# requirepass foobared/requirepass ${redis_passwd}/g" /etc/redis.conf
+systemctl start redis
+systemctl enable redis
+}
+
+main(){
+# rpm_install
+yum_install
+}
+
+main
