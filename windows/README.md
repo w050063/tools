@@ -16,6 +16,10 @@
   # cat getinfo.sh  # macos or linux
   ifconfig >> getinfo.txt
   ```
+- 路由追踪
+  ``` bat
+  # tracert www.baidu.com
+  ```
 ## powershell
 ## windows下常用工具
 ## 参考资料
