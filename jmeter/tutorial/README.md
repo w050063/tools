@@ -32,3 +32,4 @@
 
 ## 参考资料
 - [JMeter数据库压力测试工具学习资料](https://github.com/langpf1/jmeter)
+- [性能测试、资料培训、jmeter+ant+jenkins测试平台搭建](https://github.com/renyixiang/Jmeter)
