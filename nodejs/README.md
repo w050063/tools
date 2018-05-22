@@ -13,3 +13,6 @@ EOF
 source  /etc/profile
 node -v
 ```
+
+## FQA
+- https://www.cnblogs.com/jwentest/p/8259770.html
