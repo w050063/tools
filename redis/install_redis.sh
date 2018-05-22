@@ -13,21 +13,25 @@ then
 fi
 yum install -y jemalloc
 rpm -ivh ${data_dir}/${redis_version}
-sed -i.bak "s/# requirepass foobared/requirepass ${redis_passwd}/g" /etc/redis.conf
-systemctl start redis
-systemctl enable redis
 }
 
 yum_install(){
-yum install -y redis
-sed -i.bak "s/# requirepass foobared/requirepass ${redis_passwd}/g" /etc/redis.conf
-systemctl start redis
-systemctl enable redis
+yum install -y redissup
 }
 
 main(){
-# rpm_install
-yum_install
+if [ ! $# -eq 1 ]
+then
+    echo "Usages: $0 (rpm_install|yum_install)"
+    exit 1
+fi
+install_type=$1
+
+install_type
+
+sed -i.bak "s/# requirepass foobared/requirepass ${redis_passwd}/g" /etc/redis.conf
+systemctl start redis
+systemctl enable redis
 }
 
 main
