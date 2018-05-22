@@ -22,7 +22,18 @@
 ![image](https://github.com/mds1455975151/tools/blob/master/jmeter/tutorial/images/05.png)
 ![image](https://github.com/mds1455975151/tools/blob/master/jmeter/tutorial/images/06.png)
 
+### jtl文件分析
+
 ## FQA
 - 1、界面语句修改
 
    > Options-->Choose Language--> Chinese
+
+
+## FQA
+- 1、界面语句修改
+
+   > Options-->Choose Language--> Chinese
+
+## 参考资料
+- [JMeter数据库压力测试工具学习资料](https://github.com/langpf1/jmeter)
