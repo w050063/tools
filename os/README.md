@@ -43,7 +43,11 @@ EOF
   - htop\top
   
   - nethogs\iperf
-  
+- 显示中文
+``` bash
+# export LANG='zh_CN.UTF-8'
+
+```
 ## Ubuntu
 
 ## Other
