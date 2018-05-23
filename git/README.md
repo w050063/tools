@@ -1,4 +1,8 @@
-###
+# Git知识
+## git-flow
+- https://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html
+- https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow
+
 ## Git 常用指令
 ``` bash
 git status          # 查看修改文件
