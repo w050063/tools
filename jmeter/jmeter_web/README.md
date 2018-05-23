@@ -14,6 +14,8 @@ cd /home/work/report/jmeter_web_report && pip install -r requirements.txt
 cd /home/work/report/jmeter_web_report && uwsgi config.ini
 ```
 ## 展示
+![images](https://github.com/mds1455975151/tools/blob/master/jmeter/jmeter_web/01.png)
+![images](https://github.com/mds1455975151/tools/blob/master/jmeter/jmeter_web/02.png)
 
 ## FQA
 
