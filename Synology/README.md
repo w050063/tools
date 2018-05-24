@@ -3,8 +3,8 @@
 ## 设置权限
 ## 日常管理
 - [磁盘分析报告](https://www.synology.com/zh-cn/knowledgebase/DSM/help/StorageAnalyzer/StorageAnalyzer_desc)
-  ``` bash 
-    报告存放位置(可设置)：/volume1/xxxxx/Storage Analyzer/synoreport
+  ``` text
+    报告存放位置(可设置)：/volume1/xxxxx/Storage Analyzer/synoreport
     显示系统变量
     echo $HOSTNAME
 
@@ -14,4 +14,5 @@
 
     通知设置
   ```
+  
 ## 其他
