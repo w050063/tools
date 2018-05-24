@@ -13,3 +13,6 @@
 
 ## 简历筛选
 1、简历关键字提Hadoop，但是没有提到hdfs、spark、zookeeper、hbase、pig、hive且薪资要求不高
+
+## 职场
+- https://github.com/lietoumai/awesome-offer
