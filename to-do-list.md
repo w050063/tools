@@ -16,3 +16,4 @@
 
 ## 职场
 - https://github.com/lietoumai/awesome-offer
+- [简历](http://cv.ftqq.com/?fr=github#)
