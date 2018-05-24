@@ -18,4 +18,5 @@
 ### OpenLDAP
 ### 数据备份及恢复
 ## 参考资料
+- https://github.com/bravist/gitlab-ci-docker
 
