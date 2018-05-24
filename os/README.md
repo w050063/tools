@@ -46,8 +46,12 @@ EOF
 - 显示中文
 ``` bash
 # export LANG='zh_CN.UTF-8'
-
 ```
+- shell退出
+  - exit 退出脚本
+  - return 退出函数
+  - break 中断整个循环
+  - continue 退出本次循环
 ## Ubuntu
 
 ## Other
