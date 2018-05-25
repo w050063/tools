@@ -20,7 +20,6 @@ loveauth-centos-ssh:
   privileged: true
   volumes:
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    - /opt/docker/loveauth/:/data0/online/loveauth-3180
   ports:
     - '3180:3180'
     - '2080:80'
