@@ -1,32 +1,30 @@
-mysql:
-  image: 'mysql:5.7.17'
+loveauth-mysql:
+  image: 'mysql:5.7.22'
   restart: always
   ports:
-    - '3306:3306'
+    - '23306:3306'
   volumes:
-    - /opt/docker/mysql/mysqlVolume:/var/lib/mysql
+    - /opt/docker/mysql/loveauth-db:/var/lib/mysql
   environment:
     - MYSQL_ROOT_PASSWORD=123456
 
-redis:
-  image: 'redis'
+loveauth-redis:
+  image: 'redis:2.8.23'
   restart: always
   ports:
-    - '6379:6379'
-	
-phpmyadmin:
-  image: phpmyadmin/phpmyadmin
-  restart: always
-  ports:
-    - '9090:80'
-  links:
-    - mysql:db
+    - '26379:6379'
 
-loveauth:
-  image: 'centos-ssh:7.2'
+loveauth-centos-ssh:
+  image: 'centos-ssh:7'
   restart: always
+  privileged: true
+  volumes:
+    - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    - /opt/docker/loveauth/:/data0/online/loveauth-3180
   ports:
     - '3180:3180'
-    - '50000:22'
-  volumes:
-    - /opt/docker/loveauth/:/data0/online/loveauth-3180
+    - '2080:80'
+    - '2022:22'
+  links:
+    - loveauth-mysql:mysql-db
+    - loveauth-redis:redis-db

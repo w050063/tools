@@ -1,20 +1,20 @@
-mysql:
+loveserver-mysql:
   image: 'mysql:5.7.22'
   restart: always
   ports:
     - '13306:3306'
   volumes:
-    - /opt/docker/mysql/mysqlVolume:/var/lib/mysql
+    - /opt/docker/mysql/loveserver-db:/var/lib/mysql
   environment:
      MYSQL_ROOT_PASSWORD: 123456
 
-redis:
+loveserver-redis:
   image: 'redis:2.8.23'
   restart: always
   ports:
     - '16379:6379'
 
-centos-ssh:
+loveserver-centos-ssh:
   image: 'centos-ssh:7'
   restart: always
   privileged: true
@@ -24,5 +24,5 @@ centos-ssh:
     - '1080:80'
     - '1022:22'
   links:
-    - mysql:mysql-db
-    - redis:redis-db
+    - loveserver-mysql:mysql-db
+    - loveserver-redis:redis-db
