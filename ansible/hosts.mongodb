@@ -4,4 +4,5 @@
 192.168.200.102 NODE_NAME=etcd3 NODE_IP="192.168.200.102"
 
 [all:vars]
-ETCD_ENDPOINTS="http://192.168.200.100:2379,http://192.168.200.101:2379,http://192.168.200.102:2379"
+replSetName="rs0"
+admin_ip="192.168.200.100"

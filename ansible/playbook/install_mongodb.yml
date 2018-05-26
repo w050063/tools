@@ -19,7 +19,7 @@
 
   - name: rsync /etc/mongod.conf
     template:
-      src: files/mongod.conf.j2
+      src: files/mongodb/mongod.conf.j2
       dest: /etc/mongod.conf
       owner: root
       group: root
@@ -47,5 +47,3 @@
     debug:
       msg: "login cmd : mongo --host {{ ansible_eth0.ipv4.address }}:27017"
     tags: print_mongo_login_cmd
-
-  
