@@ -25,7 +25,9 @@ wrapper：为了调用CGI程序，还需要一个Fast-CGI的wrapper（wrapper可
 所以，我们首先需要一个wrapper，这个wrapper需要完成的工作：
 
 > 1、通过调用fast-cgi（库）的函数通过socket和Nginx通信（读写socket是fast-cgi内部实现的功能，对wrapper是非透明的） 
+
 > 2、调度thread，进行fork和kill
+
 > 3、和application（php）进行通信
 
 ### 简述php-fpm
