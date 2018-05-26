@@ -12,15 +12,19 @@ apache_install(){
 yum -y install httpd httpd-devel
 cp /etc/httpd/conf/httpd.conf{,.`date +%Y%m%d`}
 sed -i s'/#ServerName www.example.com:80/ServerName 127.0.0.1:80/g' /etc/httpd/conf/httpd.conf
-/etc/init.d/httpd start
-chkconfig httpd on
+systemctl start httpd
+systemctl enable httpd
 }
 
 mysql_install(){
-yum -y install mysql mysql-server mysql-devel
-/etc/init.d/mysqld start
+yum -y install mariadb mariadb-server mariadb-devel mariadb-libs
+systemctl start mariadb
 /usr/bin/mysqladmin -u root password '123456'
-chkconfig mysqld on
+systemctl enable mariadb
+mysql -uroot -p123456 -e "update mysql.user set password='*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' where user='root' and host='127.0.0.1';"
+mysql -uroot -p123456 -e "update mysql.user set password='*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' where user='root' and host='localhost';"
+mysql -uroot -p123456 -e "delete from mysql.user where user = '';"
+mysql -uroot -p123456 -e "delete from mysql.user where password = '';"
 }
 
 php_install(){
@@ -28,7 +32,7 @@ yum -y install php php-mysql gd php-gd gd-devel php-xml php-common php-mbstring 
 }
 
 lamp_test(){
-/etc/init.d/httpd restart
+systemctl restart httpd
 cat>>/var/www/html/index.php<<EOF
 <?php
   phpinfo();
@@ -47,6 +51,10 @@ cat >/var/www/html/mysql.php<<EOF
         }
 ?>
 EOF
+echo -e "
+url: http://{ip}
+url: http://{ip}/mysql.php
+"
 }
 
 main(){
