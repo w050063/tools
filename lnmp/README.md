@@ -17,7 +17,8 @@ Fast-CGI是从CGI发展改进而来的。传统CGI接口方式的主要缺点是
 FastCGI接口方式采用C/S结构，可以将HTTP服务器和脚本解析服务器分开，同时在脚本解析服务器上启动一个或者多个脚本解析守护进程。当HTTP服务器每次遇到动态程序时，可以将其直接交付给Fast-CGI进程来执行，然后将得到的结果返回给浏览器。这种方式可以让HTTP服务器专一地处理静态请求或者将动态脚本服务器的结果返回给客户端，这在很大程度上提高了整个应用系统的性能。
 ### Nginx+Fast-CGI运行原理
 Nginx不支持对外部程序的直接调用或者解析，所有的外部程序（包括PHP）必须通过Fast-CGI接口来调用。Fast-CGI接口在Linux下是socket（这个socket可以是文件socket，也可以是ip socket）。
-　　wrapper：为了调用CGI程序，还需要一个Fast-CGI的wrapper（wrapper可以理解为用于启动另一个程序的程序），这个wrapper绑定在某个固定socket上，如端口或者文件socket。当Nginx将CGI请求发送给这个socket的时候，通过Fast-CGI接口，wrapper接收到请求，然后Fork（派生）出一个新的线程，这个线程调用解释器或者外部程序处理脚本并读取返回数据；接着，wrapper再将返回的数据通过Fast-CGI接口，沿着固定的socket传递给Nginx；最后，Nginx将返回的数据（html页面或者图片）发送给客户端。这就是Nginx+Fast-CGI的整个运作过程。
+
+wrapper：为了调用CGI程序，还需要一个Fast-CGI的wrapper（wrapper可以理解为用于启动另一个程序的程序），这个wrapper绑定在某个固定socket上，如端口或者文件socket。当Nginx将CGI请求发送给这个socket的时候，通过Fast-CGI接口，wrapper接收到请求，然后Fork（派生）出一个新的线程，这个线程调用解释器或者外部程序处理脚本并读取返回数据；接着，wrapper再将返回的数据通过Fast-CGI接口，沿着固定的socket传递给Nginx；最后，Nginx将返回的数据（html页面或者图片）发送给客户端。这就是Nginx+Fast-CGI的整个运作过程。
   
 ![images](https://github.com/mds1455975151/tools/blob/master/lnmp/images/02.png)
 
