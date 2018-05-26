@@ -2,6 +2,7 @@
 ## 常用文本编辑器
 - notepad++
 - atom
+- vim
 
 ## Atom
 ### 安装软件包
