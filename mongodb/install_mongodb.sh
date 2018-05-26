@@ -7,6 +7,7 @@ yum install -y mongodb-org-3.6.4 mongodb-org-server-3.6.4 mongodb-org-shell-3.6.
 #chkconfig mongod on
 systemctl start mongod.service
 systemctl enable mongod.service
+# mongo --host 127.0.0.1:27017
 }
 
 main(){
