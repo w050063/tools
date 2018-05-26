@@ -24,6 +24,7 @@
       owner: root
       group: root
       mode: 0664
+    notify: restart mongod
     tags: rsync_mongodb_conf
 
   - name: Make sure a service is running
@@ -46,12 +47,10 @@
       owner: root
       group: root
       mode: 0664
-    when:
-       ansible_ssh_ip == "{{ admin_ip }}"
     tags: rsync_mongodb_replica_conf
   
   - name: mongo shell, run rs.initiate()
-    shell: mongo localhost:27017/test myjsfile.js
+    shell: mongo localhost:27017 ~/mongod_replica_conf.js
     tags: run_mongodb_initiate
 
   - name: mongo shell Customize the Prompt
@@ -63,4 +62,6 @@
       msg: "login cmd : mongo --host {{ ansible_eth0.ipv4.address }}:27017"
     tags: print_mongo_login_cmd
 
-  
+  handlers:
+    - name: restart mongod
+      service: name=mongod enabled=yes state=restarted
