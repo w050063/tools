@@ -7,5 +7,5 @@ host = db.serverStatus().host;
 //             return db+"@"+host+"$ ";
 //         }
 prompt = function() {
-          return db+"@"+host+"$ "+"Uptime:"+db.serverStatus().uptime+" Documents:"+db.stats().objects+" > ";
+          return host+"@"+db+" "+"Uptime:"+db.serverStatus().uptime+" Documents:"+db.stats().objects+" > ";
         }
