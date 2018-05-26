@@ -10,27 +10,32 @@ RES='\E[0m'
 
 nginx_install(){
 yum -y install nginx
-/etc/init.d/nginx start
-chkconfig nginx on
+systemctl start nginx
+systemctl enable nginx
 }
 
 mysql_install(){
-yum -y install mysql mysql-server mysql-devel
-/etc/init.d/mysqld start
+yum -y install mariadb mariadb-server mariadb-devel mariadb-libs
+systemctl start mariadb
 /usr/bin/mysqladmin -u root password '123456'
-chkconfig mysqld on
+systemctl enable mariadb
+mysql -uroot -p123456 -e "update mysql.user set password='*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' where user='root' and host='127.0.0.1';"
+mysql -uroot -p123456 -e "update mysql.user set password='*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9' where user='root' and host='localhost';"
+mysql -uroot -p123456 -e "delete from mysql.user where user = '';"
+mysql -uroot -p123456 -e "delete from mysql.user where password = '';"
 }
 
 php_install(){
 yum install -y php php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt libmcrypt-devel php-fpm
-/etc/init.d/php-fpm start
-chkconfig php-fpm on
+systemctl start php-fpm
+systemctl enable php-fpm
 
 #nginx setup
-cp /etc/nginx/conf.d/default.conf{,.`date +%Y%m%d`}
-sed -i '17s/index.html/index.php index.html/g' /etc/nginx/conf.d/default.conf
-sed -i '39,46s/#//g' /etc/nginx/conf.d/default.conf
-sed -i '44s/\/scripts/$document_root/g' /etc/nginx/conf.d/default.conf
+cp /etc/nginx/nginx.conf{,.`date +%Y%m%d`}
+\cp /etc/nginx/nginx.conf.default /etc/nginx/nginx.conf
+sed -i '45s/index.html/index.php index.html/g' /etc/nginx/nginx.conf
+sed -i '64,71s/#//g' /etc/nginx/nginx.conf
+sed -i '69s/\/scripts/$document_root/g' /etc/nginx/nginx.conf
 
 #php-fpm setup
 cp /etc/php-fpm.d/www.conf{,.`date +%Y%m%d`}
@@ -40,7 +45,7 @@ sed -i 's/group = apache/group = nginx/g' /etc/php-fpm.d/www.conf
 }
 
 lnmp_test(){
-/etc/init.d/nginx restart
+systemctl restart nginx
 
 cat>>/usr/share/nginx/html/index.php<<EOF
 <?php
