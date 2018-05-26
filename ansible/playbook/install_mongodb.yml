@@ -40,12 +40,7 @@
     tags: mongod_service_start
 
   - name: mongo shell Customize the Prompt
-    copy:
-      src: files/.mongorc.js
-      dest: ~/.mongorc.js
-      owner: root
-      group: root
-      mode: 0664
+    get_url: url=https://raw.githubusercontent.com/mds1455975151/tools/master/mongodb/.mongorc.js dest=~/.mongorc.js
     tags: rsync_mongodb_customize_prompt_conf
 
   - name: print mongo shell login 
