@@ -11,5 +11,6 @@
   - name: clean files
     file: name={{ item }} state=absent
     with_items:
-    - "/var/lib/etcd"
-    - "/etc/etcd/"
+      - "/var/lib/etcd"
+      - "/etc/etcd/"
+    tags: clean_etcd_files
