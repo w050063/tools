@@ -1,4 +1,7 @@
 # 操作系统相关问题
+- [Linux基础](#)
+  - [CentOS系统安装](https://github.com/mds1455975151/tools/blob/master/os/CentOS.md)
+  
 ## CentOS
 - 关闭ipv6协议
 - 禁ping和开启ping操作
