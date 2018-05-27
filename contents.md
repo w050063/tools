@@ -1,6 +1,6 @@
 - [前言](https://github.com/mds1455975151/tools/blob/master/README.md)
 - [Linux篇](#)
-  - [Linux基础](#)
+  - [Linux基础](https://github.com/mds1455975151/tools/blob/master/os/README.md)
   - [bash基础](https://github.com/mds1455975151/tools/tree/master/shell)
   - [os](https://github.com/mds1455975151/tools/tree/master/os)
 - [Windows篇](#)
