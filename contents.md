@@ -2,3 +2,11 @@
 - [Linux基础](#)
   - [os](https://github.com/mds1455975151/tools/tree/master/os)
 - [公有云](#)
+- [自动化运维管理]
+  - [DevOps](#)
+  - [Jenkins](https://github.com/mds1455975151/tools/tree/master/jenkins)
+  - [GitLab](https://github.com/mds1455975151/tools/tree/master/gitlab)
+  - [Ansible](https://github.com/mds1455975151/tools/tree/master/ansible)
+  - [SaltStack](https://github.com/mds1455975151/tools/tree/master/saltstack)
+- [数据库管理]
+- [其他](#)
