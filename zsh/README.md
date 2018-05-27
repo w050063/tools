@@ -21,3 +21,10 @@ Shell changed.
 
 zsh 5.1.1 + 才可以安装ohmyz
 ```
+# FQA
+- 类似工具
+  官网：http://fishshell.com/
+  官网文档：http://fishshell.com/docs/current/index.html
+
+# 参考资料
+
