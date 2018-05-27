@@ -3,14 +3,14 @@ saltstack
 
 Install
 -------
-    git clone https://github.com/oscm/saltstack.git
-    ln -s saltstack/salt /srv/salt
-    ln -s saltstack/pillar /srv/pillar
+    git clone https://github.com/mds1455975151/tools.git
+    ln -s toos/saltstack/salt /srv/salt
+    ln -s toos/saltstack/pillar /srv/pillar
 
 Demo
 ----
     salt '*' state.sls httpd
-    
+
 - - -
 
 Node
@@ -23,7 +23,7 @@ Node
     sed -i '12,12imaster: salt.example.org' /etc/salt/minion
 
     cat >> /etc/hosts <<'EOF'
-    
+
     192.168.2.1    salt.example.org
     EOF
 
