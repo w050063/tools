@@ -23,6 +23,10 @@
 - 安装完毕基础配置
 
 # CentOS 7.x安装
+# CentOS 6.x vs CentOS 7.x 差异
+- 服务管理方式
+- 网卡命名
+  > net.ifnames=0 biosdevname=0
 # U盘启动盘制作
 # FQA
 # 参考资料
