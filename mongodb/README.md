@@ -11,26 +11,24 @@
 ansible-playbook host-init-qq.yml -i ../hosts.mongodb -l mongodb
 ansible-playbook install_mongodb_replica_set.yml -i ../hosts.mongodb -l mongodb
 
-rs.status()
-rs.add("192.168.1.4:27017")
+
 rs.isMaster()
 
-6、在主节点上创建数据，从节点是否获取到
-testrs0:PRIMARY> use testdb
-switched to db testdb 
-testrs0:PRIMARY> db.testcoll.insert({Name: "test",Age: 50,Gender: "F"})
-WriteResult({ "nInserted" : 1 })
-testrs0:PRIMARY> db.testcoll.find()
-{ "_id" : ObjectId("55b9945b92ad0ab98483695e"), "Name" : "test", "Age" : 60, "Gender" : "F" }
-{ "_id" : ObjectId("55b994ce92ad0ab98483695f"), "Name" : "test", "Age" : 50, "Gender" : "F" }
 
-在从节点上查询，是不可以直接查询，要使用一个命令rs.slave()把自己提升为从节点
-testrs0:SECONDARY> rs.slaveOk()
-testrs0:SECONDARY> use testdb;
-switched to db testdb
-testrs0:SECONDARY> db.testcoll.find()
-{ "_id" : ObjectId("55b9945b92ad0ab98483695e"), "Name" : "test", "Age" : 60, "Gender" : "F" }
-{ "_id" : ObjectId("55b994ce92ad0ab98483695f"), "Name" : "test", "Age" : 50, "Gender" : "F" }
+rs.add()       为复制集新增节点。    
+rs.addArb()    为复制集新增一个 arbiter    
+rs.conf()      返回复制集配置信息    
+rs.freeze()    防止当前节点在一段时间内选举成为主节点。     
+rs.help()      返回 replica set 的命令帮助     
+rs.initiate()    初始化一个新的复制集。     
+rs.printReplicationInfo()         以主节点的视角返回复制的状态报告。     
+rs.printSlaveReplicationInfo()    以从节点的视角返回复制状态报告。     
+rs.reconfig()    通过重新应用复制集配置来为复制集更新配置。     
+rs.remove()      从复制集中移除一个节点。     
+rs.slaveOk()     为当前的连接设置 slaveOk 。不推荐使用。使用 readPref() 和 Mongo.setReadPref() 来设置 read preference 。     
+rs.status()      返回复制集状态信息。    
+rs.stepDown()    让当前的 primary 变为从节点并触发 election 。     
+rs.syncFrom()    设置复制集节点从哪个节点处同步数据，将会覆盖默认选取逻辑。
  
 ```
 # FQA
