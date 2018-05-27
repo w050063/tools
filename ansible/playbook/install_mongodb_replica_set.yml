@@ -59,7 +59,7 @@
 
   - name: print mongo shell login 
     debug:
-      msg: "login cmd : mongo --host {{ ansible_eth0.ipv4.address }}:27017"
+      msg: "login cmd : mongo --host {{ ansible_eth1.ipv4.address }}:27017"
     tags: print_mongo_login_cmd
 
   handlers:
