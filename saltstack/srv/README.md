@@ -10,7 +10,7 @@ Install
 
 Demo
 ----
-    salt '*' state.sls httpd
+    salt '*' state.sls init.init-all
 
 - - -
 
