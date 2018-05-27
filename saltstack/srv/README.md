@@ -3,9 +3,10 @@ saltstack
 
 Install
 -------
+    cd /root
     git clone https://github.com/mds1455975151/tools.git
-    ln -s toos/saltstack/salt /srv/salt
-    ln -s toos/saltstack/pillar /srv/pillar
+    ln -s /root/tools/saltstack/srv/salt /srv/salt
+    ln -s /root/tools/saltstack/srv/pillar /srv/pillar
 
 Demo
 ----
