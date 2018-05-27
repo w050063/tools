@@ -23,6 +23,17 @@
 ## 其他补充说明
 - 硬盘分区说明
 - 软件包选择
+  ``` text
+  Base System
+    Base
+    Compatibility libraries
+    Debugging Tools
+    Dial-up Networking Support
+    Hardware monitoring utilities
+    Performance Tools
+  Development
+    Development tools
+  ```
 - 安装完毕基础配置
 
 # CentOS 7.x安装
