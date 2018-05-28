@@ -1,3 +1,6 @@
+# Confluence
+官网地址：https://www.atlassian.com/software/confluence
+
+# 其他产品
 - Dokuwiki：https://www.dokuwiki.org/dokuwiki#
-- Confluence：http://confluence.fangwai.net/dashboard.action;jsessionid=B384392A0E1BF0B4CCAB8B22D67848D2
 - mediawiki
