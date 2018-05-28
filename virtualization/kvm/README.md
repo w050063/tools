@@ -19,7 +19,7 @@ virt-install --name window10 --ram 8192 --cdrom=/data0/cn_windows_10_business_ed
 
 ## CentOS 7.x 安装
 ``` bash
-qemu-img create -f raw /data0/kvm/centos7-kvm.raw 50G 
+qemu-img create -f raw /data0/kvm/centos7-kvm.raw 50G
 virt-install --name centos-7.4-01 --ram 2048 --cdrom=/data0/CentOS-7-x86_64-DVD-1804.iso --boot cdrom --network bridge=br0 --graphics vnc,listen=0.0.0.0 --disk path=/data0/kvm/centos7-kvm.raw --noautoconsole --os-type=linux
 ```
 - 设置IP地址及DNS
@@ -44,7 +44,7 @@ virsh dominfo win7
 ``` bash
 virsh shutdown win7
 virsh edit win7
-virsh create /etc/libvirt/qemu/win7.xml 
+virsh create /etc/libvirt/qemu/win7.xml
 ```
 ### 备份及还原
 ``` bash
@@ -58,10 +58,16 @@ virsh autostart win7
 ```
 
 ### 删除虚拟机
-``` bash 
+``` bash
 virsh list --all
 virsh destroy window10
 virsh undefine window10
 ```
 # FQA
+- web管理相关
+  - https://github.com/welliamcao/VManagePlatform
+  - https://github.com/kimchi-project/kimchi
+- 日常管理
+  - https://github.com/xiaoli110/kvm_vm_setup
+  
 # 参考资料
