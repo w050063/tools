@@ -69,5 +69,6 @@ virsh undefine window10
   - https://github.com/kimchi-project/kimchi
 - 日常管理
   - https://github.com/xiaoli110/kvm_vm_setup
-  
+  - https://github.com/opengers
+
 # 参考资料
