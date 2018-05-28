@@ -22,8 +22,33 @@ virt-install --name window10 --ram 8192 --cdrom=/data0/cn_windows_10_business_ed
 qemu-img create -f raw /data0/kvm/centos7-kvm.raw 50G 
 virt-install --name centos-7.4-01 --ram 2048 --cdrom=/data0/CentOS-7-x86_64-DVD-1804.iso --boot cdrom --network bridge=br0 --graphics vnc,listen=0.0.0.0 --disk path=/data0/kvm/centos7-kvm.raw --noautoconsole --os-type=linux
 ```
+- 设置IP地址及DNS
+- 设置远程桌面
+- 调整配置
 
 ## 日常管理工具
+### 日常管理命令
+
+### 调整配置
+- 调整内存可以动态实现，不用关机
+``` bash
+virsh dominfo win7
+virsh setmem win7 524288
+virsh dominfo win7
+```
+- 增加CPU需要关机
+``` bash
+virsh shutdown win7
+virsh edit win7
+virsh create /etc/libvirt/qemu/win7.xml 
+```
+### 备份及还原
+``` bash
+virsh list --all
+virsh save --bypass-cache win7 /data0/kvm/win7-`date +%Y%m%d`.img --running
+
+```
+### 设置开机启动
 ``` bash
 virsh list --all
 
@@ -31,6 +56,12 @@ virsh destroy window10
 virsh undefine window10
 
 virsh start windows20031
+
+
+virsh reboot win7
+
+
+virsh autostart win7
 ```
 # FQA
 # 参考资料
