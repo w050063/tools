@@ -18,5 +18,19 @@ virt-install --name window10 --ram 8192 --cdrom=/data0/cn_windows_10_business_ed
 > 检查系统BIOS设置，开启CPU虚拟化设置
 
 ## CentOS 7.x 安装
+``` bash
+qemu-img create -f raw /data0/kvm/centos7-kvm.raw 50G 
+virt-install --name centos-7.4-01 --ram 2048 --cdrom=/data0/CentOS-7-x86_64-DVD-1804.iso --boot cdrom --network bridge=br0 --graphics vnc,listen=0.0.0.0 --disk path=/data0/kvm/centos7-kvm.raw --noautoconsole --os-type=linux
+```
+
+## 日常管理工具
+``` bash
+virsh list --all
+
+virsh destroy window10
+virsh undefine window10
+
+virsh start windows20031
+```
 # FQA
 # 参考资料
