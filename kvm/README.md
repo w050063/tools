@@ -28,6 +28,10 @@ virt-install --name centos-7.4-01 --ram 2048 --cdrom=/data0/CentOS-7-x86_64-DVD-
 
 ## 日常管理工具
 ### 日常管理命令
+``` bash
+virsh start windows20031
+virsh reboot win7
+```
 
 ### 调整配置
 - 调整内存可以动态实现，不用关机
@@ -50,18 +54,14 @@ virsh save --bypass-cache win7 /data0/kvm/win7-`date +%Y%m%d`.img --running
 ```
 ### 设置开机启动
 ``` bash
-virsh list --all
+virsh autostart win7
+```
 
+### 删除虚拟机
+``` bash 
+virsh list --all
 virsh destroy window10
 virsh undefine window10
-
-virsh start windows20031
-
-
-virsh reboot win7
-
-
-virsh autostart win7
 ```
 # FQA
 # 参考资料
