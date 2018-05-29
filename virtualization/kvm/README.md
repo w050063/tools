@@ -34,6 +34,11 @@ virsh reboot win7
 virsh shutdown win7  # 正常关机
 virsh destroy window10 # 暴力关机
 ```
+如果不能正常关机进行设置
+``` bash
+[root@kvm_client_00 ~]# yum install acpid -y
+[root@kvm_client_00 ~]# /etc/init.d/acpid restart       //重新启动acpic服务，安装后默认会加入到开机启动的
+```
 
 ### 调整配置
 - 调整内存可以动态实现，不用关机
