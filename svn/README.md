@@ -17,4 +17,5 @@
 ``` bash 
 svn move -m "Move a dir" svn://xxx/dongsheng/test1/test_dir svn://xxx/dongsheng/test2/test_dir
 svn move -m "Move a dir" file:///home/svn-root/dongsheng/test2/test_dir file:///home/svn-root/dongsheng/test1/test_dir
+svn mkdir -m 'make a new dir' file:///home/svn-root/dongsheng/script
 ```
