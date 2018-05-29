@@ -38,7 +38,8 @@ NO_ZERO_IN_DATE,NO_ZERO_DATE
 A timestamp. The range is '1970-01-01 00:00:01' UTC to '2038-01-19 03:14:07' UTC.
 https://dev.mysql.com/doc/refman/5.7/en/date-and-time-type-overview.html
 ```
-
+- mysql_errno: 1044, mysql_error: Access denied for user 'root'@'%' to databas
+https://blog.csdn.net/aosica321/article/details/53433837
 ### SQL
 ### 分库分表
 ## 参考资料
