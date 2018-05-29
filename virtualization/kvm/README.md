@@ -31,6 +31,8 @@ virt-install --name centos-7.4-01 --ram 2048 --cdrom=/data0/CentOS-7-x86_64-DVD-
 ``` bash
 virsh start windows20031
 virsh reboot win7
+virsh shutdown win7  # 正常关机
+virsh destroy window10 # 暴力关机
 ```
 
 ### 调整配置
