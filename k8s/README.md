@@ -5,3 +5,4 @@
 
 # 部署
 - https://github.com/wise2c-devops/playbook
+- https://github.com/gjmzj/kubeasz
