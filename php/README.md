@@ -5,6 +5,11 @@
 ## 常用架构
 - LNMP(推荐)
 - LAMP
+## 常见框架
+- Laravel
+- Yaf
+- ThinkPHP 
+
 ## 常用模块
 - opcache
 
