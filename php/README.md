@@ -6,7 +6,7 @@
 - LNMP(推荐)
 - LAMP
 ## 常见框架
-- Laravel
+- [Laravel](https://www.golaravel.com/)
 - Yaf
 - ThinkPHP 
 
