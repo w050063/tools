@@ -26,4 +26,5 @@ svn设计是子目录继承父级目录权限，所有没有很好的办法解�
 svn move -m "Move a dir" svn://xxx/dongsheng/test1/test_dir svn://xxx/dongsheng/test2/test_dir
 svn move -m "Move a dir" file:///home/svn-root/dongsheng/test2/test_dir file:///home/svn-root/dongsheng/test1/test_dir
 svn mkdir -m 'make a new dir' file:///home/svn-root/dongsheng/script
+svn list file:///home/svn-root/dongsheng/script
 ```
