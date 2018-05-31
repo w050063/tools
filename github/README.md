@@ -10,6 +10,8 @@
 
 ## Travis-CI
 官网：https://www.travis-ci.org/
+官网文档：https://docs.travis-ci.com/
+GitHub地址：https://github.com/travis-ci
 
 ##
 https://resume.github.io/?mds1455975151

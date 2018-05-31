@@ -44,4 +44,7 @@
   > net.ifnames=0 biosdevname=0
 # U盘启动盘制作
 # FQA
+## 1、获取公网IP地址接口
+- http://pv.sohu.com/cityjson?ie=utf-8
+
 # 参考资料
