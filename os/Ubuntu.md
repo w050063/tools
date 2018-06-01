@@ -20,6 +20,7 @@ cat >>/etc/ssh/sshd_config<<EOF
 PermitRootLogin yes
 EOF
 service restart sshd
+echo root:123456|chpasswd
 ```
 
 # 仓库配置
