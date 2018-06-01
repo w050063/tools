@@ -7,9 +7,12 @@ apt-cache search php
 apt-get install php
 /etc/apt/sources.list
 
+docker pull ubuntu:14.04
 
 
 # 常用软件安装
+## PHP环境
+
 # FQA
 # 参考资料
 
