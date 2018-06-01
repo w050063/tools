@@ -25,4 +25,9 @@
   yum remove -y php-mysql
   yum install -y php-mysqlnd
   ```
+- 善用php -i排除问题
+  ``` bash
+  php.ini 配置修改完成，立即生效，如果发现不生效的情况，通过以下命令进行排查，可以存在多个php.ini文件
+  php -i | grep "php.ini"
+  ```
 ## 参考资料
