@@ -1,6 +1,27 @@
 # Ubuntu概述
 - Docker hub地址：https://hub.docker.com/_/ubuntu/
 
+# Docker环境设置
+``` bash
+docker pull ubuntu:18.04|14.04
+docker run --name ubuntu-os-01 -dit -p 1022:22 ubuntu
+docker exec -it ubuntu-os-01 bash -l
+```
+
+# ssh设置
+默认没有启用ssh
+``` bash
+apt-get update
+apt-get install -y openssh-server
+service ssh start
+
+apt-get install -y vim
+cat >>/etc/ssh/sshd_config<<EOF
+PermitRootLogin yes
+EOF
+service restart sshd
+```
+
 # 仓库配置
 ## apt-get使用
 apt-cache search php
