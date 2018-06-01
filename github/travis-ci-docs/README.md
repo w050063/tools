@@ -1,3 +1,9 @@
+# Travis-CI
+- 官网：https://www.travis-ci.org/
+- 官网文档：https://docs.travis-ci.com/
+- GitHub地址：https://github.com/travis-ci
+- Docker hub地址：https://hub.docker.com/u/travisci/
+
 # Getting Started 入门
 - [Getting Started 入门](https://github.com/mds1455975151/tools/blob/master/github/travis-ci-docs/build-stages.md)
 - [Core Concepts for Beginners 初学者核心概念](https://github.com/mds1455975151/tools/blob/master/github/travis-ci-docs/build-stages.md)
