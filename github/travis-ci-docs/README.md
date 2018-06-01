@@ -3,6 +3,7 @@
 - 官网文档：https://docs.travis-ci.com/
 - GitHub地址：https://github.com/travis-ci
 - Docker hub地址：https://hub.docker.com/u/travisci/
+- Travis CI client：https://rubygems.org/gems/travis
 
 # Getting Started 入门
 - [Getting Started 入门](https://github.com/mds1455975151/tools/blob/master/github/travis-ci-docs/build-stages.md)
