@@ -104,3 +104,4 @@ unset http_proxy
 ```
 ## 参考资料
 - https://www.cnblogs.com/thatsit/p/6481820.html?utm_source=itdadao&utm_medium=referral
+- https://github.com/teddysun/shadowsocks_install
