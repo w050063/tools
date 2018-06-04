@@ -20,6 +20,21 @@ svn设计是子目录继承父级目录权限，所有没有很好的办法解�
 方法2：父级目录授权，dir-1授权给user1,然后其他目录再去掉user1权限
 方法1用户体验不好，方法2二级目录太多管理员不好管理，根据情况自行选择。
 ```
+- 2、Linux环境下查看svn目录结构
+``` bash
+# cat svn_list_dir.sh
+#!/bin/env bash
+tag_level1_dir=`svn list file:///home/svn-root/proj4/`
+for i in $tag_level1_dir
+do
+    tag_level2_dir=`svn list file:///home/svn-root/proj4/$i`
+    echo $i
+    for j in $tag_level2_dir
+    do
+        echo "------/$i$j"
+    done
+done
+```
 ## SVN目录结构调整
 目录结构调整，在不checkout所有代码的情况下如何快速调整
 ``` bash 
