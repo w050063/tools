@@ -1,6 +1,15 @@
 # OpenVPN资料总结
 ## OpenVPN安装部署
 - https://github.com/Nyr/openvpn-install
+## FQA
+### 各类平台客户端
+- Windows：openvpn-install-2.4.6-I602.exe
+- Android：OpenVPN Connect – Fast Safe SSL VPN Client_v3.0.5_apkpure.com.apk
+- Mac OS：Tunnelblick_3.7.5a_build_5011.dmg
+- iPhone：
+### 最佳实践
+- 证书等相关内容统一都加入到.ovpn配置文件中，不必存储多个文件
+- 有可能最好准备2个配置文件使用不同线路(电信\联通)或者IP(主\备)的配置信息,进行容灾让客户端进行选择
 
 ## OpenVPN配置参数说明
 ``` bash
