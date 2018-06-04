@@ -10,6 +10,8 @@
   - 通过ssh反向隧道及nginx反向代理实现外网控制内网
     - https://blog.csdn.net/fg607/article/details/52123833
     - https://www.cnblogs.com/makefile/p/5410722.html
-   
+## 安卓手机连接服务器
+- juicessh
+
 ## 参考资料
 - https://github.com/StreisandEffect/streisand
