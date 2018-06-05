@@ -8,6 +8,27 @@ sh install_mysql.sh
 ## MySQL备份还原
 ## MySQL监控及故障处理
 ## MySQL批量管理
+- 如何高效的插入数据库100w条数据(大概300~400M数据)
+  - 脚本循环+insert
+  ``` bash
+  #!/bin/env bash
+
+  text=",重复的sql内容"
+  sql="INSERT INTO xxx.xxx(xx, xx, xx, xx, xx, xx, xx, xx, xx, xx) VALUES 重复的sql内容"
+  end=";"
+  sum=$sql
+  for i in `seq 1`
+  do
+      for j in `seq 99`
+      do
+          sum=$sum$text
+      done
+      mysql -u xxx -h xxx -p'xxx' -e "$sum$end"
+  done
+  注意：修改第一个循环调整插入多少次，修改第二个循环调整每次sql拼接内容条数，看情况调整sql进行插入
+  ```
+  - 存储过程
+  - 造数据+load data
 ## FQA
 - mysql -P 指定端口不起作用
 ``` text
