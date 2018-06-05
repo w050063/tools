@@ -8,7 +8,7 @@ sh install_mysql.sh
 ## MySQL备份还原
 ## MySQL监控及故障处理
 ## MySQL批量管理
-- 如何高效的插入数据库100w条数据(大概300~400M数据)
+- 如何高效的插入数据库100w条数据(大概300~400M数据具体和存储数据类型相关)
   - 脚本循环+insert
   ``` bash
   #!/bin/env bash
