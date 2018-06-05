@@ -7,7 +7,44 @@ Manager DN-------------cn=Manager,dc=worldoflove,dc=cn
 Manager Password-------123456
 最后测试LDAP测试，使用madongsheng:123456即可
 ```
+## LDAP + self-service-password
+``` bash
+ldap部分
+$ldap_url = "ldap://127.0.0.1";
+$ldap_starttls = false;
+$ldap_binddn = "cn=Manager,dc=worldoflove,dc=cn";
+$ldap_bindpw = "xxx";
+$ldap_base = "dc=worldoflove,dc=cn";
+$ldap_login_attribute = "uid";
+$ldap_fullname_attribute = "cn";
+$ldap_filter = "(&(objectClass=posixAccount)($ldap_login_attribute={login}))";
 
+邮件部分
+$mail_attribute = "mail";
+$mail_address_use_ldap = true;
+$mail_from = "1455975151@qq.com";
+$mail_from_name = "Self Service Password";
+$mail_signature = "";
+$notify_on_change = false;
+$mail_sendmailpath = '/usr/sbin/sendmail';
+$mail_protocol = 'smtp';
+$mail_smtp_debug = 0;
+$mail_debug_format = 'html';
+$mail_smtp_host = 'smtp.exmail.qq.com';
+$mail_smtp_auth = true;
+$mail_smtp_user = '1455975151@qq.com';
+$mail_smtp_pass = 'xxx';
+$mail_smtp_port = 25;
+$mail_smtp_timeout = 30;
+$mail_smtp_keepalive = false;
+$mail_smtp_secure = 'tls';
+$mail_smtp_autotls = true;
+$mail_contenttype = 'text/plain';
+$mail_wordwrap = 0;
+$mail_charset = 'utf-8';
+$mail_priority = 3;
+$mail_newline = PHP_EOL;
+```
 ## LDAP + gitlab
 官网资料：https://docs.gitlab.com/ee/administration/auth/ldap.html
 
