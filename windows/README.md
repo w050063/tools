@@ -59,6 +59,8 @@ USB Type-C接口是USB接口的一种类型。USB接口目前主要有四个接�
 - 3、Micro-B，这种接口都见过，就是手机充电器的接口。
 - 4、USB Type-C，这一种就是以后USB接口的发展趋势。
 
+![image](https://github.com/mds1455975151/tools/blob/master/windows/images/05.png) 
+
 USB Type-C最明显的特点就是支持正反面盲插
 - 1、支持大电流和大电压充电，有助于提高充电速度，可以说Type-C接口就是为快充技术而生的，以后针对USB Type-C接口的快充技术肯定越来越多。
 - 2、支持双向供电，使用USB Typc-C接口既可给设备自身充电，也可给外接设备供电。（这样我们就可以实现串联充电，用一根USB Typc-C接口的线串联不同的设备即可）。
