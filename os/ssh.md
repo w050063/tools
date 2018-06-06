@@ -10,6 +10,8 @@
   - 通过ssh反向隧道及nginx反向代理实现外网控制内网
     - https://blog.csdn.net/fg607/article/details/52123833
     - https://www.cnblogs.com/makefile/p/5410722.html
+    - 案例：ssh -fN -R 1.1.1.1:50000:2.2.2.2:80 root@1.1.1.1 -p 22  （1.1.1.1公网IP，2.2.2.2内外IP） 
+    
 ## 安卓手机连接服务器
 - juicessh
 
