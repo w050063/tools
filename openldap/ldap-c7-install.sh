@@ -1,5 +1,5 @@
-[root@openldap ~]# cat /etc/redhat-release 
-CentOS Linux release 7.2.1511 (Core) 
+[root@openldap ~]# cat /etc/redhat-release
+CentOS Linux release 7.2.1511 (Core)
 [root@openldap ~]# uname -r
 3.10.0-327.el7.x86_64
 [root@openldap ~]# uname -m
@@ -13,19 +13,19 @@ sed -i.bak 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 
-yum -y install openldap-servers openldap-clients migrationtools openldap 
-cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG 
+yum -y install openldap-servers openldap-clients migrationtools openldap
+cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
 chown ldap:ldap /var/lib/ldap/DB_CONFIG
-systemctl start slapd && systemctl enable slapd 
+systemctl start slapd && systemctl enable slapd
 
 sed -i 's/my-domain/worldoflove/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
-sed -i 's/com/cn/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif  
+sed -i 's/com/cn/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
 sed -i '/olcRootDN/aolcRootPW: 123456' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
 sed -i '/olcRootPW/aolcAccess: {1}to * by dn.base="cn=Manager,dc=worldoflove,dc=cn" write by self write by * read' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
 sed -i '/olcRootPW/aolcAccess: {0}to attrs=userPassword by self write by dn.base="cn=Manager,dc=worldoflove,dc=cn" write by anonymous auth by * none' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif
 
-sed -i 's/my-domain/worldoflove/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{1\}monitor.ldif               
-sed -i 's/com/cn/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{1\}monitor.ldif               
+sed -i 's/my-domain/worldoflove/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{1\}monitor.ldif
+sed -i 's/com/cn/g' /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{1\}monitor.ldif
 
 slaptest -u
 grep -q "BASE    dc=worldoflove,dc=cn" /etc/openldap/ldap.conf
@@ -52,22 +52,22 @@ ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f pmi.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f ppolicy.ldif
 
 cd /usr/share/migrationtools/
-sed -i 's/Group/Groups/g' migrate_common.ph 
-sed -i 's/$DEFAULT_MAIL_DOMAIN = "padl.com";/$DEFAULT_MAIL_DOMAIN = "worldoflove.cn";/g' migrate_common.ph 
-sed -i 's/$DEFAULT_BASE = "dc=padl,dc=com";/$DEFAULT_BASE = "dc=worldoflove,dc=cn";/g' migrate_common.ph 
+sed -i 's/Group/Groups/g' migrate_common.ph
+sed -i 's/$DEFAULT_MAIL_DOMAIN = "padl.com";/$DEFAULT_MAIL_DOMAIN = "worldoflove.cn";/g' migrate_common.ph
+sed -i 's/$DEFAULT_BASE = "dc=padl,dc=com";/$DEFAULT_BASE = "dc=worldoflove,dc=cn";/g' migrate_common.ph
 
 /usr/share/migrationtools/migrate_base.pl > /root/base.ldif
- 
+
 ldapadd -x -W -D "cn=Manager,dc=worldoflove,dc=cn" -f /root/base.ldif
- 
+
 useradd madongsheng
 useradd kongxiangyi
 echo '123456' | passwd --stdin madongsheng
 echo '123456' | passwd --stdin kongxiangyi
- 
+
 getent passwd | tail -n 2 > /root/users
 getent shadow | tail -n 2 > /root/shadow
-getent group | tail -n 2 > /root/groups 
+getent group | tail -n 2 > /root/groups
 
 sed -i.bak 's#/etc/shadow#/root/shadow#g' migrate_passwd.pl
 /usr/share/migrationtools/migrate_passwd.pl /root/users > /root/users.ldif
@@ -84,11 +84,32 @@ slappasswd -s 123456
 # 查看用户信息
 ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=*)"
 
+ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=*)" -w 11234
+
+# 查看用户信息的某几个字段
+ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=*)" uid uidNumber
+
 # 查看组信息
 ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(cn=madongsheng)"
 
 #查看指定用户信息
 ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -b "dc=worldoflove,dc=cn" "(uid=madongsheng)"
+
+ldapmodify
+- https://linux.die.net/man/1/ldapmodify
+- https://docs.oracle.com/cd/E19957-01/820-3204/6neolgefh/index.html#bcacx
+# more a.txt
+
+dn: uid=xxx,ou=People,dc=worldoflove,dc=cn
+changetype: modify
+add: mail
+mail: aa@xx
+-
+add: mobile
+mobile: 00000000000
+-
+
+ldapmodify -W -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -f a.txt
 
 # 组划分
 管理组 manager
@@ -111,7 +132,7 @@ ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -
 337 $servers->setValue('login','bind_pass','123456');
 340 $servers->setValue('server','tls',false);
 397 $servers->setValue('login','attr','dn');
-398 //$servers->setValue('login','attr','uid');  
+398 //$servers->setValue('login','attr','uid');
 
 397\398行可能会引起报错Failed to Authenticate to server
 
@@ -176,7 +197,7 @@ http://www.openldap.org/software/release/install.html
 /usr/share/man/man1/ldapurl.1.gz
 /usr/share/man/man1/ldapwhoami.1.gz
 
-# rpm -ql openldap-servers 
+# rpm -ql openldap-servers
 /etc/openldap/check_password.conf
 /etc/openldap/schema
 /etc/openldap/schema/collective.ldif
