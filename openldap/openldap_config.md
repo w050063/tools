@@ -44,7 +44,24 @@ $mail_wordwrap = 0;
 $mail_charset = 'utf-8';
 $mail_priority = 3;
 $mail_newline = PHP_EOL;
+
+短信部分(直接通过邮件发送验证码)
+$use_sms = true;
+$sms_method = "mail";
+$sms_api_lib = "lib/smsapi.inc.php";
+$sms_attribute = "mobile";
+$sms_partially_hide_number = true;
+$smsmailto = "dongsheng.ma@lemongrassmedia.cn";
+$smsmail_subject = "Provider code";
+$sms_message = "{smsresetmessage} {smstoken}";
+$sms_sanitize_number = false;
+$sms_truncate_number = false;
+$sms_truncate_number_length = 10;
+$sms_token_length = 6;
+$max_attempts = 3;
 ```
+> 注：短信和邮件都需要ldap有相应自动用于获取信息
+
 ## LDAP + gitlab
 官网资料：https://docs.gitlab.com/ee/administration/auth/ldap.html
 
