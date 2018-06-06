@@ -73,28 +73,21 @@ $ldap_fullname_attribute = "cn";
 $ldap_filter = "(&(objectClass=posixAccount)($ldap_login_attribute={login}))";
 $keyphrase = "247029c9123274c78ab8160965f4d29f";  //否则有报错提醒
 
-## Mail
-# LDAP mail attribute
+邮件部分
 $mail_attribute = "mail";
-# Get mail address directly from LDAP (only first mail entry)
-# and hide mail input field
-# default = false
-$mail_address_use_ldap = false;
-# Who the email should come from
-$mail_from = "xxxx@lemongrassmedia.cn";
+$mail_address_use_ldap = true;
+$mail_from = "1455975151@qq.com";
 $mail_from_name = "Self Service Password";
 $mail_signature = "";
-# Notify users anytime their password is changed
 $notify_on_change = false;
-# PHPMailer configuration (see https://github.com/PHPMailer/PHPMailer)
 $mail_sendmailpath = '/usr/sbin/sendmail';
 $mail_protocol = 'smtp';
 $mail_smtp_debug = 0;
 $mail_debug_format = 'html';
 $mail_smtp_host = 'smtp.exmail.qq.com';
 $mail_smtp_auth = true;
-$mail_smtp_user = 'xxxx';
-$mail_smtp_pass = 'xxxx';
+$mail_smtp_user = '1455975151@qq.com';
+$mail_smtp_pass = 'xxx';
 $mail_smtp_port = 25;
 $mail_smtp_timeout = 30;
 $mail_smtp_keepalive = false;
@@ -106,7 +99,24 @@ $mail_charset = 'utf-8';
 $mail_priority = 3;
 $mail_newline = PHP_EOL;
 
+短信部分(直接通过邮件发送验证码)
+$use_sms = true;
+$sms_method = "mail";
+$sms_api_lib = "lib/smsapi.inc.php";
+$sms_attribute = "mobile";
+$sms_partially_hide_number = true;
+$smsmailto = "dongsheng.ma@lemongrassmedia.cn";
+$smsmail_subject = "Provider code";
+$sms_message = "{smsresetmessage} {smstoken}";
+$sms_sanitize_number = false;
+$sms_truncate_number = false;
+$sms_truncate_number_length = 10;
+$sms_token_length = 6;
+$max_attempts = 3;
+
+注：短信和邮件都需要ldap有相应自动用于获取信息
 ```
+
 ### 设置邮箱验证及短信验证
 需求：OpenLDAP用户信息需要添加Telephone及Email信息
 ``` bash 
