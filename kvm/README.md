@@ -9,7 +9,9 @@
 ``` bash
 cat /proc/cpuinfo |egrep  "vmx|svm"
 lsmod |grep kvm
-
 ```
+
 # FQA
+- web管理平台 https://github.com/retspen/webvirtmgr
+
 # 参考资料
