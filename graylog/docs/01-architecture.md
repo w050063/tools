@@ -8,14 +8,14 @@ note: 传入的消息只存储在Elasticsearch中。如果您在Elasticsearch集
 
 # Minimum setup 最低配置
 这是可用的最小，非关键或者测试配置的最小Graylog配置。没有任何多余组件，很容易和快速设置。
-图略
+![images](https://github.com/mds1455975151/tools/blob/master/graylog/docs/images/01.png)
 我们虚拟机默认使用这种设计，将nginx作为前端代理部署。
 
 # Bigger production setup 更大生产配置
 这是适用于更大生产环境的设置。它在负载均衡后面有几个Graylog节点来分配处理负载。
 
 负载均衡器可以通过Graylog REST API上的HTTP对Graylog节点进行ping操作，以检查它们是否处于活动状态，并将死节点从集群中取出。
-图略
+![images](https://github.com/mds1455975151/tools/blob/master/graylog/docs/images/02.png)
 
 我们的多节点安装指南中介绍了如何规划和配置这样的设置。
 
