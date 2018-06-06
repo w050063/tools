@@ -98,18 +98,13 @@ ldapsearch -LLL -W -x -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -
 ldapmodify
 - https://linux.die.net/man/1/ldapmodify
 - https://docs.oracle.com/cd/E19957-01/820-3204/6neolgefh/index.html#bcacx
-# more a.txt
-
-dn: uid=xxx,ou=People,dc=worldoflove,dc=cn
+# cat b.txt 
+dn: uid=chenyu,ou=People,dc=worldoflove,dc=cn
 changetype: modify
-add: mail
-mail: aa@xx
--
-add: mobile
-mobile: 00000000000
--
+add: description
+description: users
 
-ldapmodify -W -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -f a.txt
+ldapmodify -W -H ldap://127.0.0.1 -D "cn=Manager,dc=worldoflove,dc=cn" -f b.txt
 
 # 组划分
 管理组 manager
