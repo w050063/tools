@@ -1,6 +1,7 @@
 # dbproxy总结
 ## dbproxy
 - https://github.com/highras/dbproxy
+- https://github.com/highras/tableCache
 
 ## dbproxy部署搭建
 - 机器初始化
