@@ -17,5 +17,32 @@
   - If You Don’t Have Messages
   - Create Your Dashboard
   - Get Alerted
+- [Installing Graylog](https://github.com/mds1455975151/tools/blob/master/graylog/docs/03-installation.md)
+  - Virtual Machine Appliances
+  - Operating System Packages
+    - Ubuntu installation
+    - Debian installation
+    - CentOS installation
+    - SLES installation
+  - Chef, Puppet, Ansible
+  - Docker
+  - Vagrant
+  - OpenStack
+  - Amazon Web Services
+  - Microsoft Windows
+  - Manual Setup
+- [Upgrading Graylog](https://github.com/mds1455975151/tools/blob/master/graylog/docs/06-upgrade.md)
+- [Configuring Graylog](https://github.com/mds1455975151/tools/blob/master/graylog/docs/07-configuration.md)
+  - [server.conf](https://github.com/mds1455975151/tools/blob/master/graylog/docs/07-configuration-server.conf.md)
+  - The graylog-ctl script
+  - Web interface
+  - Load balancer integration
+  - Using HTTPS
+  - Multi-node Setup
+  - Elasticsearch
+  - Index model
+  - Backup
+  - Default file locations
+  - Graylog REST API
 # FQA
 # 参考资料

@@ -16,4 +16,32 @@
 - Create Your Dashboard
 - Get Alerted
 
-installation
+# Download Graylog
+http://docs.graylog.org/en/latest/pages/getting_started/download.html
+镜像文件基于Ubuntu，主机账号密码默认为ubuntu，web端登录账号密码为admin, 终端会显示
+使用chef进行配置
+
+
+# Import the VM
+http://docs.graylog.org/en/latest/pages/getting_started/import_run.html
+
+# Start the VM
+http://docs.graylog.org/en/latest/pages/getting_started/import_run.html#start-the-vm
+
+# Connect to the Web Console
+http://docs.graylog.org/en/latest/pages/getting_started/web_console.html
+
+# Explore Graylog
+http://docs.graylog.org/en/latest/pages/getting_started/explore_graylog.html
+
+# Get Messages In
+http://docs.graylog.org/en/latest/pages/getting_started/rsyslog.html
+
+# Check If You Have Messages
+http://docs.graylog.org/en/latest/pages/getting_started/check_messages.html
+
+# Create Your Dashboard
+http://docs.graylog.org/en/latest/pages/getting_started/create_dashboard.html
+
+# Get Alerted
+http://docs.graylog.org/en/latest/pages/getting_started/stream_alerts.html
