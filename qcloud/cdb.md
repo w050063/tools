@@ -46,6 +46,6 @@ mysql -uroot
 > delete from mysql.tables_priv where user<>'root' and char_length(user)>0;
 > flush privileges;
 > select user,host,password from mysql.user;
-5、如果可以可以校验下数据条目数量
+5、如果可以先校验下数据条目数量
 6、应用测试访问
 ```
