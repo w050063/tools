@@ -44,5 +44,7 @@
   - Backup
   - Default file locations
   - Graylog REST API
+- [Securing Graylog]()
+- [Sending in log data]()
 # FQA
 # 参考资料
