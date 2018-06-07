@@ -2,8 +2,8 @@
 - [获取腾讯企业邮箱通讯录](https://github.com/b1ngz/tencent_exmail)
 
 # 腾讯云
-## CVM
-## CDB
+## CVM 云服务器
+## CDB 云数据库
 [腾讯云API调试工具](https://wx.yuczou.club/api.html)
 
 - ~~获取实例信息~~
@@ -30,4 +30,12 @@
   逻辑备份时长超长，一天内都无法完成；
   逻辑备份出现某些表、视图定义有错误，多次催促用户修正也不修正或者修正不了的；
   ```
-## CLB
+## CBS 云硬盘
+## CLB 负载均衡
+## AS 弹性伸缩
+## VPC 私有网络
+## COS 对象存储
+## CDN 内容分发网络
+## CRS 云存储Redis
+## 云解析
+## 短信
