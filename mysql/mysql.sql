@@ -27,3 +27,5 @@ flush privileges;
 -- grant all privileges on app_db.* to 'xxx'@'10.0.%' identified by password '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9';
 -- flush privileges;
 
+-- 删除非root用户但是保留空用户
+-- delete from mysql.user where user<>'root' and char_length(user)>0;  

@@ -44,6 +44,15 @@ f = open(template_file, "w")
 f.write(template_context)
 f.close()
 
+'r'：读
+'w'：写
+'a'：追加
+'r+' == r+w（可读可写，文件若不存在就报错(IOError)）
+'w+' == w+r（可读可写，文件若不存在就创建）
+'a+' == a+r（可追加可写，文件若不存在就创建）
+对应的，如果是二进制文件，就都加一个b就好啦：
+'rb'　　'wb'　　'ab'　　'rb+'　　'wb+'　　'ab+'
+
 # example 04: 拼接字符串
 db_name_list = ["wg_lj", "test_lj"]
 db_name_list = ','.join(db_name_list)
