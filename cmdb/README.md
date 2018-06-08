@@ -34,7 +34,7 @@ govendor.exe fetch github.com/sirupsen/logrus
 go get -u github.com/sirupsen/logrus
 import github.com/sirupsen/logrus
 logo='我是要被记录的log信息'
-logrue.Info(logo)
+logrus.Info(logo)
 ```
 # 参考资料
 - https://github.com/evcloud/evcloud_server
