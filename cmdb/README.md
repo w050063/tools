@@ -29,13 +29,18 @@ govendor init
 govendor list
 govendor.exe fetch github.com/sirupsen/logrus  
 ```
-- 记录log：https://github.com/sirupsen/logrus
-``` bash
-go get -u github.com/sirupsen/logrus
-import github.com/sirupsen/logrus
-logo='我是要被记录的log信息'
-logrus.Info(logo)
-```
+- 记录log
+  - https://github.com/sirupsen/logrus
+  - github.com/heirko/go-contrib/logrusHelper
+
+  ``` bash
+  go get -u github.com/sirupsen/logrus
+  import github.com/sirupsen/logrus
+  logo='我是要被记录的log信息'
+  logrus.Info(logo)
+
+  govendor.exe fetch github.com/heirko/go-contrib/logrusHelper
+  ```
 # 参考资料
 - https://github.com/evcloud/evcloud_server
 - https://github.com/linqian123/wisdom-mattress
