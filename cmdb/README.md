@@ -15,6 +15,12 @@
 - 1、技术选型后端：go+mysql 前端：bootstrap
 - 2、设计表结构、存储数据、go实现API供用户使用
 
+- 命令行库：github.com/spf13/cobra
+``` bash
+go get -v github.com/spf13/cobra/cobra
+cobra.exe init demo 基于$GOPATH路径下开始
+```
+- 读取各类配置文件：github.com/spf13/viper
 # 参考资料
 - https://github.com/evcloud/evcloud_server
 - https://github.com/linqian123/wisdom-mattress
