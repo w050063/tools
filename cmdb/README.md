@@ -12,8 +12,8 @@
 - 权限管理系统
 - 人员系统
 ## 一期规划
-1、技术选型后端：go+mysql 前端：bootstrap
-2、设计表结构、存储数据、go实现API供用户使用
+- 1、技术选型后端：go+mysql 前端：bootstrap
+- 2、设计表结构、存储数据、go实现API供用户使用
 
 # 参考资料
 - https://github.com/evcloud/evcloud_server
