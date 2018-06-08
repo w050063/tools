@@ -38,7 +38,12 @@ def main():
         os = i['OsName']
         cpu = i['CPU']
         mem = i['Memory']
-        info = '{0: <15} {1: >10}\t{2}'.format(lanip, "ansible_ssh_host=" + lanip, "ansible_ssh_port=22")
+        # info = "%s\t" \
+        #        "%score*%sG*20M*50G+300G\t" \
+        #        "%s\t" \
+        #        "%s\t" \
+        #        "%s\t" % (name, cpu, mem,wanip, lanip, os,)
+        info = "insert into hosts (hostname, conf, wan_ip, lan_ip, os) VALUES (\"%s\",\"%score*%sG*20M*50G+300G\",\"%s\",\"%s\",\"%s\");" % (name, cpu, mem, wanip, lanip, os,)
         print info
 
 
