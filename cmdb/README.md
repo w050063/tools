@@ -41,6 +41,11 @@ govendor.exe fetch github.com/sirupsen/logrus
 
   govendor.exe fetch github.com/heirko/go-contrib/logrusHelper
   ```
+ - Go ORM 
+  - https://github.com/jinzhu/gorm
+ ``` bash
+  govendor.exe fetch github.com/jinzhu/gorm
+ ```
 # 参考资料
 - https://github.com/evcloud/evcloud_server
 - https://github.com/linqian123/wisdom-mattress
