@@ -31,3 +31,4 @@
   php -i | grep "php.ini"
   ```
 ## 参考资料
+- https://github.com/TIGERB/easy-tips
