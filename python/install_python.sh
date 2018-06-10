@@ -1,5 +1,6 @@
 #!/bin/env bash
 
+install_python(){
 mkdir -p /data0/src
 yum install -y zlib zlib-devel --setopt=protected_multilib=false
 cd /data0/src/ 
@@ -17,3 +18,10 @@ ln -s /usr/local/python/bin/python3 /usr/bin/python
 python -V
 sed -i.`date +%Y%m%d` 's@#!/usr/bin/python@#!/usr/bin/python2.7@g' /usr/bin/yum 
 sed -i.`date +%Y%m%d` 's@#! /usr/bin/python@#! /usr/bin/python2.7@g' /usr/libexec/urlgrabber-ext-down
+}
+
+yum install -y python36 python36-devel
+
+main(){
+install_python
+}
