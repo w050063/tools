@@ -15,6 +15,9 @@
 - ansible-playbook -i hosts site.yml --limit remote --list-hosts
 - ansible-playbook -i hosts site.yml --limit remote --tags "generate-script"
 
+### ansible-galaxy
+- ansible-galaxy install username.rolename
+
 ### 声明
 ### Ansible CMDB
 - [ansible-cmdb](https://github.com/fboender/ansible-cmdb)
