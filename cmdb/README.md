@@ -56,6 +56,7 @@ import  _ "fmt" 表示不使用该包，而是只是使用该包的init函数，
 - api文档
   - https://swagger.io/
 - 数据库：github.com/go-sql-driver/mysql
+- HTTP框架：https://github.com/gin-gonic/gin
 
 # 参考资料
 - https://github.com/evcloud/evcloud_server
