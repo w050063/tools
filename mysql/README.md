@@ -4,6 +4,9 @@
 ``` bash
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
 sh install_mysql.sh
+
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/uninstall_mysql.sh
+sh uninstall_mysql.sh
 ```
 ## MySQL备份还原
 ## MySQL监控及故障处理
