@@ -98,6 +98,10 @@ server.rmi.ssl.disable=true
 ```
 ## FQA
 - [利用badboy进行脚本录制]()
+- 插件
+
+ - https://jmeter-plugins.org/wiki/PerfMon/
+
 - jmeter部署架构
 
   - manager端->slave端(若干)
