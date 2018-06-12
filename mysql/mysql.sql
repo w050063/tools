@@ -15,6 +15,7 @@ GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%' IDENTIFIED BY PASSWORD '*6BB4837EB7
 
 -- 数据库分库分表
 grant SELECT on dbproxy.* to 'dbproxy'@'%' identified by password '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9';
+grant SELECT on dbproxymgr.* to 'dbproxy'@'%' identified by password '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9';
 
 -- 应用授权
 -- GRANT SELECT, UPDATE, INSERT, DELETE ON loveworld.* TO 'loveworld'@'%' IDENTIFIED BY PASSWORD '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9';
