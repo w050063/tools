@@ -22,8 +22,5 @@ pipeline {
         always {
             emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'dongsheng.ma@lemongrassmedia.cn'
         }
-        failure {
-            emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'dongsheng.ma@lemongrassmedia.cn'
-        }
     }
 }
