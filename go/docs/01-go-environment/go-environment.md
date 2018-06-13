@@ -1,7 +1,8 @@
 下载地址：https://golang.org/dl/
 
-# windows:
-## Install the Go tools
+# Go安装
+## windows:
+### Install the Go tools
 [安装及配置方法](https://golang.org/doc/install?download=go1.10.windows-amd64.msi)
 ## Test your installation
 ``` bash
@@ -19,8 +20,13 @@ Hello,world!
 
 ```
 
-# Linux
+## Linux
 待补充
+## Mac OS X
+``` bash
+brew install go
+brew info go
+```
 
 # Go 命令说明
 - go build
