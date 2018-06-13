@@ -30,6 +30,8 @@ https://github.com/MXi4oyu/golang.org
 - os：命令行
 - https://github.com/golang/lint
 - https://github.com/mozillazg/request
+- 日志
+https://github.com/mozillazg/logrus
 
 ### FQA
 - go项目搜索：https://gowalker.org/
