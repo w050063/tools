@@ -34,7 +34,10 @@ https://github.com/MXi4oyu/golang.org
   - https://github.com/mozillazg/logrus
 - 包管理
   - http://glide.sh/
-
+- golint
+https://github.com/golang/lint
+- goimporter
+go vet是一个用于检查Go语言源码中静态错误的简单工具
 ### FQA
 - go项目搜索：https://gowalker.org/
 
