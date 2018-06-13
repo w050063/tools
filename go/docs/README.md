@@ -2,3 +2,7 @@
 - [Go语言结构](https://github.com/mds1455975151/tools/blob/master/go/docs/02-go-program-structure/go-program-structure.md)
 - [Go语言基础语法](https://github.com/mds1455975151/tools/blob/master/go/docs/03-go-basic-syntax/go-basic-syntax.md)
 - [Go语言数据类型](https://github.com/mds1455975151/tools/blob/master/go/docs/04-go-data-types/go-data-types.md)
+- [Go语言变量](https://github.com/mds1455975151/tools/blob/master/go/docs/05-go-variables/go-variables.md)
+- [Go 语言常量](https://github.com/mds1455975151/tools/blob/master/go/docs/06-go-constants/go-constants.md)
+- [Go语言运算符](https://github.com/mds1455975151/tools/blob/master/go/docs/07-go-operators/go-operators.md)
+- [Go语言条件语句](https://github.com/mds1455975151/tools/blob/master/go/docs/08-go-decision-making/go-decision-making.md)
