@@ -29,6 +29,7 @@ https://github.com/MXi4oyu/golang.org
 - gofmt: 源代码格式化
 - os：命令行
 - https://github.com/golang/lint
+- https://github.com/mozillazg/request
 
 ### FQA
 - go项目搜索：https://gowalker.org/
