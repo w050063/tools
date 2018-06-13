@@ -45,6 +45,11 @@ govendor.exe fetch github.com/sirupsen/logrus
   - https://github.com/jinzhu/gorm
  ``` bash
   govendor.exe fetch github.com/jinzhu/gorm
+  连接操作数据库需要两类包：1、ORM 2、数据库驱动
+  
+mysql 
+  - github.com/go-sql-driver/mysql
+  - github.com/jinzhu/gorm/dialects/mysql
  ```
  
 go import用法
