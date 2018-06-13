@@ -48,8 +48,12 @@ govendor.exe fetch github.com/sirupsen/logrus
   连接操作数据库需要两类包：1、ORM 2、数据库驱动
   
 mysql 
-  - github.com/go-sql-driver/mysql
-  - github.com/jinzhu/gorm/dialects/mysql
+import _ "github.com/go-sql-driver/mysql"
+为了方便记住导入路径，GORM包装了一些驱动。
+import _ "github.com/jinzhu/gorm/dialects/mysql"
+// import _ "github.com/jinzhu/gorm/dialects/postgres"
+// import _ "github.com/jinzhu/gorm/dialects/sqlite"
+// import _ "github.com/jinzhu/gorm/dialects/mssql"
  ```
  
 go import用法
