@@ -11,12 +11,9 @@ except:
 
 url = "http://127.0.0.1:8130/api/v1/hosts/all"
 data = urllib2.urlopen(url).read()
-# print(type(data))
 json_data = json.loads(data)
-# print json_data
-# print type(json_data)
-for i in json_data.split('|'):
-    # print i
-    # print type(i)
-    a = json.loads(i)
-    print a['Os']
+
+for i in range(len(json_data)):
+    line_info = json_data[i]
+    json_info = json.JSONDecoder().decode(line_info)
+    print(json_info['LanIp'])

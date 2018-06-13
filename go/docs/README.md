@@ -8,3 +8,5 @@
 - [Go语言条件语句](https://github.com/mds1455975151/tools/blob/master/go/docs/08-go-decision-making/go-decision-making.md)
 - [Go语言循环语句](https://github.com/mds1455975151/tools/blob/master/go/docs/09-go-loops/go-loops.md)
 - [Go语言函数](https://github.com/mds1455975151/tools/blob/master/go/docs/10-go-functions/go-functions.md)
+
+- [Go语言变量作用域](https://github.com/mds1455975151/tools/blob/master/go/docs/11-go-scope-rules/go-scope-rules.md)
