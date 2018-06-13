@@ -44,3 +44,5 @@ go vet是一个用于检查Go语言源码中静态错误的简单工具
 ### 参考资料
 - [Go语言圣经](https://books.studygolang.com/gopl-zh/index.html)
   - [示例代码](github.com/adonovan/gopl.io/)
+- 资料汇总
+  - https://github.com/jobbole/awesome-go-cn
