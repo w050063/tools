@@ -109,4 +109,32 @@ Date: Wed, 09 May 2018 09:13:11 GMT
 参考资料：http://docs.graylog.org/en/2.4/pages/gelf.html
 
 ```
+## 目录迁移
+```
+1、停止服务 
+停止graylog 	systemctl stop graylog-server.service
+停止ES  		/etc/init.d/elasticsearch stop
+
+2、修改配置 迁移数据
+默认路径：/var/lib/elasticsearch/
+vim /etc/elasticsearch/elasticsearch.yml
+
+path.data: /data0/elasticsearch/data/
+path.logs: /data0/elasticsearch/logs/ 
+mkdir -p /data0/elasticsearch/{data,logs}
+chown -R elasticsearch.elasticsearch /data0/elasticsearch
+
+mv /var/lib/elasticsearch/nodes /data0/elasticsearch/data/
+mv /var/log/elasticsearch/* /data0/elasticsearch/logs/ 
+cd /var/lib/ && ln -s /data0/elasticsearch/data  elasticsearch
+
+3、启动服务
+/etc/init.d/elasticsearch start
+/etc/init.d/elasticsearch status 
+systemctl start graylog-server.service
+systemctl status graylog-server.service
+
+4、测试
+查询30天之前log
+```
 ## 参考资料
