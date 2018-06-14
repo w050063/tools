@@ -28,6 +28,7 @@ func (struct_name_variable struct_name) method_namen() [return_type] {
 }
 ```
 实例
+```
 package main
 
 import (
@@ -62,7 +63,9 @@ func main() {
     phone.call()
 
 }
+```
 在上面的例子中，我们定义了一个接口Phone，接口里面有一个方法call()。然后我们在main函数里面定义了一个Phone类型变量，并分别为之赋值为NokiaPhone和IPhone。然后调用call()方法，输出结果如下：
-
+```
 I am Nokia, I can call you!
 I am iPhone, I can call you!
+```
