@@ -12,11 +12,24 @@
   - git
   - curl
   - wget
+  - lynx
 - 设置系统变量
 - 安装[apt-cyg](https://github.com/transcode-open/apt-cyg)
 ``` bash
 wget https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg
+or 
+curl https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg -o apt-cyg
 install apt-cyg /bin/
+```
+- 添加鼠标右键
+```
+# cat cygwin.reg
+Windows Registry Editor Version 5.00  
+  
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCygwin]  
+  
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCygwin\command]  
+@="C:\\cygwin64\\Cygwin.bat" 
 ```
 ## FQA
 
