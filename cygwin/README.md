@@ -12,6 +12,7 @@
   - git
   - curl
   - wget
+  - lynx
 - 设置系统变量
 - 安装[apt-cyg](https://github.com/transcode-open/apt-cyg)
 ``` bash
