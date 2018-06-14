@@ -73,6 +73,30 @@ print json_data
 Python下读取转换unicode的json格式
 info = json.JSONDecoder().decode(info)
 
+post请求
+#!/usr/bin/env python
+# coding=UTF-8
+
+import requests
+import json
+
+url = 'http://127.0.0.1:8130/api/v1/cmdb/hosts'
+body = [{"hostname": "gate", "conf": "2core*4G*20M*50G+300G", "wanip": "2.2.2.2", "lanip": "10.0.0.11", "os": "Tencent Linux Release 2.2 (Final)"}, ]
+headers = {'content-type': "application/json", }
+
+# print type(body)
+# print type(json.dumps(body))
+# 这里有个细节，如果body需要json形式的话，需要做处理。可以是data = json.dumps(body)
+response = requests.post(url, data=json.dumps(body), headers=headers)
+# 也可以直接将data字段换成json字段，2.4.3版本之后支持
+# response  = requests.post(url, json = body, headers = headers)
+
+# 返回信息
+print response.text
+# 返回响应头
+print response.status_code
+
+
 # example 06: 计算求和
 """
 数据格式 列表
