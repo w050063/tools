@@ -70,6 +70,9 @@ data = urllib2.urlopen(url).read()
 json_data = json.loads(data)
 print json_data
 
+Python下读取转换unicode的json格式
+info = json.JSONDecoder().decode(info)
+
 # example 06: 计算求和
 """
 数据格式 列表

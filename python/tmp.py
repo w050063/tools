@@ -9,7 +9,7 @@ try:
 except:
     import simplejson as json
 
-url = "http://127.0.0.1:8130/api/v1/hosts/all"
+url = "http://127.0.0.1:8130/api/v1/cmdb/all"
 data = urllib2.urlopen(url).read()
 json_data = json.loads(data)
 

@@ -10,3 +10,4 @@
 - [Go语言函数](https://github.com/mds1455975151/tools/blob/master/go/docs/10-go-functions/go-functions.md)
 
 - [Go语言变量作用域](https://github.com/mds1455975151/tools/blob/master/go/docs/11-go-scope-rules/go-scope-rules.md)
+- [Go语言数组](https://github.com/mds1455975151/tools/blob/master/go/docs/12-go-arrays/go-arrays.mdd)
