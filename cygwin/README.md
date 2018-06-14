@@ -16,6 +16,8 @@
 - 安装[apt-cyg](https://github.com/transcode-open/apt-cyg)
 ``` bash
 wget https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg
+or 
+curl https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg -o apt-cyg
 install apt-cyg /bin/
 ```
 ## FQA
