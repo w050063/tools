@@ -1,78 +1,19 @@
 # GrayLog知识总结
 ## GrayLog概述
+## Graylog性能压测
+- jmeter
+-
 ## GrayLog安装部署
 - ansible
-
 ansible-galaxy install Graylog2.graylog-ansible-role
 
-``` bash
-yum install java-1.8.0-openjdk
-cat>/etc/yum.repos.d/mongodb-org-3.6.repo<EOF
-[mongodb-org-3.6]
-name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.6/x86_64/
-gpgcheck=1
-enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc
-EOF
-yum install -y mongodb-org
-systemctl enable mongod.service
-systemctl start mongod.service
-rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
-cat>/etc/yum.repos.d/elasticsearch.repo<EOF
-[elasticsearch-5.x]
-name=Elasticsearch repository for 5.x packages
-baseurl=https://artifacts.elastic.co/packages/5.x/yum
-gpgcheck=1
-gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-enabled=1
-autorefresh=1
-type=rpm-md
-EOF
-yum install elasticsearch
-vim /etc/elasticsearch/elasticsearch.yml
-cluster.name: graylog
-systemctl enable elasticsearch.service
-systemctl restart elasticsearch.service
-
-rpm -Uvh https://packages.graylog2.org/repo/packages/graylog-2.4-repository_latest.rpm
-yum install graylog-server
-yum install -y pwgen
-pwgen -N 1 -s 96
-echo -n admin | sha256sum
-vim /etc/graylog/server/server.conf
-password_secret = WPtR8CI1TohZqvV0Co8elMugzkHLUS5fyEBLRTIKJC4kt0IYXGb4cNE1iQLImHXay94StebMesPT7Vd7gxKzg7nuWMvjwJ5r
-root_password_sha2 = 5ee0333e2563c2f26787082ff20785bd717e07bb26b78dd3f4839a69e04c3662
-root_timezone = Asia/Shanghai
-
-systemctl start graylog-server.service
-systemctl enable graylog-server.service
-
-yum install -y nginx
-cat>/etc/nginx/conf.d/graylog.conf<EOF
-server
-{
-        listen 80;
-        server_name xxxx;
-
-        location /
-        {
-            proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header    Host $http_host;
-            proxy_set_header    X-Graylog-Server-URL http://xxx/api;
-            proxy_pass          http://127.0.0.1:9000;
-        }
-}
-EOF
-nginx -t
-systemctl enable nginx
-systemctl start nginx
-
-排错：
-cd /var/log/graylog-server/
-tail -f server.log 
-tail -f /var/log/nginx/*
-```
+## Graylog集群管理
+- MongoDB副本集
+- Elasticsearch集群
+- graylog多节点
+- redis logstash缓存层
+- 各服务监控
+  - elasticsearch http://www.elastichq.org/
 
 ## GrayLog日常管理
 ### [使用agent收集log](http://docs.graylog.org/en/latest/pages/collector_sidecar.html#backends)
@@ -93,7 +34,7 @@ Beats backend
 /var/spool/collector-sidecar/nxlog                          # 空目录      
 # graylog-collector-sidecar -service install               
 # systemctl start collector-sidecar
-# systemctl enable collector-sidecar   
+# systemctl enable collector-sidecar  
 # curl -u madongsheng:xxx --head 127.0.0.1:9000/api/system/
 HTTP/1.1 200 OK
 X-Graylog-Node-ID: c2442555-b465-4c88-95e7-2a0d68a1305c
@@ -111,7 +52,7 @@ Date: Wed, 09 May 2018 09:13:11 GMT
 ```
 ## 目录迁移
 ```
-1、停止服务 
+1、停止服务
 停止graylog 	systemctl stop graylog-server.service
 停止ES  		/etc/init.d/elasticsearch stop
 
@@ -120,17 +61,17 @@ Date: Wed, 09 May 2018 09:13:11 GMT
 vim /etc/elasticsearch/elasticsearch.yml
 
 path.data: /data0/elasticsearch/data/
-path.logs: /data0/elasticsearch/logs/ 
+path.logs: /data0/elasticsearch/logs/
 mkdir -p /data0/elasticsearch/{data,logs}
 chown -R elasticsearch.elasticsearch /data0/elasticsearch
 
 mv /var/lib/elasticsearch/nodes /data0/elasticsearch/data/
-mv /var/log/elasticsearch/* /data0/elasticsearch/logs/ 
+mv /var/log/elasticsearch/* /data0/elasticsearch/logs/
 cd /var/lib/ && ln -s /data0/elasticsearch/data  elasticsearch
 
 3、启动服务
 /etc/init.d/elasticsearch start
-/etc/init.d/elasticsearch status 
+/etc/init.d/elasticsearch status
 systemctl start graylog-server.service
 systemctl status graylog-server.service
 
@@ -138,3 +79,4 @@ systemctl status graylog-server.service
 查询30天之前log
 ```
 ## 参考资料
+BeanShell （JAVA源码解释器）
