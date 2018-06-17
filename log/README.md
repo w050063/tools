@@ -20,3 +20,6 @@ http://geek.csdn.net/news/detail/54967
 # kibana
 1、发现搜索数据
 	beat.name:123.207.125.205 AND tags:YTTX
+
+# fluentd
+https://www.fluentd.org/
