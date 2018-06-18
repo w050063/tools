@@ -1,6 +1,6 @@
 官网文档: https://www.elastic.co/guide/en/elastic-stack/5.6/index.html
 
-### [入门 Getting Started](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/getting-started.md)
+## [入门 Getting Started](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/getting-started.md)
 #### [基本概念 Basic Concepts](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/basic_concepts.md)
 #### [部署 Installation](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/installation.md)
 #### [探索集群 Exploring Your Cluster](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/exploring_your_cluster.md)
