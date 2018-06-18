@@ -1,6 +1,7 @@
 ## Elasticsearch
 
 官网文档：https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+5.6官网文档：https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html
 
 ### API
 #### Search APIs
