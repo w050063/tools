@@ -37,10 +37,18 @@ Elasticsearch服务器需要一个IP，可通过network.host集群中的网络�
 在安装Graylog之后，您应该注意只有一个Graylog节点被配置为主配置设置。is_master = true
 
 rest_listen_uri（或rest_transport_uri）中配置的URI 必须对群集的所有Graylog节点均可访问。
+**部署从节点设置**
+```
+cd /etc/ansible/playbook/
+ansible-playbook host-init-test.yml -l 10.1.16.154
+ansible-playbook install_graylog_server.yml -l 10.1.16.154
+```
 
 ### Graylog to MongoDB connection
 ### Graylog to Elasticsearch connection
 ### Graylog web interface
+haproxy替换为腾讯云ELB
+
 ## Scaling
 这个多节点设置中的每个组件都可以根据个人需求进行扩展。
 

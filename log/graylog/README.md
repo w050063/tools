@@ -18,9 +18,9 @@ ansible-galaxy install Graylog2.graylog-ansible-role
 ## 配置流程
 system/inputs-选择类型GELF UDP|Syslog UDP|Beats|其他-->launch new input新建补充信息
 分别新建三个inputs
-- Application GELF UDP(GELF UDP) 收集游戏客户端汇报日志
-- System Log(Syslog UDP) 系统级别log
-- beats-input(Beats) agent收集input
+- Application GELF UDP(GELF UDP) 收集游戏客户端汇报日志  12201
+- System Log(Syslog UDP) 系统级别log  2514
+- beats-input(Beats) agent收集input 5044
 
 ## GrayLog日常管理
 ### [使用agent收集log](http://docs.graylog.org/en/latest/pages/collector_sidecar.html#backends)
