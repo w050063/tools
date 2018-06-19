@@ -26,3 +26,10 @@ http://10.1.16.152:9200/_cluster/settings?pretty
   > http://10.1.16.152:9200/
 
 elasticsearch官网文档过一遍
+
+# to-do-list
+- Elasticsearch部署
+- Elasticsearch添加删除node
+- Elasticsearch服务监控
+- Elasticsearch数据备份和恢复
+- Elasticsearch数据迁移

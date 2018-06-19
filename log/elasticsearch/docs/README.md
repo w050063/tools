@@ -35,6 +35,20 @@
 # Mapping
 # Analysis
 # Modules
+## Cluster
+## Discovery
+## Local Gateway
+## HTTP
+## Indices
+## Network Settings
+## Node
+## Plugins
+## Scripting
+## **Snapshot And Restore**
+## Thread Pool
+## Transport
+## Tribe node
+## Cross Cluster Search
 # Index Modules
 # Ingest Node
 # X-Pack APIs

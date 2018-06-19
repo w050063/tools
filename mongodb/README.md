@@ -29,7 +29,18 @@ rs.slaveOk()     为当前的连接设置 slaveOk 。不推荐使用。使用 re
 rs.status()      返回复制集状态信息。    
 rs.stepDown()    让当前的 primary 变为从节点并触发 election 。     
 rs.syncFrom()    设置复制集节点从哪个节点处同步数据，将会覆盖默认选取逻辑。
- 
+
 ```
+## 基本命令
+```
+show dbs;
+use graylog;
+show collections;
+db.dropDatabase()
+```
+## MongoDB备份和还原
+mongodump -h 10.1.16.152 -o /data0/backups/mongodb-`date +%Y%m%d`
+mongorestore -h 10.1.16.152 -d graylog /data0/backups/mongodb-20180619/graylog/
+
 # FQA
-# 参考资料 
+# 参考资料

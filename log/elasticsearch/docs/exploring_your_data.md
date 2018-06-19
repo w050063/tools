@@ -94,5 +94,112 @@ curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d
 '
 ```
 ## Executing Searches 执行搜索
+深入了解查询DSL
+
+默认情况下，完整的json文档作为所有搜索的一部分返回。这被称为源_source，如果不希望整个源文档被返回，我们有能力只需要返回源内的几个字段。
+```
+curl -X GET "10.1.16.152:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match_all": {} },
+  "_source": ["account_number", "balance"]
+}
+'
+```
+请注意，上述示例只是简化了_source字段。它们仍然只会返回名为_source，在其中，只有account_number和balance也包括在内。
+
+如果有sql知识，上述内容在概念上和sql select from字段列表有些相似
+
+match查询 针对特定字段或字段集合进行的搜索
+```
+示例:返回编号20的账号
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match": { "account_number": 20 } }
+}
+'
+
+示例：返回地址中包含mail的所有账号
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match": { "address": "mill" } }
+}
+'
+
+示例：返回地址中包含mail 或 lane的所有账号
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match": { "address": "mill lane" } }
+}
+'
+
+示例：返回地址中包含mail lane的所有账号 match方法的变种
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match_phrase": { "address": "mill lane" } }
+}
+'
+
+bool查询 允许我们撰写较小的查询到布尔逻辑更大的查询
+本示例组成两个match查询并返回地址中包含mail lane的所有账号
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}
+'
+
+
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "bool": {
+      "should": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}
+'
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "bool": {
+      "must_not": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}
+'
+
+示例:返回任何40岁但未居住在id的人的所有账号
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "age": "40" } }
+      ],
+      "must_not": [
+        { "match": { "state": "ID" } }
+      ]
+    }
+  }
+}
+'
+```
+
 ## Executing Filters 执行过滤器
+[官网文档](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/_executing_filters.html)
+
+_ score搜索结果中的字段细节。score是一个数值，它是文档与我们制定的搜索查询匹配度的相对度量。越高越相关，越低文档的相关性越低
+
 ## Executing Aggregations 执行聚合
