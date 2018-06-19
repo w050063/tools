@@ -8,15 +8,15 @@
 #### [探索数据 Exploring Your Data](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/exploring_your_data.md)
 #### [结论 Conclusion](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/conclusion.md)
 
-# [Set up Elasticsearch]()
-## [Installing Elasticsearch]()
-## [Configuring Elasticsearch]()
-## [Important Elasticsearch configuration]()
-## [Secure Settings]()
-## [Bootstrap Checks]()
-## [Important System Configuration]()
-## [Upgrading Elasticsearch]()
-## [Stopping Elasticsearch]()
+## [配置 Set up Elasticsearch](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/setup.md)
+#### [安装 Installing Elasticsearch](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/install-elasticsearch.md)
+#### [配置 Configuring Elasticsearch](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/settings.md)
+#### [重要配置 Important Elasticsearch configuration](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/important-settings.md)
+#### [Secure Settings]()
+#### [Bootstrap Checks]()
+#### [Important System Configuration]()
+#### [Upgrading Elasticsearch]()
+#### [Stopping Elasticsearch]()
 
 # Set up X-Pack
 # Breaking changes
