@@ -4,8 +4,10 @@
 - 官网文档：http://supervisord.org/installing.html
 
 ## 部署安装
-- [install_supervisor.sh]()
-
+```
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/supervisor/install_supervisor.sh
+sh install_supervisor.sh
+```
 ## 日常管理
 - supervisord
   ``` text
