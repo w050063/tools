@@ -233,4 +233,22 @@ bool查询包含match_all查询和range查询。我们可以将任何其他查�
 
 聚合提供了从数据中分组和提取统计数据的功能。考虑聚合的最简单方法是将其大致等同于SQL Group by和SQL聚合函数。
 
-示例:按状态对所有账号进行分组，
+示例:按状态对所有账号进行分组
+```
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0,
+  "aggs": {
+    "group_by_state": {
+      "terms": {
+        "field": "state.keyword"
+      }
+    }
+  }
+}
+'
+```
+SQL中，上面的聚合在概念上类似于：
+```
+SELECT state, COUNT(*) FROM bank GROUP BY state ORDER BY COUNT(*) DESC
+```
