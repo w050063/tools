@@ -85,5 +85,11 @@ systemctl status graylog-server.service
 4、测试
 查询30天之前log
 ```
+
+## FQA
+- tools
+```
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/log/graylog/graylog_tools.sh
+```
 ## 参考资料
 BeanShell （JAVA源码解释器）
