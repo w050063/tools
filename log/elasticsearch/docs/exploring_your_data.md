@@ -202,4 +202,35 @@ curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d
 
 _ score搜索结果中的字段细节。score是一个数值，它是文档与我们制定的搜索查询匹配度的相对度量。越高越相关，越低文档的相关性越低
 
+查询并不总是需要生成分数，特别是当它们仅用于过滤文档集时，Elasticsearch检测这些情况并自动优化查询执行，以便不计算无用分数。
+
+介绍下range查询，允许我们通过一系列值来过滤文档。这些通常用于数字或日期过滤。
+
+此示例使用bool查询返回余额介于20000和30000之间的所有账号。换句话说，我们希望查找余额大于或等于20000且小于等于30000的账号
+```
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "bool": {
+      "must": { "match_all": {} },
+      "filter": {
+        "range": {
+          "balance": {
+            "gte": 20000,
+            "lte": 30000
+          }
+        }
+      }
+    }
+  }
+}
+'
+```
+bool查询包含match_all查询和range查询。我们可以将任何其他查询替换为查询和过滤器部分。在上述情况下，range查询非常有意义，因为落入该房屋的文档全部匹配相同，即没有文档比另一个文档更相关。
+
 ## Executing Aggregations 执行聚合
+[官网文档](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/_executing_aggregations.html)
+
+聚合提供了从数据中分组和提取统计数据的功能。考虑聚合的最简单方法是将其大致等同于SQL Group by和SQL聚合函数。
+
+示例:按状态对所有账号进行分组，

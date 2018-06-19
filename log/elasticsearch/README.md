@@ -14,7 +14,6 @@ curl -X GET http://localhost:9200/graylog_deflector		//获取指定索引信息g
 curl -X PUT http://localhost:9200/customer?pretty		//创建索引customer
 curl -X DELETE http://localhost:9200/customer?pretty	//删除索引customer
 curl -X GET http://localhost:9200/graylog_deflector/_search?pretty		//在指定索引中搜索数据
-
 ```
 #### Cluster APIs
 
