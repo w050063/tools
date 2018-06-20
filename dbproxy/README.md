@@ -44,5 +44,6 @@ autorestart=true
 stderr_logfile=/var/log/DBProxy_err.log
 stdout_logfile=/var/log/DBProxy_out.log
 EOF
-systemctl restart supervisord.service
+supervisorctl update
+supervisorctl start DBProxy
 ```
