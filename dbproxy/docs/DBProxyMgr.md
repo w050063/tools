@@ -23,7 +23,8 @@ autorestart=true
 stderr_logfile=/var/log/DBProxyMgr_err.log
 stdout_logfile=/var/log/DBProxyMgr_out.log
 EOF
-systemctl restart supervisord.service
+supervisorctl update
+supervisorctl start DBProxyMgr
 supervisorctl status
 netstat -tunlp|grep 12322
 ```
