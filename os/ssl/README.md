@@ -12,4 +12,8 @@ certbot --nginx certonly
 cos-cdn.xxx.cn
 
 certbot -d nas.dev.xx.cn --manual --preferred-challenges dns certonly -m xxx@gmail.com
+根据提示添加域名text记录
+
+cd /etc/letsencrypt/live/
+for i in `ls`;do cat $i/*.pem>$i.txt;done
 ```
