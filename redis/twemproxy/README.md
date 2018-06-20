@@ -16,6 +16,12 @@ sh install_twemproxy.sh
 ```
 ### twemproxy配置
 配置案例：https://github.com/twitter/twemproxy/blob/v0.4.1/conf/nutcracker.yml
+```
+# twemproxy -t   检测配置文件有无语法问题
+twemproxy: configuration file '/etc/twemproxy.yml' syntax is ok
+- 账号密码配置
+所有redis实例要求密码一致,库只能使用0库
+```
 
 配置说明：
 可以通过进程启动时使用-c or --conf-file指定YAML文件进行配置。配置文件用于指定twemproxy管理的每个池中的服务器池和服务器。
@@ -50,7 +56,41 @@ sh install_twemproxy.sh
 - **server_retry_timeout：** 当auto_eject_host设置为true时，在临时弹出的服务器上重试之前等待的超时值（以毫秒为单位）。默认为30000毫秒。
 - **server_failure_limit：** 当auto_eject_host设置为true时，服务器上导致临时弹出的连续失败次数。默认为2。
 - **servers：** 此服务器池的服务器地址，端口和权重（name:port:weight or ip:port:weight）列表
+## 性能测试
+- set测试
+```
+twemproxy:
+redis-benchmark -h 127.0.0.1 -p 6379 -c 100 -t set -d 100 -l –q
 
+redis:
+redis-benchmark -h 10.0.0.46 -p 6379 -c 100 -t set -d 100 -l –q
+redis-benchmark -h 10.0.0.42 -p 6379 -c 100 -t set -d 100 -l –q
+```
+- get测试
+```
+twemproxy:
+redis-benchmark -h 127.0.0.1 -p 6379 -c 100 -t get -d 100 -l -q
+
+redis:
+redis-benchmark -h 10.0.0.46 -p 6379 -c 100 -t get -d 100 -l -q
+redis-benchmark -h 10.0.0.42 -p 6379 -c 100 -t get -d 100 -l -q
+```
+- 查看键值分布
+```
+redis1:
+redis-cli -h 10.0.0.42 -a 'xxx' info|grep db0
+
+redis2:
+redis-cli -h 10.0.0.46 -a 'xxx' info|grep db0
+```
+
+-h: redis IP
+-p: redis port
+-c: Total number of requests (default 100000)
+-t: Only run the comma separated list of tests. The test names are the same as the ones produced as output.
+-d: Data size of SET/GET value in bytes (default 2)
+-l: Loop. Run the tests forever
+-q: Quiet. Just show query/sec values
 ## FQA
 - [2016-06-17 09:12:29.376] nc_redis.c:1092 parsed unsupported command 'keys'
 > twemproxy代理redis的情况，不支持一些指令。这里错误说的是Keys指令不支持
