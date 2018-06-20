@@ -34,7 +34,7 @@ Web-based dashboard written in Node.js.
 
 3）Supervisord-Monitor
     Web-based dashboard written in PHP.
-    
+
 4）SupervisorUI
 Another Web-based dashboard written in PHP.
 supervisord-monitor（改进版）
