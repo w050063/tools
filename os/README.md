@@ -1,11 +1,11 @@
 # 操作系统相关问题
 - [Linux基础](#)
   - [CentOS系统安装](https://github.com/mds1455975151/tools/blob/master/os/CentOS.md)
-  
+
 ## CentOS
 - 关闭ipv6协议
 - 禁ping和开启ping操作
-  ``` bash 
+  ``` bash
   echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all  # 禁止ping
   echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_all  # 开启ping
   ```
@@ -44,9 +44,9 @@ EOF
 - 服务器性能排除
   
   - htop\top
-  
+
   - nethogs\iperf
-  
+
 - 显示中文
 ``` bash
 # export LANG='zh_CN.UTF-8'
@@ -59,7 +59,10 @@ EOF
     - break 中断整个循环
 
     - continue 退出本次循环
-  
+## Linux OOM killer
+[Linux OOM killer](https://segmentfault.com/a/1190000008268803)
+
+
 ## Ubuntu
 
 ## Other
