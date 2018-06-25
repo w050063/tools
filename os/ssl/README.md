@@ -23,7 +23,7 @@ certbot -d nas.dev.xx.cn --manual --preferred-challenges dns certonly -m xxx@gma
 根据提示添加域名text记录
 
 cd /etc/letsencrypt/live/
-for i in `ls`;do cat $i/*.pem>$i.txt;done
+for i in `ls|grep -v txt`;do cat $i/*.pem>$i.txt;done
 
 添加定时更新证书
 0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew
