@@ -28,3 +28,5 @@ for i in `ls|grep -v txt`;do cat $i/*.pem>$i.txt;done
 添加定时更新证书
 0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew
 ```
+# 工具
+https://github.com/Neilpang/acme.sh
