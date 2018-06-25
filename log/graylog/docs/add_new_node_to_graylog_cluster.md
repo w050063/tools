@@ -16,7 +16,10 @@ mongodb_uri = mongodb://10.1.16.152/graylog
   - mongodb_uri(可以调整成一致)
 ```
 - 启动服务并测试
-
+```
+systemctl start graylog-server.service 
+tail -f /var/log/graylog-server/server.log
+```
 检查如下几项:
 - web是否可以正常登陆 http://10.1.16.154
 - streams是否可以刷新到最新日志
