@@ -1,4 +1,9 @@
 # GitLab知识总结
+- 安装部署
+- 日常管理
+- 配置OpenLDAP
+- 管理用户、权限、组等
+
 ## GitLab安装部署
 ## GitLab日常管理
 - 限制用户注册邮箱后缀(settings-->Sign-up Restrictions-->Whitelisted domains for sign-ups)
