@@ -14,6 +14,7 @@ docker run -d -it -p 20022:22 centos:7.2.1511 /bin/bash
 
 ## Dockerfiles
 - https://github.com/jessfraz/dockerfiles
+- 编写技巧
 
 ## 监控
 - [ctop](https://github.com/bcicen/ctop)
