@@ -1,3 +1,5 @@
+- 官网地址：https://gogs.io/
+- 官网文档：https://gogs.io/docs/installation
 
 ```
 docker run -itd -p 3000:3000 -p 2000:22 gogs/gogs  
