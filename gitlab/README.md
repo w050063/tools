@@ -10,6 +10,7 @@
 ## GitLab安装部署
 ## GitLab日常管理
 - 限制用户注册邮箱后缀(settings-->Sign-up Restrictions-->Whitelisted domains for sign-ups)
+- 找回管理员密码
 
 ## Windows客户端
   - Git-2.7.2-32-bit_setup.1457942412.exe
