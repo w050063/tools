@@ -1,5 +1,8 @@
 # DNS知识总结
 ## 自建DNS
+- dnsmasq搭建简易DNS服务器
+- bind9
+
 ## 云DNS服务
 - https://github.com/DNSPod
 
