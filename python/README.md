@@ -13,3 +13,5 @@ python get-pip.py
 # 汉字拼音
 - https://github.com/mozillazg/python-pinyin
 - https://github.com/mozillazg/go-pinyin
+
+# Python开发环境管理virtualenvwrapper
