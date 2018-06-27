@@ -28,6 +28,59 @@ for i in `ls|grep -v txt`;do cat $i/*.pem>$i.txt;done
 添加定时更新证书
 0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew
 ```
+
+# FQA
+- 问题1
+```
+[root@cdn01 ~]# certbot -d xxx --manual --preferred-challenges dns certonly -m dongsheng.ma@lemongrassmedia.cn
+Traceback (most recent call last):
+  File "/usr/bin/certbot", line 9, in <module>
+    load_entry_point('certbot==0.24.0', 'console_scripts', 'certbot')()
+  File "/usr/lib/python2.7/site-packages/pkg_resources/__init__.py", line 476, in load_entry_point
+    return get_distribution(dist).load_entry_point(group, name)
+  File "/usr/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2700, in load_entry_point
+    return ep.load()
+  File "/usr/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2318, in load
+    return self.resolve()
+  File "/usr/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2324, in resolve
+    module = __import__(self.module_name, fromlist=['__name__'], level=0)
+  File "/usr/lib/python2.7/site-packages/certbot/main.py", line 20, in <module>
+    from certbot import client
+  File "/usr/lib/python2.7/site-packages/certbot/client.py", line 13, in <module>
+    from acme import client as acme_client
+  File "/usr/lib/python2.7/site-packages/acme/client.py", line 36, in <module>
+    urllib3.contrib.pyopenssl.inject_into_urllib3()
+  File "/usr/lib/python2.7/site-packages/urllib3/contrib/pyopenssl.py", line 118, in inject_into_urllib3
+    _validate_dependencies_met()
+  File "/usr/lib/python2.7/site-packages/urllib3/contrib/pyopenssl.py", line 153, in _validate_dependencies_met
+    raise ImportError("'pyOpenSSL' module missing required functionality. "
+ImportError: 'pyOpenSSL' module missing required functionality. Try upgrading to v0.14 or newer.
+```
+解决：
+```
+Steps: Install virtualenv
+
+pip install virtualenv --upgrade
+Create a virtualenv
+
+virtualenv -p /usr/bin/python2.7 certbot
+Activate the certbot virtualenv
+
+. /root/certbot/bin/activate
+Your prompt might turn into something like this
+
+(certbot) [root@hostname ~]#
+
+Then pip install certbot
+
+pip install certbot
+Once complete you can test certbot command under the certbot virtualenv, but this is not practical if you are going to use cron to setup certbot renewals. So deactivate the virtual environment,
+
+(certbot) [root@hostname ~]# deactivate
+Now run the certbot command from
+
+/root/certbot/bin/certbot
+```
 # 工具
 - https://github.com/Neilpang/acme.sh
 - https://github.com/geerlingguy/ansible-role-certbot
