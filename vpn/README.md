@@ -1,5 +1,5 @@
 # l2tp/ipsec
-- https://github.com/hwdsl2/setup-ipsec-vpn(推荐)
+- https://github.com/hwdsl2/setup-ipsec-vpn (推荐)
 
 # openvpn
 
