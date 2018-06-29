@@ -70,11 +70,13 @@ redis-benchmark -h xxx -p 6379 -a crs-1znib6aw:xxx -t set -c 3500 -d 128 -n 2500
 -h: redis实例IP
 -p: redis实例port
 -a: redis实例password
--t: 测试
--c: 每次请求量
--d: set/get value大小
+-t: 测试 Only run the comma separated list of tests. The test names are the same as the ones produced as output.
+-c: 请求量 Total number of requests (default 100000)
+-d: set/get value大小 Data size of SET/GET value in bytes (default 2)
 -n: 总请求数量
 -r: 随机值
+-l: Loop. Run the tests forever
+-q: Quiet. Just show query/sec values
 ```
 - get测试
 ```
@@ -94,13 +96,7 @@ redis2:
 redis-cli -h 10.0.0.46 -a 'xxx' info|grep db0
 ```
 
--h: redis IP
--p: redis port
--c: Total number of requests (default 100000)
--t: Only run the comma separated list of tests. The test names are the same as the ones produced as output.
--d: Data size of SET/GET value in bytes (default 2)
--l: Loop. Run the tests forever
--q: Quiet. Just show query/sec values
+
 ## FQA
 - [2016-06-17 09:12:29.376] nc_redis.c:1092 parsed unsupported command 'keys'
 > twemproxy代理redis的情况，不支持一些指令。这里错误说的是Keys指令不支持
