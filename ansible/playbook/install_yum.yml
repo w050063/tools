@@ -31,5 +31,3 @@
       - dos2unix
       - htop
       - rsync
-      - zsh
-    tags: yum_packages  

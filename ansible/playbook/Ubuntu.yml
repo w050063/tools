@@ -1,7 +1,7 @@
 --- 
 # Tasks specific for Ubuntu systems
 
-- name: tools packages install
+- name: Ubuntu os tools packages install
   apt: state=latest pkg={{ item }}
   with_items:
    - bzip2

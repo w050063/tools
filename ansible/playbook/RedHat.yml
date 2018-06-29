@@ -1,7 +1,7 @@
 --- 
 # Tasks specific for RedHat systems
 
-- name: rpm install
+- name: RedHat os tools packages install
   yum: state=latest name={{item}}
   with_items:
     - gcc

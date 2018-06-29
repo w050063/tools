@@ -1,6 +1,6 @@
 ---
 - import_playbook: install_jdk.yml
-- import_playbook: install_yum.yml
+- import_playbook: install_tools_packages.yml
 
 - hosts: all
   remote_user: root
