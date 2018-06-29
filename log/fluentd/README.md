@@ -31,3 +31,15 @@ Fluent Bit是Fluentd的轻量级数据转发器。Fluent Bit专门用于将数�
 ## Events
 ## Newsletter
 # DOWNLOAD 下载
+
+```
+wget http://packages.treasuredata.com.s3.amazonaws.com/3/redhat/7/x86_64/td-agent-3.2.0-0.el7.x86_64.rpm
+yum install td-agent-3.2.0-0.el7.x86_64.rpm
+/etc/td-agent/td-agent.conf
+systemctl start td-agent
+systemctl status td-agent
+/opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-input-gelf
+/opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-rewrite-tag-filter
+/opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-record-reformer
+curl -X POST -d 'json={"json":"message"}' http://localhost:8888/debug.test
+```
