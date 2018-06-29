@@ -9,6 +9,15 @@ wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/uninstal
 sh uninstall_mysql.sh
 ```
 ## MySQL备份还原
+## 可视化管理工具
+- [SQLyog]
+- [phpMyAdmin]
+- [Navicat]
+- [MySQL ODBC Connector]
+- [DBeaver]
+- [MyDB Studio]
+- [SQL Lite Manger]
+
 ## MySQL监控及故障处理
 ## MySQL批量管理
 - 如何高效的插入数据库100w条数据(大概300~400M数据具体和存储数据类型相关)
