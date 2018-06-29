@@ -65,6 +65,16 @@ redis-benchmark -h 127.0.0.1 -p 6379 -c 100 -t set -d 100 -l –q
 redis:
 redis-benchmark -h 10.0.0.46 -p 6379 -c 100 -t set -d 100 -l –q
 redis-benchmark -h 10.0.0.42 -p 6379 -c 100 -t set -d 100 -l –q
+
+redis-benchmark -h xxx -p 6379 -a crs-1znib6aw:xxx -t set -c 3500 -d 128 -n 25000000 -r 5000000
+-h: redis实例IP
+-p: redis实例port
+-a: redis实例password
+-t: 测试
+-c: 每次请求量
+-d: set/get value大小
+-n: 总请求数量
+-r: 随机值
 ```
 - get测试
 ```
