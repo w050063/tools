@@ -10,9 +10,11 @@
 - sh ansible_install.sh
 
 ### Ansible Playbook
+- ansible-playbook -i hosts site.yml --check
 - ansible-playbook -i hosts site.yml
 - ansible-playbook -i hosts site.yml --limit remote
 - ansible-playbook -i hosts site.yml --limit remote --list-hosts
+- ansible-playbook -i hosts site.yml --list-tags
 - ansible-playbook -i hosts site.yml --limit remote --tags "generate-script"
 
 ### ansible-galaxy
