@@ -29,4 +29,7 @@ EOF
 - 配置
 - 性能测试
 ## codis
+## 可视化管理工具
+- [redis desktop manager](https://redisdesktop.com/download)
+
 ## 参考资料
