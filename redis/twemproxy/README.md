@@ -95,7 +95,11 @@ redis-cli -h 10.0.0.42 -a 'xxx' info|grep db0
 redis2:
 redis-cli -h 10.0.0.46 -a 'xxx' info|grep db0
 ```
-
+- 性能测试遇到报错
+```
+问题1：Could not connect to Redis at 127.0.0.1:6379: Can\'t create socket: Too many open files
+ulimit -n 10000 设置相对大的文件描述符
+```
 
 ## FQA
 - [2016-06-17 09:12:29.376] nc_redis.c:1092 parsed unsupported command 'keys'
