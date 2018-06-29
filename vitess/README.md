@@ -76,6 +76,18 @@
 - keyspace -- 一个数据库
 - vttablet -- MySQL实例
 ```
+- 研究进度
+```
+- 1、本地部署的情况下部署的MySQL实例主要功能
+- ~~2、local案例里里面 新建的db table(messages)看不到是啥原因 需要使用vitess提供命令查看~~
+- ~~3、节点之前会利用GTID进行复制，看不到slave状态是啥情况  需要使用vitess提供命令查看~~
+- 4、数据备份还原方案
+- 5、shard unshard方案
+- 6、Vitess不使用自建MySQL搭配云数据库如何实现(例如：与腾讯云数据库结合)
+- ~~7、如何连接vtgate，有初始化sql，但是使用权限无法登陆 可以登录~~
+- 8、本地部署
+- 9、k8s docker部署
+```
 
 ## 参考资料
 - http://jixiuf.github.io/blog/go_vitess_start.html/
