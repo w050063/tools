@@ -16,17 +16,5 @@ python get-pip.py
 
 # Python开发环境管理virtualenvwrapper
 ```
-pip install virtualenv
-pip install virtualenvwrapper
-cat>>~/.bashrc<EOF
-if [ `id -u` != '0' ]; then
-  export VIRTUALENV_USE_DISTRIBUTE=1            # <-- Always use pip/distribute
-  export WORKON_HOME=$HOME/.virtualenvs        # <-- Where all virtualenvs will be stored
-  source /usr/local/bin/virtualenvwrapper.sh
-  export PIP_VIRTUALENV_BASE=$WORKON_HOME
-  export PIP_RESPECT_VIRTUALENV=true
-fi
-EOF
-source .bashrc
-mkvirtualenv aardvark
+install_virtualenvwrapper.sh
 ```
