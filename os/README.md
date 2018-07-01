@@ -46,7 +46,9 @@ EOF
   - [htop](http://hisham.hm/htop/index.php)\top
 
   - nethogs\iperf
-
+  - [网络测速speed-test](https://github.com/sindresorhus/speed-test)
+  - [下载测速fast-cli](https://github.com/sindresorhus/fast-cli)
+  - [vtop](https://parall.ax/blog/view/3071/introducing-vtop-a-terminal-activity-monitor-in-node-js) - Easily-extendable activity monitor.
 - 显示中文
 ``` bash
 # export LANG='zh_CN.UTF-8'
@@ -62,6 +64,15 @@ EOF
 ## Linux OOM killer
 [Linux OOM killer](https://segmentfault.com/a/1190000008268803)
 
+## 有用的网站
+- Compute Freely
+- AlternativeTo
+- Linux Foundation
+- Linux.com
+- Linux.org
+- Kernel.org
+- Opensource.com
+- Linux.die
 
 ## Ubuntu
 

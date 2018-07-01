@@ -16,5 +16,6 @@ python get-pip.py
 
 # Python开发环境管理virtualenvwrapper
 ```
-install_virtualenvwrapper.sh
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/python/install_virtualenvwrapper.sh
+sh install_virtualenvwrapper.sh
 ```

@@ -5,3 +5,5 @@ df -H
 ```
 - 机器监控
 
+# Mac OS
+- [Homebrew](https://brew.sh/)
