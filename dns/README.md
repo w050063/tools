@@ -2,6 +2,7 @@
 ## 自建DNS
 - dnsmasq搭建简易DNS服务器
 - bind9
+  - https://github.com/Matty9191/bind-query-log-statistics
 
 ## 云DNS服务
 - https://github.com/DNSPod
