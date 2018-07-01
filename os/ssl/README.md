@@ -8,6 +8,8 @@ https://certbot.eff.org
 - 缺点
   - 大规模使用复杂 过期管理
 
+# 证书过期时间检查及报警
+https://github.com/Matty9191/ssl-cert-check
 
 ```
 yum -y install yum-utils
