@@ -9,8 +9,11 @@ https://certbot.eff.org
   - 大规模使用复杂 过期管理
 
 # 证书过期时间检查及报警
+- https://github.com/matteocorti/check_ssl_cert(推荐)
 - https://github.com/Matty9191/ssl-cert-check
-- https://github.com/matteocorti/check_ssl_cert
+- https://github.com/srvrco/checkssl
+- https://github.com/selivan/https-ssl-cert-check-zabbix
+- https://github.com/adfinis-sygroup/check-ssl
 
 ```
 yum -y install yum-utils
