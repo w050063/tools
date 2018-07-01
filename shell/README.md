@@ -15,3 +15,5 @@ $$:代表所在命令的PID
 $!:代表最后执行的后台命令的PID
 $?:代表上一个命令执行是否成功的标志，如果执行成功则$? 为0，否则不为0
 ```
+# 资料
+- https://github.com/dylanaraps/pure-bash-bible
