@@ -7,3 +7,4 @@
 - [如何学习一门技术](https://github.com/mds1455975151/tools/blob/master/idea-repo/03.md)
 - [企业仓库收集](https://github.com/mds1455975151/tools/blob/master/idea-repo/04.md)
 - [团队管理](https://github.com/mds1455975151/tools/blob/master/idea-repo/05.md)
+- [Github Repo 百宝箱](https://github.com/mds1455975151/tools/blob/master/idea-repo/06.md)
