@@ -2,11 +2,11 @@
 - 官网文档:http://docs.graylog.org/en/latest/
 
 # 内容
-- [Architectural considerations 架构](https://github.com/mds1455975151/tools/blob/master/graylog/docs/01-architecture.md)
+- [Architectural considerations 架构](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/01-architecture.md)
   - Minimum setup 最小配置
   - Bigger production setup 生产配置
   - Graylog Architecture Deep Dive 架构深入研究
-- [Getting Started 入门](https://github.com/mds1455975151/tools/blob/master/graylog/docs/02-getting_started.md)
+- [Getting Started 入门](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/02-getting_started.md)
   - Download Graylog
   - Import the VM
   - Start the VM
@@ -17,7 +17,7 @@
   - If You Don’t Have Messages
   - Create Your Dashboard
   - Get Alerted
-- [Installing Graylog](https://github.com/mds1455975151/tools/blob/master/graylog/docs/03-installation.md)
+- [Installing Graylog](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/03-installation.md)
   - Virtual Machine Appliances
   - Operating System Packages
     - Ubuntu installation
@@ -31,9 +31,9 @@
   - Amazon Web Services
   - Microsoft Windows
   - Manual Setup
-- [Upgrading Graylog](https://github.com/mds1455975151/tools/blob/master/graylog/docs/06-upgrade.md)
-- [Configuring Graylog](https://github.com/mds1455975151/tools/blob/master/graylog/docs/07-configuration.md)
-  - [server.conf](https://github.com/mds1455975151/tools/blob/master/graylog/docs/07-configuration-server.conf.md)
+- [Upgrading Graylog](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/06-upgrade.md)
+- [Configuring Graylog](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration.md)
+  - [server.conf](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-server.conf.md)
   - The graylog-ctl script
   - Web interface
   - Load balancer integration
