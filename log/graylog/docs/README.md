@@ -38,7 +38,7 @@
   - [Web interface](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-web_interface.md)
   - [Load balancer integration](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-load_balancers.md)
   - [Using HTTPS](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-https.md)
-  - Multi-node Setup
+  - [Multi-node Setup](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-multinode_setup.md)
   - Elasticsearch
   - Index model
   - Backup
