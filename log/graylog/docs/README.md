@@ -34,10 +34,10 @@
 - [Upgrading Graylog](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/06-upgrade.md)
 - [Configuring Graylog](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration.md)
   - [server.conf](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-server.conf.md)
-  - The graylog-ctl script
-  - Web interface
-  - Load balancer integration
-  - Using HTTPS
+  - [The graylog-ctl script](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-graylog_ctl.md)
+  - [Web interface](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-web_interface.md)
+  - [Load balancer integration](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-load_balancers.md)
+  - [Using HTTPS](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-https.md)
   - Multi-node Setup
   - Elasticsearch
   - Index model
