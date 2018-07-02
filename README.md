@@ -7,3 +7,4 @@ tools 运维工具总结
 - https://github.com/June-Wang/github4shell
 - https://github.com/Polaris0112/Ops-Tools
 - https://github.com/mozillazg/blog
+- https://github.com/xdtianyu/scripts
