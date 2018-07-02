@@ -10,12 +10,12 @@
     - TeamCity
     - ~~confluence wik~~
     - ~~GitLab~~
-    - Open-Falcon
+    - Open-Falcon(待解决)
 - 日常管理
-    - 用户增删改查
-    - ~~大批量增加或者删除用户属性ldapmodify，例如增加mail,mobile等~~
-- ~~域用户自助修改密码self-service-password~~
-- 账号添加属性总结，例如：mail,tel等
+  - ~~用户增删改查(ldapadd,ldapmodify)~~
+  - ~~大批量增加或者删除用户属性ldapmodify，例如增加mail,mobile等~~
+- ~~账号添加属性总结，例如：mail,tel等~~
+- ~~每天利用jenkins定时分析log~~
 - 常用的OpenLDAP[维护工具](https://github.com/ltb-project)
 - self-service-password设置邮件及短信密码找回功能
     - ~~问题找回(最简单不需要依赖ldap信息)~~
@@ -23,8 +23,10 @@
     - ~~短信方式~~
 > 在ldap中获取mail和tel信息 短信需要php调用腾讯sms服务发送短信
 
+- 内网从节点
+- TLS加密信息传输
 - 性能优化
-    
+  
     - ~~降低应用的同步周期120分钟即可，实时性要求不用那么高~~
     - jmeter压测
 # 最佳实践

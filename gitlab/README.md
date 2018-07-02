@@ -19,13 +19,21 @@
   - https://mirror.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-8.9.5-ce.0.el7.x86_64.rpm
   - https://mirror.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-8.17.3-ce.0.el7.x86_64.rpm
   - https://mirror.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-9.1.1-ce.0.el7.x86_64.rpm
-	
+
 ## GitLab源
   - 官网：https://about.gitlab.com/
   - 清华大学镜像：https://mirror.tuna.tsinghua.edu.cn/
-  
+
 ### OpenLDAP
 ### 数据备份及恢复
 ## 参考资料
 - https://github.com/bravist/gitlab-ci-docker
 
+
+## ~~to-do-list~~
+- 日常管理(账号增删改查、添加项目权限、deploy-key添加)
+- ~~数据备份~~
+- 服务监控
+- 部署搭建及维护文档资料
+- ~~项目添加deploy key方法(项目--settings--repository--deploy-keys)~~
+- ~~所有项目由个人账号转至规范groups中并调整jenkins等相关配置~~

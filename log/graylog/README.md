@@ -11,6 +11,7 @@ ansible-galaxy install Graylog2.graylog-ansible-role
 - MongoDB副本集
 - Elasticsearch集群
 - graylog多节点
+  - [验证过程](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/add_new_node_to_graylog_cluster.md)
 - redis logstash缓存层
 - 各服务监控
   - elasticsearch http://www.elastichq.org/

@@ -15,7 +15,7 @@ Java HotSpot(TM) Client VM (build 25.144-b01, mixed mode, sharing)
 > 双击D:\apache-jmeter-4.0\bin\jmeter.bat
 ```
 ### Linux环境
-``` bash 
+``` bash
 yum install -y java-1.8.0-openjdk
 wget http://ftp.cuhk.edu.hk/pub/packages/apache.org//jmeter/binaries/apache-jmeter-4.0.tgz
 tar -zxf apache-jmeter-4.0.tgz -C /usr/local/
@@ -114,3 +114,10 @@ server.rmi.ssl.disable=true
 
 ## 参考资料
 - http://www.cnblogs.com/imyalost/category/846346.html
+
+## to-do-list
+- ~~单机/集群部署~~
+- jar文件(官网插件or自己编写)
+- ~~jmx文件~~
+- 应用到运维工作中(web、LDAP、ftp等等)
+- web服务器\API等性能压测
