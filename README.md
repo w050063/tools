@@ -8,3 +8,4 @@ tools 运维工具总结
 - https://github.com/Polaris0112/Ops-Tools
 - https://github.com/mozillazg/blog
 - https://github.com/xdtianyu/scripts
+- https://github.com/goodboy23/shell-script-collection
