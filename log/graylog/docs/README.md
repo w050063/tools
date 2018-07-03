@@ -39,7 +39,7 @@
   - [Load balancer integration](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-load_balancers.md)
   - [Using HTTPS](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-configuration-https.md)
   - [Multi-node Setup](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-multinode_setup.md)
-  - Elasticsearch
+  - [Elasticsearch](https://github.com/mds1455975151/tools/blob/master/log/graylog/docs/07-elasticsearch.md)
   - Index model
   - Backup
   - Default file locations
