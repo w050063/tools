@@ -16,7 +16,7 @@
   xxx业务名称
   xxx子业务名称
   xxx主机
-
+- https://github.com/sdvdxl/falcon-logdog
 
 ### 相关资源
 - [增强open-falcon提供的alarm模块对邮件模板的支持](https://github.com/mircoteam/mailtemplate)
