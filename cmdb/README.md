@@ -74,3 +74,4 @@ import  _ "fmt" 表示不使用该包，而是只是使用该包的init函数，
 - https://github.com/ixrjog/opsCloud
 - https://github.com/chanyipiaomiao
 - https://github.com/YoLoveLife/DevOps
+- https://github.com/george518/PPGo_Job
