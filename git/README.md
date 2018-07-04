@@ -36,3 +36,12 @@ git remote set-url origin https://github.com/mds1455975151/tools.git
 ``` bash
 ssh-keygen -t rsa -C "your_email@example.com"
 ```
+
+## 仓库镜像
+- 方案1：gogs配置迁移外部仓库 每分钟同步
+- 方案2：git --mirror配置 git remote pull + crontab
+
+使用新地址：
+```
+git clone root@10.135.95.147:/opt/ansible-role-pip.git
+```
