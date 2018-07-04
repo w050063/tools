@@ -2,4 +2,5 @@
 
 # 安装,配置，使用TCCLI
 ```
+ansible-galaxy install mds1455975151.ansible_tc_cli
 ```
