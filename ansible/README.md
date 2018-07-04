@@ -19,7 +19,10 @@
 
 ### ansible-galaxy
 - ansible-galaxy install username.rolename
-
+```
+# vim /etc/ansible/ansible.cfg
+roles_path    = /etc/ansible/roles
+```
 ### 声明
 ### Ansible CMDB
 - [ansible-cmdb](https://github.com/fboender/ansible-cmdb)
