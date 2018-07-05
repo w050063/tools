@@ -1,4 +1,9 @@
 # SSH相关
+## SSH密钥
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/loveserver-deploy
+```
 ## SSH密钥生成
 ## SSH密钥分发
 ## 其他常用技能
