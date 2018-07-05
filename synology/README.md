@@ -13,5 +13,6 @@
    - /usr/syno/etc/packages/StorageAnalyzer
 
    通知设置
-  
+- Directory Server
+https://www.synology.com/zh-cn/knowledgebase/DSM/help/DirectoryServer/ldap_desc
 ## 其他
