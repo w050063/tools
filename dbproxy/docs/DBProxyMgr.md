@@ -12,16 +12,16 @@ wget https://raw.githubusercontent.com/mds1455975151/tools/master/supervisor/ins
 sh install_supervisor.sh
 
 
-cat>/etc/supervisord.d/DBProxyMgr.ini<<EOF
-[program:DBProxyMgr]
+cat>/etc/supervisord.d/dbproxymgr.ini<<EOF
+[program:dbproxymgr]
 directory = /data0/dbproxy/infra-fp-mysql-dbproxy/DBProxyMgr/DBPM
 command = /data0/dbproxy/infra-fp-mysql-dbproxy/DBProxyMgr/DBPM/DBProxyMgr DBProxy.conf
 priority=1
 numprocs=1
 autostart=true
 autorestart=true
-stderr_logfile=/var/log/DBProxyMgr_err.log
-stdout_logfile=/var/log/DBProxyMgr_out.log
+stderr_logfile=/var/log/dbproxymgr_err.log
+stdout_logfile=/var/log/dbproxymgr_out.log
 EOF
 supervisorctl update
 supervisorctl start DBProxyMgr
