@@ -24,7 +24,6 @@ stderr_logfile=/var/log/dbproxymgr_err.log
 stdout_logfile=/var/log/dbproxymgr_out.log
 EOF
 supervisorctl update
-supervisorctl start DBProxyMgr
 supervisorctl status
 netstat -tunlp|grep 12322
 ```
