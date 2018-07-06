@@ -32,6 +32,12 @@ git stash pop                 # 将修改恢复
 git remote -v
 git remote set-url origin https://github.com/mds1455975151/tools.git
 ```
+## Git远程仓库地址变更本地如何修改
+- 通过命令直接修改远程地址
+- 通过命令先删除或重命名再添加远程仓库
+- 直接修改配置文件
+- 修改第三方Git客户端
+
 ## 生成ssh密钥
 ``` bash
 ssh-keygen -t rsa -C "your_email@example.com"
