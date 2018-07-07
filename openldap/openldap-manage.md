@@ -46,6 +46,7 @@ ldap-gather.pl
 - https://www.orcaware.com/
 ```
 yum install -y perl-ExtUtils-MakeMaker libtool
+yum install perl-Data-Dumper perl-Digest-MD5
 tar -zxf orca-0.27.tar.gz
 cd orca-0.27/
 ./configure --with-html-dir=/usr/share/nginx/html/
