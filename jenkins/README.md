@@ -1,4 +1,5 @@
 ## 资料
+- https://github.com/Neilpang/AutoArchive
 
 ### jenkins-pipeline-examples
 - https://github.com/kitconcept/jenkins-pipeline-examples
