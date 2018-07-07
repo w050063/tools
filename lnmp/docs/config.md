@@ -10,4 +10,15 @@ gzip_comp_level   1;
 gzip_http_version 1.1;
 gzip_vary         on;
 ```
+
+```
+worker_connections 51200;
+
+/etc/security/limits.conf
+fastcgi参数
+
+```
 # php-fpm
+```
+
+```
