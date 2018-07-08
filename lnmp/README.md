@@ -39,6 +39,7 @@ PHP-FPM是一个PHP FastCGI管理器，是只用于PHP的，它其实是PHP源�
 - https://bbs.vpser.net/forum-25-1.html
 - https://www.wdlinux.cn/bbs/forum-5-1.html
 - https://blog.linuxeye.cn/31.html
+- https://oneinstack.com/
 
 ### Windows
 - https://www.apachefriends.org/zh_cn/index.html
