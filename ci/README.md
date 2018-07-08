@@ -1,1 +1,2 @@
 - [Travis CI](https://www.travis-ci.org/)
+- [AppVeyor](www.appveyor.com)
