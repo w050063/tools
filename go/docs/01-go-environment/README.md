@@ -76,3 +76,8 @@ go doc工具会从Go程序和包文件中提前顶级声明的首行注释以及
 godoc -http=:6060，然后使用浏览器打开http://localhost:6060 后可以在本地文档浏览服务器提供的页面。(**本地重要手册方便快捷**)
 
 参考资料：http://golang.org/cmd/godoc/
+
+# 其他工具
+- go install
+- go fix
+- go test:轻量级的单元测试框架
