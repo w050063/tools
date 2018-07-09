@@ -172,3 +172,6 @@ if __name__ == "__main__":
 
     data = load()
     print data["last"]
+    
+# example 09: 执行shell命令
+
