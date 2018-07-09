@@ -59,6 +59,7 @@ https://www.jetbrains.com/go/?fromMenu
 gofmt -w a1.go  # 格式化并重写go源文件
 gofmt -w *.go
 gofmt dir1      # 格式化并重写dir1目录及其子目录下的所有go源文件
-
-
 ```
+
+参考资料：https://golang.org/cmd/gofmt/
+
