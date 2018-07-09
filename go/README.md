@@ -37,3 +37,4 @@ go vet是一个用于检查Go语言源码中静态错误的简单工具
   - [示例代码](github.com/adonovan/gopl.io/)
 - 资料汇总
   - https://github.com/jobbole/awesome-go-cn
+  - https://github.com/Unknwon/the-way-to-go_ZH_CN
