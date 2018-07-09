@@ -73,6 +73,6 @@ go doc工具会从Go程序和包文件中提前顶级声明的首行注释以及
 - go doc package/subpackage获取子包的文档注释，例如：go doc container/list
 - go doc package function 获取某个函数在某个包中的文档注释，例如：go doc fmt Printf会显示有关fmt.Printf()的使用说明
 
-godoc -http=:6060，然后使用浏览器打开http://localhost:6060 后可以在本地文档浏览服务器提供的页面。
+godoc -http=:6060，然后使用浏览器打开http://localhost:6060 后可以在本地文档浏览服务器提供的页面。(**本地重要手册方便快捷**)
 
 参考资料：http://golang.org/cmd/godoc/
