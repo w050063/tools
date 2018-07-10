@@ -81,3 +81,9 @@ godoc -http=:6060，然后使用浏览器打开http://localhost:6060 后可以�
 - go install
 - go fix
 - go test:轻量级的单元测试框架
+
+# 与其它语言进行交互
+## C语言
+- http://golang.org/cmd/cgo
+## C++
+
