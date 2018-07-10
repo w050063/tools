@@ -19,6 +19,7 @@ ssh-add ~/.ssh/loveserver-deploy
     
 ## 安卓手机连接服务器
 - juicessh
-
+## 测试ssh连接质量
+- https://github.com/spook/sshping
 ## 参考资料
 - https://github.com/StreisandEffect/streisand
