@@ -12,6 +12,16 @@
 - user build vars
 - build-name-setter
 
+### API
+- 普通触发(建议使用账号名和token,非密码)
+```
+curl -X POST http://localhost:8080/job/xxx-ci-auto/build --user madongsheng:xxxx
+```
+- 带参数触发
+```
+curl -X POST http://localhost:8080/job/xxx-ci-auto/buildWithParameters -d branch_name=develop&update_type=update --user madongsheng:xxxx
+```
+
 ### 自定义主题
 - https://wiki.jenkins.io/display/JENKINS/Simple+Theme+Plugin
 - http://afonsof.com/jenkins-material-theme/
