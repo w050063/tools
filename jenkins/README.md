@@ -19,7 +19,7 @@ curl -X POST http://localhost:8080/job/xxx-ci-auto/build --user madongsheng:xxxx
 ```
 - 带参数触发
 ```
-curl -X POST http://localhost:8080/job/xxx-ci-auto/buildWithParameters -d branch_name=develop&update_type=update --user madongsheng:xxxx
+curl -X POST http://localhost:8080/job/xxx-ci-auto/buildWithParameters -d 'branch_name=develop&update_type=update' --user madongsheng:xxxx
 ```
 
 ### 自定义主题
