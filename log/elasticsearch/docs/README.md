@@ -14,9 +14,9 @@
 #### [重要配置 Important Elasticsearch configuration](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/important-settings.md)
 #### [安全设置 Secure Settings](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/secure-settings.md)
 #### [引导检查 Bootstrap Checks](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/bootstrap-checks.md)
-#### [Important System Configuration]()
-#### [Upgrading Elasticsearch]()
-#### [Stopping Elasticsearch]()
+#### [重要系统配置 Important System Configuration](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/system-config.md)
+#### [升级elasticsearch Upgrading Elasticsearch](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/setup-upgrade.md)
+#### [停止Elasticsearch Stopping Elasticsearch](https://github.com/mds1455975151/tools/blob/master/log/elasticsearch/docs/system-config.md)
 
 # Set up X-Pack
 # Breaking changes
