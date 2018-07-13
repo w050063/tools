@@ -156,4 +156,47 @@ apache
    Deny from all
 </Proxy>
 ```
+
+# 防止恶意解析的域名
+```
+nginx version: nginx/1.12.2
+
+server {
+    listen       80 default_server;
+    listen       [::]:80 default_server;
+    server_name  _;
+
+    return       508;
+}
+
+server {
+    listen       80;
+    listen       [::]:80;
+    server_name  *.xxx.cn; 
+
+    root         /home/xxx/public;
+    # Load configuration files for the default server block.
+    include /etc/nginx/default.d/*.conf;
+
+    index index.php index.html index.htm;
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+        try_files $uri /index.php =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/dev/shm/fpm-cgi.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+    error_page 404 /404.html;
+        location = /40x.html {
+    }
+
+    error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+    }
+}
+```
 ## 参考资料
