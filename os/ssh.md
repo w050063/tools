@@ -10,13 +10,23 @@ ssh-add ~/.ssh/loveserver-deploy
 - ~/.ssh/config管理
   
   - [onfig管理工具manssh](https://github.com/xwjdsh/manssh)
-  
+
   - [~/.ssh/config.d/*方式](https://superuser.com/questions/247564/is-there-a-way-for-one-ssh-config-file-to-include-another-one?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
   - 通过ssh反向隧道及nginx反向代理实现外网控制内网
     - https://blog.csdn.net/fg607/article/details/52123833
     - https://www.cnblogs.com/makefile/p/5410722.html
-    - 案例：ssh -fN -R 1.1.1.1:50000:2.2.2.2:80 root@1.1.1.1 -p 22  （1.1.1.1公网IP，2.2.2.2内外IP） 
-    
+    - 案例：ssh -fN -R 1.1.1.1:50000:2.2.2.2:80 root@1.1.1.1 -p 22  （1.1.1.1公网IP，2.2.2.2内外IP）
+    - ngrok一款内网穿透+记录HTTP请求的神器(支持HTTPS)
+
+## 内网穿透
+- ngrok
+  - [GitHub地址](https://github.com/inconshreveable/ngrok)
+  - [ngrok官网](https://ngrok.com/)
+  - [ittun-ngrok](https://www.ittun.com/)
+  - [sunny-ngrok](https://www.ngrok.cc/)
+- fpr
+  - [GitHub地址](https://github.com/fatedier/frp)
+
 ## 安卓手机连接服务器
 - juicessh
 ## 测试ssh连接质量

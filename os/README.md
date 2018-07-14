@@ -1,5 +1,7 @@
 # 操作系统相关问题
 - [Linux基础](#)
+  - [Linux系统入门](https://computefreely.org/)
+  - [Linux教程](https://linuxjourney.com/)
   - [CentOS系统安装](https://github.com/mds1455975151/tools/blob/master/os/CentOS.md)
 
 ## CentOS

@@ -28,7 +28,7 @@
 ### 数据备份及恢复
 ## 参考资料
 - https://github.com/bravist/gitlab-ci-docker
-
+- [gitlabctl](https://github.com/devopsctl/gitlabctl)
 
 ## ~~to-do-list~~
 - 日常管理(账号增删改查、添加项目权限、deploy-key添加)
