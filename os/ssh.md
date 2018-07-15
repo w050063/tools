@@ -22,9 +22,9 @@ ssh-add ~/.ssh/loveserver-deploy
   - [whosthere](https://github.com/FiloSottile/whosthere)
   - [ssh-chat](https://github.com/shazow/ssh-chat)
   - [sshcommand](https://github.com/dokku/sshcommand)
-- 网络
 
-##
+参考资料：https://github.com/moul/awesome-ssh
+
 ## SSH密钥生成
 ## SSH密钥分发
 ## 其他常用技能

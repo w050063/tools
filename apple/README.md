@@ -7,3 +7,4 @@ df -H
 
 # Mac OS
 - [Homebrew](https://brew.sh/)
+- [技术文档](https://kapeli.com/dash)

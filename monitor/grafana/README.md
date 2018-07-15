@@ -4,6 +4,8 @@
 - 清华大学源：https://mirrors.tuna.tsinghua.edu.cn/grafana
 - Ansible:https://github.com/cloudalchemy/ansible-grafana
 
+# 其他
+- https://github.com/monitoringartist/grafana-aws-cloudwatch-dashboards
 
 # to-do-list
 - ~~安装部署(ansible-playbook)~~
