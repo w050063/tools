@@ -17,7 +17,7 @@ sh uninstall_mysql.sh
 - [DBeaver]
 - [MyDB Studio]
 - [SQL Lite Manger]
-
+- [adminer](https://www.adminer.org/)
 ## MySQL监控及故障处理
 ## MySQL批量管理
 - 如何高效的插入数据库100w条数据(大概300~400M数据具体和存储数据类型相关)
@@ -46,7 +46,7 @@ sh uninstall_mysql.sh
 ``` text
 mysql -P 指定端口不起作用，我的MySQL端口实际在3306上，但指定32442端口也能连接上：
 [root@centos7 ~] #15> mysql -uroot -hlocalhost -P32442 -p
-Enter password: 
+Enter password:
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 13
 Server version: 10.1.30-MariaDB MariaDB Server
@@ -55,11 +55,11 @@ Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-MariaDB [(none)]> 
+MariaDB [(none)]>
 默认尝试3306端口进行连接，连接上才不去尝试-P指定的端口号了，即：如果使用的是3306端口，则-P参数无效，此处指定的32442没有生效。
 ```
 - ERROR 1067 (42000) at line 621: Invalid default value for 'closeTime'							
-``` bash 
+``` bash
 show variables like 'sql_mode';
 SET sql_mode = '';
 SET GLOBAL sql_mode = 'ALLOW_INVALID_DATES,NO_ENGINE_SUBSTITUTION';

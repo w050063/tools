@@ -4,6 +4,27 @@
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/loveserver-deploy
 ```
+## Apps
+- .ssh/config
+  - [advanced-ssh-config](https://github.com/moul/advanced-ssh-config):Transparent wrapper (ProxyCommand) that adds regex, aliases, gateways, includes, dynamic hostnames to SSH and ssh-config.
+  - [storm](https://github.com/emre/storm): 管理SSH config配置
+  - [ansible-ssh-config](https://github.com/gaqzi/ansible-ssh-config):使用Ansible管理SSH Config配置
+  - [ec2ssh](https://github.com/mirakui/ec2ssh):AWS EC2 ssh_config管理工具
+  - [ssh-config](https://github.com/dbrady/ssh-config): ssh_config管理工具
+- 基于SSH协议的工具
+  - scp
+  - rsync
+  - sftp
+  - curl
+- 服务
+  - [teleport](https://github.com/gravitational/teleport)
+  - [ssh2docker](https://github.com/moul/ssh2docker)
+  - [whosthere](https://github.com/FiloSottile/whosthere)
+  - [ssh-chat](https://github.com/shazow/ssh-chat)
+  - [sshcommand](https://github.com/dokku/sshcommand)
+- 网络
+
+##
 ## SSH密钥生成
 ## SSH密钥分发
 ## 其他常用技能

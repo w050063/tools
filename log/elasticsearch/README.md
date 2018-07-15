@@ -27,6 +27,8 @@ http://10.1.16.152:9200/_cluster/settings?pretty
  - 确定节点version,保持节点版本一致性
   > http://10.1.16.152:9200/
 
+es优化：https://mp.weixin.qq.com/s/0TMESj2Z-XK2PzwBQo0Mpg
+
 # to-do-list
 - elasticsearch官网文档过一遍
 - ~~Elasticsearch部署~~

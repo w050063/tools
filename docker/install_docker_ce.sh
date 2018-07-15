@@ -1,6 +1,7 @@
 #!/bin/env bash
 
 docker_version="docker-ce-17.06.2.ce"
+docker_version="docker-ce-18.03.1.ce" # 2018.07.15
 
 install_repo(){
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
@@ -26,6 +27,7 @@ tee /etc/docker/daemon.json <<-'EOF'
 EOF
 systemctl daemon-reload
 systemctl restart docker
+yum install -y docker-compose
 docker version
 }
 

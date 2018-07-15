@@ -12,6 +12,9 @@
 - user build vars
 - build-name-setter
 
+### JX
+https://github.com/jenkins-x/jx
+
 ### API
 - 普通触发(建议使用账号名和token,非密码)
 ```
