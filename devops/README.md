@@ -24,3 +24,20 @@ https://github.com/mistio/mist-ce
 
 # CMDB
 - https://github.com/hgz6536/opman-django
+
+# 源码管理
+- GitHub
+- Bitbucket
+- GitLab
+- Gerrit
+- Gogs
+# 持续集成与交付
+- AppVeyor
+- Drone
+- TeamCity
+- GitLab CI
+- Travis-CI
+- Hudson
+# 打包和工件
+# 虚拟化和容器
+# 云和PaaS环境
