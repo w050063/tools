@@ -38,5 +38,7 @@
     with_items:
       - loveworldserver-deploy-key
       - loveserver-deploy
+      - loveserver-mirror-deploy
       - lovejob-deploy
+      - loveauth-deploy
     tags: rsync_app_deploy-key

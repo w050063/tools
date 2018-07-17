@@ -8,13 +8,14 @@
   - name: glibc install
     yum: state=latest name={{item}}
     with_items:
-      # - glibc.i686
+      - glibc.i686
       - libstdc++
+      - libstdc++.so.6
     tags: install_nodejs_requires
 
   - name: install nodejs
     shell: cd /data0/src && \
-           rsync -avz {{REPO_IP}}::DATA/devops/packages/node-v8.10.0-linux-x86.tar.gz . && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/node-v8.10.0-linux-x86.tar.gz . && \
            tar -zxf node-v8.10.0-linux-x86.tar.gz -C /usr/local/ && \
            chown -R root.root /usr/local/node-v8.10.0-linux-x86
     tags: install_nodejs

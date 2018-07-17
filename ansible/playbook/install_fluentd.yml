@@ -19,7 +19,20 @@
       owner: root
       group: root
       mode: 0664
+    notify: restart td-agent
     tags: rsync_fluent_config
+
+  - name: mkdir td-agent data and log dir
+    file:
+      path: /data0/td-agent/{{ item }}
+      owner: td-agent
+      group: td-agent
+      mode: 0755
+      state: directory
+    with_items:
+      - data
+      - logs
+    tags: create_fluentd_work_dir
 
   - name: install fluent plugins
     shell: /opt/td-agent/embedded/bin/fluent-gem install {{ item }}
@@ -39,3 +52,7 @@
       enabled: yes
       masked: no
     tags: service_boot
+
+  handlers:
+    - name: restart td-agent
+      service: name=td-agent enabled=yes state=restarted
