@@ -35,6 +35,7 @@ es优化：https://mp.weixin.qq.com/s/0TMESj2Z-XK2PzwBQo0Mpg
 - ~~Elasticsearch添加node~~
 - Elasticsearch服务监控
 - Elasticsearch数据备份和恢复
+
 - Elasticsearch数据迁移
 - [Elasticsearch索引迁移](https://blog.csdn.net/laoyang360/article/details/65449407)
   - [elaticserch-dump](https://github.com/taskrabbit/elasticsearch-dump)
