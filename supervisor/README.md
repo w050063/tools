@@ -72,8 +72,23 @@ port=*:9001
 ```
 2）lnmp环境
 ```
+supervisor-monitor这个web控制台控制着多台服务器的程序运行,自然是非常重要,所以访问时应该输入用户名和密码
+
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/lnmp/install_lnmp_c7.sh
 sh install_lnmp_c7.sh
+
+yum -y install httpd-tools
+htpasswd -c /etc/nginx/conf.d/.htpasswd admin
+New password: [admin]
+Re-type new password: [admin]
+Adding password for user admin
+# 如果还想增加用户
+htpasswd -m /etc/nginx/conf.d/.htpasswd tom
+# 这么重要的文件,当然要做好授权
+chown root.nginx .htpasswd
+chmod 640 .htpasswd
+ll .htpasswd
+-rw-r----- 1 root nginx 86 Nov 24 16:18 .htpasswd
 
     server {
         listen 80;
@@ -85,6 +100,8 @@ sh install_lnmp_c7.sh
 
         location / {
             try_files $uri $uri/ /index.php;
+            auth_basic "Basic Auth";
+            auth_basic_user_file "/etc/nginx/conf.d/.htpasswd";
         }
 
         location ~ /*\.php$ {
@@ -95,6 +112,8 @@ sh install_lnmp_c7.sh
             fastcgi_pass 127.0.0.1:9000;
         }
     }
+    
+systemctl reload nginx
 ```
 3）配置supervisord-monitor环境
 ```
