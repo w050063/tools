@@ -63,15 +63,62 @@ supervisord-monitor（改进版）
 https://github.com/mlazarov/supervisord-monitor
 
 - supervisord-monitor（改进版）界面效果
+1）配置每个主机supervisor配置
 ```
-1）安装
-git clone https://github.com/mlazarov/supervisord-monitor.git
 修改配置文件supervisord.conf
 [inet_http_server]
 port=*:9001
-
-2）编写supervisord-monitor配置文件
 ```
+2）lnmp环境
+```
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/lnmp/install_lnmp_c7.sh
+sh install_lnmp_c7.sh
+
+    server {
+        listen 80;
+        server_name  10.1.16.152;
+        set $web_root  /usr/share/nginx/html/supervisord-monitor/public_html/;
+        root $web_root;
+
+        index  index.php index.html index.htm;
+
+        location / {
+            try_files $uri $uri/ /index.php;
+        }
+
+        location ~ /*\.php$ {
+            fastcgi_index index.php;
+            fastcgi_param  SCRIPT_FILENAME $web_root$fastcgi_script_name;
+            fastcgi_param  SCHEME $scheme;
+            include        fastcgi_params;
+            fastcgi_pass 127.0.0.1:9000;
+        }
+    }
+```
+3）配置supervisord-monitor环境
+```
+cd /usr/share/nginx/html/
+git clone https://github.com/mlazarov/supervisord-monitor.git
+cp supervisord-monitor/application/config/supervisor.php.example supervisord-monitor/application/config/supervisor.php
+cd supervisord-monitor/application/config/
+vim supervisor.php
+        '10.1.16.152' => array(
+                'url' => 'http://10.1.16.152/RPC2',
+                'port' => '9001',
+                'username' => 'supervisor',
+                'password' => '09348c20a019be0318387c08df7a783d'
+        ),
+        '10.1.16.155' => array(
+                'url' => 'http://10.1.16.155/RPC2',
+                'port' => '9001',
+                'username' => 'supervisor',
+                'password' => '09348c20a019be0318387c08df7a783d'
+        ),
+
+```
+4）测试
+![images]()
+
 ## Ansible + Supervisor
 - [ansible supervisor](http://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html#supervisorctl-module)
 
