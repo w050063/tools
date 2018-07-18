@@ -13,8 +13,7 @@ https://github.com/zachflower/awesome-open-source-supporters
 https://github.com/devopsbookmarks/devopsbookmarks.com
 http://www.devopsbookmarks.com/
 
-多云管理平台
-https://github.com/mistio/mist-ce
+
 
 # AWS
 - https://github.com/stelligent/mu
@@ -24,6 +23,8 @@ https://github.com/mistio/mist-ce
 
 # CMDB
 - https://github.com/hgz6536/opman-django
+- 多云管理平台
+  - https://github.com/mistio/mist-ce
 
 # 源码管理
 - GitHub
