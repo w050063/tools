@@ -42,7 +42,7 @@ go vet是一个用于检查Go语言源码中静态错误的简单工具
 - 资料汇总
   - https://github.com/jobbole/awesome-go-cn
   - https://github.com/Unknwon/the-way-to-go_ZH_CN
-
+  - https://github.com/EDDYCJY/blog
 ### Go开发环境的基本要求
 - 语法高亮
 - 自动保存代码
