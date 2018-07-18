@@ -22,6 +22,20 @@ sh install_supervisor.sh
   ```
 - supervisorctl
 - web管理界面(inet_http_server)
+- 案例模板
+```
+cat>/etc/supervisord.d/test.ini<<EOF
+[program:test]
+directory = /tmp
+command = ping www.baidu.com
+priority=1
+numprocs=1
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/test_err.log
+stdout_logfile=/var/log/test_out.log
+EOF
+```
 
 ## supervisor集中管理的方案
 - Django-Dashvisor（功能简陋，项目更新不及时）
