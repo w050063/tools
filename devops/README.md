@@ -8,12 +8,15 @@ https://github.com/geerlingguy/ansible-vagrant-examples
 https://github.com/lexrus/ios-dev-playbook
 https://github.com/joubertredrat/awesome-devops
 https://github.com/zachflower/awesome-open-source-supporters
-
+https://github.com/wxyyxc1992/ServerSideApplication-Series
 
 https://github.com/devopsbookmarks/devopsbookmarks.com
 http://www.devopsbookmarks.com/
 
+<details>
 
+xxx
+</details>
 
 # AWS
 - https://github.com/stelligent/mu
