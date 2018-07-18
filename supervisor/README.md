@@ -38,6 +38,8 @@ Web-based dashboard written in Node.js.
 
 Web-based dashboard written in PHP.
 
+- Supvisors
+
 - SupervisorUI
 
 Another Web-based dashboard written in PHP.
