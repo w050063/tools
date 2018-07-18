@@ -118,7 +118,8 @@ vim supervisor.php
 
 ```
 4）测试
-![images]()
+
+![images](https://github.com/mds1455975151/tools/blob/master/supervisor/images/01.png)
 
 ## Ansible + Supervisor
 - [ansible supervisor](http://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html#supervisorctl-module)
