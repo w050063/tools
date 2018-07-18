@@ -63,6 +63,7 @@ supervisord-monitor（改进版）
 https://github.com/mlazarov/supervisord-monitor
 
 - supervisord-monitor（改进版）界面效果
+
 1）配置每个主机supervisor配置
 ```
 修改配置文件supervisord.conf
