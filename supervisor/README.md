@@ -25,21 +25,29 @@ sh install_supervisor.sh
 
 ## supervisor集中管理的方案
 - Django-Dashvisor（功能简陋，项目更新不及时）
+
 Web-based dashboard written in Python. Requires Django 1.3 or 1.4.
 
 - Nodervisor
+
 Web-based dashboard written in Node.js.
+
 项目地址：https://github.com/TAKEALOT/nodervisor
 
 - Supervisord-Monitor
-    Web-based dashboard written in PHP.
+
+Web-based dashboard written in PHP.
 
 - SupervisorUI
+
 Another Web-based dashboard written in PHP.
+
 supervisord-monitor（改进版）
+
 https://github.com/mlazarov/supervisord-monitor
 
 - supervisord-monitor（改进版）界面效果
+```
 1）安装
 git clone https://github.com/mlazarov/supervisord-monitor.git
 修改配置文件supervisord.conf
@@ -47,7 +55,7 @@ git clone https://github.com/mlazarov/supervisord-monitor.git
 port=*:9001
 
 2）编写supervisord-monitor配置文件
-
+```
 ## Ansible + Supervisor
 - [ansible supervisor](http://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html#supervisorctl-module)
 
