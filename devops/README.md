@@ -26,6 +26,7 @@ xxx
 
 # CMDB
 - https://github.com/hgz6536/opman-django
+- https://github.com/YoLoveLife/DevOps
 - 多云管理平台
   - https://github.com/mistio/mist-ce
 
