@@ -10,6 +10,7 @@ sudo systemctl stop firewalld
 setenforce 0
 sed -i.bak 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
+jdk_install(){
 if [ ! -f ${data_dir}/${jdk_version} ]
 then
     # cd ${data_dir} && wget http://${jdk_version}
@@ -27,6 +28,9 @@ export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/li
 export PATH=$PATH:$JAVA_HOME/bin
 EOF
 source /etc/profile
+}
+
+yum install -y java-1.8.0-openjdk
 java -version
 
 wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
