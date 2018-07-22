@@ -37,9 +37,18 @@ done
 ```
 ## SVN目录结构调整
 目录结构调整，在不checkout所有代码的情况下如何快速调整
-``` bash 
+``` bash
 svn move -m "Move a dir" svn://xxx/dongsheng/test1/test_dir svn://xxx/dongsheng/test2/test_dir
 svn move -m "Move a dir" file:///home/svn-root/dongsheng/test2/test_dir file:///home/svn-root/dongsheng/test1/test_dir
 svn mkdir -m 'make a new dir' file:///home/svn-root/dongsheng/script
 svn list file:///home/svn-root/dongsheng/script
+```
+
+##
+```
+--force # 强制覆盖
+/usr/bin/svn --username user --password passwd co  $Code  ${SvnPath}src/                 # 检出整个项目
+/usr/bin/svn --username user --password passwd up  $Code  ${SvnPath}src/                 # 更新项目
+/usr/bin/svn --username user --password passwd export  $Code$File ${SvnPath}src/$File    # 导出个别文件
+/usr/bin/svn --username user --password passwd export -r 版本号 svn路径 本地路径 --force   # 导出指定版本
 ```

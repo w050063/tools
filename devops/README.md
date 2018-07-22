@@ -13,6 +13,7 @@ https://github.com/wxyyxc1992/ServerSideApplication-Series
 https://github.com/devopsbookmarks/devopsbookmarks.com
 http://www.devopsbookmarks.com/
 
+https://github.com/ramyrams/DevOps
 <details>
 
 xxx
@@ -25,10 +26,17 @@ xxx
 - [SQL操作平台](https://github.com/jly8866/archer)
 
 # CMDB
+- https://github.com/openspug/spug
+- https://github.com/welliamcao/OpsManage
+- https://github.com/itpubs/OneStack
+- https://github.com/chanyipiaomiao/devops-api
+- https://github.com/roddyofchina/SimpletourDevops
 - https://github.com/hgz6536/opman-django
 - https://github.com/YoLoveLife/DevOps
 - 多云管理平台
   - https://github.com/mistio/mist-ce
+# OPStools
+- https://github.com/alibaba/opstools
 
 # 源码管理
 - GitHub
