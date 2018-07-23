@@ -1,0 +1,30 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: bind install
+    yum: state=latest name=bind
+    tags: install_bind_packages
+
+  - name: git clone tools repo
+    git:
+      repo: 'https://github.com/molin1987/DNS.git'
+      dest: /data0/src
+      version: master
+      accept_hostkey: yes
+      update: yes
+    tags: git_clone_config_files
+
+  - name: make sure a service is running
+    systemd: state=started name=bind
+    tags: service_start
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: bind
+      enabled: yes
+      masked: no
+    tags: service_boot_start
+
+
