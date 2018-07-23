@@ -33,4 +33,5 @@ roles_path    = /etc/ansible/roles
 - https://github.com/arbabnazar/ansible-roles
 - https://github.com/contiv/ansible
 - https://github.com/adithyakhamithkar/ansible-playbooks
+- https://github.com/kbrebanov
 - [基于Ansible的自动化代码发布工具](https://github.com/geekwolf/flamingo)
