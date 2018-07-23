@@ -33,6 +33,18 @@ for i in `ls|grep -v txt`;do cat $i/*.pem>$i.txt;done
 
 添加定时更新证书
 0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew
+
+申请通配符域名
+https://github.com/Neilpang/acme.sh/wiki/%E8%AF%B4%E6%98%8E
+acme.sh
+export DP_Id="xxx"
+export DP_Key="xxx"
+acme.sh --issue --dns dns_dp -d xxx.cn -d *.xxx.cn 
+acme.sh --issue --dns dns_dp -d *gs.xxx.cn
+
+~/.acme.sh/account.conf
+
+https://blog.csdn.net/wr410/article/details/79559369
 ```
 
 # FQA
