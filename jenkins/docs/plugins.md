@@ -13,4 +13,5 @@
 - SCM Sync Configuration Plugin
 - Jenkins Maven plugin
 - Jenkins Subversion plugin
+
 原文：http://www.infoq.com/cn/news/2018/07/devops-10best-jenkins-plugins
