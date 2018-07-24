@@ -31,20 +31,35 @@ es优化：https://mp.weixin.qq.com/s/0TMESj2Z-XK2PzwBQo0Mpg
 # 相关工具
 ## 基础类工具
 - head插件
+```
 ES集群状态查看、索引数据查看、ES DSL实现（增、删、改、查操作）
 比较实用的地方：json串的格式化
 GitHub地址：http://mobz.github.io/elasticsearch-head/
+```
 
 - Kibana
+```
 除了支持各种数据的可视化之外，最重要的是：支持Dev Tool进行RESTFUL API增删改查操作。比Postman工具和curl都方便很多。
 地址：https://www.elastic.co/products/kibana
+```
 
 - ElasticHD
+```
 强势功能——支持sql转DSL，不要完全依赖，可以借鉴用。
 GitHub地址：https://github.com/360EntSecGroup-Skylar/ElasticHD
+```
 
 ## 集群监控工具
+- cerebro
+```
+GitHub地址：https://github.com/lmenezes/cerebro
+```
 
+- Elaticsearch-HQ
+```
+管理elasticsearch集群以及通过web界面来进行查询操作
+GitHub地址：https://github.com/royrusso/elasticsearch-HQ
+```
 # to-do-list
 - elasticsearch官网文档过一遍
 - ~~Elasticsearch部署~~
