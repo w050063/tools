@@ -5,6 +5,8 @@
 
 # 部署安装
 ```
+cd /etc/ansible/playbook/
+ansible-playbook host-init-test.yml -l 10.1.16.154
 ansible-playbook install_elasticsearch.yml -l 10.1.16.154
 ```
 ### API
