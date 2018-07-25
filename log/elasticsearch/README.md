@@ -84,6 +84,28 @@ GitHub地址：https://github.com/royrusso/elasticsearch-HQ
 ```
 移动和保存索引的工具。
 地址：https://github.com/taskrabbit/elasticsearch-dump
+
+- copy索引
+				elasticdump \
+				  --input=http://1.1.1.1:9200/my_index \
+				  --output=http://10.1.16.152:9200/my_index \
+				  --type=analyzer
+				elasticdump \
+				  --input=http://1.1.1.1:9200/my_index \
+				  --output=http://10.1.16.152:9200/my_index \
+				  --type=mapping
+				elasticdump \
+				  --input=http://1.1.1.1:9200/my_index \
+				  --output=http://10.1.16.152:9200/my_index \
+				  --type=data
+			
+- copy分片shard(每100个对象操作一次)
+				elasticdump \
+				  --input=http://1.1.1.1:9200/graylog_0 \
+				  --output=http://10.1.16.152:9200/graylog_0 \
+				  --params='{"preference" : "_shards:0"}'
+  
+
 ```
 
 ## 集群数据处理工具
