@@ -16,6 +16,9 @@ https://certbot.eff.org
 - https://github.com/adfinis-sygroup/check-ssl
 
 ```
+./check_ssl_cert -H develop.gs.worldoflove.cn|awk -F '[=;]+' '{print $2}'  # 计算还有多少天证书过期
+```
+```
 yum -y install yum-utils
 yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
 yum install python2-certbot-nginx
