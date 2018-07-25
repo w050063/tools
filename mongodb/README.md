@@ -39,8 +39,10 @@ show collections;
 db.dropDatabase()
 ```
 ## MongoDB备份和还原
+```
 mongodump -h 10.1.16.152 -o /data0/backups/mongodb-`date +%Y%m%d`
 mongorestore -h 10.1.16.152 -d graylog /data0/backups/mongodb-20180619/graylog/
+```
 
 # FQA
 # 参考资料
