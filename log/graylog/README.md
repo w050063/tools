@@ -12,7 +12,9 @@ ansible-playbook install_graylog_server.yml -l 10.1.16.152
 ansible-playbook install_graylog_syslog.yml -l 10.1.16.152
 ```
 - ansible 官网推荐
+```
 ansible-galaxy install Graylog2.graylog-ansible-role
+```
 
 ## Graylog集群管理
 - MongoDB副本集
