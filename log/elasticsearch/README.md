@@ -1,8 +1,12 @@
-## Elasticsearch
+# Elasticsearch
 
 - 官网文档：https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
 - 5.6官网文档：https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html
 
+# 部署安装
+```
+ansible-playbook install_elasticsearch.yml -l 10.1.16.154
+```
 ### API
 #### Search APIs
 #### Indices APIs
