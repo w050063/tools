@@ -2,7 +2,7 @@
 ## GrayLog概述
 ## Graylog性能压测
 - jmeter
--
+
 ## GrayLog安装部署
 - ansible
 ```
@@ -97,9 +97,29 @@ systemctl status graylog-server.service
 ```
 
 ## FQA
-- tools
+### tools
 ```
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/log/graylog/graylog_tools.sh
 ```
+
+### graylog 蓝绿部署思路
+-  ~~两个负载均衡，用于指向后端两个graylog集群~~
+- ~~配置两个graylog集群的安全组，开放对应日志收集端口(注意区分：TCP,UDP)~~
+- ~~自定义插件/usr/share/graylog-server/plugin/graylog-plugin-splunk-0.6.3.jar，集成到部署脚本，保证部署环境一致性~~
+- ~~input配置(要点：输出日志时使用域名地址，保证切换域名解析即可指向不同的graylog集群)~~
+	- Application GELF HTTP
+	- Application GELF UDP
+	- System Log  /etc/rsyslog.d/90-graylog.conf
+	- beats-input /etc/graylog/collector-sidecar/collector_sidecar.yml
+- stream配置
+	- All messages
+	- Love BI 
+	- System Log
+	- TLog
+- ldap用户配置(存储在MongoDB中,研究如何快速导出导入配置)
+- 索引配置(存储在MongoDB中,研究如何快速导出导入配置)
+- web界面其他自定义配置(存储在MongoDB中,研究如何快速导出导入配置)
+
+
 ## 参考资料
 BeanShell （JAVA源码解释器）
