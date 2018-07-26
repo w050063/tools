@@ -11,6 +11,8 @@
 ### 命名规范
 ### ssl证书(常见web服务配置)
 ### 域名备案
+- 域名购买后会颁发域名所有权证书，如下：
+![images]()
 ### 域名转出及转入
 ### 域名过期检查
 - https://github.com/Matty9191/dns-domain-expiration-checker
