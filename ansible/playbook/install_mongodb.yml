@@ -1,4 +1,6 @@
 --- 
+- import_playbook: create_work_dir.yml
+
 - hosts: all
   remote_user: root
   gather_facts: true
@@ -17,6 +19,38 @@
       - mongodb-org-tools 
     tags: mongodb_install
 
+  - name: mkdir data and log dir
+    file:
+      path: /data0/mongodb/{{ item }}
+      owner: mongod
+      group: mongod
+      mode: 0755
+      state: directory
+    with_items:
+      - data
+      - logs
+    tags: create_app_work_dir
+
+  - name: remove old data dir
+    file:
+      path: /var/lib/mongo/
+      owner: mongod
+      group: mongod
+      mode: 0755
+      state: absent
+      backup: yes
+    tags: remove_old_data_work_dir
+
+  - name: mkdir data link
+    file:
+      src: /data0/mongodb/data
+      dest: /var/lib/mongo
+      owner: mongod
+      group: mongod
+      mode: 0755
+      state: link
+    tags: create_app_work_dir_link
+
   - name: rsync /etc/mongod.conf
     template:
       src: files/mongodb/mongod.conf.j2
@@ -24,15 +58,16 @@
       owner: root
       group: root
       mode: 0664
+      backup: yes
     tags: rsync_mongodb_conf
 
-  - name: Make sure a service is running
+  - name: make sure a service is running
     systemd: 
       state: started 
       name: mongod
     tags: mongod_service_running
 
-  - name: enable service etcd and ensure it is not masked
+  - name: enable service and ensure it is not masked
     systemd:
       name: mongod
       enabled: yes

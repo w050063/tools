@@ -5,6 +5,9 @@
 - hosts: all
   remote_user: root
   gather_facts: true
+  vars:
+    - graylog_message_journal_max_age: "24h"
+    - graylog_message_journal_max_size: "10gb"
   tasks:
   #- name: install graylog repository
   #  shell: rpm -Uvh https://packages.graylog2.org/repo/packages/graylog-2.4-repository_latest.rpm
@@ -32,6 +35,17 @@
       mode: 0664
     tags: rsync_graylog_server_conf
 
+  - name: install the graylog custom plugins (lemongrassmedia)
+    copy:
+      src: files/graylog-server/{{ item }}
+      dest: /usr/share/graylog-server/plugin/{{ item }}
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      - graylog-plugin-splunk-0.6.3.jar
+    tags: rsync_graylog_server_conf
+
   #- name: Make sure a service is running
   #  systemd: 
   #    state: started 
@@ -40,7 +54,7 @@
 
   - name: print change graylog server config
     debug:
-      msg: "please change graylog server config and start service(es\mongodb\api configs)"
+      msg: "please change graylog server config and start service(es/mongodb/api configs)"
     tags: print_change_graylog_server_config
 
   - name: enable service and ensure it is not masked

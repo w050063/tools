@@ -1,0 +1,59 @@
+--- 
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  tasks:
+  - name: rsysc php.d config file
+    copy:
+      src: files/game_conf/php/{{ item }}
+      dest: /etc/php.d/{{ item }}
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      - apcu.ini
+      - igbinary.ini
+      - opcache.ini
+      - protobuf.ini
+      # - trie_filter.ini
+    tags: rsync_php.d_config
+    
+  - name: rsysc php.ini config file
+    copy:
+      src: files/game_conf/php/php.ini
+      dest: /etc/php.ini
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_php.ini_config
+
+  - name: rsync php-fpm config file
+    copy:
+      src: files/game_conf/fpm/www.conf
+      dest: /etc/php-fpm.d/www.conf
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_php-fpm_config
+
+  - name: rsync nginx.conf config file
+    template:
+      src: files/game_conf/nginx.conf.j2
+      dest: /etc/nginx/nginx.conf
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    tags: rsync_nginx_conf_config
+
+  - name: nginx log owner user
+    shell: chown -R nobody.nobody /var/log/nginx
+    tags: nginx_log_owner
+
+  - name: restart php-fpm
+    shell: systemctl restart php-fpm
+    tags: restart_php-fpm
+
+  - name: restart nginx
+    shell: systemctl restart nginx
+    tags: restart_nginx

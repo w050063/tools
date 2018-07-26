@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  become_user: root
+  remote_user: root
+  gather_facts: true
+  tasks:
+  - name: uninstall jenkins packages
+    yum: name=jenkins state=absent
+    tags: uninstall_jenkins
+
+  - name: clean files
+    file: name={{ item }} state=absent
+    with_items:
+      - "/data0/jenkins"
+      - "/etc/yum.repos.d/jenkins.repo"
+    tags: clean_packages_files

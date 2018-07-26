@@ -1,0 +1,83 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  become: true
+  become_user: root
+  remote_user: root
+  gather_facts: true
+  vars:
+    jenkins_port: 8080
+    jenkins_user: root
+    jenkins_home: /data0/jenkins
+  tasks:
+  - name: RedHat os elasticsearch install
+    include: "install_jdk_redhat.yml"
+    when:
+      - ansible_os_family == "RedHat"
+    tags: install_jdk_redhat
+
+  - name: wget jenkins repo file
+    shell: wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo --no-check-certificate
+    tags: wget_jenkins_packages
+
+  - name: wget jenkins repo key files
+    shell: wget -O /data0/src/jenkins.io.key https://pkg.jenkins.io/redhat-stable/jenkins.io.key --no-check-certificate
+    tags: wget_jenkins_repo_key
+
+  - name: import jenkins repo key files
+    shell: rpm --import /data0/src/jenkins.io.key
+    tags: import_jenkins_repo_key
+
+  - name: jenkins packages install
+    yum: state=latest name=jenkins
+    tags: install_jenkins_packages
+ 
+  - name: configure jenkins port for RedHat
+    lineinfile:
+      dest: /etc/sysconfig/jenkins
+      regexp: ^JENKINS_PORT=
+      line: 'JENKINS_PORT="{{ jenkins_port }}"'
+    tags: change_port
+
+  - name: configure jenkins user for RedHat
+    lineinfile:
+      dest: /etc/sysconfig/jenkins
+      regexp: ^JENKINS_USER=
+      line: 'JENKINS_USER="{{ jenkins_user }}"'
+    tags: change_user
+
+  - name: configure jenkins home for RedHat
+    lineinfile:
+      dest: /etc/sysconfig/jenkins
+      regexp: ^JENKINS_HOME=
+      line: 'JENKINS_HOME="{{ jenkins_home }}"'
+    tags: change_home_dir
+
+  - name: mkdir jenkins data
+    file:
+      path: /data0/jenkins
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+    tags: create_jenkins_work_dir
+
+  - name: make sure a service is running
+    systemd: 
+      state: started 
+      name: jenkins
+    tags: jenkins_service_running
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: jenkins
+      enabled: yes
+      masked: no
+    tags: jenkins_service_start
+
+  # Safe-restart Jenkins
+  - name: Restart Jenkins
+    command: "{{ jenkins_cli_cmd }} safe-restart --username {{ jenkins_admin_user }} --password {{ jenkins_admin_password }}"
+    when: jenkins_admin_user is defined and jenkins_admin_password is defined
+    tags: safe_restart_jenkins

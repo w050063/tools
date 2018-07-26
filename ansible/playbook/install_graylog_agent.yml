@@ -22,23 +22,34 @@
   - name: install collector-sidecar-0.1.4-1.x86_64.rpm
     shell: rpm -ivh /data0/src/collector-sidecar-0.1.4-1.x86_64.rpm
     ignore_errors: yes
+    tags: installr_collector_sidecar
 
   - name: rsync collector-sidecar config
     copy:
-      src: files/collector_sidecar.yml
+      src: files/collector_sidecar.yml.j2
       dest: /etc/graylog/collector-sidecar/collector_sidecar.yml
       owner: root
       group: root
       mode: 0664
+    notify: restart collector-sidecar
+    tags: rsync_config
 
   - name: service install
     shell: graylog-collector-sidecar -service install
+    tags: service_install
 
-  - name: Make sure a service is running
+  - name: make sure a service is running
     systemd: state=started name=collector-sidecar
+    tags: service_start
 
   - name: enable service collector-sidecar and ensure it is not masked
     systemd:
       name: collector-sidecar
       enabled: yes
       masked: no
+    tags: service_boot
+
+  handlers:
+    - name: restart collector-sidecar
+      service: name=rsyslog enabled=yes state=restarted
+      tags: restart_collector_sidecar

@@ -1,0 +1,52 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  tasks:
+  - name: get branch version
+    shell: cd /home/gameserver/ && git branch -a|awk '/*/{print $2}' 
+    register: branch_version
+    tags: print_branch_version
+
+  - name: get git commit version
+    shell: cd /home/gameserver/ && git log -p -1|awk '/commit/{print $2}'
+    register: commit_version
+    tags: print_commit_version
+  
+  - name: get git remote_url
+    shell: cd /home/gameserver/ && git remote -v|awk '{print $2}'|uniq
+    register: git_remote_url_version
+    tags: print_git_remote_url_version
+
+  - name: get env GAME_ZONE_ID
+    shell: awk '/ZONE/{print $0}' /home/gameserver/.env
+    register: game_zone_id
+    tags: print_game_zone_id
+
+  - name: print branch info
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "{{ branch_version.stdout_lines }}"
+    tags: print_branch_version
+
+  - name: print git commit info
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "{{ commit_version.stdout_lines }}"
+    tags: print_git_commit_version
+
+  - name: print git remote_url
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "{{ git_remote_url_version.stdout_lines }}"
+    tags: print_git_remote_url_version
+
+  - name: print game_zone_id
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "{{ game_zone_id.stdout_lines }}"
+    tags: print_game_zone_id

@@ -1,0 +1,40 @@
+---
+- import_playbook: create_work_dir.yml
+- import_playbook: install_openjdk.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: install sdkman
+    shell: curl -s get.sdkman.io | bash
+    tags: install_sdkman
+
+  #- name: install grooy
+  #  shell: source "$HOME/.sdkman/bin/sdkman-init.sh"
+  #  tags: set_sdbman_env
+
+  - name: set sdbman env
+    lineinfile:
+      path: ~/.bashrc
+      state: present
+      backup: yes
+      line: 'source "$HOME/.sdkman/bin/sdkman-init.sh"'
+    tags: set_sdbman_env
+
+  - name: install groovy
+    shell: sdk install groovy
+    ignore_errors: yes
+    tags: install_groovy
+
+  - name: get groovy version
+    shell: groovy -version
+    register: version
+    tags: print_version
+  
+  - name: print app version
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "version: {{ version.stdout_lines }}"
+    tags: print_version

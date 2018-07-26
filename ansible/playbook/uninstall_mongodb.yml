@@ -3,18 +3,19 @@
   remote_user: root
   gather_facts: false
   tasks:
-  - name: mongodb uninstall
-    yum: state=absent name={{ item }}
+  - name: service packages uninstall
+    yum: name={{ item }} state=absent
     with_items:
       - mongodb-org
       - mongodb-org-server
       - mongodb-org-shell
       - mongodb-org-mongos
       - mongodb-org-tools
-    tags: mongodb_uninstall
+    tags: uninstall_service_packages
 
   - name: clean files
     file: name={{ item }} state=absent
     with_items:
-      - "/var/lib/mongo"
-      - "/etc/mongod.conf"
+    - "/var/log/mongodb/"
+    - "/etc/yum.repos.d/mongodb-org-3.6.repo"
+    tags: clean_service_files

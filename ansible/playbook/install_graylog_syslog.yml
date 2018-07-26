@@ -11,9 +11,10 @@
       owner: root
       group: root
       mode: 0644
+    notify: restart rsyslog
     tags: rsync_graylog_conf
 
-  - name: systemd Make sure a service is running
+  - name: systemd make sure a service is running
     systemd: state=started name=rsyslog
     when: ansible_os_family == "RedHat"
     tags: start_rsyslog
@@ -26,14 +27,20 @@
     when: ansible_os_family == "RedHat"
     tags: onboot_rsyslog
 
-  - name: service Make sure a service is running
+  - name: service make sure a service is running
     service: state=started name=rsyslog
     when: ansible_os_family == "Debian"
     tags: start_rsyslog
 
-  - name: service enable service httpd and ensure it is not masked
+  - name: service enable service and ensure it is not masked
     service:
       name: rsyslog
       enabled: yes
     when: ansible_os_family == "Debian"
     tags: onboot_rsyslog
+
+  handlers:
+    - name: restart rsyslog
+      service: name=rsyslog enabled=yes state=restarted
+      when: ansible_os_family == "RedHat"
+      tags: restart_rsyslog
