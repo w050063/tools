@@ -1,0 +1,60 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - ant_version: 1.10.5
+  tasks:
+  - name: Redhat os java install
+    include: "install_jdk_redhat.yml"
+    when:
+      - ansible_os_family == "RedHat"
+    tags: install_jdk_redhat
+
+  - name: download apache-ant-{{ ant_version }}-bin.tar.gz
+    get_url: url=http://mirrors.tuna.tsinghua.edu.cn/apache//ant/binaries/apache-ant-{{ ant_version }}-bin.tar.gz dest=/data0/src/
+    tags: download_ant_packages
+
+  - name: unzip ant packages
+    unarchive: src=/data0/src/apache-ant-{{ ant_version }}-bin.tar.gz dest=/usr/local/
+    tags: unzip_ant_packages
+
+  - name: mkdir version link
+    file:
+      src: /usr/local/apache-ant-{{ ant_version }}/
+      dest:  /usr/local/ant
+      owner: root
+      group: root
+      mode: 0755
+      state: link
+    tags: create_ant_version_link
+
+  - name: rsysc ant_env.sh
+    copy:
+      src: files/{{ item }}
+      dest: /data0/src/{{ item }}
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      - ant_env.sh
+      - build.xml
+    tags: rsync_env_scripts
+    
+  - name: ant env setup
+    shell: sh /data0/src/ant_env.sh
+    tags: config_ant_env
+
+  - name: get ant version
+    shell: ant -version
+    register: version
+    tags: print_version
+  
+  - name: print ant version
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "version: {{ version.stdout_lines }}"
+    tags: print_version
