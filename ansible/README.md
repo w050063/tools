@@ -27,7 +27,7 @@ roles_path    = /etc/ansible/roles
 ### Ansible CMDB
 - [ansible-cmdb](https://github.com/fboender/ansible-cmdb)
 ### FQA
-- **环境变量问题**
+**环境变量问题**
 - ansible这类远程执行的non-login shell 并不会加载/etc/profile和~/.bash_profile下的环境变量，只是加载~/.bashrc和/etc/bashrc
 - 如果需要在ansible中执行需要特定环境变量的命令，可以在执行前source一下~/.bash_profile， 或者将环境变量写在~/.bashrc
 
