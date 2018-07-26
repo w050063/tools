@@ -43,6 +43,14 @@ db.dropDatabase()
 mongodump -h 10.1.16.152 -o /data0/backups/mongodb-`date +%Y%m%d`
 mongorestore -h 10.1.16.152 -d graylog /data0/backups/mongodb-20180619/graylog/
 ```
+## MongoDB客户端管理工具
+- MongoVUE
+http://www.mongovue.com/
+- MongoHub
+- RockMongo
+需要PHP环境
+- RoboMongo
+https://robomongo.org/
 
 # FQA
 # 参考资料
