@@ -120,6 +120,14 @@ wget https://raw.githubusercontent.com/mds1455975151/tools/master/log/graylog/gr
 - 索引配置(存储在MongoDB中,研究如何快速导出导入配置)
 - web界面其他自定义配置(存储在MongoDB中,研究如何快速导出导入配置)
 
-
+### 常见错误
+- Uncommited messages deleted from journal (triggered 15 days ago)
+```
+Some messages were deleted from the Graylog journal before they could be written to Elasticsearch. Please verify that your Elasticsearch cluster is healthy and fast enough. You may also want to review your Graylog journal settings and set a higher limit. (Node: c2442555-b465-4c88-95e7-2a0d68a1305c)
+```
+- Journal utilization is too high (triggered 15 days ago)
+```
+Journal utilization is too high and may go over the limit soon. Please verify that your Elasticsearch cluster is healthy and fast enough. You may also want to review your Graylog journal settings and set a higher limit. (Node: c2442555-b465-4c88-95e7-2a0d68a1305c)
+```
 ## 参考资料
 BeanShell （JAVA源码解释器）
