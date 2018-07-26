@@ -19,3 +19,6 @@ python get-pip.py
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/python/install_virtualenvwrapper.sh
 sh install_virtualenvwrapper.sh
 ```
+
+# 总结资料
+- https://github.com/lijin-THU/notes-python

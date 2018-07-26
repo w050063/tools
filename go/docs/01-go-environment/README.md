@@ -1,5 +1,16 @@
 下载地址：https://golang.org/dl/
 
+# 什么是Go?
+  Go是一门并发支持、垃圾回收的编译型系统编程语言，旨在创造一门具有在静态编译语言的高性能和动态语言的高效开发之间拥有良好平衡点的一门编程语言。
+
+Go的主要特点有哪些？
+- 类型安全和内存安全
+- 以非常直观和极低代价实现高并发
+- 高效的垃圾回收机制
+- 快速编译
+- 为多核计算机提供高性能提升方案
+- UTF-8支持
+
 # Go安装
 ## windows:
 ### Install the Go tools
@@ -29,14 +40,14 @@ brew info go
 ```
 
 # Go 命令说明
-- go build
+- go build：测试编译，检查是否有编译错误
 - go run:编译并运行Go程序
-- go install
+- go install：编译包文件并编译整个程序
 - go clean
-- go fmt
+- go fmt：格式化源码
 - go get:动态获取远程代码包
-- go test
-- go doc
+- go test：运行测试文件
+- go doc：查看文档
 - go version
 - go env
 - go list
@@ -86,4 +97,3 @@ godoc -http=:6060，然后使用浏览器打开http://localhost:6060 后可以�
 ## C语言
 - http://golang.org/cmd/cgo
 ## C++
-
