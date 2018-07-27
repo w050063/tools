@@ -103,6 +103,7 @@ wget https://raw.githubusercontent.com/mds1455975151/tools/master/log/graylog/gr
 ```
 ## 导出导入配置system\Content packs配置
 http://docs.graylog.org/en/2.4/pages/configuration/server.conf.html?highlight=Content%20packs
+http://docs.graylog.org/en/2.4/pages/marketplace.html?highlight=Content%20packs
 
 ### graylog 蓝绿部署思路
 -  ~~两个负载均衡，用于指向后端两个graylog集群~~
