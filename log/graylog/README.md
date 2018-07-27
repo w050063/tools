@@ -102,8 +102,12 @@ systemctl status graylog-server.service
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/log/graylog/graylog_tools.sh
 ```
 ## 导出导入配置system\Content packs配置
+在配置中添加默认加载
 http://docs.graylog.org/en/2.4/pages/configuration/server.conf.html?highlight=Content%20packs
+别人共享的配置信息
 http://docs.graylog.org/en/2.4/pages/marketplace.html?highlight=Content%20packs
+说明
+http://docs.graylog.org/en/2.4/pages/sending_data.html?highlight=Content%20packs
 
 ### graylog 蓝绿部署思路
 -  ~~两个负载均衡，用于指向后端两个graylog集群~~
