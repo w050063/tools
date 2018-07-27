@@ -32,6 +32,7 @@ roles_path    = /etc/ansible/roles
 - 如果需要在ansible中执行需要特定环境变量的命令，可以在执行前source一下~/.bash_profile， 或者将环境变量写在~/.bashrc
 
 参考资料：https://blog.csdn.net/u010871982/article/details/78525367
+
 **模块**
 - set_fact
 
