@@ -194,6 +194,10 @@ SENTINL还旨在简化在Siren Investigate / Kibana 6.x中通过其本地应用�
 
 官网地址：https://github.com/sirensolutions/sentinl
 ```
+# FQA
+```
+主动设置elasticsearch主节点
+```
 # to-do-list
 - elasticsearch官网文档过一遍
 - ~~Elasticsearch部署~~
