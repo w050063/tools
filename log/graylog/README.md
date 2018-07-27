@@ -12,6 +12,11 @@ ansible-playbook install_graylog_cluster.yml -l 10.1.16.152
 
 添加es+graylog节点
 ansible-playbook install_graylog_add_node.yml -l 10.1.16.153
+检查关键配置
+is_master = false
+mongodb_uri = mongodb://10.1.16.152/graylog
+elasticsearch_hosts = http://10.1.16.152:9200,http://10.1.16.153:9200
+
 ```
 - ansible 官网推荐
 ```
