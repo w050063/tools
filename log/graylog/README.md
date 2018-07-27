@@ -8,8 +8,10 @@
 ```
 cd /etc/ansible/playbook/
 ansible-playbook host-init-test.yml -l 10.1.16.154
-ansible-playbook install_graylog_server.yml -l 10.1.16.152
-ansible-playbook install_graylog_syslog.yml -l 10.1.16.152
+ansible-playbook install_graylog_cluster.yml -l 10.1.16.152
+
+添加es+graylog节点
+
 ```
 - ansible 官网推荐
 ```
