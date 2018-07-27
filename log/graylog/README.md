@@ -107,6 +107,7 @@ wget https://raw.githubusercontent.com/mds1455975151/tools/master/log/graylog/gr
 - ~~配置两个graylog集群的安全组，开放对应日志收集端口(注意区分：TCP,UDP)~~
 - ~~自定义插件/usr/share/graylog-server/plugin/graylog-plugin-splunk-0.6.3.jar，集成到部署脚本，保证部署环境一致性~~
 - 自定义配置(system\Content packs)
+
 	~~input配置(要点：输出日志时使用域名地址，保证切换域名解析即可指向不同的graylog集群)~~
 		- Application GELF HTTP
 		- Application GELF UDP
