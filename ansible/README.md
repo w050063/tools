@@ -34,7 +34,7 @@ roles_path    = /etc/ansible/roles
 参考资料：https://blog.csdn.net/u010871982/article/details/78525367
 
 **模块**
-- set_fact
+- set_fact(oracle_java)
 
 ### 参考
 - https://github.com/manala/ansible-roles
