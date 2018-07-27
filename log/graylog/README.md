@@ -11,7 +11,7 @@ ansible-playbook host-init-test.yml -l 10.1.16.154
 ansible-playbook install_graylog_cluster.yml -l 10.1.16.152
 
 添加es+graylog节点
-
+ansible-playbook install_graylog_add_node.yml -l 10.1.16.153
 ```
 - ansible 官网推荐
 ```
