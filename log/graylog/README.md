@@ -125,6 +125,8 @@ http://docs.graylog.org/en/2.4/pages/sending_data.html?highlight=Content%20packs
 		- Love BI 
 		- System Log
 		- TLog
+	- outputs配置
+	- Dashboards配置
 - ldap用户配置(存储在MongoDB中,研究如何快速导出导入配置)
 - 索引配置(存储在MongoDB中,研究如何快速导出导入配置)
 - web界面其他自定义配置(存储在MongoDB中,研究如何快速导出导入配置)
