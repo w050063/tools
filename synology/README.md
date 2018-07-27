@@ -17,8 +17,10 @@
 https://www.synology.com/zh-cn/knowledgebase/DSM/help/DirectoryServer/ldap_desc
 ## FQA
 - 设置自定义服务开机启动
+
 控制面板-->任务计划-->新增-->事件选择开机-->配置服务启动脚本即可
 
 - 磁盘检查URL错误，无法访问
+
 编写自定义脚本-->添加定时任务
 
