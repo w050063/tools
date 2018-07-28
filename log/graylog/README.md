@@ -27,7 +27,13 @@ curl -XPOST http://admin:admin@10.1.16.155/system/inputs -d @/tmp/create_input.j
 部署参考资料：
 - [官网推荐ansible-galaxy install Graylog2.graylog-ansible-role](#)
 - [https://github.com/m-kraus/graylog-cluster](https://github.com/m-kraus/graylog-cluster)
-
+- https://github.com/joe-speedboat/ansible.graylog2
+- https://github.com/eduardohki/graylog-utilities
+- https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca
+- https://github.com/SoInteractive/ansible-graylog
+- https://github.com/softasap/sa-graylog
+- https://github.com/kassielbatista/graylog_aws
+- https://github.com/mrlesmithjr/ansible-graylog
 ## Graylog集群管理
 - MongoDB副本集
 - Elasticsearch集群
@@ -134,7 +140,7 @@ http://docs.graylog.org/en/2.4/pages/sending_data.html?highlight=Content%20packs
 		- beats-input /etc/graylog/collector-sidecar/collector_sidecar.yml
 	- stream配置
 		- All messages
-		- Love BI 
+		- Love BI
 		- System Log
 		- TLog
 	- outputs配置
@@ -158,7 +164,15 @@ Journal utilization is too high and may go over the limit soon. Please verify th
 BeanShell （JAVA源码解释器）
 
 ## FQA
+## to-do-list
 - ~~快速部署上线~~
 - 服务及性能监控
 - 数据备份还原
 - 报警
+- API
+  - https://github.com/yumimobi/graylog.py
+- 收集不同应用日志
+  - nginx
+  - centos 7
+  - .....
+- [graylog-proxy](https://github.com/digiapulssi/graylog-proxy)
