@@ -43,6 +43,8 @@ go vet是一个用于检查Go语言源码中静态错误的简单工具
   - https://github.com/jobbole/awesome-go-cn
   - https://github.com/Unknwon/the-way-to-go_ZH_CN
   - https://github.com/EDDYCJY/blog
+  - https://getqor.com/cn go语言实现电商系统
+  - https://github.com/linclin/gopub 运维发布系统 学习go语言案例
 ### Go开发环境的基本要求
 - 语法高亮
 - 自动保存代码
@@ -70,4 +72,3 @@ go vet是一个用于检查Go语言源码中静态错误的简单工具
 - 具备代码重构的能力
 - 集成git等版本控制工具
 - 集成google app engine开发及调试的功能
-
