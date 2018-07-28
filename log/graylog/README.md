@@ -153,5 +153,12 @@ Journal utilization is too high and may go over the limit soon. Please verify th
 
 #message_journal_max_age = 12h
 #message_journal_max_size = 5gb
+
 ## 参考资料
 BeanShell （JAVA源码解释器）
+
+## FQA
+- ~~快速部署上线~~
+- 服务及性能监控
+- 数据备份还原
+- 报警
