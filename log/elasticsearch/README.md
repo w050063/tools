@@ -42,6 +42,11 @@ ES集群状态查看、索引数据查看、ES DSL实现（增、删、改、查
 比较实用的地方：json串的格式化
 ```
 GitHub地址：http://mobz.github.io/elasticsearch-head/
+- elasticsearch-kopf插件(支持早期版本)
+GitHub地址：https://github.com/lmenezes/elasticsearch-kopf
+
+- bigdesk插件(支持早期版本)
+GitHub地址：https://github.com/lukas-vlcek/bigdesk
 
 - Kibana
 ```
