@@ -17,6 +17,12 @@ is_master = false
 mongodb_uri = mongodb://10.1.16.152/graylog
 elasticsearch_hosts = http://10.1.16.152:9200,http://10.1.16.153:9200
 
+自动化部署及管理技巧
+curl -XGET http://admin:admin@10.1.16.155/system/inputs --silent   判断节点是否启动
+创建inputs
+# create syslog tcp input on port 10514
+curl -XPOST http://admin:admin@10.1.16.155/system/inputs -d @/tmp/create_input.json --header "Content-Type: application/json"
+
 ```
 部署参考资料：
 - [官网推荐ansible-galaxy install Graylog2.graylog-ansible-role](#)
