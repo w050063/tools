@@ -24,6 +24,8 @@ curl -X POST http://localhost:8080/job/xxx-ci-auto/build --user madongsheng:xxxx
 ```
 curl -X POST http://localhost:8080/job/xxx-ci-auto/buildWithParameters -d 'branch_name=develop&update_type=update' --user madongsheng:xxxx
 ```
+# 邮件通知规则
+- 构建失败，自动给最后一次提交代码的人员及项目负责人发生通知
 
 ### 自定义主题
 - https://wiki.jenkins.io/display/JENKINS/Simple+Theme+Plugin
