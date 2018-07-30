@@ -28,7 +28,7 @@ systemctl status mysqld.service
 rm -f ${data_dir}/mysql.sql
 cd ${data_dir} && wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/mysql.sql
 # mysql_upgrade -uroot -p123456
-mysql_upgrade
+# mysql_upgrade
 mysql -uroot < ${data_dir}/mysql.sql
 mysql -uroot -p123456 -h 127.0.0.1 -e "select user,host,password from mysql.user;"
 mysql -uroot -p123456 -h 127.0.0.1 -e "select version();"
