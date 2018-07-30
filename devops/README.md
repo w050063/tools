@@ -1,3 +1,7 @@
+# 自动化实例
+https://github.com/NARKOZ/hacker-scripts
+
+# DevOps工具
 https://github.com/ripienaar/free-for-dev
 https://github.com/Leo-G/DevopsWiki
 https://github.com/adnanh/webhook
@@ -33,6 +37,7 @@ xxx
 - https://github.com/roddyofchina/SimpletourDevops
 - https://github.com/hgz6536/opman-django
 - https://github.com/YoLoveLife/DevOps
+- https://github.com/roncoo/roncoo-cmdb
 - 多云管理平台
   - https://github.com/mistio/mist-ce
 # OPStools
