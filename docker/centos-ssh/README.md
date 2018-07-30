@@ -8,7 +8,7 @@ docker rm $(docker ps -a -q)
 
 id=n  # 1 2 3 .. 9
 # 无需systemctl管理服务
-docker run -d -it -p 20${id}0${id}:22 --name os-0${id} centos-ssh:7.2
+docker run -d -it -p 20${id}0${id}:22 --name os-0${id} centos-ssh:7
 
 # 需要systemctl管理服务
 docker run --privileged -d -it -p 20${id}0${id}:22 -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name os-0${id} centos-ssh:7
