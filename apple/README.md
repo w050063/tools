@@ -39,6 +39,11 @@ NAS路径：/volume1/Teamcity
 - https://support.apple.com/zh-cn/HT202181
 ```
 - 机器监控
+# 自动化管理
+- https://github.com/geerlingguy/ansible-role-homebrew
+- https://github.com/homebrew
+- https://github.com/daemonza/setupmac
+- https://github.com/bennylope/macbook-configuration
 
 # Mac OS
 - [Homebrew](https://brew.sh/)
