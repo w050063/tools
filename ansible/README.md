@@ -35,7 +35,20 @@ roles_path    = /etc/ansible/roles
 
 **模块**
 - set_fact(oracle_java)
+### Ansible管理Mac OS
+### Ansible管理Windows
+```
+pip install six --upgrade --ignore-installed six
+[Powershell Script Cannot Be Loaded Because Running Scripts Is Disabled On This System](http://heresjaken.com/running-scripts-disabled-system/)
 
+192.168.1.4 | UNREACHABLE! => {
+    "changed": false, 
+    "msg": "ssl: [Errno 1] _ssl.c:492: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed", 
+    "unreachable": true
+}
+ansible_winrm_server_cert_validation=ignore
+
+```
 ### 参考
 - https://github.com/manala/ansible-roles
 - https://github.com/kuailemy123/Ansible-roles
