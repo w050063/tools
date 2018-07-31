@@ -25,6 +25,8 @@
 ## PowerShell
 - 查看PowerShell版本
 > $PSVersionTable
+- 查看安装的.Net framework版本信息
+> $PSVersionTable.CLRVersion
 
 ## windows下常用工具
 ## Ansible and saltstack管理Window机器
