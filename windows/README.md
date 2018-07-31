@@ -22,7 +22,10 @@
   ``` bat
   # tracert www.baidu.com
   ```
-## powershell
+## PowerShell
+- 查看PowerShell版本
+> $PSVersionTable
+
 ## windows下常用工具
 ## 常见接口类型
 ### 视频接口类型
