@@ -2,12 +2,14 @@
 
 data_dir="/data0/src"
 repo_version="mysql57-community-release-el7-11.noarch.rpm"
+repo_version="mysql57-community-release-el7-10.noarch.rpm"
 
 [ ! -d ${data_dir} ] && mkdir -p ${data_dir}
 
 if [ ! -f ${data_dir}/${repo_version} ]
 then
-    cd ${data_dir} && wget https://repo.mysql.com/${repo_version}
+    # wget -O ${data_dir}/${repo_version} https://repo.mysql.com/${repo_version}
+    wget -O ${data_dir}/${repo_version} https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql57-community-el7/${repo_version}
 fi
 
 rpm -ivh ${data_dir}/${repo_version}
@@ -23,9 +25,7 @@ wget -O /etc/my.cnf https://raw.githubusercontent.com/mds1455975151/tools/master
 systemctl start mysqld.service
 systemctl status mysqld.service
 
-
-rm -f ${data_dir}/mysql.sql
-cd ${data_dir} && wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/mysql.sql
+wget -O ${data_dir}/mysql.sql https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/mysql.sql
 # mysql_upgrade -uroot -p123456
 mysql_upgrade
 mysql -uroot < ${data_dir}/mysql.sql
