@@ -27,6 +27,9 @@
 > $PSVersionTable
 
 ## windows下常用工具
+## Ansible and saltstack管理Window机器
+- https://docs.ansible.com/ansible/latest/user_guide/windows.html
+
 ## 常见接口类型
 ### 视频接口类型
 - VGA
