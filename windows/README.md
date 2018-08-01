@@ -29,6 +29,9 @@
 > $PSVersionTable.CLRVersion
 
 ## windows下常用工具
+- window下包管理工具
+> https://chocolatey.org/
+
 ## Ansible and saltstack管理Window机器
 - https://docs.ansible.com/ansible/latest/user_guide/windows.html
 
