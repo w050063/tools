@@ -18,3 +18,5 @@
   - 2、两种方法
     - 等待配置项 DBProxy.ConfigureDB.checkInterval(默认900秒)指定的时间过后，DBProxy自动加载新的数据表。
     - 或使用 DBRefresher强制每个DBProxy立刻加载新的数据表。(./DBRefresher 10.0.0.6:12321 )
+# 修改数据表结构
+# 框架性能监控
