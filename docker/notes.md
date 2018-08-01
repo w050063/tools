@@ -36,7 +36,7 @@ docker run \
   google/cadvisor:latest
 ```
 - prometheus
-github:https://github.com/prometheus/prometheus
+  - github:https://github.com/prometheus/prometheus
 ```
 docker run --name prometheus -d -p 9090:9090 quay.io/prometheus/prometheus
 ```
