@@ -42,8 +42,8 @@ pip install six --upgrade --ignore-installed six
 [Powershell Script Cannot Be Loaded Because Running Scripts Is Disabled On This System](http://heresjaken.com/running-scripts-disabled-system/)
 
 192.168.1.4 | UNREACHABLE! => {
-    "changed": false, 
-    "msg": "ssl: [Errno 1] _ssl.c:492: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed", 
+    "changed": false,
+    "msg": "ssl: [Errno 1] _ssl.c:492: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed",
     "unreachable": true
 }
 ansible_winrm_server_cert_validation=ignore
@@ -55,5 +55,6 @@ ansible_winrm_server_cert_validation=ignore
 - https://github.com/arbabnazar/ansible-roles
 - https://github.com/contiv/ansible
 - https://github.com/adithyakhamithkar/ansible-playbooks
+- https://github.com/ansible/ansible-examples
 - https://github.com/kbrebanov
 - [基于Ansible的自动化代码发布工具](https://github.com/geekwolf/flamingo)

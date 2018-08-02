@@ -24,3 +24,4 @@
 ### 相关资源
 - [增强open-falcon提供的alarm模块对邮件模板的支持](https://github.com/mircoteam/mailtemplate)
 - [微信企业号发送监控 for OpenFalcon](https://github.com/Yanjunhui/chat)
+- [falcon-monit-scripts](https://github.com/iambocai/falcon-monit-scripts)

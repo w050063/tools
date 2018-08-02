@@ -38,6 +38,7 @@ xxx
 - https://github.com/hgz6536/opman-django
 - https://github.com/YoLoveLife/DevOps
 - https://github.com/roncoo/roncoo-cmdb
+- https://github.com/wylok/opsweb
 - 多云管理平台
   - https://github.com/mistio/mist-ce
 # OPStools

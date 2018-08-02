@@ -1,0 +1,12 @@
+pipeline {
+    agent {
+        docker { image 'koalaman/shellcheck:v0.4.6' }
+    }
+    stages {
+        stage('shellcheck') {
+	    steps {
+                sh 'shellcheck -e SC1091 *.sh'
+            }
+        }
+    }
+}
