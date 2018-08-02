@@ -31,9 +31,28 @@ Unmount failed for /Library/TeamCity/nas_teamcity/      # 待解决
 - umount share
   umount /tmp/afptest
 
-7、其他
+7、新增挂载点
+- 新增配置
+# vim /etc/auto_nas_test
+test -fstype=afp,rw afp://build:xxx@nas.dev.xxx.cn:/test
+- 将新配置/etc/auto_nas_test加入/etc/auto_master配置
+# vim /etc/auto_master
+/tmp/nas_test auto_nas_test
+- 执行挂载
+automount -vc
+
+8、其他
 NAS路径：/volume1/Teamcity
 挂载路径：/Library/TeamCity/nas_teamcity/Teamcity
+重启autofs服务：
+  - sudo service com.apple.autofsd stop
+	- sudo service com.apple.autofsd start
+	- sudo launchctl stop com.apple.autofsd
+  
+9、FQA
+  - autofs无法正常工作(Mac OS 10.12.1+) 
+	  - https://discussions.apple.com/thread/7677185?answerId=30688767022#30688767022
+	  - https://forum.synology.com/enu/viewtopic.php?f=64&t=122975
 
 相关参考资料：
 - https://support.apple.com/zh-cn/HT202181
