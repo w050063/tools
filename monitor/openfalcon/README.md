@@ -1,4 +1,4 @@
-###
+### to-do-list
 - 监控规模评估，选择部署模式（单机\集群）
 - ~~服务器申请，服务规划~~
 - 服务部署(异常关机服务启动 open-falcon\MySQL\Redis\)
@@ -24,8 +24,14 @@
 - 自定义监控
   - 文件系统只读
   - ~~SSL证书过期时间~~
+- API
+- 点击hostname跳转到http://IP:1998页面
+- dashboard如何更新
+- 其他组件如何更新
+
 
 ### 相关资源
 - [增强open-falcon提供的alarm模块对邮件模板的支持](https://github.com/mircoteam/mailtemplate)
 - [微信企业号发送监控 for OpenFalcon](https://github.com/Yanjunhui/chat)
 - [falcon-monit-scripts](https://github.com/iambocai/falcon-monit-scripts)
+
