@@ -20,6 +20,9 @@
 - 编写自定义监控项模板\思路(python\go)
   - [fastdfs](https://github.com/zzlyzq/openfalcon-agent-fastdfs)
   - [rabbitmq](https://github.com/barryz/rabbitmq-monitor)
+- 自定义监控
+  - 文件系统只读
+  - ~~SSL证书过期时间~~
 
 ### 相关资源
 - [增强open-falcon提供的alarm模块对邮件模板的支持](https://github.com/mircoteam/mailtemplate)
