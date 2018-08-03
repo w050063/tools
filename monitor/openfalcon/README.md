@@ -20,6 +20,7 @@
 - 编写自定义监控项模板\思路(python\go)
   - [fastdfs](https://github.com/zzlyzq/openfalcon-agent-fastdfs)
   - [rabbitmq](https://github.com/barryz/rabbitmq-monitor)
+- [Linux默认监控项](https://github.com/open-falcon/book/blob/master/en_0_2/faq/linux-metrics.md)
 - 自定义监控
   - 文件系统只读
   - ~~SSL证书过期时间~~
