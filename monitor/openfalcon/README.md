@@ -27,6 +27,12 @@
 - API
 - 点击hostname跳转到http://IP:1998页面
 - dashboard如何更新
+```
+git clone https://github.com/open-falcon/dashboard.git
+cd dashboard
+zip -r dashboard.zip rrd screenshots scripts
+上传更新到到对应目录下，解压、重启服务
+```
 - 其他组件如何更新
 
 
