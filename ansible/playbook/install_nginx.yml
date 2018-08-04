@@ -1,10 +1,28 @@
 --- 
 - hosts: all
   remote_user: root
-  gather_facts: false
+  gather_facts: true
+  vars:
+    - install_type: yum_default  # yum_default|yum
+    - os_type: centos            # centos|rhel
   tasks:
+  - name: set_fact install_type
+    set_fact: install_type = "{{ install_type }}"
+    tags: set_fact_install_type
+
+  - name: rsync /etc/yum.repos.d/nginx.repo
+    template:
+      src: files/nginx.repo.j2
+      dest: /etc/yum.repos.d/nginx.repo
+      owner: root
+      group: root
+      mode: 0644
+    when: install_type == "yum"
+    tags: rsync_nginx_repo_file
+
   - name: nginx install
     yum: state=latest name=nginx
+    tags: install_nginx
 
   - name: make sure a service is running
     systemd: 
