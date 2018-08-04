@@ -4,10 +4,10 @@
 - 官网文档：https://www.consul.io/intro/index.html
 
 ## Consul功能：
-- 1）服务发现
-- 2）健康检查
-- 3）Key/value存储
-- 4）支持多数据中心
+- 服务发现
+- 健康检查
+- Key/value存储
+- 支持多数据中心
 
 ## Consul使用场景：
 - Docker实例的注册与配置共享
