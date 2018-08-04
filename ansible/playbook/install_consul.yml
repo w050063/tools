@@ -19,3 +19,22 @@
   - name: install consul
     shell: install /data0/src/consul /usr/local/bin/
     tags: install_consul
+
+  - name: mkdir data and log dir
+    file:
+      path: /data0/consul/{{ item }}
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+    with_items:
+      - data
+      - logs
+    tags: create_app_work_dir
+
+  - name: print messages
+    debug:
+      msg: "{{ item }}"
+    with_items:
+      - "consul agent --server --bind=192.168.200.101 --data-dir=/data0/consule/data -bootstrap-expect=1 -node=nginx-lb -client 0.0.0.0 -ui"
+    tags: print_minikube_cmd
