@@ -1,0 +1,5 @@
+ansible_user: xxx
+ansible_password: xxx
+ansible_connection: winrm
+ansible_winrm_transport: basic
+ansible_winrm_server_cert_validation: ignore

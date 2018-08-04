@@ -3,9 +3,11 @@
   remote_user: root
   gather_facts: false
   tasks:
-  - name: create /data0/src/
+  - name: create work dir
     file:
-      path: /data0/src/
+      path: "{{ item }}"
       mode: 0755
       state: directory
+    with_items:
+      - /data0/src/
     tags: create_work_dir
