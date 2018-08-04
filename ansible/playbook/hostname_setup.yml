@@ -2,10 +2,9 @@
 - hosts: all
   remote_user: root
   tasks:
-  - name: Set the hostname
+  - name: set the hostname
     hostname: name={{ hostname }}
-    tags:
-      - hostname
+    tags: setup_hostname
 
   #- name: set hostname to ip 
   #  lineinfile:

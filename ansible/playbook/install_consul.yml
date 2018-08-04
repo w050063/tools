@@ -1,38 +1,21 @@
 ---
 - import_playbook: create_work_dir.yml
+- import_playbook: install_tools_packages.yml
 
 - hosts: all
   remote_user: root
   gather_facts: false
+  vars:
+    - consul_version: 1.2.2
   tasks:
-  - name: rsysc redis-3.2.10-2.el7.x86_64.rpm
-    copy:
-      src: files/redis-3.2.10-2.el7.x86_64.rpm
-      dest: /data0/src/redis-3.2.10-2.el7.x86_64.rpm
-      owner: root
-      group: root
-      mode: 0664
-    tags: rsync_redis_packages
-    
-  - name: jemalloc install
-    yum: state=latest name=jemalloc
+  - name: download consul_{{ consul_version }}_linux_amd64.zip
+    get_url: url=https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip dest=/data0/src/
+    tags: download_app_packages
 
-  - name: install redis-3.2.10-2.el7.x86_64.rpm
-    shell: rpm -ivh /data0/src/redis-3.2.10-2.el7.x86_64.rpm
-    ignore_errors: yes
-    tags: install_redis
+  - name: unzip app packages
+    unarchive: src=/data0/src/consul_{{ consul_version }}_linux_amd64.zip dest=/data0/src/
+    tags: unzip_app_packages
 
-  - name: change password
-    shell: sed -i.bak "s/# requirepass foobared/requirepass j!7Fv#QXc473C2c6/g" /etc/redis.conf
-    tags: setup_redis_passwd
-
-  - name: make sure a service is running
-    systemd: state=started name=redis
-    tags: start_service
-
-  - name: enable service and ensure it is not masked
-    systemd:
-      name: redis
-      enabled: yes
-      masked: no
-    tags: service_boot
+  - name: install consul
+    shell: install /data0/src/consul /usr/local/bin/
+    tags: install_consul
