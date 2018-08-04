@@ -1,0 +1,33 @@
+---
+# Tasks specific for Mac OS systems
+
+# brew
+- name: Mac os tools packages install
+  homebrew: 
+    name: "{{ item }}"
+    state: latest 
+  with_items:
+    - tree
+    - autoconf
+    - bash-completion
+    - iperf
+    - ssh-copy-id
+    - readline
+    - vim
+    - curl
+    - zsh
+    #- wget
+    #- nmap
+    #- git
+  tags: homebrew_install_packages
+
+# cask
+- name: install configured cask applications.
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items: 
+    - atom
+    - sublime-text
+    - google-chrome
+    #- firefox

@@ -1,0 +1,9 @@
+--- 
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: clean deploy tools files
+    file: name={{ item }} state=absent
+    with_items:
+    - "/home/deploy/"

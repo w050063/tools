@@ -1,7 +1,10 @@
---- 
+---
 - hosts: all
   remote_user: root
   gather_facts: true
+  vars:
+    - harden_win_temp_dir: 'c:\Program Files\ansible'
+    - harden_win_log_dir: 'c:\ProgramData\ansible\log'
   tasks:
   - name: RedHat os tools packages install
     include: "RedHat.yml"
@@ -12,4 +15,13 @@
     include: "Ubuntu.yml"
     when:
       - ansible_os_family == "Debian"
-  
+
+  - name: Mac os tools packages install
+    include: "MacOS.yml"
+    when:
+      - ansible_os_family == "Darwin"
+
+  - name: Windows os tools packages install
+    include: "Windows.yml"
+    when:
+      - ansible_os_family == "Windows"

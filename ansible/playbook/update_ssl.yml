@@ -1,0 +1,21 @@
+--- 
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: download openssl packages
+    shell: cd /data0/src/ && rsync -avz {{REPO_IP}}::DATA/repo/{{ item }}
+    with_items:
+      - openssl-1.0.2k-8.el7.x86_64.rpm
+      - openssl-libs-1.0.2k-8.el7.x86_64.rpm
+    tags: download_openssl_packages
+ 
+  - name: update openssl packages
+    shell: rpm -e --nodeps openssl-libs.i686 openssl-libs.x86_64
+    ignore_errors: yes
+    tags: update_openssl_packages
+
+  - name: install new openssl
+    shell: rpm -ivh openssl-libs-1.0.2k-8.el7.x86_64.rpm ; rpm -Uvh openssl-1.0.2k-8.el7.x86_64.rpm
+    ignore_errors: yes
+    tags: install_new_openssl

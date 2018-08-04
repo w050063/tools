@@ -1,0 +1,50 @@
+--- 
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: create tmp workdir
+    file:
+      path: /data0/src/
+      mode: 0755
+      state: directory
+    tags: tmpdir
+
+  - name: create open-falcon workdir
+    file:
+      path: /usr/local/open-falcon/
+      mode: 0755
+      state: directory
+    tags: workdir
+
+  - name: rsync open-falcon
+    template:
+      src: files/open-falcon-agent.j2
+      dest: /data0/src/open-falcon-agent.sh
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart open-falcon
+    tags: rsync_install_scripts
+
+  - name: run /data0/src/open-falcon-agent.sh
+    shell: sh /data0/src/open-falcon-agent.sh
+    tags: run_install_scripts
+  
+  - name: start agent proc
+    shell: cd /usr/local/open-falcon && nohup ./open-falcon start agent
+    tags: start_agent
+
+  - name: rsync hostinfo.yml
+    template:
+      src: files/hostinfo.j2
+      dest: /usr/local/open-falcon/hostinfo.yml
+      owner: root
+      group: root
+      mode: 0664
+    tags: hostinfo
+
+  handlers:
+    - name: restart open-falcon
+      shell: cd /usr/local/open-falcon && nohup ./open-falcon restart agent
+      tags: restart_openfalcon

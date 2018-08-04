@@ -1,0 +1,44 @@
+--- 
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: install go
+    shell: cd /data0/src && \
+           rsync -avz {{REPO_IP}}::DATA/devops/packages/go1.10.linux-amd64.tar.gz . && \
+           tar -zxf go1.10.linux-amd64.tar.gz -C /usr/local/
+    tags: install_go
+
+  - name: rsync go_env.sh
+    copy:
+      src: files/go_env.sh
+      dest: /data0/src/go_env.sh
+      owner: root
+      group: root
+      mode: 0755
+    tags: rsync_go_env_scripts
+
+  - name: go env setup
+    shell: sh /data0/src/go_env.sh
+    tags: config_go_env
+  
+  - name: get go version
+    shell: go version
+    register: go_version
+    tags: print_go_version
+
+  - name: create /data0/workspaces/go
+    file:
+      path: /data0/workspaces/go
+      mode: 0755
+      state: directory
+    tags: create_go_work_dir
+
+  - name: print go version
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "{{ go_version.stdout_lines }}"
+    tags: print_version

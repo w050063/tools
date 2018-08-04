@@ -79,6 +79,7 @@
       group: root
       mode: 0664
       backup: yes
+    notify: restart elasticsearch
     tags: rsync_es_conf
 
   - name: rsync /etc/elasticsearch/jvm.options
@@ -89,6 +90,7 @@
       group: root
       mode: 0664
       backup: yes
+    notify: restart elasticsearch
     tags: rsync_es_jvm_conf
 
   - name: make sure a service is running
@@ -103,3 +105,8 @@
       enabled: yes
       masked: no
     tags: es_service_start
+
+  handlers:
+    - name: restart elasticsearch
+      service: name=elasticsearch enabled=yes state=restarted
+      tags: restart_elasticsearch

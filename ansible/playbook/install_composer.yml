@@ -1,15 +1,12 @@
 --- 
 - hosts: all
   remote_user: root
+  gather_facts: false
   tasks:
-  - name: create tmp /data0/src/
-    file:
-      path: /data0/src/
+  - name: rsync composer
+    copy:
+      src: files/composer
+      dest: /usr/bin/composer
+      owner: root
+      group: root
       mode: 0755
-      state: directory
-
-  - name: install composer
-    shell: cd /data0/src && wget http://10.0.0.23:9012/composer && install composer /usr/bin/composer
-
-  - name: remove /usr/local/bin/composer
-    shell: cd /usr/local/bin/ && rm -f composer

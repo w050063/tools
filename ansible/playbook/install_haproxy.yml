@@ -1,12 +1,28 @@
 --- 
 - hosts: all
   remote_user: root
-  gather_facts: false
+  gather_facts: true
+  vars:
+    - haproxy_host_list:
+      - { host: 'graylog01' , ip: '10.1.16.152', port: '80' }
+      - { host: 'graylog02' , ip: '10.1.16.153', port: '80' }
   tasks:
   - name: haproxy install
     yum: state=latest name=haproxy
+    tags: install_haproxy
 
-  - name: Make sure a service is running
+  - name: rsysc haproxy.cfg
+    template:
+      src: files/haproxy/haproxy.cfg.j2
+      dest: /etc/haproxy/haproxy.cfg
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    notify: restart haproxy
+    tags: rsync_haproxy_conf
+
+  - name: make sure a service is running
     systemd: 
       state: started 
       name: haproxy
@@ -18,3 +34,8 @@
       enabled: yes
       masked: no
     tags: haproxy_service_start
+
+  handlers:
+    - name: restart haproxy
+      service: name=haproxy enabled=yes state=restarted
+      tags: restart_haproxy

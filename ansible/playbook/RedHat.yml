@@ -1,8 +1,10 @@
---- 
+---
 # Tasks specific for RedHat systems
 
 - name: RedHat os tools packages install
-  yum: state=latest name={{item}}
+  yum:
+    state: latest 
+    name: "{{item}}"
   with_items:
     - gcc
     - gcc-c++

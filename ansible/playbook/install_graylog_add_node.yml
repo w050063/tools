@@ -1,7 +1,12 @@
 ---
-- import_playbook: install_mongodb.yml
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  vars:
+    - graylog_mongodb_url: "mongodb://10.1.16.152/graylog"
+    - graylog_elasticsearch_hosts: "http://10.1.16.152:9200"
+
 - import_playbook: install_elasticsearch.yml
-- import_playbook: install_elasticdump.yml
 - import_playbook: install_graylog_server.yml
 - import_playbook: install_graylog_syslog.yml
 - import_playbook: install_graylog_agent.yml
