@@ -1,0 +1,24 @@
+---
+- hosts: node03,node04
+  remote_user: root
+  gather_facts: true
+  vars:
+    - install_type: yum          # yum_default|yum|sources
+    - os_type: centos            # centos|rhel
+    - nginx_version: 1.14.0
+  tasks:
+  - include: install_nginx_include.yml
+
+  - name: print message
+    debug:
+      msg: "node03,node04"
+    tags: print_messages
+
+- hosts: node02
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: print message
+    debug:
+      msg: "node02"
+    tags: print_messages
