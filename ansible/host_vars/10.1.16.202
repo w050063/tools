@@ -1,0 +1,2 @@
+ansible_user: hs
+ansible_ssh_pass: "xxx"

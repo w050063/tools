@@ -1,0 +1,66 @@
+--- 
+- name: set_fact install_type
+  set_fact: install_type = "{{ install_type }}"
+  tags: set_fact_install_type
+
+- name: rsync /etc/yum.repos.d/nginx.repo
+  template:
+    src: files/nginx.repo.j2
+    dest: /etc/yum.repos.d/nginx.repo
+    owner: root
+    group: root
+    mode: 0644
+  when: install_type == "yum"
+  tags: rsync_nginx_repo_file
+
+- name: nginx dependent on rpm
+  yum: name={{ item }} state=latest
+  with_items:
+    - pcre-devel
+    - openssl-devel
+  when: install_type == "sources"
+  tags: install_dependent_packages
+
+- name: download nginx-{{ nginx_version }}.tar.gz
+  get_url: url=http://nginx.org/download/nginx-{{ nginx_version }}.tar.gz dest=/data0/src/
+  when: install_type == "sources"
+  tags: download_app_packages
+
+- name: unzip app packages
+  unarchive: src=/data0/src/nginx-{{ nginx_version }}.tar.gz dest=/data0/src/
+  when: install_type == "sources"
+  tags: unzip_app_packages
+
+- name: git nginx module repo
+  git:
+    repo: "git clone {{ item }}"
+    dest: /data0/src/
+    accept_hostkey: yes
+    update: yes
+  with_items:
+    - "https://github.com/weibocom/nginx-upsync-module.git"
+    - "https://github.com/xiaokai-wang/nginx_upstream_check_module.git"
+  when: install_type == "sources"
+  tags: git_clone_nginx_module
+
+- name: nginx_upstream_check_module
+  shell: cd /data0/src/nginx-{{ nginx_version}}/ && patch -p1 < /data0/src/nginx_upstream_check_module/check_1.12.1+.patch
+  when: install_type == "sources"
+  tags: patch_nginx_upstream_check_module
+
+- name: nginx install
+  yum: state=latest name=nginx
+  tags: install_nginx
+
+- name: make sure a service is running
+  systemd: 
+    state: started 
+    name: nginx
+  tags: nginx_service_running
+
+- name: enable service and ensure it is not masked
+  systemd:
+    name: nginx
+    enabled: yes
+    masked: no
+  tags: nginx_service_start

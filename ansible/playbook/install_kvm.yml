@@ -1,0 +1,65 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  vars: 
+    - google_url: "https://storage.googleapis.com"
+    - github_url: "https://github.com"
+    - driver_type: kvm2           # kvm or kvm2
+  tasks:
+  - name: kvm install
+    yum: name={{ item }} state=latest
+    with_items:
+      - qemu-kvm 
+      - libvirt 
+      - libvirt-python 
+      - libguestfs-tools 
+      - virt-install
+      - libvirt-daemon-kvm 
+      - qemu-kvm
+    tags: install_kvm
+
+  - name: set_fact driver_type
+    set_fact: driver_type = "{{ driver_type }}"
+    tags: set_fact_driver_type
+
+  - name: download kvm2 driver
+    get_url:
+      url: "{{ google_url }}/minikube/releases/latest/docker-machine-driver-kvm2"
+      dest: /usr/local/bin/docker-machine-driver-kvm2
+    when: 
+      - driver_type == "kvm2"
+    tags: download_kvm2_driver
+
+  - name: download kvm driver
+    get_url:
+      url: "{{ github_url }}/dhiltgen/docker-machine-kvm/releases/download/v0.10.0/docker-machine-driver-kvm-centos7"
+      dest: /usr/local/bin/docker-machine-driver-kvm
+    when:
+      - driver_type == "kvm"
+    tags: download_kvm_driver
+
+  - name: change tools permissions docker-machine-driver-kvm2
+    shell: chmod +x /usr/local/bin/docker-machine-driver-kvm2
+    when:
+      - driver_type == "kvm2"
+    tags: change_tools_permissions
+
+  - name: change tools permissions docker-machine-driver-kvm
+    shell: chmod +x /usr/local/bin/docker-machine-driver-kvm
+    when:
+      - driver_type == "kvm"
+    tags: change_tools_permissions
+
+  - name: make sure a service is running
+    systemd: 
+      state: started 
+      name: libvirtd
+    tags: service_running
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: libvirtd
+      enabled: yes
+      masked: no
+    tags: service_start_boot

@@ -25,7 +25,7 @@
     tags: installr_collector_sidecar
 
   - name: rsync collector-sidecar config
-    copy:
+    template:
       src: files/collector_sidecar.yml.j2
       dest: /etc/graylog/collector-sidecar/collector_sidecar.yml
       owner: root

@@ -1,0 +1,42 @@
+---
+- import_playbook: hostname_setup.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  vars:
+    - google_url: "https://storage.googleapis.com"
+  tasks:
+  - name: download kubectl
+    get_url:
+      url: "{{ google_url }}/kubernetes-release/release/v1.10.0/bin/linux/amd64/kubectl"
+      dest: /usr/local/bin/kubectl
+    tags: download_kubectl
+
+  - name: download minikube
+    get_url:
+      url: "{{ google_url }}/minikube/releases/latest/minikube-linux-amd64"
+      dest: /usr/local/bin/minikube
+    tags: download_minikube
+
+  - name: change tools permissions {{ item }}
+    shell: chmod +x /usr/local/bin/{{ item }}
+    with_items:
+      - kubectl
+      - minikube
+    tags: change_tools_permissions
+
+  - name: print minikube messages
+    shell: minikube version
+    register: minikube_version
+    tags: get_minikube_version
+
+  - name: print messages
+    debug:
+      msg: "{{ item }}"
+    with_items:
+      - "{{ minikube_version.stdout }}"
+      #- "minikube start --vm-driver kvm|kvm2"
+      - "minikube start --vm-driver=none"
+      - "web: http://{{ ansible_eth0.ipv4.address }}:30000"
+    tags: print_minikube_cmd

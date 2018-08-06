@@ -4,35 +4,72 @@
 - hosts: all
   remote_user: root
   gather_facts: false
+  vars:
+    - docker_ce_version: docker-ce-18.03.1.ce
   tasks:
-  - name: rsysc redis-3.2.10-2.el7.x86_64.rpm
+  - name: docker old version uninstall
+    yum: name={{ item }} state=absent
+    with_items:
+      - docker 
+      - docker-common 
+      - docker-selinux 
+      - docker-engine
+    tags: uninstall_old_docker
+
+  - name: docker-ce tools install
+    yum: name={{ item }} state=latest
+    with_items:
+      - yum-utils 
+      - device-mapper-persistent-data 
+      - lvm2
+      - docker-compose
+    tags: install_docker_tools
+
+  - name: docker repo setup
+    shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
+           yum-config-manager --enable docker-ce-edge && \
+           yum-config-manager --enable docker-ce-test
+    tags: docker_repo_setup
+
+
+  - name: docker-ce install {{ docker_ce_version }}
+    yum: name={{ docker_ce_version }} state=latest
+    tags: install_docker_ce
+
+  - name: rsysc /etc/docker/daemon.json
     copy:
-      src: files/redis-3.2.10-2.el7.x86_64.rpm
-      dest: /data0/src/redis-3.2.10-2.el7.x86_64.rpm
+      src: files/docker/daemon.json
+      dest: /etc/docker/daemon.json
       owner: root
       group: root
       mode: 0664
-    tags: rsync_redis_packages
-    
-  - name: jemalloc install
-    yum: state=latest name=jemalloc
-
-  - name: install redis-3.2.10-2.el7.x86_64.rpm
-    shell: rpm -ivh /data0/src/redis-3.2.10-2.el7.x86_64.rpm
-    ignore_errors: yes
-    tags: install_redis
-
-  - name: change password
-    shell: sed -i.bak "s/# requirepass foobared/requirepass j!7Fv#QXc473C2c6/g" /etc/redis.conf
-    tags: setup_redis_passwd
+    tags: rsync_docker_daemon_config
 
   - name: make sure a service is running
-    systemd: state=started name=redis
+    systemd: state=started name=docker
     tags: start_service
 
   - name: enable service and ensure it is not masked
     systemd:
-      name: redis
+      name: docker
       enabled: yes
       masked: no
     tags: service_boot
+
+  - name: get docker version
+    shell: docker version
+    register: version
+    tags: print_version
+  
+  - name: print app version
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "docker version: {{ version.stdout }}"
+    tags: print_version
+
+
+  handlers:
+    - name: restart docker
+      service: name=docker enabled=yes state=restarted
+      tags: restart_docker

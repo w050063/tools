@@ -5,9 +5,30 @@
 193.112.50.123 ansible_ssh_host=193.112.50.123 ansible_ssh_port=22 ansible_ssh_private_key_file=~/.ssh/keys/ssh_key_01 hostname=master.mdslq.cn
 
 [docker]
-172.17.0.2 ansible_ssh_host=172.17.0.2 wan_ip=172.17.0.2 qcloud_zone=ap-shanghai-1 endpoint=os-01 hostname=os-01
-172.17.0.4 ansible_ssh_host=172.17.0.4 wan_ip=172.17.0.4 qcloud_zone=ap-shanghai-1 endpoint=os-04 hostname=os-04
-172.17.0.5 ansible_ssh_host=172.17.0.5 wan_ip=172.17.0.5 qcloud_zone=ap-shanghai-1 endpoint=os-05 hostname=os-05
+172.17.0.2  ansible_ssh_host=172.17.0.2  wan_ip=172.17.0.2  endpoint=os-01 hostname=os-01 GAME_SERVER_ID=game-109-0001
+172.17.0.4  ansible_ssh_host=172.17.0.4  wan_ip=172.17.0.4  endpoint=os-04 hostname=os-04 GAME_SERVER_ID=game-109-0002
+172.17.0.5  ansible_ssh_host=172.17.0.5  wan_ip=172.17.0.5  endpoint=os-05 hostname=os-05 GAME_SERVER_ID=game-109-0003
+
+[intranet-server]
+10.1.16.151 ansible_ssh_host=10.1.16.151 wan_ip=10.1.16.151 endpoint=GS        hostname=gs01
+10.1.16.152 ansible_ssh_host=10.1.16.152 wan_ip=10.1.16.152 endpoint=GRAYLOG   hostname=graylog01
+10.1.16.153 ansible_ssh_host=10.1.16.153 wan_ip=10.1.16.153 endpoint=GRAYLOG   hostname=graylog02
+10.1.16.154 ansible_ssh_host=10.1.16.154 wan_ip=10.1.16.154 endpoint=GRAYLOG   hostname=graylog03
+10.1.16.155 ansible_ssh_host=10.1.16.155 wan_ip=10.1.16.155 endpoint=OPENVPN   hostname=openvpn
+10.1.16.201 ansible_ssh_host=10.1.16.201 wan_ip=10.1.16.201 endpoint=GITLAB    hostname=gitlab
+10.1.16.202 ansible_ssh_host=10.1.16.202 wan_ip=10.1.16.202 endpoint=SVN       hostname=svn
+
+[build]
+build01 ansible_ssh_host=10.1.16.200 wan_ip=10.1.16.200 endpoint=BUILD     hostname=build01
+build02 ansible_ssh_host=10.1.16.208 wan_ip=10.1.16.208 endpoint=BUILD     hostname=build02
+build03 ansible_ssh_host=10.1.16.209 wan_ip=10.1.16.209 endpoint=BUILD     hostname=build03
+build04 ansible_ssh_host=10.1.16.150 wan_ip=10.1.16.150 endpoint=BUILD     hostname=build04
+build05 ansible_ssh_host=10.1.16.25  wan_ip=10.1.16.25  endpoint=BUILD     hostname=build05
+
+[k8s]
+10.1.16.152 ansible_ssh_host=10.1.16.152 wan_ip=10.1.16.152 endpoint=K8S   hostname=k8s-node01
+
+
 
 [other-test]
 10.1.16.151 ansible_ssh_host=10.1.16.151 wan_ip=10.1.16.151 qcloud_zone=ap-shanghai-1 endpoint=gs01      hostname=gs01

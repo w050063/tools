@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  vars:
+    - repo_url: "https://github.com/gjmzj/kubeasz.git"
+  tasks:
+  - name: pip install ansible
+    shell: pip install ansible
+    tags: install_ansible
+
+  - name: git clone kubeasz repo
+    git:
+      repo: "{{ repo_url }}"
+      dest: /etc/ansible/
+      version: master
+      accept_hostkey: yes
+      update: yes
+    tags: git_clone_repo

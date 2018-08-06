@@ -1,0 +1,24 @@
+---
+- import_playbook: create_work_dir.yml
+- import_playbook: hostname_setup.yml
+- import_playbook: install_tools_packages.yml
+- import_playbook: install_pip.yml
+- import_playbook: install_rsync.yml
+- import_playbook: limits_setup.yml
+- import_playbook: install_supervisor.yml
+- import_playbook: install_nginx.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+  tasks:
+  - name: rsync index.html
+    template:
+      src: files/nginx/index.html.j2
+      dest: /usr/share/nginx/html/index.html
+      owner: root
+      group: root
+      mode: 0644
+      backup: yes
+    tags: rsync_index_file

@@ -1,16 +1,37 @@
 ---
 - hosts: all
   remote_user: root
+  vars:
+    - hostnames_file: "/etc/hosts"
+    - ipnames: 
+      - {'192.168.200.100': 'linux-node01 linux-node01.example.com'}
+      - {'192.168.200.101': 'linux-node02 linux-node02.example.com'}
+      - {'192.168.200.102': 'linux-node03 linux-node03.example.com'}
+      - {'192.168.200.103': 'linux-node04 linux-node04.example.com'}
+    - ipnames_flag: "false" # false|true
   tasks:
-  - name: Set the hostname
-    hostname: name={{ hostname }}
-    tags:
-      - hostname
+  - name: set_fact ipnames_flag
+    set_fact: ipnames_flag = "{{ ipnames_flag }}"
+    tags: set_fact_ipnames_flag
 
-  #- name: set hostname to ip 
-  #  lineinfile:
-  #    path: /etc/hosts
-  #    state: present
-  #    backup: yes
-  #    line: '{{ansible_eth0.ipv4.address}} {{ hostname }}'
-  #  tags: hostname_resolve
+  - name: set the hostname
+    hostname: name={{ hostname }}
+    tags: setup_hostname
+
+  - name: add ipnames to {{ hostnames_file }}
+    lineinfile: 
+      dest: "{{ hostnames_file }}"
+      line: "{{ item.key }} {{ item.value }}"
+    with_dict: 
+      - "{{ ipnames }}"
+    when: ipnames and ipnames_flag == "true"
+    tags: add_ipnames
+
+  - name: add system ip and system hostname to {{ hostnames_file }}
+    lineinfile: 
+      dest: "{{ hostnames_file }}" 
+      line: "{{ item }} {{ ansible_hostname }}"
+    with_items: 
+      - "{{ ansible_all_ipv4_addresses }}"
+    when: ansible_all_ipv4_addresses and ipnames_flag == "true"
+    tags: add_ip_to_hosts

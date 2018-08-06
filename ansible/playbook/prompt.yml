@@ -1,0 +1,27 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  vars_prompt:
+    - name: "password"
+      prompt: "Enter 'admin' user password"
+      private: yes
+      default: graylog
+
+    - name: "gl_ip"
+      prompt: "IP for graylog server? (defaults to system IP)"
+      private: no
+
+    - name: "es_memory"
+      prompt: "Change memory committed to elasticsearch process (in MBs)"
+      private: no
+
+    - name: "gl_memory"
+      prompt: "Change memory committed to graylog process (in MBs)"
+      private: no
+
+  tasks:
+  - name: echo test string
+    debug: 
+      msg: "gl_ip: {{ gl_ip }} \\t es_memory: {{ es_memory }} \t gl_memory: {{ gl_memory }} \t password : {{ password }}"
+    tags: echo_test_string

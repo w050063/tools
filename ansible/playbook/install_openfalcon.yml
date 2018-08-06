@@ -1,12 +1,76 @@
 ---
-- hosts: all
-  remote_user: root
-  gather_facts: false
-  tasks:
-  - name: check remote dir /data0/src
-    file: path=/data0/src state=directory mode=0755
+- import_playbook: create_work_dir.yml
 
-  - name: start open-falcon
-    shell: cd /usr/local/workspace; ./open-falcon start agent
-    async: 10
-    poll: 0
+- hosts: all
+  become: true
+  become_user: root
+  remote_user: root
+  gather_facts: true
+  vars:
+    - plugin_enabled: "true"
+    - plugin_dir: "./plugin"
+    - plugin_url: "https://github.com/open-falcon/plugin.git"
+    #- heartbeat_addr: "10.0.0.30"
+    #- transfer_addr: "10.0.0.30"
+  tasks:
+  - name: mkdir open-falcon data and log dir
+    file:
+      path: /usr/local/open-falcon
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+      backup: yes
+    tags: create_work_dir
+
+  - name: download open-falcon-agent-v0.2.1.tar.gz
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/open-falcon/open-falcon-agent-v0.2.1.tar.gz .
+    tags: download_openfalcon_packages
+  
+  - name: unarchive openfalcon packages
+    unarchive:
+      src: /data0/src/open-falcon-agent-v0.2.1.tar.gz
+      dest: /usr/local/open-falcon/
+    tags: unarchive_openfalcon_packages
+
+  - name: rsync open-falcon agent config file
+    template:
+      src: files/openfalcon/cfg.json.j2
+      dest: /usr/local/open-falcon/agent/config/cfg.json
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    notify: restart open-falcon
+    tags: rsync_openfalcon_config
+
+  - name: start agent proc
+    shell: cd /usr/local/open-falcon && nohup ./open-falcon start agent
+    tags: start_agent
+
+  - name: rsync hostinfo.yml
+    template:
+      src: files/hostinfo.j2
+      dest: /usr/local/open-falcon/hostinfo.yml
+      owner: root
+      group: root
+      mode: 0664
+    tags: hostinfo
+
+  - name: setup service start boot
+    lineinfile:
+      path: /etc/rc.local
+      state: present
+      backup: yes
+      line: "cd /usr/local/open-falcon/ && ./open-falcon start agent >/dev/null 2&1"
+    tags: setup_service_start_boot
+
+  - name: update open-falcon plugins
+    shell: curl http://127.0.0.1:1988/plugin/update
+    tags: update_openfalcon_plugins
+
+  handlers:
+    - name: restart open-falcon
+      shell: cd /usr/local/open-falcon && nohup ./open-falcon restart agent
+      tags: restart_openfalcon

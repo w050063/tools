@@ -4,9 +4,7 @@
   gather_facts: false
   tasks:
   - name: etcd install
-    yum: 
-      state: latest 
-      name: etcd
+    yum: name=etcd state=latest
     tags: etcd_install
 
   - name: rsysc lastet bin file
@@ -28,6 +26,8 @@
       owner: root
       group: root
       mode: 0664
+      backup: yes
+    notify: restart etcd
     tags: rsync_etcd_conf
 
   - name: Make sure a service is running
@@ -43,6 +43,11 @@
       masked: no
     tags: etcd_service_start
 
-  - name: restart etcd
-    shell: systemctl daemon-reload && systemctl restart etcd
-    tags: etcd_restart
+  #- name: restart etcd
+  #  shell: systemctl daemon-reload && systemctl restart etcd
+  #  tags: etcd_restart
+
+  handlers:
+    - name: restart etcd
+      service: name=etcd enabled=yes state=restarted
+      tags: restart_etcd

@@ -1,0 +1,57 @@
+global
+    log         127.0.0.1 local2
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+    stats socket /var/lib/haproxy/stats
+
+defaults
+    mode    http
+    log     global
+    option  httplog
+    option  dontlognull
+    option  redispatch
+    retries 3
+    timeout connect 10s
+    timeout client 1m
+    timeout server 1m
+    timeout http-keep-alive 10s
+
+listen stats {{ ansible_eth0.ipv4.address }}:9900
+    mode http
+    balance
+    timeout client 5000
+    timeout connect 4000
+    timeout server 30000
+    stats uri /
+    stats realm HAProxy\ Statistics
+    stats auth admin:admin
+    stats admin if TRUE
+
+listen graylg_web 0.0.0.0:80
+    mode http
+    balance roundrobin
+{% for item in haproxy_host_list %}
+    server {{ item.host }} {{ item.ip }}:{{ item.port }} check
+{% endfor %}
+
+listen beats-TCP-5044 0.0.0.0:5044
+    mode tcp
+    option tcpka
+    option tcplog
+    balance roundrobin
+{% for item in haproxy_host_list %}
+    server {{ item.host }} {{ item.ip }}:5044 check
+{% endfor %}
+
+listen app-gelf-TCP-12201 0.0.0.0:12201
+    mode tcp
+    option tcpka
+    option tcplog
+    balance roundrobin
+{% for item in haproxy_host_list %}
+    server {{ item.host }} {{ item.ip }}:12201 check
+{% endfor %}

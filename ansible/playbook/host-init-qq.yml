@@ -1,8 +1,15 @@
 ---
+- import_playbook: create_work_dir.yml
 - import_playbook: hostname_setup.yml
-- import_playbook: install_yum.yml
+- import_playbook: yum_repo_setup.yml
+- import_playbook: install_tools_packages.yml
+- import_playbook: install_graylog.yml
+- import_playbook: install_graylog_agent.yml
+- import_playbook: disk_data_mount.yml
 - import_playbook: install_pip.yml
 - import_playbook: install_rsync.yml
-- import_playbook: rsync_sshkey.yml
+- import_playbook: open-falcon.yml
+- import_playbook: rsync_ssh_config.yml
 - import_playbook: limits_setup.yml
-
+- import_playbook: install_supervisor.yml
+- import_playbook: deploy_tools.yml

@@ -6,6 +6,7 @@
   remote_user: root
   gather_facts: true
   vars:
+    - graylog_version: 2.4.3-1
     - graylog_message_journal_max_age: "24h"
     - graylog_message_journal_max_size: "10gb"
   tasks:
@@ -14,10 +15,20 @@
   #  ignore_errors: yes
   #  tags: install_graylog_repo
 
+  #- name: install graylog server packages
+  #  shell: rpm -ivh https://packages.graylog2.org/repo/el/stable/2.4/x86_64/graylog-server-{{ graylog_version }}.noarch.rpm
+  #  ignore_errors: yes
+  #  tags: install_graylog_packages
+  
+  - name: download graylog-server-{{ graylog_version }}.noarch.rpm
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/graylog-server-{{ graylog_version }}.noarch.rpm .
+    tags: download_graylog_packages
+
   - name: install graylog server packages
-    shell: rpm -ivh https://packages.graylog2.org/repo/el/stable/2.4/x86_64/graylog-server-2.4.3-1.noarch.rpm
+    shell: rpm -ivh /data0/src/graylog-server-2.4.3-1.noarch.rpm
     ignore_errors: yes
-    tags: install_graylog_repo
+    tags: install_graylog_packages
 
   - name: graylog-server packages install
     yum: state=latest name={{ item }}
@@ -46,7 +57,18 @@
       - graylog-plugin-splunk-0.6.3.jar
     tags: rsync_graylog_server_conf
 
-  #- name: Make sure a service is running
+  #- name: install the graylog custom config,example:input\output\dashboard (lemongrassmedia)
+  #  copy:
+  #    src: files/graylog-server/{{ item }}
+  #    dest: /usr/share/graylog-server/contentpacks/{{ item }}
+  #    owner: root
+  #    group: root
+  #    mode: 0664
+  #  with_items:
+  #    - loveworld_content_pack.json
+  #  tags: rsync_graylog_config
+
+  #- name: make sure a service is running
   #  systemd: 
   #    state: started 
   #    name: graylog-server

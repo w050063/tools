@@ -1,0 +1,40 @@
+---
+- import_playbook: create_work_dir.yml
+- import_playbook: install_tools_packages.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  vars:
+    - consul_version: 1.2.2
+  tasks:
+  - name: download consul_{{ consul_version }}_linux_amd64.zip
+    get_url: url=https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip dest=/data0/src/
+    tags: download_app_packages
+
+  - name: unzip app packages
+    unarchive: src=/data0/src/consul_{{ consul_version }}_linux_amd64.zip dest=/data0/src/
+    tags: unzip_app_packages
+
+  - name: install consul
+    shell: install /data0/src/consul /usr/local/bin/
+    tags: install_consul
+
+  - name: mkdir data and log dir
+    file:
+      path: /data0/consul/{{ item }}
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+    with_items:
+      - data
+      - logs
+    tags: create_app_work_dir
+
+  - name: print messages
+    debug:
+      msg: "{{ item }}"
+    with_items:
+      - "consul agent --server --bind=192.168.200.101 --data-dir=/data0/consule/data -bootstrap-expect=1 -node=nginx-lb -client 0.0.0.0 -ui"
+    tags: print_minikube_cmd

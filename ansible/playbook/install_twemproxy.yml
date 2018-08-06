@@ -8,12 +8,13 @@
     tags: install_twemproxy
 
   - name: rsysc twemproxy config file
-    copy:
-      src: files/game_conf/twemproxy.yml
+    template:
+      src: files/game_conf/twemproxy.yml.j2
       dest: /etc/twemproxy.yml
       owner: root
       group: root
       mode: 0664
+    notify: restart twemproxy
     tags: rsync_twemproxy_config_file
 
   - name: Make sure a service is running
@@ -32,3 +33,7 @@
   - name: redis-cli install
     yum: state=latest name=redis
     tags: install_redis_cli
+
+  handlers:
+    - name: restart twemproxy
+      service: name=twemproxy enabled=yes state=restarted
