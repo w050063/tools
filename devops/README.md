@@ -40,6 +40,7 @@ xxx
 - https://github.com/YoLoveLife/DevOps
 - https://github.com/roncoo/roncoo-cmdb
 - https://github.com/wylok/opsweb
+- https://github.com/PythonTra1nee
 - 多云管理平台
   - https://github.com/mistio/mist-ce
 # OPStools
