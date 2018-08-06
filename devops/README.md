@@ -1,5 +1,6 @@
 # 自动化实例
 https://github.com/NARKOZ/hacker-scripts
+https://www.jianshu.com/p/80336139ad1d
 
 # DevOps工具
 https://github.com/ripienaar/free-for-dev
