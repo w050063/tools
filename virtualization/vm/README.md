@@ -9,7 +9,7 @@
 # FQA
 - 设置VMware开机启动并同时启动指定虚拟机
 
-右键VMware Workstation快捷方式，看属性。在目标中直接添加【空格】-x【空格】"D:\vmhost\openvpn\openvpn.vmx"
+右键VMware Workstation快捷方式查看属性，在目标中直接添加【空格】-x【空格】"D:\vmhost\openvpn\openvpn.vmx"
 
 目标中完整内容为:
 ```
