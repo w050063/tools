@@ -1,24 +1,25 @@
 # 自动化实例
-https://github.com/NARKOZ/hacker-scripts
-https://www.jianshu.com/p/80336139ad1d
+- https://github.com/NARKOZ/hacker-scripts
+- https://www.jianshu.com/p/80336139ad1d
 
 # DevOps工具
-https://github.com/ripienaar/free-for-dev
-https://github.com/Leo-G/DevopsWiki
-https://github.com/adnanh/webhook
-https://github.com/StackStorm/st2
-https://github.com/aelsabbahy/goss
-https://github.com/geerlingguy/ansible-for-devops
-https://github.com/geerlingguy/ansible-vagrant-examples
-https://github.com/lexrus/ios-dev-playbook
-https://github.com/joubertredrat/awesome-devops
-https://github.com/zachflower/awesome-open-source-supporters
-https://github.com/wxyyxc1992/ServerSideApplication-Series
+- https://github.com/ripienaar/free-for-dev
+- https://github.com/Leo-G/DevopsWiki
+- https://github.com/adnanh/webhook
+- https://github.com/StackStorm/st2
+- https://github.com/aelsabbahy/goss
+- https://github.com/geerlingguy/ansible-for-devops
+- https://github.com/geerlingguy/ansible-vagrant-examples
+- https://github.com/lexrus/ios-dev-playbook
+- https://github.com/joubertredrat/awesome-devops
+- https://github.com/zachflower/awesome-open-source-supporters
+- https://github.com/wxyyxc1992/ServerSideApplication-Series
 
-https://github.com/devopsbookmarks/devopsbookmarks.com
-http://www.devopsbookmarks.com/
+- https://github.com/devopsbookmarks/devopsbookmarks.com
+- http://www.devopsbookmarks.com/
 
-https://github.com/ramyrams/DevOps
+- https://github.com/ramyrams/DevOps
+
 <details>
 
 xxx
