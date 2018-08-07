@@ -5,6 +5,10 @@
 
 # KVM部署
 - [CentOS 7.x](http://linux.dell.com/files/whitepapers/KVM_Virtualization_in_RHEL_7_Made_Easy.pdf)
+``` bash
+cat /proc/cpuinfo |egrep  "vmx|svm"
+lsmod |grep kvm
+```
 ## Windows 10 安装
 ``` bash
 qemu-img create -f raw /data0/kvm/win10-kvm.raw 50G
@@ -74,6 +78,7 @@ virsh undefine window10
 - web管理相关
   - https://github.com/welliamcao/VManagePlatform
   - https://github.com/kimchi-project/kimchi
+  - https://github.com/retspen/webvirtmgr
 - 日常管理
   - https://github.com/xiaoli110/kvm_vm_setup
   - https://github.com/opengers
