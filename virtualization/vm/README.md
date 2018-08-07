@@ -12,7 +12,7 @@
 
 目标中完整内容为:
 ```
-"C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe -x "D:\vmhost\openvpn\openvpn.vmx" -x "D:\vmhost\loveworld-gs01\loveworld-gs01.vmx"
+"C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe -x "D:\vmhost\openvpn\openvpn.vmx"
 ```
 
 最后剪切移动快捷方式到windows开机启动路径: C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
