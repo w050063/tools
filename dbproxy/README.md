@@ -4,6 +4,10 @@
 - https://github.com/highras/dbproxy
 - https://github.com/highras/tableCache
 
+## 根据hitid定位数据再那个shard
+```
+cd /home/DBProxy/deployTools && php findPhysicalInfo.php /home/DBProxy/DBProxy/DBProxy.conf 2369083373524 user
+```
 ## dbproxy部署搭建
 - 机器初始化
 ``` bash 
