@@ -1,6 +1,7 @@
 ### to-do-list
 - 监控规模评估，选择部署模式（单机\集群）
 - ~~服务器申请，服务规划~~
+- plugins功能
 - 服务部署(异常关机服务启动 open-falcon\MySQL\Redis\)
 - 各类监控模板编写：
   - 服务器基础监控
@@ -33,7 +34,26 @@ cd dashboard
 zip -r dashboard.zip rrd screenshots scripts
 上传更新到到对应目录下，解压、重启服务
 ```
-- 其他组件如何更新
+- 服务器端组件如何更新？
+```
+1、配置go环境
+2、编译打包最新代码
+cd $GOPATH/src/github.com/open-falcon/falcon-plus/
+make all             # make all modules
+make pack            # pack all modules
+3、备份原代码目录
+cp -rf open-falcon open-falcon.20180808
+cp open-falcon-v0.2.1.tar.gz open-falcon
+cd open-falcon
+for i in `find . -type f -name cfg.json`;do cp ${i}{,.bak};done
+4、更新代码并重启服务
+tar -zxf open-falcon-v0.2.1.tar.gz
+for i in `find . -type f -name cfg.json`;do \cp ${i}.bak $i;done
+sh start.sh stop
+sh start.sh start
+sh start.sh check
+5、研发服务正常与否
+```
 
 
 ### 相关资源
