@@ -37,6 +37,8 @@ roles_path    = /etc/ansible/roles
 - set_fact(oracle_java)
 ### Ansible管理Mac OS
 ### Ansible管理Windows
+### Ansible管理MySQL
+- ~~账号管理~~
 ```
 pip install six --upgrade --ignore-installed six
 [Powershell Script Cannot Be Loaded Because Running Scripts Is Disabled On This System](http://heresjaken.com/running-scripts-disabled-system/)
