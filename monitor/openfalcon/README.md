@@ -10,8 +10,10 @@
 - URL
 - 自监控tycs-anteye
 - task模块
-- Redis
-- MySQL
+- Nodata配置用于监控agent alive检查，如果无汇报数据自动补其他数据，用于监控报警
+- 应用健康
+  - Redis
+  - MySQL
 - screen
   xxx公司监控
   xxx业务名称
