@@ -13,7 +13,7 @@
 - Nodata配置用于监控agent alive检查，如果无汇报数据自动补其他数据，用于监控报警
 - 应用健康
   - Redis
-  - MySQL
+  - [MySQL](https://github.com/open-falcon/mymon)
 - screen
   xxx公司监控
   xxx业务名称
