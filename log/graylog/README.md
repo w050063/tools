@@ -25,7 +25,7 @@ curl -XPOST http://admin:admin@10.1.16.155/system/inputs -d @/tmp/create_input.j
 
 ```
 部署参考资料：
-- [官网推荐ansible-galaxy install Graylog2.graylog-ansible-role](#)
+- [官网推荐ansible-galaxy install Graylog2.graylog-ansible-role](https://github.com/Graylog2/graylog-ansible-role)
 - [https://github.com/m-kraus/graylog-cluster](https://github.com/m-kraus/graylog-cluster)
 - https://github.com/joe-speedboat/ansible.graylog2
 - https://github.com/eduardohki/graylog-utilities
