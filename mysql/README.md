@@ -73,6 +73,10 @@ https://dev.mysql.com/doc/refman/5.7/en/date-and-time-type-overview.html
 ```
 - mysql_errno: 1044, mysql_error: Access denied for user 'root'@'%' to databas
 https://blog.csdn.net/aosica321/article/details/53433837
+- Linux命令行成功登录mysql，执行命令报 Ignoring query to other database
+```
+检查登陆命令是否未加-u或者使用了-U等情况
+```
 ### SQL
 ### 分库分表
 ## 参考资料
