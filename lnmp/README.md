@@ -35,6 +35,15 @@ PHP-FPM是一个PHP FastCGI管理器，是只用于PHP的，它其实是PHP源�
 
 ## 部署说明
 ### Linux
+#### 快速部署
+```
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/lnmp/install_lnmp_c6.sh
+sh install_lnmp_c6.sh
+
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/lnmp/install_lnmp_c7.sh
+sh install_lnmp_c7.sh
+```
+#### 第三方
 - https://lnmp.org/install.html，[GitHub](https://github.com/licess/lnmp)
 - https://bbs.vpser.net/forum-25-1.html
 - https://www.wdlinux.cn/bbs/forum-5-1.html
