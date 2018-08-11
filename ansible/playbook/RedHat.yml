@@ -31,4 +31,7 @@
     - dos2unix
     - htop
     - rsync
+    - iptraf 
+    - iftop 
+    - nethogs
   tags: install_tools_packages
