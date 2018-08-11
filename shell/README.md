@@ -24,7 +24,18 @@ $?:代表上一个命令执行是否成功的标志，如果执行成功则$? �
     - break 中断整个循环
 
     - continue 退出本次循环
+# 中文转拼音
+```
+shell
+yum install -y ruby
+gem update --system
+gem install chinese_pinyin
+ch2py -h
 
+python
+http://pypinyin.mozillazg.com/zh_CN/master/index.html
+echo `pypinyin -s NORMAL 中文`|sed 's/ //g'
+```
 # 资料
 - https://github.com/dylanaraps/pure-bash-bible
 
