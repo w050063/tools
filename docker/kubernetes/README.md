@@ -10,3 +10,4 @@
 - [kubeasz](https://github.com/gjmzj/kubeasz)
 - [kops](https://github.com/kubernetes/kops)
 - [kubernetes_practice](https://github.com/hackstoic/kubernetes_practice)
+- https://github.com/opsnull/follow-me-install-kubernetes-cluster

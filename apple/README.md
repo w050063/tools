@@ -48,9 +48,9 @@ NAS路径：/volume1/Teamcity
   - sudo service com.apple.autofsd stop
 	- sudo service com.apple.autofsd start
 	- sudo launchctl stop com.apple.autofsd
-  
+
 9、FQA
-  - autofs无法正常工作(Mac OS 10.12.1+) 
+  - autofs无法正常工作(Mac OS 10.12.1+)
 	  - https://discussions.apple.com/thread/7677185?answerId=30688767022#30688767022
 	  - https://forum.synology.com/enu/viewtopic.php?f=64&t=122975
 
@@ -67,3 +67,4 @@ NAS路径：/volume1/Teamcity
 # Mac OS
 - [Homebrew](https://brew.sh/)
 - [技术文档](https://kapeli.com/dash)
+- [awesome-mac](https://github.com/jaywcjlove/awesome-mac)

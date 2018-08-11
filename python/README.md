@@ -6,6 +6,9 @@ My Python Example
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 ```
+
+# 库
+- [tqdm进度条](https://github.com/tqdm/tqdm)
 # paramiko
 - [paramiko多线程执行命令总结](https://github.com/mds1455975151/Python/blob/master/paramiko/paramiko_muti.md)
 - [mail发邮件](http://www.runoob.com/python/python-email.html)
@@ -74,3 +77,4 @@ error，warning，refactor，convention
 
 # 总结资料
 - https://github.com/lijin-THU/notes-python
+- https://github.com/coco369/knowledge

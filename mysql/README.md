@@ -18,6 +18,8 @@ sh uninstall_mysql.sh
 - [MyDB Studio]
 - [SQL Lite Manger]
 - [adminer](https://www.adminer.org/)
+
+- [mycli](https://github.com/dbcli/mycli)
 ## MySQL监控及故障处理
 ## MySQL批量管理
 - 如何高效的插入数据库100w条数据(大概300~400M数据具体和存储数据类型相关)

@@ -121,7 +121,7 @@ location ~ .*.(svn|git|cvs) {
 apache
 <Directory "/opt/www/svip/gift/webroot">
     RewriteEngine On
-    RewriteRule .svn/  /404.html 
+    RewriteRule .svn/  /404.html
 </Directory>
 
 整理了一些方法供大家参考
@@ -174,7 +174,7 @@ server {
 server {
     listen       80;
     listen       [::]:80;
-    server_name  *.xxx.cn; 
+    server_name  *.xxx.cn;
 
     root         /home/xxx/public;
     # Load configuration files for the default server block.
@@ -202,3 +202,4 @@ server {
 }
 ```
 ## 参考资料
+- ngxtop

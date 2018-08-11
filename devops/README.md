@@ -14,6 +14,7 @@
 - https://github.com/joubertredrat/awesome-devops
 - https://github.com/zachflower/awesome-open-source-supporters
 - https://github.com/wxyyxc1992/ServerSideApplication-Series
+- https://github.com/EruDev/eru_manager
 
 - https://github.com/devopsbookmarks/devopsbookmarks.com
 - http://www.devopsbookmarks.com/
@@ -64,3 +65,11 @@ xxx
 # 打包和工件
 # 虚拟化和容器
 # 云和PaaS环境
+
+# 爬虫
+- https://github.com/henrylee2cn/pholcus
+
+# 运维工具
+- [pip install httpstat](https://github.com/reorx/httpstat)
+- [终端录像](https://github.com/icholy/ttygif)
+- [互联网公司经典技术架构](https://github.com/davideuler/architecture.of.internet-product)

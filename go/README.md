@@ -33,6 +33,8 @@ https://github.com/MXi4oyu/golang.org
 https://github.com/golang/lint
 - goimporter
 go vet是一个用于检查Go语言源码中静态错误的简单工具
+- mysq
+https://github.com/siddontang/go-mysql
 ### FQA
 - go项目搜索：https://gowalker.org/
 
@@ -51,7 +53,11 @@ go vet是一个用于检查Go语言源码中静态错误的简单工具
   - https://github.com/astaxie/build-web-application-with-golang
   - https://github.com/hackstoic/golang-open-source-projects
   - https://github.com/avelino/awesome-go
-  
+  - https://github.com/george518/PPGo_Job 定时任务系统
+  - https://github.com/gopherchina/conference Go 语言实际项目应用的技术分享
+  - https://github.com/pingcap/tidb
+  - https://github.com/gocn/knowledge Go社区的知识图谱
+  - https://gobyexample.com/
 ### Go开发环境的基本要求
 - 语法高亮
 - 自动保存代码
