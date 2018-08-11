@@ -42,6 +42,10 @@ sh install_lnmp_c6.sh
 
 wget https://raw.githubusercontent.com/mds1455975151/tools/master/lnmp/install_lnmp_c7.sh
 sh install_lnmp_c7.sh
+
+验证
+phpinfo页面：http://192.168.200.100
+MySQL集成：http://192.168.200.100/mysql.php
 ```
 #### 第三方
 - https://lnmp.org/install.html，[GitHub](https://github.com/licess/lnmp)
