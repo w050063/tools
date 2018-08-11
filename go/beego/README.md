@@ -1,4 +1,5 @@
 - 官网地址：https://beego.me/
+- GitHub：https://github.com/beego
 
 # [快速入门](https://beego.me/quickstart)
 ## 安装
@@ -18,4 +19,12 @@ $ bee run hello
 - 在您的计算机上安装 Bee 工具。
 - 创建一个名为 “hello” 的应用程序。
 - 启动热编译。
+
 一旦程序开始运行，您就可以在浏览器中打开 http://localhost:8080/ 进行访问。
+## [开发者社区](https://beego.me/community)
+- 社区讨论
+- 分享开发经验
+- 贡献社区代码
+- beego开发实例展示
+
+## [开发文档](https://beego.me/docs/intro/)
