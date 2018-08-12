@@ -43,6 +43,7 @@ xxx
 - https://github.com/roncoo/roncoo-cmdb
 - https://github.com/wylok/opsweb
 - https://github.com/PythonTra1nee
+- https://github.com/binbin91/oms
 - 多云管理平台
   - https://github.com/mistio/mist-ce
 # OPStools
@@ -73,3 +74,4 @@ xxx
 - [pip install httpstat](https://github.com/reorx/httpstat)
 - [终端录像](https://github.com/icholy/ttygif)
 - [互联网公司经典技术架构](https://github.com/davideuler/architecture.of.internet-product)
+- hosts管理 https://github.com/HostsTools/Windows

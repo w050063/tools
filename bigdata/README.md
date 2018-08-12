@@ -1,3 +1,6 @@
+- https://github.com/youngwookim/awesome-hadoop
+
+
 hdfs{
     hdfs --help                  # 所有参数
 
