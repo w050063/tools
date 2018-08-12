@@ -11,7 +11,7 @@ pipeline {
             steps {
 				timestamps {
 					echo 'starting pull code ...'
-					git credentialsId: '419e4dfe-9774-4b69-8d4f-ad309edb4aee', url: 'git@github.com:xykong/lovejob.git'
+					git credentialsId: '419e4dfe-9774-4b69-8d4f-ad309edb4aee', url: ''
 				}
             }
         }
