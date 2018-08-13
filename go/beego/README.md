@@ -28,3 +28,6 @@ $ bee run hello
 - beego开发实例展示
 
 ## [开发文档](https://beego.me/docs/intro/)
+
+## Window下安装gcc环境
+https://sourceforge.net/projects/mingw/files/MinGW/
