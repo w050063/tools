@@ -1,6 +1,8 @@
 # windows相关技能
 - [Termius(ssh工具)](http://www.termius.com)
 - [Windows 绝赞应用](https://amazing-apps.gitbooks.io/windows-apps-that-amaze-us/zh-CN/)
+- [Windows 开源编程工具集](http://www.mingw.org/)
+
 ## 系统及软件下载
 - https://msdn.itellyou.cn/
 ## bat

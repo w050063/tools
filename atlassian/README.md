@@ -1,0 +1,2 @@
+- 官网地址: https://www.atlassian.com/
+- 参考资料：http://www.confluence.cn/spacedirectory/view.action

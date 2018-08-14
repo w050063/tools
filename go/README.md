@@ -18,6 +18,13 @@ sh go_install.sh
 https://github.com/MXi4oyu/golang.org
 源：go get golang.org/x/tools/cmd/goimports
 新：go get github.com/MXi4oyu/golang.org/x/toos/cmd/goimports
+
+alias goget='env http_proxy=127.0.0.1:1080 https_proxy=127.0.0.1:1080 go get -v -u'
+在使用go包管理工具如dep时候，我们也会遇到类似情况，可以仿照上面的命令：
+alias depp="env http_proxy=127.0.0.1:1080 https_proxy=127.0.0.1:1080 dep prune -v"
+alias depea="env http_proxy=127.0.0.1:1080 https_proxy=127.0.0.1:1080 dep ensure -add -v"
+alias depeu="env http_proxy=127.0.0.1:1080 https_proxy=127.0.0.1:1080 dep ensure -update -v"
+alias depe="env http_proxy=127.0.0.1:1080 https_proxy=127.0.0.1:1080 dep ensure -v"
 ```
 
 ### 模块
@@ -35,15 +42,19 @@ https://github.com/golang/lint
 go vet是一个用于检查Go语言源码中静态错误的简单工具
 - mysq
 https://github.com/siddontang/go-mysql
+- github.com/spf13/cobra/cobra 命令行
+- github.com/logrusorgru/aurora 终端颜色
+
 ### FQA
 - go项目搜索：https://gowalker.org/
 
 ### 参考资料
-- [Go语言圣经](https://books.studygolang.com/gopl-zh/index.html)
-  - [示例代码](github.com/adonovan/gopl.io/)
 - 资料汇总
+  - [Go语言圣经](https://books.studygolang.com/gopl-zh/index.html)
+  - [示例代码](github.com/adonovan/gopl.io/)
   - https://github.com/jobbole/awesome-go-cn
   - https://github.com/Unknwon/the-way-to-go_ZH_CN
+- 项目汇总
   - https://github.com/EDDYCJY/blog
   - https://getqor.com/cn go语言实现电商系统
   - https://github.com/linclin/gopub 运维发布系统 学习go语言案例

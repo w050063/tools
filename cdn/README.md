@@ -1,5 +1,20 @@
 # to-do-list
 - cdn厂商选择标准制定
+  - 网宿科技股份有限公司
+  - 上海帝联信息科技发展有限公司
+  - 蓝汛通信技术有限责任公司
+  - BAT
+  - 贵州白山云科技有限公司
+  - 北京金山云网络技术有限公司
+  - 北京快网科技有限公司
+  - 北京迅达云成科技有限公司
+  - 七牛云
+  - 迅雷
+  - Akamai
+  - Google Cloudflare
+  - Amazon CloudFront
+
+
 - cdn质量监测，故障定位
 - dns
 - varish,squid,nginx
@@ -9,3 +24,15 @@
   - ffmpeg
   - rtmp协议
 - 费用计算
+- tcp/ip,http协议
+- 缓存
+  - nginx
+  - squid
+  - varish
+- 负载均衡
+  - lvs
+  - haproxy
+  - nginx
+- 存储
+  - Ceph
+  - MooseFS
