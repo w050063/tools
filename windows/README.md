@@ -26,6 +26,10 @@
   ``` bat
   # tracert www.baidu.com
   ```
+- 查看系统版本
+```
+winver
+```
 ## PowerShell
 - 概述
 > Windows PowerShell 是专为系统管理员设计的新 Windows 命令行外壳程序。该外壳程序包括交互式提示和脚本环境，两者既可以独立使用也可以组合使用。
@@ -42,6 +46,9 @@
 
 ## Ansible and saltstack管理Window机器
 - https://docs.ansible.com/ansible/latest/user_guide/windows.html
+
+## to-do-list
+- 批量安装Windows之配置无人值守安装
 
 ## 常见接口类型
 ### 视频接口类型

@@ -112,7 +112,7 @@ ll .htpasswd
             fastcgi_pass 127.0.0.1:9000;
         }
     }
-    
+
 systemctl reload nginx
 ```
 3）配置supervisord-monitor环境
@@ -144,3 +144,4 @@ vim supervisor.php
 - [ansible supervisor](http://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html#supervisorctl-module)
 
 ## 参考资料
+- [supervisor事件通知, 支持邮件, Slack, WebHook](https://github.com/ouqiang/supervisor-event-listener)

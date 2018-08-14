@@ -9,6 +9,7 @@
 - apache/ambari
 - apache/pig
 - apache/sqoop
+- apache/kudu
 
 - apache/mesos
 - apache/cassandra(NoSQL数据库)
