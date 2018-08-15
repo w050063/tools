@@ -54,6 +54,11 @@ https://github.com/siddontang/go-mysql
   - [示例代码](github.com/adonovan/gopl.io/)
   - https://github.com/jobbole/awesome-go-cn
   - https://github.com/Unknwon/the-way-to-go_ZH_CN
+  - godoc
+  ```
+  godoc -http=:6060
+  ```
+  - [官网教程](https://tour.go-zh.org/welcome/1)
 - 项目汇总
   - https://github.com/EDDYCJY/blog
   - https://getqor.com/cn go语言实现电商系统
