@@ -11,3 +11,5 @@
 - [kops](https://github.com/kubernetes/kops)
 - [kubernetes_practice](https://github.com/hackstoic/kubernetes_practice)
 - https://github.com/opsnull/follow-me-install-kubernetes-cluster
+- [Kubernetes Handbook——Kubernetes中文指南/云原生应用架构实践手册](https://jimmysong.io/kubernetes-handbook/)
+- [使用Vagrant和VirtualBox在本地搭建分布式的Kubernetes集群和Istio Service Mesh](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster/blob/master/README-cn.md)

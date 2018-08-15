@@ -68,3 +68,4 @@ NAS路径：/volume1/Teamcity
 - [Homebrew](https://brew.sh/)
 - [技术文档](https://kapeli.com/dash)
 - [awesome-mac](https://github.com/jaywcjlove/awesome-mac)
+- [收集&推荐优秀的 Apps/硬件/技巧/周边等](https://github.com/hzlzh/Best-App)
