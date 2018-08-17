@@ -2,6 +2,7 @@
 - [官网地址](https://glide.sh/)
 
 ```
+curl https://glide.sh/get | sh
 glide init
 edit glide.yaml
 glide update
