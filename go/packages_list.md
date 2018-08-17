@@ -13,9 +13,10 @@ import  _ "fmt" 表示不使用该包，而是只是使用该包的init函数，
 - https://github.com/mozillazg/request
 - 日志
   - https://github.com/mozillazg/logrus
+  - https://github.com/golang/glog
 - 包管理
 	- govendor
-	- gopm
+	- [gopm](https://gopm.io/)
 	- glide包管理工具
 			[官网地址](https://glide.sh/)
 			```
@@ -121,4 +122,3 @@ func main() {
 
 ```
 - [time]() 时间
-- [gopm](https://gopm.io/)
