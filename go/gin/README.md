@@ -3,7 +3,8 @@
 
 # 实践
 - [Gin实践](https://github.com/EDDYCJY/go-gin-example)
-
+- https://github.com/appleboy/gin-jwt
+- https://github.com/edisonlz/Gin_API_Framework
 ```
 go get -u github.com/spf13/cobra/cobra
 

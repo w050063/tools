@@ -6,9 +6,9 @@ grep -q GOPATH /etc/profile
 [ ! $? -eq 0 ] && cat>>/etc/profile<<EOF
 
 # setup go path env
-export PATH=\$PATH:/usr/local/go/bin
+export GOROOT=/usr/local/go
 export GOPATH="/data0/workspaces/go"
-export PATH=$PATH:$GOPATH/bin
+export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin
 EOF
 source /etc/profile
 go env

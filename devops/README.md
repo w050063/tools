@@ -75,3 +75,7 @@ xxx
 - [终端录像](https://github.com/icholy/ttygif)
 - [互联网公司经典技术架构](https://github.com/davideuler/architecture.of.internet-product)
 - hosts管理 https://github.com/HostsTools/Windows
+
+
+# Netflix
+- [来自Netflix的系统高可用建议](http://www.infoq.com/cn/articles/tips-for-high-availability?utm_source=infoq&utm_medium=popular_widget&utm_campaign=popular_content_list&utm_content=homepage)
