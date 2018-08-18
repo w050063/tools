@@ -1,10 +1,18 @@
 # Gin
-- 官网地址：https://github.com/gin-gonic/gin
+- 官网地址：https://gin-gonic.github.io/gin/
+- GitHub地址：https://github.com/gin-gonic/gin
+
 
 # 实践
 - [Gin实践](https://github.com/EDDYCJY/go-gin-example)
 - https://github.com/appleboy/gin-jwt
 - https://github.com/edisonlz/Gin_API_Framework
+- [go 语言框架 gin 的中文文档](https://github.com/skybebe/gin-doc-cn)
+- https://github.com/madhums/go-gin-mgo-demo
+- https://github.com/weiyunhelong/GinLearn
+- https://github.com/wangsongyan/wblog
+- https://github.com/swaggo/gin-swagger
+
 ```
 go get -u github.com/spf13/cobra/cobra
 

@@ -7,6 +7,9 @@ import . "fmt"，将fmt启用别名"."，这样就可以直接使用其内容，
 import  _ "fmt" 表示不使用该包，而是只是使用该包的init函数，并不显示的使用该包的其他内容。注意：这种形式的import，当import时就执行了fmt包中的init函数，而不能够使用该包的其他函数。
 ```
 # 常用包列表
+- 标准库
+  - fmt: 格式化输出
+  - net/http: http客户端和服务端实现
 - gofmt: 源代码格式化
 - os：命令行
 - https://github.com/golang/lint
@@ -45,6 +48,7 @@ https://github.com/siddontang/go-mysql
 
 - 配置管理
 	- github.com/spf13/viper
+  - github.com/go-ini/ini 简单项目使用
 - 依赖管理
 	- github.com/kardianos/govendor
 	``` bash
@@ -122,3 +126,6 @@ func main() {
 
 ```
 - [time]() 时间
+
+- 其他
+  - https://github.com/Unknwon/com 无闻工具包
