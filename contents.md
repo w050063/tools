@@ -3,7 +3,7 @@
   - [Linux基础](https://github.com/mds1455975151/tools/blob/master/os/README.md)
   - [bash基础](https://github.com/mds1455975151/tools/tree/master/shell)
   - [os](https://github.com/mds1455975151/tools/tree/master/os)
-- [Windows篇](#)
+- [Windows篇](https://github.com/mds1455975151/tools/blob/master/windows/README.md)
 - [公有云](#)
 - [自动化运维管理](#)
   - [DevOps](#)
