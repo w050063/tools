@@ -20,3 +20,6 @@ Invoke-WebRequest -Uri $nas_scripts -OutFile $Destination -UseBasicParsing
  
 Invoke-Item -Path $Destination
 ```
+
+# 参考资料
+- PowerShell中文博客：https://www.pstips.net/
