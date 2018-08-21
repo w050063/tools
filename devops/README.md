@@ -20,6 +20,7 @@
 - http://www.devopsbookmarks.com/
 
 - https://github.com/ramyrams/DevOps
+- [运维社区赵班长](https://github.com/unixhot)
 
 <details>
 
@@ -44,6 +45,8 @@ xxx
 - https://github.com/wylok/opsweb
 - https://github.com/PythonTra1nee
 - https://github.com/binbin91/oms
+- https://github.com/hequan2017/chain
+- https://github.com/uglyliu/paleluan-fms
 - 多云管理平台
   - https://github.com/mistio/mist-ce
 # OPStools

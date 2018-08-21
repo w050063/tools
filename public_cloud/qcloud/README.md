@@ -1,8 +1,8 @@
 # 腾讯云
 
 # 腾讯云概述
-- 官网地址
-- 官网文档地址
+- [官网地址](https://cloud.tencent.com/)
+- [官网文档地址](https://cloud.tencent.com/document/product)
 
 ## 腾讯云相关内容
 - [获取腾讯企业邮箱通讯录](https://github.com/b1ngz/tencent_exmail)
