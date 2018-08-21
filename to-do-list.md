@@ -22,6 +22,14 @@
 
 ## markdown
 - https://www.w3cschool.cn/lme/7ei21srt.html
+>打钩表示已经完成
+
+- [X] [Redis](redis/index.md)
+- [ ] [Zookeeper](zookeeper/index.md)
+- [ ] [Hadoop](hadoop/index.md)
+- [ ] HDFS
+- [X] [Storm](storm/index.md)
+
 
 ## 运维金句
 - 重启能解决99%的问题
