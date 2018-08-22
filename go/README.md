@@ -60,9 +60,11 @@ alias depe="env http_proxy=127.0.0.1:1080 https_proxy=127.0.0.1:1080 dep ensure 
   - https://github.com/gocn/knowledge Go社区的知识图谱
   - https://gobyexample.com/
   - https://github.com/AsuraTeam/zcloud k8s管理平台
-  - https://github.com/developer-learning/learning-golang 
-  - https://github.com/Unknwon/go-fundamental-programming 无闻go教学
+  - https://github.com/developer-learning/learning-golang
   - https://github.com/KeKe-Li/For-learning-Go-Tutorial
+  - 无闻
+    - https://github.com/Unknwon/go-fundamental-programming 无闻go教学
+    - https://www.cntofu.com/book/14/index.html
 ### Go开发环境的基本要求
 - 语法高亮
 - 自动保存代码

@@ -10,3 +10,4 @@ chrome://net-internals/
 - Octotree: GitHub代码库浏览
 - uBlock：广告屏蔽
 - YouTube™广告拦截器
+- Sourcegraph: 
