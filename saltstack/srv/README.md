@@ -10,9 +10,9 @@ Install
 
 Demo
 ----
-    salt '*' state.sls init.init-all
+    salt \* state.sls init.init-all
 
-- - -
+----
 
 Node
 ----
@@ -24,7 +24,6 @@ Node
     sed -i '12,12imaster: salt.example.org' /etc/salt/minion
 
     cat >> /etc/hosts <<'EOF'
-
     192.168.2.1    salt.example.org
     EOF
 

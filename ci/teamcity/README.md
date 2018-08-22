@@ -1,5 +1,11 @@
 # TeamCity说明
 
+# 部署
+```
+cd /usr/local/TeamCity/bin/
+./version.sh
+./runAll.sh 
+```
 - http://plugins.jetbrains.com/
 - https://download-cf.jetbrains.com/teamcity/TeamCity-2018.1.1.tar.gz
 - [LDAP配置](https://confluence.jetbrains.com/display/TCD18/LDAP+Integration)
