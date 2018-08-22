@@ -30,7 +30,12 @@
 - [ ] HDFS
 - [X] [Storm](storm/index.md)
 
+# hexo
+- 文件下载：https://jingyan.baidu.com/article/fec4bce296d834f2608d8b5b.html
+- hexo能在markdown中调用_config.yml中的值吗？ https://www.zhihu.com/question/264598381
 
+# RSS
+https://github.com/DIYgod/RSSHub
 ## 运维金句
 - 重启能解决99%的问题
 - 重启、重装、找运营商
