@@ -1,4 +1,4 @@
-- [Cloudera Introduction](docs/introduction.md)
+- [Cloudera Introduction](introduction.md)
 Cloudera Release Notes
 Requirements and Supported Versions
 Cloudera QuickStart VM
