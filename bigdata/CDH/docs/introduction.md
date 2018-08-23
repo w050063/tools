@@ -1,0 +1,15 @@
+Cloudera提供可扩展，灵活的集成平台，可以轻松管理企业中快速增长的数据量和各种数据。Cloudera产品和解决方案使您能够部署和管理Apache Hadoop及相关项目，操作和分析数据，并保护数据的安全和受保护。
+
+Cloudera提供以下产品和工具：
+- CDH- Apache Hadoop和其他相关开源项目的Cloudera发行版，包括Apache Impala和Cloudera Search。CDH还提供安全性和与众多硬件和软件解决方案的集成。
+- Apache Impala - 用于交互式分析和商业智能的大规模并行处理SQL引擎。其高度优化的体系结构使其非常适合具有连接，聚合和子查询的传统BI样式查询。它可以从各种来源查询Hadoop数据文件，包括MapReduce作业生成的或加载到Hive表中的数据文件。YARN资源管理组件允许Impala与运行批处理工作负载的集群共存，与Impala SQL查询同时运行。您可以通过Cloudera Manager用户界面管理Impala以及其他Hadoop组件，并通过Sentry授权框架保护其数据。
+- Cloudera搜索 - 提供对Hadoop和HBase中存储或摄取的数据的实时访问。搜索提供近实时索引，批量索引，全文探索和导航深入分析，以及不需要SQL或编程技能的简单全文界面。Search完全集成在数据处理平台中，使用CDH附带的灵活，可扩展且强大的存储系统。这消除了跨基础架构移动大型数据集以执行业务任务的需要。
+- Cloudera Manager - 用于部署，管理，监控和诊断CDH部署问题的复杂应用程序。Cloudera Manager提供管理控制台，这是一个基于Web的用户界面，使您的企业数据管理变得简单明了。它还包括Cloudera Manager API，您可以使用它来获取群集运行状况信息和指标，以及配置Cloudera Manager。
+-Cloudera Navigator - CDH平台的端到端数据管理和安全性。Cloudera Navigator数据管理使管理员，数据管理员和分析师能够在Hadoop中探索大量数据集。Cloudera Navigator加密并简化加密密钥的存储和管理。Cloudera Navigator中强大的审计，数据管理，沿袭管理，生命周期管理和加密密钥管理使企业能够遵守严格的合规性和监管要求。
+
+本入门指南提供了CDH，Cloudera Manager和Cloudera Navigator的一般概述。本指南还包括有关Cloudera产品的常见问题，并介绍如何获取支持，报告问题以及接收有关更新和新版本的信息。
+
+文档概述:
+
+Cloudera文档集中包含以下指南：
+略
