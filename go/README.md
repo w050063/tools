@@ -62,6 +62,7 @@ alias depe="env http_proxy=127.0.0.1:1080 https_proxy=127.0.0.1:1080 dep ensure 
   - https://github.com/AsuraTeam/zcloud k8s管理平台
   - https://github.com/developer-learning/learning-golang
   - https://github.com/KeKe-Li/For-learning-Go-Tutorial
+  - https://github.com/chai2010/advanced-go-programming-book
   - 无闻
     - https://github.com/Unknwon/go-fundamental-programming 无闻go教学
     - https://www.cntofu.com/book/14/index.html
