@@ -1,6 +1,4 @@
 --- 
-- import_playbook: install_coscmd.yml
-
 - hosts: all
   remote_user: root
   gather_facts: false
@@ -18,32 +16,3 @@
       mode: 0755
       state: directory
     tags: create_backups_dir
-
-  - name: copy scripts to client remote dir
-    copy: 
-      src: files/deploy
-      dest: /home/
-      directory_mode: yes
-      owner: root
-      group: root
-      mode: 0755
-    tags: rsync_scripts
-
-  # create a job that backup gs logs files
-  - name: add crontab job to backup_gs_log.sh
-    cron:
-      name: loveworld backup gs logs files at
-      minute: "0"
-      user: root
-      job: "/bin/bash /home/deploy/scripts/backup_gs_log.sh >/dev/null 2>&1"
-    tags: add_backup_logs_job
-
-  # create a job that backup files
-  - name: add crontab job to loveworld_backup_v1.0.sh
-    cron:
-      name: loveworld backup files at
-      minute: "0"
-      hour: "1"
-      user: root
-      job: "/bin/bash /home/deploy/scripts/loveworld_backup_v1.0.sh all >/dev/null 2>&1"
-    tags: add_backup_job

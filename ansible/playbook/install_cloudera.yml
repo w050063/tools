@@ -7,6 +7,7 @@
   gather_facts: true
   vars:
     - cloudera_version: '5.15.1'
+    - install_type: local   # download|local
   tasks:
   - name: install tools packages
     yum:
@@ -25,6 +26,23 @@
       - 'manifest.json'
       - 'cloudera-manager-centos7-cm{{ cloudera_version }}_x86_64.tar.gz'
       - 'mysql-connector-java-8.0.12.tar.gz'
+    when: install_type == "download"
+    tags: download_app_packages
+
+  - name: download packages
+    copy:
+      src: files/cloudera/{{ item }}
+      dest: /data0/src/
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel'
+      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel.sha1'
+      - 'manifest.json'
+      - 'cloudera-manager-centos7-cm{{ cloudera_version }}_x86_64.tar.gz'
+      - 'mysql-connector-java-8.0.12.tar.gz'
+    when: install_type == "local"
     tags: download_app_packages
 
   - name: unzip mysql-connector-java-8.0.12.tar.gz

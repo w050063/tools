@@ -1,0 +1,23 @@
+Host *
+  ForwardAgent yes
+  GSSAPIAuthentication no
+  GSSAPIDelegateCredentials yes
+  StrictHostKeyChecking no
+  
+# node01 192.168.200.100
+Host node01
+  HostName 192.168.200.100
+  Port 22
+  User root
+
+# node02 192.168.200.101
+Host node02
+  HostName 192.168.200.101
+  Port 22
+  User root
+
+# node03 192.168.200.102
+Host node03
+  HostName 192.168.200.102
+  Port 22
+  User root

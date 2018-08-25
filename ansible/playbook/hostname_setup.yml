@@ -3,11 +3,11 @@
   remote_user: root
   vars:
     - hostnames_file: "/etc/hosts"
-    - ipnames: 
-      - {'192.168.200.100': 'linux-node01 linux-node01.example.com'}
-      - {'192.168.200.101': 'linux-node02 linux-node02.example.com'}
-      - {'192.168.200.102': 'linux-node03 linux-node03.example.com'}
-      - {'192.168.200.103': 'linux-node04 linux-node04.example.com'}
+    - ipnames:       
+      - { ip: '192.168.200.100', hostname: 'linux-node01 linux-node01.example.com' }      
+      - { ip: '192.168.200.101', hostname: 'linux-node02 linux-node02.example.com' }      
+      - { ip: '192.168.200.102', hostname: 'linux-node03 linux-node03.example.com' }      
+      - { ip: '192.168.200.103', hostname: 'linux-node04 linux-node04.example.com' }
     - ipnames_flag: "false" # false|true
   tasks:
   - name: set_fact ipnames_flag
@@ -21,8 +21,8 @@
   - name: add ipnames to {{ hostnames_file }}
     lineinfile: 
       dest: "{{ hostnames_file }}"
-      line: "{{ item.key }} {{ item.value }}"
-    with_dict: 
+      line: "{{ item.ip }} {{ item.hostname }}"
+    with_items: 
       - "{{ ipnames }}"
     when: ipnames and ipnames_flag == "true"
     tags: add_ipnames
