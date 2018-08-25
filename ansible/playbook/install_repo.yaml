@@ -1,0 +1,10 @@
+---
+- import_playbook: install_nginx.yml 
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: install tools
+    yum: name=createrepo state=latest
+    tags: install_tools_packages
