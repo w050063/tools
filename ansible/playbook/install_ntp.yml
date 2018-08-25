@@ -1,0 +1,51 @@
+--- 
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - ntp_type: 'client'                     # server|client
+    - ntp_server_address: '192.168.200.100'
+  tasks:
+  - name: ntp install
+    yum: name=ntp state=latest
+    tags: install_ntp
+
+  - name: rsync /etc/ntp.conf
+    template:
+      src: files/ntp/ntp.conf.j2
+      dest: /etc/ntp.conf
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    when: ntp_type == 'client'
+    notify: restart ntpd
+    tags: rsync_ntpd_config
+
+  - name: make sure a service is running
+    systemd: 
+      state: started 
+      name: ntpd
+    tags: app_service_running
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: ntpd
+      enabled: yes
+      masked: no
+    tags: app_service_start
+
+  - name: sync time from server
+    shell: ntpdate -u 0.centos.pool.ntp.org
+    when: ntp_type == 'server'
+    tags: server_sync_time
+
+  - name: sync time from server
+    shell: ntpdate -u {{ ntp_server_address }}
+    when: ntp_type == 'client'
+    tags: client_sync_time
+
+  handlers:
+    - name: restart ntpd
+      service: name=ntpd enabled=yes state=restarted
+      tags: restart_ntpd

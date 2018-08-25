@@ -1,0 +1,45 @@
+---
+- import_playbook: install_nginx.yml 
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  vars:
+    - cloudera_version: '5.15.1'
+    - mysql_connector_java_version: '8.0.11'
+    - install_type: local   # download|local
+  tasks:
+  - name: install tools
+    yum: name=createrepo state=latest
+    tags: install_tools_packages
+
+  - name: download packages
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ item }} .
+    with_items:
+      - 'cdh{{ cloudera_version }}-centos7.tar.gz.sha1'
+      - 'cdh{{ cloudera_version }}-centos7.tar.gz.md5'
+      - 'cdh{{ cloudera_version }}-centos7.tar.gz'
+    when: install_type == "download"
+    tags: download_app_packages
+
+  - name: download packages
+    copy:
+      src: files/cloudera/{{ item }}
+      dest: /data0/src/
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      - 'cdh{{ cloudera_version }}-centos7.tar.gz.sha1'
+      - 'cdh{{ cloudera_version }}-centos7.tar.gz.md5'
+      - 'cdh{{ cloudera_version }}-centos7.tar.gz'
+    when: install_type == "local"
+    tags: download_app_packages
+
+  - name: unzip cdh{{ cloudera_version }}-centos7.tar.gz
+    unarchive: 
+      src: "/data0/src/cdh{{ cloudera_version }}-centos7.tar.gz"
+      dest: /data0/src
+      remote_src: yes
+    tags: unzip_cdh_repo_packages

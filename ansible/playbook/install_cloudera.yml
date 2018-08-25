@@ -10,78 +10,6 @@
     - mysql_connector_java_version: '8.0.11'
     - install_type: local   # download|local
   tasks:
-  - name: install tools packages
-    yum:
-      state: latest 
-      name: "{{item}}"
-    with_items:
-      - psmisc
-    tags: install_tools
-
-  - name: download packages
-    shell: cd /data0/src && \
-           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ item }} .
-    with_items:
-      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel'
-      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel.sha1'
-      - 'manifest.json'
-      - 'cloudera-manager-centos7-cm{{ cloudera_version }}_x86_64.tar.gz'
-      - 'cdh5.15.1-centos7.tar.gz.sha1'
-      - 'cdh5.15.1-centos7.tar.gz.md5'
-      - 'cdh5.15.1-centos7.tar.gz'
-      - 'mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz'
-    when: install_type == "download"
-    tags: download_app_packages
-
-  - name: download packages
-    copy:
-      src: files/cloudera/{{ item }}
-      dest: /data0/src/
-      owner: root
-      group: root
-      mode: 0664
-    with_items:
-      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel'
-      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel.sha1'
-      - 'manifest.json'
-      - 'cloudera-manager-centos7-cm{{ cloudera_version }}_x86_64.tar.gz'
-      - 'cdh5.15.1-centos7.tar.gz.sha1'
-      - 'cdh5.15.1-centos7.tar.gz.md5'
-      - 'cdh5.15.1-centos7.tar.gz'
-      - 'mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz'
-    when: install_type == "local"
-    tags: download_app_packages
-
-  - name: unzip mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz
-    unarchive: 
-      src: "/data0/src/mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz"
-      dest: /data0/src
-      remote_src: yes
-    tags: unzip_mysql_jdbc_packages
-
-  - name: unzip app packages
-    unarchive: 
-      src: "/data0/src/cloudera-manager-centos7-cm{{ cloudera_version }}_x86_64.tar.gz"
-      dest: /opt/
-      remote_src: yes
-    tags: unzip_app_packages
-  
-  - name: parcel
-    shell: cp -f /data0/src/{{ item }} /opt/cloudera/parcel-repo/
-    with_items:
-      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel'
-      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel.sha1'
-      - 'manifest.json'
-    tags: parcel
-
-  - name: mysql-connector-java
-    shell: cp -f /data0/src/mysql-connector-java-{{ mysql_connector_java_version }}/mysql-connector-java-{{ mysql_connector_java_version }}.jar /opt/cm-5.15.1/share/cmf/lib/
-    tags: mysql-connector-java
-
-  - name: init db
-    shell: /opt/cm-5.15.1/share/cmf/schema/scm_prepare_database.sh mysql cm -hlocalhost -uroot -p123456 --scm-host localhost scm scm scm
-    tags: init_db
-
   - name: create user cloudera-scm
     shell: useradd --system \
                    --home=/opt/cm-5.15.1/run/cloudera-scm-server/ \
@@ -90,23 +18,27 @@
                    --comment "Cloudera SCM User" cloudera-scm
     tags: add_user_cloudera
 
-  - name: start server
-    shell: /opt/cm-5.15.1/etc/init.d/cloudera-scm-server start 
-    tags: start_server
+  - name: other setup
+    shell: echo never > /sys/kernel/mm/transparent_hugepage/defrag \
+           echo never > /sys/kernel/mm/transparent_hugepage/enabled \
+           echo 10 > /proc/sys/vm/swappiness
+    tags: other_setup
 
-  - name: rsync /opt/cm-{{ cloudera_version }}/etc/cloudera-scm-agent/config.ini
-    template:
-      src: files/cloudera/config.ini.j2
-      dest: "/opt/cm-{{ cloudera_version }}/etc/cloudera-scm-agent/config.ini"
-      owner: root
-      group: root
-      mode: 0664
-      backup: yes
-    tags: rsync_agent_config
+  - name: other setup
+   
+  - name: boot settings /etc/rc.local    
+    lineinfile:      
+      path: /etc/rc.local     
+      line: "\n# cloudera setup at {{ ansible_date_time.date }} by madongsheng\n
+                 echo never > /sys/kernel/mm/transparent_hugepage/defrag\n
+                 echo never > /sys/kernel/mm/transparent_hugepage/enabled"    
+    tags: boot_settings
 
-  - name: start agent
-    shell: /opt/cm-5.15.1/etc/init.d/cloudera-scm-agent start 
-    tags: start_agent
+  - name: vm.swappiness
+    lineinfile:
+      path: /etc/sysctl.d/99-sysctl.conf
+      line: "vm.swappiness = 10"
+    tags: boot_settings
 
   - name: rsysc cloudera-manager.repo
     copy:

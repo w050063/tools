@@ -1,0 +1,4 @@
+[cloudera-manager] 
+name = Cloudera Manager, Version 5.5.2
+baseurl = http://192.168.200.100/mirrors/cm/
+gpgcheck = 0
