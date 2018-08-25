@@ -1,0 +1,43 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - dba_user: 'dba'
+    - dba_password: '123456'
+    - login_host: '127.0.0.1'
+  tasks:
+  - name: install MySQL-python
+    yum: name=MySQL-python state=latest
+    tags: install_mysql_python_module
+
+  - name: create databases
+    shell: mysql -u{{ dba_user }} \
+                 -p{{ dba_password }} \
+                 -h{{ login_host }} \ 
+                 -e "CREATE DATABASE {{ item }} DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;"
+    with_items:
+      - hue
+      - metastore
+      - sentry
+      - oozie
+    ignore_errors: yes
+    tags: create_database
+
+  # create user with name 'xxx' and previously hashed mysql native password 'xxx' with all database privileges
+  - mysql_user:
+      name: "{{ item.user }}"
+      login_host: '{{ login_host }}'
+      login_user: "{{ dba_user }}"
+      login_password: "{{ dba_password }}"
+      password: "{{ item.password }}"
+      encrypted: yes
+      priv: "{{ item.priv }}"
+      host: "{{ item.host }}"
+      state: present
+    with_items:
+      - { user: 'hue',    host: '%', password: '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9', priv: 'hue.*:ALL' }
+      - { user: 'hive',   host: '%', password: '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9', priv: 'metastore.*:ALL' }
+      - { user: 'sentry', host: '%', password: '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9', priv: 'sentry.*:ALL' }
+      - { user: 'oozie',  host: '%', password: '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9', priv: 'oozie.*:ALL' }
+    tags: add_mysql_user
