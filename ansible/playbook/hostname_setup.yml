@@ -3,12 +3,13 @@
   remote_user: root
   vars:
     - hostnames_file: "/etc/hosts"
+    - ipnames_flag: "true" # false|true
+    - host_flag: "false"   # false|true
     - ipnames:       
       - { ip: '192.168.200.100', hostname: 'linux-node01 linux-node01.example.com' }      
       - { ip: '192.168.200.101', hostname: 'linux-node02 linux-node02.example.com' }      
       - { ip: '192.168.200.102', hostname: 'linux-node03 linux-node03.example.com' }      
       - { ip: '192.168.200.103', hostname: 'linux-node04 linux-node04.example.com' }
-    - ipnames_flag: "false" # false|true
   tasks:
   - name: set_fact ipnames_flag
     set_fact: ipnames_flag = "{{ ipnames_flag }}"
@@ -33,5 +34,5 @@
       line: "{{ item }} {{ ansible_hostname }}"
     with_items: 
       - "{{ ansible_all_ipv4_addresses }}"
-    when: ansible_all_ipv4_addresses and ipnames_flag == "true"
+    when: ansible_all_ipv4_addresses and host_flag == "true"
     tags: add_ip_to_hosts

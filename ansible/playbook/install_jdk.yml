@@ -2,7 +2,18 @@
 - hosts: all
   remote_user: root
   gather_facts: false
+  vars:
+    - install_type: download   # download|local
+    - REPO_IP: 115.159.89.176
   tasks:
+  - name: download packages
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ item }} .
+    with_items:
+      - 'jdk-8u161-linux-x64.rpm'
+    when: install_type == "download"
+    tags: download_app_packages
+
   - name: rsysc jdk files
     copy:
       src: files/{{ item }}
@@ -12,8 +23,19 @@
       mode: 0664
     with_items:
       - jdk-8u161-linux-x64.rpm
+    when: install_type == 'local'
+    tags: rsyncr_jdk_packages
+
+  - name: rsysc jdk files
+    copy:
+      src: files/{{ item }}
+      dest: /data0/src/{{ item }}
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
       - java_env.sh
-    tags: rsync jdk files
+    tags: rsync_jdk_env
     
   - name: install jdk-8u161-linux-x64.rpm
     shell: rpm -ivh /data0/src/jdk-8u161-linux-x64.rpm
