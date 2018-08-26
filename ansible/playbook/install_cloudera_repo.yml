@@ -40,6 +40,20 @@
   - name: unzip cdh{{ cloudera_version }}-centos7.tar.gz
     unarchive: 
       src: "/data0/src/cdh{{ cloudera_version }}-centos7.tar.gz"
-      dest: /data0/src
+      dest: /usr/share/nginx/html/
       remote_src: yes
     tags: unzip_cdh_repo_packages
+
+  - name: cloudera create repo
+    shell: cd /usr/share/nginx/html/ && createrepo ./cdh
+    tags: create_repo
+
+  - name: nginx config
+    copy:
+      src: files/cloudera/nginx.conf
+      dest: /etc/nginx/nginx.conf
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    tags: rsync_repo_nginx_config

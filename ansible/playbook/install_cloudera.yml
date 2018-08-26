@@ -8,7 +8,8 @@
   vars:
     - cloudera_version: '5.15.1'
     - mysql_connector_java_version: '8.0.11'
-    - install_type: local   # download|local
+    - install_type: 'local'                     # download|local
+    - repo_url: '192.168.200.100'
   tasks:
   - name: create user cloudera-scm
     shell: useradd --system \
@@ -16,16 +17,15 @@
                    --no-create-home \
                    --shell=/bin/false \
                    --comment "Cloudera SCM User" cloudera-scm
+    ignore_errors: yes
     tags: add_user_cloudera
 
   - name: other setup
-    shell: echo never > /sys/kernel/mm/transparent_hugepage/defrag \
-           echo never > /sys/kernel/mm/transparent_hugepage/enabled \
+    shell: echo never > /sys/kernel/mm/transparent_hugepage/defrag; \
+           echo never > /sys/kernel/mm/transparent_hugepage/enabled; \
            echo 10 > /proc/sys/vm/swappiness
     tags: other_setup
 
-  - name: other setup
-   
   - name: boot settings /etc/rc.local    
     lineinfile:      
       path: /etc/rc.local     
@@ -41,9 +41,9 @@
     tags: boot_settings
 
   - name: rsysc cloudera-manager.repo
-    copy:
-      src: files/cloudera/cloudera-manager.repo
-      dest: /etc/yum.repos.d/cloudera-manager.repo
+    template:
+      src: files/cloudera/cloudera-cdh5.repo.j2
+      dest: /etc/yum.repos.d/cloudera-cdh5.repo
       owner: root
       group: root
       mode: 0644
