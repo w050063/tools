@@ -19,3 +19,7 @@ hdfs{
     hdfs dfsadmin -help          # hdfs集群节点管理
     hdfs dfsadmin -report        # 基本的文件系统统计信息
 }
+
+
+# 参考资料
+- http://www.aboutyun.com/
