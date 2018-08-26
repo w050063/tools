@@ -1,0 +1,10 @@
+---
+- import_playbook: create_work_dir.yml
+- import_playbook: hostname_setup.yml
+- import_playbook: yum_setup.yml
+- import_playbook: install_tools_packages.yml
+- import_playbook: install_pip.yml
+- import_playbook: install_rsync.yml
+- import_playbook: limits_setup.yml
+- import_playbook: install_supervisor.yml
+- import_playbook: deploy_tools.yml
