@@ -31,6 +31,7 @@
 - ~~集群监控aggregator功能~~
 - 点击hostname跳转到http://IP:1998页面
 - dashboard如何更新
+- ~~利用snmp监控交换机或者路由器~~
 ```
 git clone https://github.com/open-falcon/dashboard.git
 cd dashboard
