@@ -81,9 +81,15 @@ Date: Wed, 09 May 2018 09:13:11 GMT
 # logger -t graylog-ubuntu -n 10.1.16.124 -P 12201 "11111"   # Syslog UDP 测试方式
 
 # Application GELF UDP 测试方式
-# echo -n '{ "version": "1.1", "host": "example.org", "short_message": "A short message", "level": 5, "_some_info": "foo" }' | nc -w 5 -u 10.1.16.124 12201
-参考资料：http://docs.graylog.org/en/2.4/pages/gelf.html
+echo -n '{ "version": "1.1", "host": "example.org", "short_message": "A short message", "level": 5, "_some_info": "foo" }' | nc -w 5 -u 10.1.16.124 12201
 
+# TCP
+echo -n -e '{ "version": "1.1", "host": "example.org", "short_message": "A short message", "level": 5, "_some_info": "foo" }'"\0" | nc -w0 graylog.example.com 12201
+
+# http
+curl -X POST -H 'Content-Type: application/json' -d '{ "version": "1.1", "host": "example.org", "short_message": "A short message", "level": 5, "_some_info": "foo" }' 'http://graylog.example.com:12201/gelf'
+
+参考资料：http://docs.graylog.org/en/2.4/pages/gelf.html
 ```
 ## 目录迁移
 ```

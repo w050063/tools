@@ -44,7 +44,8 @@ export DP_Id="xxx"
 export DP_Key="xxx"
 acme.sh --issue --dns dns_dp -d xxx.cn -d *.xxx.cn
 acme.sh --issue --dns dns_dp -d *gs.xxx.cn
-
+证书存放位置：/root/.acme.sh/
+ 
 ~/.acme.sh/account.conf
 
 https://blog.csdn.net/wr410/article/details/79559369
