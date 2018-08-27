@@ -51,7 +51,27 @@ CDH安装方式：
 - jdk
 - MySQL
 ```
-ansible-playbook host-init-qq.yml -i ../hosts.cdh4 -l vm
+git clone https://github.com/mds1455975151/tools.git
+sh ansible_install.sh
+
+ssh-copy-id 192.168.200.100
+ssh-copy-id 192.168.200.101
+
+ansible-playbook host-init-vm.yml -i ../hosts.cdh5 -l node01,node02
+
+ansible-playbook install_ntp.yml -i ../hosts.cdh5 -l node01 -e "ntp_type=server"
+ansible-playbook install_ntp.yml -i ../hosts.cdh5 -l node02
+
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
+sh install_mysql.sh
+systemctl stop mysqld
+\cp tools/ansible/playbook/files/cloudera/my.cnf /etc/my.cnf
+systemctl start mysqld
+
+ansible-playbook install_cloudera_manager.yml -i ../hosts.cdh5 -l node01
+
+ansible-playbook install_cloudera.yml -i ../hosts.cdh5 -l node01,node02
+
 ```
 http://192.168.200.100:7180
 账号密码默认admin
@@ -92,5 +112,12 @@ waiting for rollback request
 解决版本：
 ```
 sudo mv /usr/bin/host /usr/bin/host.bak
+```
+- 安装失败。 无法接收 Agent 发出的检测信号。
+  - 检查提示信息中的问题
+  - ntp时间问题
+  -
+```
+python -c 'import socket; print socket.getfqdn(), socket.gethostbyname(socket.getfqdn())'
 ```
 # to-do-list
