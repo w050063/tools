@@ -35,12 +35,12 @@
       masked: no
     tags: app_service_start
 
-  - name: sync time from server
+  - name: sync time server
     shell: ntpdate -u 0.centos.pool.ntp.org
     when: ntp_type == 'server'
     tags: server_sync_time
 
-  - name: sync time from server
+  - name: sync time client
     shell: ntpdate -u {{ ntp_server_address }}
     when: ntp_type == 'client'
     tags: client_sync_time

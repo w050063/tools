@@ -57,3 +57,7 @@
       mode: 0664
       backup: yes
     tags: rsync_repo_nginx_config
+
+  - name: restart nginx
+    shell: systemctl restart nginx
+    tags: restart_nginx

@@ -1,7 +1,7 @@
 ---
 - import_playbook: create_work_dir.yml
 - import_playbook: install_jdk.yml
-- import_playbook: install_cloudera_repo.yaml
+- import_playbook: install_cloudera_repo.yml
 - import_playbook: install_cloudera.yml
 
 - hosts: all
@@ -90,6 +90,7 @@
                    --no-create-home \
                    --shell=/bin/false \
                    --comment "Cloudera SCM User" cloudera-scm
+    ignore_errors: yes
     tags: add_user_cloudera
 
   - name: start server
@@ -112,8 +113,8 @@
 
   - name: rsysc cloudera-manager.repo
     copy:
-      src: files/cloudera/cloudera-manager.repo
-      dest: /etc/yum.repos.d/cloudera-manager.repo
+      src: files/cloudera/cloudera-cdh5.repo.j2
+      dest: /etc/yum.repos.d/cloudera-cdh5.repo
       owner: root
       group: root
       mode: 0644
