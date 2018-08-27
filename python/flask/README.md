@@ -3,6 +3,13 @@
 - GitHub地址：https://github.com/pallets/flask
 - 资料： https://github.com/humiaozuzu/awesome-flask
 
+```
+yum install -y python-pip
+pip install --upgrade pip
+pip install flask flask_admin
+pip freeze > requirement.txt
+```
+
 # 小目标
 - 1、flask 安装 基本应用(基于docker环境，快速部署及测试)
 - 2、flask登录页面

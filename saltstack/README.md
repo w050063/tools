@@ -16,3 +16,6 @@ ansible-playbook install_saltstack_server.yml -i ../hosts.salt -l salt-minion
 
 # FQA
 # 参考资料
+- states
+  - https://github.com/brutasse/states
+  - https://github.com/bclermont/states
