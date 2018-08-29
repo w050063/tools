@@ -29,7 +29,7 @@ netstat -tunlp|grep 12322
 ```
 # 修改表结构
 ``` bash
-cd /data0/dbproxy/infra-fp-mysql-dbproxy/tools
+cd /home/DBProxy/tools
 ./DBParamsQuery -h
 Usage: 
         ./DBParamsQuery [-h host] [-p port] [-t table_name] [-timeout timeout_seconds] <hintId | -i int_hintIds | -s string_hintIds> sql [param1 param2 ...]
@@ -48,7 +48,7 @@ mysql -uroot -p123456 -h127.0.0.1 -e "CREATE DATABASE dbproxymgr;"
 mysql -uroot -p123456 -h127.0.0.1 dbproxymgr < dbproxy.sql
 mysql -uroot -p123456 -h127.0.0.1 -e "update dbproxymgr.server_info set user='dba';"
 
-sed -i 's/DBProxy.ConfigureDB.databaseName = dbproxy/DBProxy.ConfigureDB.databaseName = dbproxymgr/g' /data0/dbproxy/infra-fp-mysql-dbproxy/DBProxyMgr/DBPM/DBProxy.conf
+sed -i 's/DBProxy.ConfigureDB.databaseName = dbproxy/DBProxy.ConfigureDB.databaseName = dbproxymgr/g' cd /home/DBProxy/DBProxyMgr/DBPM/DBProxy.conf
 supervisorctl status
 supervisorctl restart DBProxyMgr
 
