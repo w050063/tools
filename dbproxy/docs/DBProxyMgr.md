@@ -52,14 +52,14 @@ sed -i 's/DBProxy.ConfigureDB.databaseName = dbproxy/DBProxy.ConfigureDB.databas
 supervisorctl status
 supervisorctl restart DBProxyMgr
 
-./DBParamsQuery -h 10.0.0.14 -p 12322 -i "" "desc user;"
-./DBParamsQuery -h 10.0.0.14 -p 12322 -i "" "show create table user" 
-./DBParamsQuery -h 10.0.0.14 -p 12322 -i "" "ALTER TABLE user COMMENT = '用户信息1';"
-./DBParamsQuery -h 10.0.0.14 -p 12322 -i "" "ALTER TABLE user_friend_unlock ADD COLUMN testField varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'aaa' AFTER isShow;"
-./DBParamsQuery -h 10.0.0.14 -p 12322 -i "" "ALTER TABLE user_friend_unlock DROP COLUMN testField;"
+./DBParamsQuery -h 127.0.0.1 -p 12322 -i "" "desc user;"
+./DBParamsQuery -h 127.0.0.1 -p 12322 -i "" "show create table user" 
+./DBParamsQuery -h 127.0.0.1 -p 12322 -i "" "ALTER TABLE user COMMENT = '用户信息1';"
+./DBParamsQuery -h 127.0.0.1 -p 12322 -i "" "ALTER TABLE user_friend_unlock ADD COLUMN testField varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'aaa' AFTER isShow;"
+./DBParamsQuery -h 127.0.0.1 -p 12322 -i "" "ALTER TABLE user_friend_unlock DROP COLUMN testField;"
 
 检查修改一致性
-./DBTableStrictChecker 10.0.0.14 12322 user_friend_unlock
+./DBTableStrictChecker 127.0.0.1 12322 user_friend_unlock
 
 Query interface 'splitInfo' ...
 ----------------------------------
