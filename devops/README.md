@@ -46,13 +46,24 @@ xxx
 - https://github.com/PythonTra1nee
 - https://github.com/binbin91/oms
 - https://github.com/hequan2017/chain
+- https://github.com/evcloud/evcloud_server
+- https://github.com/linqian123/wisdom-mattress
+- https://github.com/ixrjog/opsCloud
+- https://github.com/chanyipiaomiao
+- https://github.com/YoLoveLife/DevOps
+- https://github.com/george518/PPGo_Job
+- https://github.com/MiSecurity/x-patrol
+- https://github.com/openspug/spug
 - https://github.com/uglyliu/paleluan-fms
 - 多云管理平台
   - https://github.com/mistio/mist-ce
+
 # OPStools
 - https://github.com/alibaba/opstools
 - https://github.com/DevopsNexus
 
+# SRE
+- https://github.com/dastergon/awesome-sre
 # 源码管理
 - GitHub
 - Bitbucket
