@@ -45,6 +45,20 @@
   - 默认数据库 账号：jumpserver 密码：somepassword
   - 资产表assets_asset
 
+# API
+``` json
+$ curl -X POST -H 'Content-Type: application/json' -d '{"username": "admin", "password": "admin"}' http://localhost/api/users/v1/token/  # 获取token
+{"Token":"937b38011acf499eb474e2fecb424ab3","KeyWord":"Bearer"}%  # 获取到的token
+
+$ curl -H 'Authorization: Bearer 937b38011acf499eb474e2fecb424ab3' -H "Content-Type:application/json" http://localhost/api/users/v1/users/
+# 使用token访问，token有效期 1小时
+
+curl -X POST -H 'Content-Type: application/json' -d '{"username": "admin", "password": "admin"}' http://localhost/api/users/v1/token/
+curl -H 'Authorization: Bearer 35d862791cf44af18d14dc39bc76c337' -H "Content-Type:application/json" http://localhost/api/users/v1/users/
+
+curl -H 'Authorization: Bearer 35d862791cf44af18d14dc39bc76c337' -H "Content-Type:application/json" -d '{"ip": "1.1.1.1", "hostname": "test01", "port": "22","admin_user_id":"f9ff44fc03c6489f8fabe0c816f2b579"}' http://localhost/api/assets/v1/assets/
+```
+
 # 参考资料
 - https://github.com/getway/diting
 - https://github.com/xskh2007/zjump
