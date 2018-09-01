@@ -45,6 +45,9 @@
   - 默认数据库 账号：jumpserver 密码：somepassword
   - 资产表assets_asset
 
+- SecureCRT登录
+  使用jumpserver用户登录即可使用key
+  
 # API
 ``` json
 $ curl -X POST -H 'Content-Type: application/json' -d '{"username": "admin", "password": "admin"}' http://localhost/api/users/v1/token/  # 获取token
