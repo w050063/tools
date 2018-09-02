@@ -8,8 +8,6 @@
 
     siege  http://www.joedog.org/ POST haha=papa&dada=mama
 
-
-
 #### # 参数
 
     -c 并发数

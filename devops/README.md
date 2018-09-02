@@ -1,3 +1,12 @@
+# 发布方案
+- 金丝雀部署
+- 蓝绿部署
+
+# 发布系统
+- https://github.com/linclin/gopub 学习go语言案例
+- https://github.com/meolu/walle-web
+- https://github.com/linclin/gopub go walle-web
+
 # 自动化实例
 - https://github.com/NARKOZ/hacker-scripts
 - https://www.jianshu.com/p/80336139ad1d
