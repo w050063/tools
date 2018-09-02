@@ -34,6 +34,7 @@ xxx
 - [SQL操作平台](https://github.com/jly8866/archer)
 
 # CMDB
+- https://github.com/PythonTra1nee/OPMS_v3
 - https://github.com/openspug/spug
 - https://github.com/welliamcao/OpsManage
 - https://github.com/itpubs/OneStack
