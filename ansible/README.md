@@ -61,3 +61,4 @@ ansible_winrm_server_cert_validation=ignore
 - https://github.com/ansible/ansible-examples
 - https://github.com/kbrebanov
 - [基于Ansible的自动化代码发布工具](https://github.com/geekwolf/flamingo)
+- [Ansible官网文档中文本地化](https://github.com/stanleylst/ansible-tran)

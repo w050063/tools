@@ -2,6 +2,8 @@
 ```
 yum -y install net-snmp-utils
 ```
+# 查找OID
+下载查阅OID的第三方软件（Getif）
 
 命令
 ```

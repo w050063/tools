@@ -52,21 +52,27 @@ CDH安装方式：
 - MySQL
 ```
 git clone https://github.com/mds1455975151/tools.git
+cd tools/ansible/
 sh ansible_install.sh
 
 ssh-copy-id 192.168.200.100
 ssh-copy-id 192.168.200.101
+ssh-copy-id 192.168.200.102
 
-ansible-playbook host-init-vm.yml -i ../hosts.cdh5 -l node01,node02
+ansible-playbook host-init-vm.yml -i ../hosts.cdh5 -l hadoop-cluster
 
-ansible-playbook install_ntp.yml -i ../hosts.cdh5 -l node01 -e "ntp_type=server"
-ansible-playbook install_ntp.yml -i ../hosts.cdh5 -l node02
+ansible-playbook install_ntp.yml -i ../hosts.cdh5 -l cm -e "ntp_type=server"
+ansible-playbook install_ntp.yml -i ../hosts.cdh5 -l cdh -e "ntp_type=client"
+ansible hadoop-cluster -i ../hosts.cdh5 -m shell -a 'date'
 
-wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
+cd tools/mysql/
 sh install_mysql.sh
 systemctl stop mysqld
 \cp tools/ansible/playbook/files/cloudera/my.cnf /etc/my.cnf
 systemctl start mysqld
+
+install_cloudera_manager.yml
+
 
 ansible-playbook install_cloudera_manager.yml -i ../hosts.cdh5 -l node01
 
