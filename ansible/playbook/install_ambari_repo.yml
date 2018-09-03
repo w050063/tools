@@ -1,0 +1,60 @@
+---
+- import_playbook: create_work_dir.yml
+- import_playbook: install_nginx.yml 
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: tools install
+    yum: name={{ item }} state=latest
+    with_items:
+      - yum-utils 
+      - createrepo
+    tags: install_tools_packages
+
+  - name: ambari repo
+    get_url: 
+      url: http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/ambari.repo
+      dest: /etc/yum.repos.d/
+    tags: ambari_repo
+
+  - name: HDP repo
+    get_url: 
+      url: http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.0.0.0/hdp.repo
+      dest: /etc/yum.repos.d/
+    tags: hdp_repo
+
+  - name: create work dir
+    file:
+      path: "/usr/share/nginx/html/{{ item }}"
+      mode: 0755
+      state: directory
+    with_items:
+      - 'ambari/centos7'
+      - 'hdp/centos7'
+      - 'hdf/centos7'
+    tags: create_work_dir
+
+  - name: reposync Ambari-2.7.0.0
+    shell: cd /usr/share/nginx/html/ambari/centos7 && reposync -r ambari-2.7.0.0
+    tags: reposync_ambari
+
+  - name: reposync HDP-3.0.0.0
+    shell: cd /usr/share/nginx/html/hdp/centos7 && reposync -r HDP-3.0.0.0; reposync -r HDP-UTILS-1.1.0.22 
+    tags: reposync_hdp
+  
+  - name: generate the repository metadata
+    shell: createrepo /usr/share/nginx/html/ambari/centos7/
+    with_items:
+      - ''
+    tags: generate_repo_metadata
+
+  - name: print messages
+    debug:
+      msg: '{{ item }}'
+    with_items:
+      - 'http://<web.server>/ambari/centos7/ambari-2.7.0.0'
+      - 'http://<web.server>/hdp/centos7/HDP-3.0.0.0'
+      - 'http://<web.server>/hdp/centos7/HDP-UTILS-1.1.0.22'
+    tags: print_messages

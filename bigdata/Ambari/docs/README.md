@@ -1,0 +1,19 @@
+- 1. Getting Ready
+  - [Product Interoperability](determine_product_interop.md)
+  - [Meet Minimum System Requirements](meet_minimum_system_requirements.md)
+    - Software Requirements
+    - Memory Requirements
+    - Package Size and Inode Count Requirements
+    - Maximum Open Files Requirements
+  - Collect Information
+  - Prepare the Environment
+- 2. Using a Local Repository
+  - Setting Up a Local Repository
+    - Preparing to Set Up a Local Repository
+    - Setting up a Local Repository with Temporary Internet Access
+    - Setting Up a Local Repository with No Internet Access
+  - Preparing the Ambari Repository Configuration File to Use the Local Repository
+- 3. Obtaining Public Repositories
+- 4. Installing Ambari
+- 5. Working with Management Packs
+- 6. Installing, Configuring, and Deploying a Cluster
