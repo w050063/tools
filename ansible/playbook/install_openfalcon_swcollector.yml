@@ -1,0 +1,72 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  become: true
+  become_user: root
+  remote_user: root
+  gather_facts: true
+  vars:
+    - app_version: '4.0.6.3'
+  tasks:
+  - name: mkdir open-falcon data and log dir
+    file:
+      path: /usr/local/falcon-swcollector-{{ app_version }}
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+      backup: yes
+    tags: create_app_work_dir
+
+  - name: download falcon-swcollector-{{ app_version }}.tar.gz
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/open-falcon/falcon-swcollector-{{ app_version }}.tar.gz .
+    tags: download_app_packages
+  
+  - name: unarchive app packages
+    unarchive:
+      src: /data0/src/falcon-swcollector-{{ app_version }}.tar.gz
+      dest: /usr/local/falcon-swcollector-{{ app_version }}
+    tags: unarchive_app_packages
+
+  - name: mkdir falcon-swcollector link
+    file:
+      src: /usr/local/falcon-swcollector-{{ app_version }}
+      dest: /usr/local/falcon-swcollector
+      owner: root
+      group: root
+      mode: 0755
+      state: link
+    tags: create_work_dir_link
+
+  - name: rsync falcon-swcollector agent config file
+    template:
+      src: files/openfalcon/sw-{{ item }}.j2
+      dest: /usr/local/falcon-swcollector/{{ item }}
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    with_items:
+      - cfg.json
+      - hosts.json
+    notify: restart falcon-swcollector
+    tags: rsync_app_config
+
+  - name: start agent proc
+    shell: cd /usr/local/falcon-swcollector && nohup ./control start
+    tags: start_agent
+
+  - name: setup service start boot
+    lineinfile:
+      path: /etc/rc.local
+      state: present
+      backup: yes
+      line: "cd /usr/local/falcon-swcollector && ./control start >/dev/null 2&1"
+    tags: setup_service_start_boot
+
+  handlers:
+    - name: restart falcon-swcollector
+      shell: cd /usr/local/falcon-swcollector && nohup ./control restart
+      tags: restart_falcon_swcollector

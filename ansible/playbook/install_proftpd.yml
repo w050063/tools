@@ -1,0 +1,93 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - install_type: source       # yum|source
+    - proftpd_version: '1.3.6'
+    - install_dir: '/usr/local/proftpd'
+    - data_dir: '/data0/proftpd'
+  tasks:
+  - name: install tools packages
+    yum:
+      state: latest 
+      name: "{{item}}"
+    with_items:
+      - ftp 
+      - python-devel
+      - openldap-devel
+    tags: install_tools
+
+  - name: download proftpd-{{ proftpd_version }}.tar.gz
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/proftpd-{{ proftpd_version }}.tar.gz .
+    tags: download_app_packages
+
+  - name: unzip app packages
+    unarchive: 
+      src: "/data0/src/proftpd-{{ proftpd_version }}.tar.gz"
+      dest: /data0/src/
+      remote_src: yes
+    tags: unzip_app_packages
+
+  - name: install app
+    shell: cd /data0/src/proftpd-{{ proftpd_version }} && \
+           ./configure --prefix={{ install_dir }} --with-modules=mod_ldap && \
+           make && \
+           make install
+    tags: install_app
+
+  - name: rsync authuser proftpd.conf
+    template:
+      src: files/proftpd/{{ item }}.j2
+      dest: "{{ install_dir }}/etc/{{ item }}"
+      owner: root
+      group: root
+      mode: 0600
+      backup: yes
+    with_items:
+      - authuser
+      - proftpd.conf
+    tags: rsync_readme_files
+
+  - name: add test user
+    shell: "{{ install_dir }}/bin/ftpasswd \
+           --passwd \
+           --name=test \
+           --home {{ data_dir }} \
+           --shell=/sbin/nologin \
+           --uid=99 --gid=99 \
+           --file /usr/local/proftpd/etc/authuser \
+           --stdin test"
+    tags: add_user
+
+  - name: create work dir
+    file:
+      path: '{{ item }}'
+      mode: 0755
+      state: directory
+    with_items:
+      - /var/log/proftpd
+      - '{{ data_dir }}'
+    tags: create_log_dir
+
+  - name: start proftpd service
+    shell: pkill proftpd; /usr/local/proftpd/sbin/proftpd
+    tags: start_service
+
+  - name: boot settings /etc/rc.local
+    lineinfile:
+      path: /etc/rc.local
+      line: "\n# proftpd service start at {{ ansible_date_time.date }} by madongsheng\n/usr/local/proftpd/sbin/proftpd"
+    tags: boot_settings
+
+  - name: rsync README.md
+    template:
+      src: files/proftpd/README.md.j2
+      dest: "{{ install_dir }}/README.md"
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_readme_files

@@ -1,0 +1,82 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  vars:
+    - repo_home_dir: '/data0/svn'
+    - repo_name: 'loveworld'
+  tasks:
+  - name: rsysc svn repo file
+    copy:
+      src: files/svn/wandisco-svn.repo
+      dest: /etc/yum.repos.d/
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_repo_file
+    
+  - name: svn install
+    yum: name=jemalloc state=latest
+    with_items:
+      - httpd 
+      - svn 
+      - mod_dav_svn
+    tags: install_svn
+
+  - name: rsysc subversion.conf
+    template:
+      src: files/svn/subversion.conf.j2
+      dest: /etc/httpd/conf.d/subversion.conf
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_svn_http_file
+
+  - name: make sure a service is running
+    systemd: state=started name=httpd
+    tags: start_service
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: httpd
+      enabled: yes
+      masked: no
+    tags: service_boot
+
+  - name: create svn work dir
+    file:
+      path: '{{ repo_home_dir }}'
+      mode: 0755
+      state: directory
+    tags: create_svn_work_dir
+
+  - name: create {{ repo_name }}
+    shell: "cd {{ repo_home_dir }} && svnadmin create {{ repo_name }}"
+    tags: create_repo
+
+  - name: start svn service
+    shell: "svnserve -d -r {{ repo_home_dir }}"
+    tags: start_svn_service
+
+  - name: other setup
+    shell: "chown apache.apache -R {{ repo_home_dir }}"
+    tags: othter_setup
+
+  - name: create svn password file
+    file:
+      path: '{{ repo_home_dir }}/{{ repo_name }}/conf/httpd_passwd'
+      owner: apache
+      group: apache
+      mode: 0644
+      state: file
+    tags: create_svn_password_files
+
+  - name: add user 
+    debug: 
+      msg: '{{ item }}'
+    with_items:
+      - 'htpasswd {{ repo_home_dir }}/{{ repo_name }}/conf/httpd_passwd admin'
+      - 'svn co http://{ip}/svn/{{ repo_name }} .'
+    tags: print_add_users

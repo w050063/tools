@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+  tasks:
+  - name: maven install
+    yum: name=maven state=latest
+    tags: install_maven

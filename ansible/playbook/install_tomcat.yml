@@ -1,0 +1,70 @@
+--- 
+- import_playbook: install_jdk.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - tomcat_main_version: "9"
+    - tomcat_version: "9.0.10"
+    - mirror_url: "https://mirrors.tuna.tsinghua.edu.cn/apache/tomcat"
+    - tomcat_user: "tomcat"
+    - tomcat_password: "s3cret"
+    - host_list: "^.*$"
+  tasks:
+  - name: download apache-tomcat-{{ tomcat_version }}.zip
+    get_url: 
+      url: "{{ mirror_url }}/tomcat-{{tomcat_main_version }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.zip"
+      dest: /data0/src/
+      remote_src: yes
+    tags: download_app_packages
+
+  - name: unzip app packages
+    unarchive: 
+      src: "/data0/src/apache-tomcat-{{ tomcat_version }}.zip"
+      dest: /usr/local/
+      remote_src: yes
+    tags: unzip_app_packages
+
+  - name: mkdir install path link
+    file:
+      src: /usr/local/apache-tomcat-{{ tomcat_version }}
+      dest: /usr/local/tomcat
+      owner: root
+      group: root
+      mode: 0755
+      state: link
+    tags: create_install_dir_link
+
+  - name: rsync tomcat-users.xml
+    template:
+      src: files/tomcat/tomcat-users.xml.j2
+      dest: /usr/local/tomcat/conf/tomcat-users.xml
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    # notify: restart tomcat
+    tags: rsync_users_conf
+
+  - name: rsync context.xml
+    template:
+      src: files/tomcat/context.xml.j2
+      dest: "{{ item }}"
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    # notify: restart tomcat
+    with_items:
+      - "/usr/local/tomcat/webapps/manager/META-INF/context.xml"
+      - "/usr/local/tomcat/webapps/host-manager/META-INF/context.xml"
+    tags: rsync_context_conf
+
+  - name: change scripts +x
+    shell: chmod +x /usr/local/tomcat/bin/*.sh
+    tags: change_scripts
+
+  - name: start service
+    shell: sh /usr/local/tomcat/bin/startup.sh
+    tags: start_service

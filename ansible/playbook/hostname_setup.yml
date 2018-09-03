@@ -1,22 +1,28 @@
 ---
 - hosts: all
   remote_user: root
+  gather_facts: true
   vars:
     - hostnames_file: "/etc/hosts"
-    - ipnames_flag: "true" # false|true
-    - host_flag: "false"   # false|true
-    - ipnames:       
-      - { ip: '192.168.200.100', hostname: 'linux-node01 linux-node01.example.com' }      
-      - { ip: '192.168.200.101', hostname: 'linux-node02 linux-node02.example.com' }      
-      - { ip: '192.168.200.102', hostname: 'linux-node03 linux-node03.example.com' }      
+    - ipnames: 
+      - { ip: '192.168.200.100', hostname: 'linux-node01 linux-node01.example.com' }
+      - { ip: '192.168.200.101', hostname: 'linux-node02 linux-node02.example.com' }
+      - { ip: '192.168.200.102', hostname: 'linux-node03 linux-node03.example.com' }
       - { ip: '192.168.200.103', hostname: 'linux-node04 linux-node04.example.com' }
+    - ipnames_flag: "false" # false|true
   tasks:
   - name: set_fact ipnames_flag
     set_fact: ipnames_flag = "{{ ipnames_flag }}"
     tags: set_fact_ipnames_flag
 
-  - name: set the hostname
+  - name: change the hostname to new_hostname linux
     hostname: name={{ hostname }}
+    when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+    tags: setup_hostname
+
+  - name: change the hostname to new_hostname windows
+    win_hostname: name={{ hostname }}
+    when: ansible_os_family == "Windows"
     tags: setup_hostname
 
   - name: add ipnames to {{ hostnames_file }}
@@ -34,5 +40,5 @@
       line: "{{ item }} {{ ansible_hostname }}"
     with_items: 
       - "{{ ansible_all_ipv4_addresses }}"
-    when: ansible_all_ipv4_addresses and host_flag == "true"
+    when: ansible_os_family == "RedHat" and ipnames_flag == "true" and ansible_all_ipv4_addresses
     tags: add_ip_to_hosts

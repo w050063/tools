@@ -1,0 +1,18 @@
+--- 
+- hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: td-agent uninstall
+    yum: 
+      state: absent
+      name: td-agent-3.2.0-0.el7.x86_64
+
+  - name: clean files
+    file: name={{ item }} state=absent
+    with_items:
+      - "/etc/td-agent"
+      - "/var/log/td-agent"
+      - "/data0/td-agent"
+      - "/opt/td-agent"
+    tags: clean_app_files
