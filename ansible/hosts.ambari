@@ -1,0 +1,5 @@
+[vm]
+node01 ansible_ssh_host=192.168.47.100 wan_ip=192.168.200.100  endpoint=VM hostname=linux-node01.example.com
+node02 ansible_ssh_host=192.168.47.101 wan_ip=192.168.200.101  endpoint=VM hostname=linux-node02.example.com
+node03 ansible_ssh_host=192.168.47.102 wan_ip=192.168.200.102  endpoint=VM hostname=linux-node03.example.com
+node04 ansible_ssh_host=192.168.47.103 wan_ip=192.168.200.103  endpoint=VM hostname=linux-node04.example.com

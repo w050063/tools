@@ -4,9 +4,42 @@
 - hosts: all
   remote_user: root
   gather_facts: false
+  vars:
+    - dnsmasq_upstream_servers:
+      - 223.5.5.5
+      - 223.6.6.6
+      - 114.114.114.114
+      - 8.8.8.8
+    - dnsmasq_hosts_files: 'dnsmasq.hosts'
+    - dnsmasq_cache_size: '1000'
   tasks:
   - name: dnsmasq install
     yum: name=dnsmasq state=latest
+    tags: install_dnsmasq
+
+  - name: rsync dnsmasq.hosts
+    copy:
+      src: files/dnsmasq/dnsmasq.hosts
+      dest: /etc/dnsmasq.hosts
+    tags: rsync_dnsmasq_hosts
+
+  - name: set configuration file
+    template:
+      src: files/dnsmasq/dnsmasq.conf.j2
+      dest: /etc/dnsmasq.conf
+      validate: 'dnsmasq --test --conf-file=%s'
+    notify: restart dnsmasq
+    tags: rsync_dnsmasq_file
+
+  - name: install dnsmasq-china-list
+    get_url:
+      url: "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/install.sh"
+      dest: /data0/src/
+    tags: download_dnsmasq_china_list
+
+  - name: install dnsmasq-china-list
+    shell: sh /data0/src/install.sh
+    tags: install_dnsmasq_china_list
 
   - name: make sure a service is running
     systemd: state=started name=dnsmasq
@@ -18,3 +51,8 @@
       enabled: yes
       masked: no
     tags: service_boot
+
+  handlers:
+    - name: restart dnsmasq
+      service: name=dnsmasq enabled=yes state=restarted
+      tags: restart_dnsmasq
