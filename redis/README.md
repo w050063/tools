@@ -30,10 +30,11 @@ EOF
 - 性能测试
 ## codis
 ## 可视化管理工具
-- redis的图形化工具 
-  - redis-stat 
-  - redis-browser 
+- redis的图形化工具
+  - redis-stat
+  - redis-browser
   - redis-live
 - [redis desktop manager](https://redisdesktop.com/download)
 
 ## 参考资料
+- [CentOS 7下Rinetd安装与应用](https://www.cnblogs.com/zhenyuyaodidiao/p/5540209.html)
