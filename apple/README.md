@@ -3,6 +3,7 @@
 - [技术文档](https://kapeli.com/dash)
 - [awesome-mac](https://github.com/jaywcjlove/awesome-mac)
 - [收集&推荐优秀的 Apps/硬件/技巧/周边等](https://github.com/hzlzh/Best-App)
+- 黑苹果
 
 # 自动化管理
 - https://github.com/geerlingguy/ansible-role-homebrew
