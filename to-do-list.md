@@ -1,6 +1,9 @@
 # 待办
+## 技术点
+- [] [OpenStack](#)
+
 ## Ansible
-- ansible-pull
+- 
 ## 其他
 - Scollector+Bosun+OpenTSDB的监控方案
 - Fluentd (td-agent) 日志收集系统

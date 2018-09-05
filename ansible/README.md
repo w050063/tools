@@ -51,6 +51,9 @@ pip install six --upgrade --ignore-installed six
 ansible_winrm_server_cert_validation=ignore
 
 ```
+
+### ansible-pull
+
 ### 参考
 - https://github.com/manala/ansible-roles
 - https://github.com/kuailemy123/Ansible-roles
