@@ -6,6 +6,10 @@
 # Kubernetes概述
 生产级别的容器编排系统，自动化的容器部署、扩展和管理。
 
+# Kubernetes部署方案
+- kubeadm
+  - https://github.com/cookcodeblog/k8s-deploy
+
 # Kubernetes资料
 - [kubeasz](https://github.com/gjmzj/kubeasz)
 - [kops](https://github.com/kubernetes/kops)
