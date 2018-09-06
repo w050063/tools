@@ -6,6 +6,8 @@
 # Kubernetes概述
 生产级别的容器编排系统，自动化的容器部署、扩展和管理。
 
+- [利用Katacoda免费同步Docker镜像到Docker Hub](https://imroc.io/posts/kubernetes/sync-images-to-docker-hub-using-katacoda/)
+
 # Kubernetes部署方案
 - kubeadm
   - https://github.com/cookcodeblog/k8s-deploy

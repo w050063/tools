@@ -1,5 +1,6 @@
 # Vitess知识总结
 ## Vitess概述
+- 官网地址：https://vitess.io/
 - 官网文档地址：https://vitess.io/overview/
 - GitHub仓库地址：https://github.com/vitessio/vitess
 - godoc地址：https://godoc.org/github.com/youtube/vitess
@@ -7,15 +8,15 @@
 ## 实践操作
 - 初始化机器
   - https://raw.githubusercontent.com/mds1455975151/tools/master/shell/host_init.sh
-  
+
 - Go环境
   - https://raw.githubusercontent.com/mds1455975151/tools/master/go/go_install.sh
-  
+
 - MySQL环境
   - https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
-  
+
 - JDK安装
-  - 
+  -
 - 下载Vitess源码并编译
   - https://codeload.github.com/vitessio/vitess/tar.gz/v2.1.1
 
@@ -24,7 +25,7 @@
   - https://github.com/coreos/etcd/releases/download/v3.1.0-rc.1/etcd-v3.1.0-rc.1-linux-amd64.tar.gz
 
   - https://releases.hashicorp.com/consul/0.7.2/consul_0.7.2_linux_amd64.zip
-  
+
 ## 客户端
 - [PHP](https://github.com/pixelfederation/vitess-php-pdo)
 - [Java]()
@@ -52,7 +53,7 @@
 - Vitess+RDS
 
   - https://github.com/vitessio/vitess/issues/2518
-  
+
 - 常用端口
 
 ``` text
@@ -89,7 +90,12 @@
 - 9、k8s docker部署
 ```
 
+## vitess + RDS 总结
+
 ## 参考资料
+- https://github.com/BetterCloud/collectd-vitess
+- https://github.com/gilmore606/vitess
+- https://github.com/rerorero/vitess-playground
 - http://jixiuf.github.io/blog/go_vitess_start.html/
 - https://github.com/jixiuf/vitess-build-patch
 - http://www.cnblogs.com/davygeek/p/6433296.html
