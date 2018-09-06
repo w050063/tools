@@ -12,12 +12,14 @@
 ```
 dnsmasq --no-daemon --log-queries
 
-
 domain-needed                                  不转发格式错误的域名
 bogus-priv                                     从不转发不在路由地址中的域名
 resolv-file=/etc/dnsmasq.d/upstream_dns.conf   如果你想dns从/etc/resolv.conf之外的地方获取你的上游dns服务器
 strict-order                         默认情况下dnsmasq会发送查询到它的任何上游dns服务器上，如果取消注释，则dnsmasq则会严格按照/etc/resolv.conf中的dns server顺序进行查询
 ```
+
+# Docker部署
+
 
 # 参考资料
 - https://linux.cn/article-9438-1.html

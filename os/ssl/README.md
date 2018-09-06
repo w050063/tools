@@ -16,93 +16,29 @@ https://certbot.eff.org
 - https://github.com/adfinis-sygroup/check-ssl
 
 ```
-./check_ssl_cert -H develop.gs.worldoflove.cn|awk -F '[=;]+' '{print $2}'  # 计算还有多少天证书过期
+./check_ssl_cert -H xxx.gs.xxx.cn|awk -F '[=;]+' '{print $2}'  # 计算还有多少天证书过期
 ```
+# 相关实践
+## 用OpenSSL生成自签名证书
 ```
-yum -y install yum-utils
-yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
-yum install python2-certbot-nginx
-certbot --nginx
+# 生成 CA 证书的 key
+openssl genrsa -out ca.key 4096
 
-certbot --nginx certonly
+# 根据 key 生成 CA 证书
+openssl req -new -x509 -days 365 -key ca.key -out ca.crt
 
-cos-cdn.xxx.cn
+# 服务器 key
+openssl genrsa -out server.key 4096
 
-certbot -d nas.dev.xx.cn --manual --preferred-challenges dns certonly -m xxx@gmail.com
-根据提示添加域名text记录
+# 服务器证书请求
+openssl req -new -key server.key -out server.csr
 
-cd /etc/letsencrypt/live/
-for i in `ls|grep -v txt`;do cat $i/*.pem>$i.txt;done
-
-添加定时更新证书
-0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew
-
-申请通配符域名
-https://github.com/Neilpang/acme.sh/wiki/%E8%AF%B4%E6%98%8E
-acme.sh
-export DP_Id="xxx"
-export DP_Key="xxx"
-acme.sh --issue --dns dns_dp -d xxx.cn -d *.xxx.cn
-acme.sh --issue --dns dns_dp -d *gs.xxx.cn
-证书存放位置：/root/.acme.sh/
- 
-~/.acme.sh/account.conf
-
-https://blog.csdn.net/wr410/article/details/79559369
+# 用 ca 签名服务器证书请求，生成一个有效期为 365 天的证书
+openssl x509 -req -days 365 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt
 ```
 
-# FQA
-- 问题1
-```
-[root@cdn01 ~]# certbot -d xxx --manual --preferred-challenges dns certonly -m dongsheng.ma@lemongrassmedia.cn
-Traceback (most recent call last):
-  File "/usr/bin/certbot", line 9, in <module>
-    load_entry_point('certbot==0.24.0', 'console_scripts', 'certbot')()
-  File "/usr/lib/python2.7/site-packages/pkg_resources/__init__.py", line 476, in load_entry_point
-    return get_distribution(dist).load_entry_point(group, name)
-  File "/usr/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2700, in load_entry_point
-    return ep.load()
-  File "/usr/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2318, in load
-    return self.resolve()
-  File "/usr/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2324, in resolve
-    module = __import__(self.module_name, fromlist=['__name__'], level=0)
-  File "/usr/lib/python2.7/site-packages/certbot/main.py", line 20, in <module>
-    from certbot import client
-  File "/usr/lib/python2.7/site-packages/certbot/client.py", line 13, in <module>
-    from acme import client as acme_client
-  File "/usr/lib/python2.7/site-packages/acme/client.py", line 36, in <module>
-    urllib3.contrib.pyopenssl.inject_into_urllib3()
-  File "/usr/lib/python2.7/site-packages/urllib3/contrib/pyopenssl.py", line 118, in inject_into_urllib3
-    _validate_dependencies_met()
-  File "/usr/lib/python2.7/site-packages/urllib3/contrib/pyopenssl.py", line 153, in _validate_dependencies_met
-    raise ImportError("'pyOpenSSL' module missing required functionality. "
-ImportError: 'pyOpenSSL' module missing required functionality. Try upgrading to v0.14 or newer.
-```
-解决：
-```
-Steps: Install virtualenv
-
-pip install virtualenv --upgrade
-Create a virtualenv
-
-virtualenv -p /usr/bin/python2.7 certbot
-Activate the certbot virtualenv
-
-. /root/certbot/bin/activate
-Your prompt might turn into something like this
-
-(certbot) [root@hostname ~]#
-
-Then pip install certbot
-
-pip install certbot
-Once complete you can test certbot command under the certbot virtualenv, but this is not practical if you are going to use cron to setup certbot renewals. So deactivate the virtual environment,
-
-(certbot) [root@hostname ~]# deactivate
-Now run the certbot command from
-
-/root/certbot/bin/certbot
-```
+## 用CFSSL生成自签名证书
+## mkcert
 # 工具
 - https://github.com/Neilpang/acme.sh
 - https://github.com/geerlingguy/ansible-role-certbot

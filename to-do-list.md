@@ -27,6 +27,7 @@
 - MongoDB副本集
 - https://certbot.eff.org
 - url监控：https://github.com/urlooker
+- SwitchHosts: https://oldj.github.io/SwitchHosts/
 
 ## 简历筛选
 1、简历关键字提Hadoop，但是没有提到hdfs、spark、zookeeper、hbase、pig、hive且薪资要求不高
@@ -34,6 +35,10 @@
 ## 职场
 - https://github.com/lietoumai/awesome-offer
 - [简历](http://cv.ftqq.com/?fr=github#)
+
+# 免费的服务
+- https://github.com/qinghuaiorg/free-for-dev-zh
+- https://github.com/ripienaar/free-for-dev
 
 ## markdown
 - https://www.w3cschool.cn/lme/7ei21srt.html

@@ -146,3 +146,4 @@ vim supervisor.php
 ## 参考资料
 - [supervisor事件通知, 支持邮件, Slack, WebHook](https://github.com/ouqiang/supervisor-event-listener)
 - [frigga类似工具](https://github.com/xiaomi-sa/frigga)
+- [pm2](http://pm2.keymetrics.io/)
