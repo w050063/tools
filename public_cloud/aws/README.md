@@ -9,6 +9,16 @@
 ## EC2
 参考资料: http://www.cnblogs.com/syaving/p/8583060.html
 
+## CloudFormation
+CloudFormation给予了用户一种简单的方法来创建和管理一系列有关联的AWS的资源,可以有序的及可预见的初始化和更新这些资源。
+
+### Template 模板
+Template本质上是一个json格式的文件。该文件定义了你需要使用那些AWS的资源，并且如何初始化这些资源。
+### Stack 堆
+### CloudFormer
+CloudFormer是亚马逊提供的一个工具，用来给已有的AWS资源创建CloudFormation Template。这样你在以后创建相同的AWS资源时就可以直接使用这个Template了。
+
+要使用CloudFormer首先要创建一个Stack，CloudFormer就被部署到一台EC2机器上，通过这个Stack返回的Outputs的URL我们可以一步步勾选使用到的资源，最终生成一个Template，该Template会自动放置到你的S3中。
 ## MySQL
 ## S3
 ## IAM安全

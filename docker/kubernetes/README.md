@@ -11,7 +11,11 @@
 # Kubernetes部署方案
 - kubeadm
   - https://github.com/cookcodeblog/k8s-deploy
-https://github.com/xiaoping378/k8s-deploy
+
+- other
+  - https://github.com/xiaoping378/k8s-deploy
+  - https://github.com/unixhot/devops-x
+
 # Helm
 
 # Kubernetes资料
