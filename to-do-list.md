@@ -1,9 +1,21 @@
 # 待办
 ## 技术点
+- 业务
+  - 产品
+  - 运营
+- 容器云
+  - docker
+  - k8s
+- 大数据
+  - hadoop
+- 自动化
+  - ansible
+  - devops
+
 - [] [OpenStack](#)
 
 ## Ansible
-- 
+-
 ## 其他
 - Scollector+Bosun+OpenTSDB的监控方案
 - Fluentd (td-agent) 日志收集系统
