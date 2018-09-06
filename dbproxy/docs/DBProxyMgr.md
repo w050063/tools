@@ -76,4 +76,10 @@ Query interface 'allSplitHintIds' ...
 All sub-tables are OK!
 
 time cost 4.76 ms
+
+cd /home/DBProxy/tools
+./DBParamsQuery -h 127.0.0.1 -p 12322 -i "" "desc user_avg_book;"
+./DBParamsQuery -h 127.0.0.1 -p 12322 -i "" "ALTER TABLE user_avg_book ADD COLUMN unlockItems text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'This article reads unlocked items' AFTER readTime;" 
+./DBTableStrictChecker 127.0.0.1 12322 user_avg_book
+修改字段不需要重启dbproxy进程
 ```
