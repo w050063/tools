@@ -1,0 +1,8 @@
+[Ambari-2.7.0.0]
+name=Ambari-2.7.0.0-Updates
+#baseurl=INSERT-BASE-URL
+baseurl=http://qcloud-cdn.xxx.cn/loveworld/bigdata/ambari/centos7/ambari-2.7.0.0
+gpgcheck=1
+gpgkey=http://public-repo-1.hortonworks.com/ambari/centos7/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins
+enabled=1
+priority=1
