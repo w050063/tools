@@ -31,7 +31,9 @@
 - 将sql更新到全量脚本中
 
 ```
-修改/home/DBProxy/init_dbproxy_tmp.sql(分表名称 分表数量)
+1、加新增表规则添加到全量模板中init_dbproxy_init.sql.j2
+
+2、修改/home/DBProxy/init_dbproxy_tmp.sql(分表名称 分表数量)
 cd /home/DBProxy/tools/DBDeployer
 ./DBDeployer 10.0.0.7 3306 root "xxx" /home/DBProxy/init_dbproxy_tmp.sql
 supervisorctl restart dbproxy
