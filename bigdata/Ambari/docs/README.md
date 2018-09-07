@@ -17,3 +17,17 @@
 - 4. Installing Ambari
 - 5. Working with Management Packs
 - 6. Installing, Configuring, and Deploying a Cluster
+  - [Start the Ambari Server]()
+  - [Log In to Apache Ambari]()
+  - [Launch the Ambari Cluster Install Wizard]()
+  - [Name Your Cluster]()
+  - [Select Version]()
+  - [Install Options]()
+  - [Confirm Hosts]()
+  - [Choose Services]()
+  - [Assign Masters]()
+  - [Assign Slaves and Clients]()
+  - [Customize Services]()
+  - [Review]()
+  - [Install, Start and Test]()
+  - [Complete]()
