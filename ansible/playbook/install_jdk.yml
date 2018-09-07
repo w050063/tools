@@ -1,4 +1,6 @@
 ---
+- import_playbook: create_work_dir.yml
+
 - hosts: all
   remote_user: root
   gather_facts: false
