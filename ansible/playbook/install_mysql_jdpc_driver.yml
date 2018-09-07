@@ -1,0 +1,36 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - mysql_connector_java_version: '8.0.12'
+    - install_type: download                   # download|local
+  tasks:
+  - name: download packages
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ item }} .
+    with_items:
+      - 'mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz'
+    when: install_type == "download"
+    tags: download_app_packages
+
+  - name: download packages
+    copy:
+      src: files/{{ item }}
+      dest: /data0/src/
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      - 'mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz'
+    when: install_type == "local"
+    tags: download_app_packages
+
+  - name: unzip mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz
+    unarchive: 
+      src: "/data0/src/mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz"
+      dest: /data0/src
+      remote_src: yes
+    tags: unzip_mysql_jdbc_packages

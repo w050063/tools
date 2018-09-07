@@ -9,7 +9,7 @@
       - { ip: '192.168.200.101', hostname: 'linux-node02 linux-node02.example.com' }
       - { ip: '192.168.200.102', hostname: 'linux-node03 linux-node03.example.com' }
       - { ip: '192.168.200.103', hostname: 'linux-node04 linux-node04.example.com' }
-    - ipnames_flag: "false" # false|true
+    - ipnames_flag: "true" # false|true
   tasks:
   - name: set_fact ipnames_flag
     set_fact: ipnames_flag = "{{ ipnames_flag }}"
