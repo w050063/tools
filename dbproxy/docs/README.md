@@ -20,3 +20,19 @@
     - 或使用 DBRefresher强制每个DBProxy立刻加载新的数据表。(./DBRefresher 10.0.0.6:12321 )
 # 修改数据表结构
 # 框架性能监控
+
+# 新增表或者修改表结构
+## 加表 
+- 将sql语句更新对应到分支代码
+- 提供分表规则hintId field名称、分表数量、要更新的分支服务
+
+## 加字段
+- sql语句不带反引号 ```text ` ```  符号，不带中文即可
+- 将sql更新到全量脚本中
+
+```
+修改/home/DBProxy/init_dbproxy_tmp.sql(分表名称 分表数量)
+cd /home/DBProxy/tools/DBDeployer
+./DBDeployer 10.0.0.7 3306 root "xxx" /home/DBProxy/init_dbproxy_tmp.sql
+supervisorctl restart dbproxy
+```
