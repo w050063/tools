@@ -3,25 +3,25 @@
 
 
 - Administering Ambari
-  Introducing Ambari administration
-  Understanding Ambari terminology
-  Using the Administrator role in Ambari Web
-  Setting up Ambari to use an Internet proxy server
-  Managing cluster roles
-  Managing versions
-  Managing users
-  Managing group membership
-  Installing Ambari agents manually
-  Understanding service users and groups
-  Understanding custom and private host names
-  Moving the Ambari server
-  Configuring LZO compression
-  Using LZO compression with Hive queries
-  Using an existing or installing a default database
-  Configuring network port numbers
-  Tuning Ambari performance
-  Customizing Ambari log and pid directories
-  Managing host participation for HDFS and YARN
+  [Introducing Ambari administration 介绍Ambari管理](amb_introducing_ambari_administration.md)
+  [Understanding Ambari terminology 了解Ambari术语](amb_understanding_ambari_terminology.md)
+  [Using the Administrator role in Ambari Web 在Ambari Web中使用管理员角色](amb_using_ambari_admin_role_ambari_web.md)
+  [Setting up Ambari to use an Internet proxy server](amb_setting_up_ambari_to_use_an_internet_proxy_server.md)
+  [Managing cluster roles](amb_managing_cluster_roles.md)
+  [Managing versions]()
+  [Managing users]()
+  [Managing group membership]()
+  [Installing Ambari agents manually]()
+  [Understanding service users and groups]()
+  [Understanding custom and private host names]()
+  [Moving the Ambari server]()
+  [Configuring LZO compression]()
+  [Using LZO compression with Hive queries]()
+  [Using an existing or installing a default database]()
+  [Configuring network port numbers]()
+  [Tuning Ambari performance]()
+  [Customizing Ambari log and pid directories]()
+  [Managing host participation for HDFS and YARN]()
 Managing and Monitoring Your Hadoop Cluster
   Introducing Ambari operations
   Working with the cluster dashboard

@@ -42,4 +42,17 @@ dba 192.168.200.100
 漫长的等待
 
 很有可能各种服务都无法启动
+
+/hadoop/hdfs/data
+/hadoop/hdfs/namenode
+/hadoop/hdfs/namesecondary
+/hadoop/hdfs/journalnode
+/var/log/hadoop
+
+所有组件安装路径
+/usr/hdp/
+
+端口列表
+8020
+
 ```
