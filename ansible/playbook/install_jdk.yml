@@ -6,7 +6,7 @@
   gather_facts: false
   vars:
     - install_type: download   # download|local
-    - REPO_IP: 115.159.89.176
+    - REPO_IP: ''
   tasks:
   - name: download packages
     shell: cd /data0/src && \
