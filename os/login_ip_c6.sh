@@ -27,7 +27,7 @@ export user=$USER
 export PORT="22"
 if [[ $1 =~ ([0-9]{1,3}\.){3}[0-9]{1,3} ]]; 
 then
-    /usr/bin/ssh -A -o StrictHostKeyChecking=no -o "ProxyCommand=/usr/bin/nc -X connect -x 123.207.246.22:8888 %h %p" -l ${user} ${1} -p${PORT}
+    /usr/bin/ssh -A -o StrictHostKeyChecking=no -o "ProxyCommand=/usr/bin/nc -X connect -x xxx:8888 %h %p" -l ${user} ${1} -p${PORT}
     if [ $? -eq 0 ]
     then
         write_log "${user} login $1 is ok"
