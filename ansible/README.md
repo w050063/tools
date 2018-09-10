@@ -23,20 +23,11 @@
 # vim /etc/ansible/ansible.cfg
 roles_path    = /etc/ansible/roles
 ```
-### 声明
-### Ansible CMDB
-- [ansible-cmdb](https://github.com/fboender/ansible-cmdb)
-### FQA
-**环境变量问题**
-- ansible这类远程执行的non-login shell 并不会加载/etc/profile和~/.bash_profile下的环境变量，只是加载~/.bashrc和/etc/bashrc
-- 如果需要在ansible中执行需要特定环境变量的命令，可以在执行前source一下~/.bash_profile， 或者将环境变量写在~/.bashrc
-
-参考资料：https://blog.csdn.net/u010871982/article/details/78525367
-
-**模块**
-- set_fact(oracle_java)
 ### Ansible管理Mac OS
 ### Ansible管理Windows
+### ansible-pull
+### Ansible CMDB
+- [ansible-cmdb](https://github.com/fboender/ansible-cmdb)
 ### Ansible管理MySQL
 - ~~账号管理~~
 ```
@@ -49,10 +40,16 @@ pip install six --upgrade --ignore-installed six
     "unreachable": true
 }
 ansible_winrm_server_cert_validation=ignore
-
 ```
+### FQA
+**环境变量问题**
+- ansible这类远程执行的non-login shell 并不会加载/etc/profile和~/.bash_profile下的环境变量，只是加载~/.bashrc和/etc/bashrc
+- 如果需要在ansible中执行需要特定环境变量的命令，可以在执行前source一下~/.bash_profile， 或者将环境变量写在~/.bashrc
 
-### ansible-pull
+参考资料：https://blog.csdn.net/u010871982/article/details/78525367
+
+**模块**
+- set_fact(oracle_java)
 
 ### 参考
 - https://github.com/manala/ansible-roles

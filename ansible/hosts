@@ -28,8 +28,6 @@ build05 ansible_ssh_host=10.1.16.25  wan_ip=10.1.16.25  endpoint=BUILD     hostn
 [k8s]
 10.1.16.152 ansible_ssh_host=10.1.16.152 wan_ip=10.1.16.152 endpoint=K8S   hostname=k8s-node01
 
-
-
 [other-test]
 10.1.16.151 ansible_ssh_host=10.1.16.151 wan_ip=10.1.16.151 qcloud_zone=ap-shanghai-1 endpoint=gs01      hostname=gs01
 
