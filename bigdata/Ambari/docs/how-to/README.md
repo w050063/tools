@@ -23,7 +23,7 @@
   [Customizing Ambari log and pid directories]()
   [Managing host participation for HDFS and YARN]()
 Managing and Monitoring Your Hadoop Cluster
-  Introducing Ambari operations
+  [Introducing Ambari operations](amb_introducing_ambari_operations.md)
   Working with the cluster dashboard
   Modifying the cluster dashboard
   Managing Hosts
