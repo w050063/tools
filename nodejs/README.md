@@ -1,6 +1,7 @@
 # NodeJS知识
 ## 安装配置环境
 ``` bash
+方法1:
 wget https://nodejs.org/dist/v8.10.0/node-v8.10.0-linux-x86.tar.gz
 tar -zxf node-v8.10.0-linux-x86.tar.gz -C /usr/local/
 cd /usr/local/ && ln -s node-v8.10.0-linux-x86/ node
@@ -12,6 +13,9 @@ export PATH=$NODE_HOME/bin:$PATH
 EOF
 source  /etc/profile
 node -v
+
+方案2:
+ansible-playbook install_nodejs.yml -l 10.1.16.153
 ```
 
 ## FQA

@@ -13,6 +13,8 @@
 - https://github.com/capistrano/capistrano
 - https://jaminzhang.github.io/p2p/Twitter-Murder-a-large-scale-file-distribute-system-via-p2p/
 
+# 架构设计
+- [system-design-primer](https://github.com/donnemartin/system-design-primer)
 
 # 下载
 - wget
