@@ -15,10 +15,15 @@
 - other
   - https://github.com/xiaoping378/k8s-deploy
   - https://github.com/unixhot/devops-x
+  - https://github.com/wise2c-devops/playbook
+  - https://github.com/gjmzj/kubeasz
 
 # Helm
 
 # Kubernetes资料
+- https://github.com/kubeapps/kubeapps
+- https://github.com/hasura/gitkube
+- https://github.com/jenkins-x/jx
 - [kubeasz](https://github.com/gjmzj/kubeasz)
 - [kops](https://github.com/kubernetes/kops)
 - [kubernetes_practice](https://github.com/hackstoic/kubernetes_practice)

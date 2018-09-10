@@ -3,6 +3,11 @@
 - 下载地址：http://www.thekelleys.org.uk/dnsmasq/
 - GitHub地址：https://github.com/imp/dnsmasq
 
+# 部署安装
+```
+ansible-playbook install_dnsmasq.yml -l 10.1.16.153
+```
+
 # 解决问题
 - 莫名其妙弹出广告，消耗流量，网速编码
 - 部分网站域名不能正常被解析，导致网站打不开或者时好时坏
