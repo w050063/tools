@@ -25,6 +25,8 @@
 - apache/cloudstack
 - apache/httpd
 - apache/ant
+- apache/tez
+  - https://tez.apache.org/
 
 国外教学网站
 

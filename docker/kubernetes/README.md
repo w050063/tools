@@ -17,6 +17,7 @@
   - https://github.com/unixhot/devops-x
   - https://github.com/wise2c-devops/playbook
   - https://github.com/gjmzj/kubeasz
+  - https://github.com/yonyoucloud/install_k8s
 
 # Helm
 
