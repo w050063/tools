@@ -1,6 +1,3 @@
-# Aapache httpd
-- 配置SSL
-
 # Apache组织
 - apache/kafka
   - https://github.com/yahoo/kafka-manager
