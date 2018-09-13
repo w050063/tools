@@ -5,7 +5,15 @@
   - https://github.com/Matty9191/bind-query-log-statistics
 
 ## 云DNS服务
-- https://github.com/DNSPod
+- DNSPod https://github.com/DNSPod
+- CloudXNS.com
+- CloudFlare
+- GoDaddy.com
+- PowerDNS
+- Amazon Route53
+- Aliyun
+- DigitalOcean
+- FreeDNS
 
 ## 域名管理规范
 ### 命名规范

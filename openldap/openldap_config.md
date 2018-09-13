@@ -66,7 +66,7 @@ LDAP_TLS_CIPHER_SUITE = ""
 ## LDAP + TeamCity
 https://confluence.jetbrains.com/display/TCD10/LDAP+Integration
 
-## LDAP + confluence + Jira
+## LDAP + confluence
 - 第一步：启用OpenLDAP的memberof功能，方法参考请点击[这里](https://raw.githubusercontent.com/mds1455975151/tools/master/openldap/Enable_MemberOf.md)
 - 第二步：配置Confluence
 ```
@@ -92,6 +92,11 @@ Test user can authenticate : Succeeded
 答案1：
 https://confluence.atlassian.com/adminjiraserver073/connecting-to-an-ldap-directory-861253200.html?_ga=2.47348132.2015352131.1524042226-1638756934.1524042226#ConnectingtoanLDAPDirectory-MembershipSchemaSettings
 ```
+
+## LDAP + Jira
+- 权限方案
+问题--权限方案--给ldap组授予相应权限方案
+
 
 ## LDAP + OpenVPN
 ## LDAP + vsftpd

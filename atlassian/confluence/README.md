@@ -1,5 +1,7 @@
 https://support.atlassian.com/confluence-cloud/
 
+- 官网地址：https://www.atlassian.com/software/confluence
+
 迁移
 ```
 GRANT ALL PRIVILEGES ON jiradb.* TO 'jira'@'%' IDENTIFIED BY PASSWORD '*D6027F9F55352F47C2177DB6408DBA472F781B51' WITH GRANT OPTION;
