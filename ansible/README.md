@@ -26,6 +26,9 @@ roles_path    = /etc/ansible/roles
 ### Ansible管理Mac OS
 ### Ansible管理Windows
 ### ansible-pull
+### semaphore
+https://github.com/ansible-semaphore/semaphore
+
 ### Ansible CMDB
 - [ansible-cmdb](https://github.com/fboender/ansible-cmdb)
 ### Ansible管理MySQL
