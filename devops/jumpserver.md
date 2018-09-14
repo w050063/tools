@@ -14,6 +14,10 @@
   - ~~Django debug模式关闭~~
   - ~~nginx设置~~
   - ~~日常管理(启动、重启、停止等等操作)~~
+  ```
+  cd /opt/jumpserver/ && ./jms start all -d
+  cd /opt/coco && ./cocod start -d
+  ```
   - 高可用方案
   - wiki功能
   - 导航功能
@@ -47,7 +51,7 @@
 
 - SecureCRT登录
   使用jumpserver用户登录即可使用key
-  
+
 # API
 ``` json
 $ curl -X POST -H 'Content-Type: application/json' -d '{"username": "admin", "password": "admin"}' http://localhost/api/users/v1/token/  # 获取token
