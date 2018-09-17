@@ -48,10 +48,13 @@
 
 ## 其他
 - Crowd SSO ID管理
+
   简化数字签名和ID管理。Crowd是专门处理权限和认证的工具。
 - HipChat企业级聊天工具
+
   通过HipChat分享自己的想法和文件，HipChat是一个为您的公司和团队免费服务的私人聊天服务器。在分组的空间中，让团队成员相互交流想法，共享文件，支持视频聊天等。
 - Atlassian Enterprise Data Center 大规模企业级服务
+
   使用Active-Active的类环境,实现多个节点间的可用性,数据保护,病毒防护,负荷分散对应。
 
 # jira+confluence整合
@@ -62,10 +65,10 @@
 # FQA
 - 如何使用Atlassian产品提高项目工作效率?
 - 自研或者使用现有插件，扩大Atlassian工具的功能
--
+
 # 参考资料
 - jira+confluence整合
   - https://www.cnblogs.com/jifeng/p/5062171.html
   - https://www.atlassian.com/blog/confluence/link-jira-issues-to-confluence-pages-automatically
   - https://blog.csdn.net/weiguang1017/article/details/79302765
-  - 问题排查思路: https://confluence.atlassian.com/pages/viewpage.action?spaceKey=APPLINKS054&title=Network+and+connectivity+troubleshooting+guide
+  - [问题排查思路](https://confluence.atlassian.com/pages/viewpage.action?spaceKey=APPLINKS054&title=Network+and+connectivity+troubleshooting+guide) 
