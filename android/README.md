@@ -11,6 +11,7 @@
 - Microsoft Remote Desktop(window远程桌面工具)
 - IP tools网络工具
 - Google Chrome 同步书签及密码记录工具
+- splashtop
 
 # Android
 - [Android related examples](https://github.com/hmkcode/Android), http://hmkcode.com/
