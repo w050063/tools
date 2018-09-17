@@ -1,3 +1,11 @@
+# to-do-list
+- Let's Encrypt Authority X3证书部署方法
+  - 直接本地使用
+  - cdn,elb使用证书
+- 已经申请的SSL证书(详见execl列表)
+- 证书到期续约
+
+# 部署案例
 ```
 yum -y install yum-utils
 yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional

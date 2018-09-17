@@ -1,12 +1,9 @@
-# twemproxy知识总结
-
 ## twemproxy概述
 - GitHub地址：https://github.com/twitter/twemproxy
 
 - 其他相关项目
 
     - [nutcracker-web](https://github.com/kontera-technologies/nutcracker-web)
-
 
 ## twemproxy安装及配置说明
 ### twemproxy安装
@@ -119,4 +116,12 @@ tcp        0      0 127.0.0.1:56663         127.0.0.1:6379          TIME_WAIT   
 tcp        0      0 127.0.0.1:39547         127.0.0.1:6379          TIME_WAIT   -                   
 tcp        0      0 127.0.0.1:47716         127.0.0.1:6379          TIME_WAIT   -  
 ```
-## 参考资料
+
+# to-do-list
+- 原理及概念
+- ~~安装部署ansible playbook~~
+- 参数配置
+- 性能测试(https://cloud.tencent.com/document/product/239/13420)
+- 监控
+
+# 参考资料
