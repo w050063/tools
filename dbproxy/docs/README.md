@@ -24,17 +24,22 @@
 # 新增表或者修改表结构
 ## 加表 
 - 将sql语句更新对应到分支代码
-- 提供分表规则hintId field名称、分表数量、要更新的分支服务
+- 提供分表规则hintId field名称、分表数量、要更新的分支服务器
+
+```
+# vim init_dbproxy_init.sql.j2 (加新增表规则添加到全量模板中)
+add hash table from {{ dbproxy_sql_dir }}/database_loveworld.sql user_daily_task 4 with hintId field uid in database {{ app_db_name }} 2
+# ansible-playbook install_dbproxy.yml -l gs01* -t rsync_dbproxy_script
+# vim /home/DBProxy/init_dbproxy_tmp.sql (分表名称 分表数量)
+# cd /home/DBProxy/tools/DBDeployer
+# ./DBDeployer 10.0.0.7 3306 root "xxx" /home/DBProxy/init_dbproxy_tmp.sql
+# supervisorctl restart dbproxy
+```
 
 ## 加字段
 - sql语句不带反引号 ```text ` ```  符号，不带中文即可
 - 将sql更新到全量脚本中
 
 ```
-1、加新增表规则添加到全量模板中init_dbproxy_init.sql.j2
 
-2、修改/home/DBProxy/init_dbproxy_tmp.sql(分表名称 分表数量)
-cd /home/DBProxy/tools/DBDeployer
-./DBDeployer 10.0.0.7 3306 root "xxx" /home/DBProxy/init_dbproxy_tmp.sql
-supervisorctl restart dbproxy
 ```
