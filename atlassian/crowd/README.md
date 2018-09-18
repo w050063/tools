@@ -2,7 +2,7 @@
 - 官网项目地址：https://www.atlassian.com/software/crowd
 - 官网软件包下载地址：https://www.atlassian.com/software/crowd/download
 - 官网所有版本：https://www.atlassian.com/software/crowd/download-archive
-- 官网文档地址：
+- 官网文档地址：https://confluence.atlassian.com/crowd/crowd-documentation-16482400.html
 
 ```
 0.3.1 Standalone ~ 3.2.3 - Standalone
