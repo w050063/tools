@@ -4,6 +4,7 @@
 - 参考资料：
   - http://www.confluence.cn/spacedirectory/view.action
   - http://www.confluence.cn/dashboard.action
+  - https://wiki.shileizcc.com/confluence/display/atlassian/Atlassian
 
 # 产品
 ## 项目管理工具、课题管理工具
@@ -67,8 +68,10 @@
 - 自研或者使用现有插件，扩大Atlassian工具的功能
 
 # 参考资料
+- 翻译汉化
+  - https://translations.atlassian.com/
 - jira+confluence整合
   - https://www.cnblogs.com/jifeng/p/5062171.html
   - https://www.atlassian.com/blog/confluence/link-jira-issues-to-confluence-pages-automatically
   - https://blog.csdn.net/weiguang1017/article/details/79302765
-  - [问题排查思路](https://confluence.atlassian.com/pages/viewpage.action?spaceKey=APPLINKS054&title=Network+and+connectivity+troubleshooting+guide) 
+  - [问题排查思路](https://confluence.atlassian.com/pages/viewpage.action?spaceKey=APPLINKS054&title=Network+and+connectivity+troubleshooting+guide)

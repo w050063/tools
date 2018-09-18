@@ -8,6 +8,13 @@
 - 版本信息
   - 7版本的 7.1-7.12 还包括其他小版本号例如:7.8.x等
   - 6版本
+# to-do-list
+- ~~集成confluence~~
+- ~~集成LDAP~~
+- 集成Gerrit
+- 集成Jenkins
+- 集成GitHub
+  - https://www.atlassian.com/blog/jira-software/connecting-jira-6-2-github
 
 # 参考资料
 - [JIRA 7.8 版本的安装与破解](https://www.cnblogs.com/houchaoying/p/9096118.html)
