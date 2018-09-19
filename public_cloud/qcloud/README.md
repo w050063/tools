@@ -4,6 +4,7 @@
 - [官网地址](https://cloud.tencent.com/)
 - [官网文档地址](https://cloud.tencent.com/document/product)
 - [tencentcloud-sdk-python](https://github.com/tencentcloud/tencentcloud-sdk-python)
+- [命令行工具](https://cloud.tencent.com/document/product/440/6176)
 
 ## 腾讯云相关内容
 - [获取腾讯企业邮箱通讯录](https://github.com/b1ngz/tencent_exmail)
