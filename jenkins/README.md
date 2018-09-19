@@ -30,3 +30,6 @@ curl -X POST http://localhost:8080/job/xxx-ci-auto/buildWithParameters -d 'branc
 ### 自定义主题
 - https://wiki.jenkins.io/display/JENKINS/Simple+Theme+Plugin
 - http://afonsof.com/jenkins-material-theme/
+
+# 参考资料
+- https://github.com/reevoo/jenkins-github-webhook-proxy

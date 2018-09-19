@@ -43,3 +43,63 @@ add hash table from {{ dbproxy_sql_dir }}/database_loveworld.sql user_daily_task
 ```
 
 ```
+BNF范式
+问题2、添加实例
+select * from split_range_info;
+select * from split_table_info;
+
+select * from server_info;
+select * from table_info;
+select * from variable_setting;
+
+
+原来分库 5个库
+
+初期规划
+库1     		库2 	库3     库4 		库5       库6
+t1-t4   		t5-t8   t9-t12  t13-t16 	t17-t20   配置库
+=================================================================
+二次拆库
+库1
+t1-t4
+t1 t3 保留
+
+库-1
+t1-t4
+t2-t4 保留
+=================================================================
+
+三次拆库
+库1-1源
+t1 t3 保留
+t1    保留
+
+库1-1 副本
+t1 t3 保留
+   t3 保留
+
+
+库1-1
+t2-t4 保留
+t2    保留
+
+库1-1
+t2-t4 保留
+   t4 保留
+=================================================================
+
+表的概念
+PHP Warning:  mysqli::mysqli(): Headers and client library minor version mismatch. Headers:50556 Library:50640 in /data0/dbproxy/infra-fp-mysql-dbproxy/deployTools/configureTools/deployAssistant/MySQLClient.php on line 20
+
+https://blog.csdn.net/ausboyue/article/details/52790222
+
+yum remove php-mysql  
+yum install php-mysqlnd
+
+一般都是先分表在分库
+
+
+每个库名字都一样 表名字都一样
+每个库名字都一样 表名字不一样
+每个库名字不一样 表名字都一样
+每个库名字不一样 表名字不一样 
