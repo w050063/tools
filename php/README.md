@@ -8,12 +8,13 @@
 ## 常见框架
 - [Laravel](https://www.golaravel.com/)
 - Yaf
-- ThinkPHP 
+- ThinkPHP
 
 ## 常用模块
 - opcache
 
 ## 性能分析
+- [newrelic](https://newrelic.com/)
 ## FQA
 - 有可能影响PHP读写MySQL库
   ``` bash
@@ -21,7 +22,7 @@
   Client API library version => 5.5.50-MariaDB
   Client API header version => 5.5.56-MariaDB
   Client API version => 5.5.50-MariaDB
-  
+
   yum remove -y php-mysql
   yum install -y php-mysqlnd
   ```
