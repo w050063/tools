@@ -6,3 +6,5 @@ docker run -itd -p 3000:3000 -p 2000:22 gogs/gogs
 ```
 - 仓库路径：/data/git/gogs-repositories
 - 日志路径：/app/gogs/log
+
+# 简单版本sqlite做数据库
