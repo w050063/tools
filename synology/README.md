@@ -15,6 +15,9 @@
    通知设置
 - Directory Server
 https://www.synology.com/zh-cn/knowledgebase/DSM/help/DirectoryServer/ldap_desc
+- Git Server
+https://blog.csdn.net/kaulctin/article/details/68080043
+
 ## FQA
 - 设置自定义服务开机启动
 
@@ -23,4 +26,3 @@ https://www.synology.com/zh-cn/knowledgebase/DSM/help/DirectoryServer/ldap_desc
 - 磁盘检查URL错误，无法访问
 
 > 编写自定义脚本-->添加定时任务
-
