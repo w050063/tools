@@ -13,4 +13,10 @@ yum install -y java-1.8.0-openjdk
 - Ant：http://ant.apache.org/
 - Maven
 - Gradle
+
+# 加解密
+如何使用开源项目Jasypt来实现加解密?
+- [参考资料](https://my.oschina.net/apdplat/blog/405306)
+- 官网地址: http://www.jasypt.org/download.html
+
 ## 参考资料
