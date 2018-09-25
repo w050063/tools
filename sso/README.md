@@ -5,16 +5,9 @@
 目前已经有了成熟的单点登录实现方案，比如CAS，我们只要在web系统中应用单点登录方案CAS即可。(主要涉及到注册登录验证等模块的改动)
 
 
-- openam
-https://www.forgerock.com/platform/access-management
-
-- CAS
-https://www.apereo.org/projects/cas
-
-- Shiro
-https://shiro.apache.org/
-
-然后翻到了
+- [openam](https://www.forgerock.com/platform/access-management)
+- [CAS](https://www.apereo.org/projects/cas)
+- [Shiro](https://shiro.apache.org/)
 - [django-cas](https://pypi.org/project/django-cas-client/)
 - django-mama-cas
 - [django-cas-ng](https://pypi.org/project/django-cas-ng/)

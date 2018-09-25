@@ -27,7 +27,11 @@ cas.server.prefix: https://sso.dev.xxx.cn:8443/cas
 
 
 
-
+git clone https://github.com/apereo/cas-management-overlay.git
+cd cas-management-overlay
+git branch -a
+git checkout 5.2
+scp cdn02:/data0/src/cas/cas-management-overlay/target/cas-management.war .
 ```
 http://10.1.16.153:8080/cas  默认账号:casuser  密码:Mellon
 ![images](01.png)
@@ -50,11 +54,45 @@ vim pom.xml
 ./build.sh package
 scp cdn02:/data0/src/cas/cas-overlay-template/target/cas.war .
 
+未认证授权的服务
+CAS的服务记录是空的，没有定义服务。希望通过CAS进行认证的应用程序必须在服务记录中明确定义
 
+CAS 5.x 默认情况下不支持HTTP的客户端接入，建议客户端采用HTTPS协议。
+
+不过，确实无法升级为HTTP的，那也可以把CAS Server开启支持HTTP的客户端接入。
+
+具体开发的方法如下：
+
+1. 修改http支持的配置
+打开文件：cas\WEB-INF\classes\services\HTTPSandIMAPS-10000001.json
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^(https|imaps)://.*",
+  "name" : "HTTPS and IMAPS",
+  "id" : 10000001,
+  "description" : "This service definition authorizes all application urls that support HTTPS and IMAPS protocols.",
+  "evaluationOrder" : 10000
+}
+第三行改为 (https|http|imaps)
+2. 启用记载JSON配置文件
+打开文件cas\WEB-INF\classes\application.properties
+增加如下配置
+cas.tgc.secure=false
+cas.serviceRegistry.initFromJson=true
+重新启动cas就ok了
 ```
 
 # CAS与jenkins集成
 - https://wiki.jenkins.io/display/JENKINS/CAS+Plugin
+- https://www.2cto.com/kf/201804/739613.html
+```
+- jenkins安装CAS插件
+- jenkins配置插件信息
+- 测试并验证
+
+问题:
+管理用户如何设置？
+```
 # CAS与Confluence集成
 - https://blog.csdn.net/yelllowcong/article/details/79651651
 # CAS与Jira集成
@@ -64,6 +102,10 @@ scp cdn02:/data0/src/cas/cas-overlay-template/target/cas.war .
 - https://apereo.github.io/2018/02/06/cas52-gettingstarted-overlay/
 - https://blog.csdn.net/xiaoxing598/article/details/55518241
 - https://blog.csdn.net/fireofjava/article/details/79072187
+- https://blog.csdn.net/zhurhyme/article/category/2362091 较老cas系列文章
+- https://blog.csdn.net/u010475041/article/category/7156505 cas系列文章
+- https://github.com/X-rapido/CAS_SSO_Record
+- https://www.cnblogs.com/jpeanut/tag/CAS/
 
 
 
