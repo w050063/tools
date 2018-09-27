@@ -13,7 +13,8 @@
   - devops
 
 - [] [OpenStack](#)
-
+## 配置管理员
+- https://www.proginn.com/wo/210609
 ## Ansible
 -
 ## 其他
