@@ -1,6 +1,7 @@
 # SVN相关问题
 ## SVN web管理工具
 - [submin](https://supermind.nl/submin/)
+- [安装高版本svn客户端](http://opensource.wandisco.com/)
 
 ## SVN权限设置
 - 特殊账号($authenticated 代表所有用户)
