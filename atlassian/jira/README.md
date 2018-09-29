@@ -15,6 +15,9 @@
 - 集成Jenkins
 - 集成GitHub
   - https://www.atlassian.com/blog/jira-software/connecting-jira-6-2-github
+- Asana Importer Plugin for Jira
+插件下载: https://marketplace.atlassian.com/apps/1213440/asana-importer-plugin-for-jira?hosting=server&tab=overview
+项目--导入外部项目--Asana--根据提示完成导入
 
 # 参考资料
 - [JIRA 7.8 版本的安装与破解](https://www.cnblogs.com/houchaoying/p/9096118.html)
