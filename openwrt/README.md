@@ -16,6 +16,14 @@
 - 华硕电脑ESC设置U盘启动
 - 设置PC地址设置连接路由器默认WEB 192.168.1.1 用户名 root 密码 koolshare
 
+# 软路由系统
+- Openwrt(LEDE)
+- [ROS](http://www.ros.org/)
+- [海蜘蛛](http://www.hi-spider.com/zh)
+- 微盟
+- 百为
+- [小草](http://www.freegateway.cn/)
+- [iKuai](http://www.ikuai8.com/)
 
 多线多拨
 
@@ -26,7 +34,8 @@
 physdiskwrite
 
 软路由+AP或者硬路由搭配使用
+参考资料：
+- https://en.wikipedia.org/wiki/List_of_router_and_firewall_distributions
 
-海蜘蛛
 
 黑群晖
