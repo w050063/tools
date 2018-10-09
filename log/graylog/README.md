@@ -171,10 +171,33 @@ BeanShell （JAVA源码解释器）
 
 ## FQA
 ## to-do-list
+- 部署及说明文档
+    - Graylog 2.4.3+2c41897
+    - java 1.8.0_151
+    - mongod v2.6.11
+    - elasticsearch-5.6.7.rpm
+- 服务监控及性能监控
+- 数据备份管理
+  - ~~MongoDB 备份admin graylog两个库~~
+  - ~~nginx、graylog-server配置~~
+  - ~~elasticsearch配置备份~~
+  - elasticsearch数据备份
+- 性能压测
+- 日常管理
+    - ~~客户端agent安装配置~~
+    - ~~自定义权限设置BI,OP,DEV等(区分ldap默认权限)~~
+- 集群扩展方案
+  - ~~修改elasticsearch服务监听端口由127.0.0.1 到内网地址，方便api信息查看及后期集群配置~~
+  - ~~elasticsearch集群扩展节点~~
+  - ~~graylog添加新节点~~
+  - MongoDB配置副本集
+  - graylog配置elasticsearch副本设置
+  - graylog web负载均衡配置 1、haproxy 2、腾讯云负载均衡配置
+- graylog监控插件
+  - [Graylog Metrics Reporter plugins](https://marketplace.graylog.org/addons/6fef88c7-94f7-488e-a6c5-bd6b71d8343e)
 - ~~快速部署上线~~
-- 服务及性能监控
-- 数据备份还原
-- 报警
+- 自定义报警
+- https方案
 - API
   - https://github.com/yumimobi/graylog.py
 - 收集不同应用日志

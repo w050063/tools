@@ -72,3 +72,14 @@ https://raw.githubusercontent.com/mds1455975151/tools/master/etcd/etcd_backup.sh
 ### 监控报警
 ### 性能压测
 ## 参考资料
+
+# to-do-list
+- ~~安装部署~~
+- 监控及报警
+  - 端口及进程
+  - 性能监控及分析
+- 备份
+- 日常管理
+  - 新增节点
+  - 节点故障处理
+  - 集群超过半数不可用

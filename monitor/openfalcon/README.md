@@ -1,24 +1,39 @@
 ### to-do-list
+- ~~部署及相关文档资料~~
+- ~~短信费用监测及续费管理~~
+- ~~数据备份及监控~~
+- ~~endpoint规范~~
+- ~~安装脚本agent启动问题（严重）利用ansible解决~~
+    > ansible all -m shell -a 'cd /usr/local/open-falcon && nohup ./open-falcon start agent'
+
+- 新项目监控需求管理
+- 日常需求管理（redis\MySQL\新服务器基础监控等等监控需求）
+- 出现报警如何快速关闭短信接口或者屏蔽告警服务器，防止短信轰炸
+- 各类监控模板编写：
+  - 服务器基础监控
+  - 服务监控规范
+    - httpd
+    - nginx
+    - php
+    - [MySQL](https://github.com/open-falcon/mymon)
+    - redis
+    - openldap
+    - gitlab
+    - .....
+- ~~自动添加监控Screen(常用监控项简化查看方式)~~
+- Open-Falcon自监控 添加各个服务的端口 及falcon-task tycs-anteye
+- Open-Falcon邮件报警信息修改
+- ~~ansible-playbook安装openfalcon~~
 - 监控规模评估，选择部署模式（单机\集群）
 - ~~服务器申请，服务规划~~
 - ~~plugins功能~~
 - 服务部署(异常关机服务启动 open-falcon\MySQL\Redis\)
-- 各类监控模板编写：
-  - 服务器基础监控
-  - 服务监控（MySQL\Nginx）
-- ~~endpoint规范~~
 - URL
 - 自监控tycs-anteye
 - task模块
 - Nodata配置用于监控agent alive检查，如果无汇报数据自动补其他数据，用于监控报警
-- 应用健康
-  - Redis
-  - [MySQL](https://github.com/open-falcon/mymon)
 - screen
-  xxx公司监控
-  xxx业务名称
-  xxx子业务名称
-  xxx主机
+  xxx公司监控-xxx业务名称-xxx子业务名称-xxx主机
 - https://github.com/sdvdxl/falcon-logdog
 - 编写自定义监控项模板\思路(python\go)
   - [fastdfs](https://github.com/zzlyzq/openfalcon-agent-fastdfs)
