@@ -1,4 +1,15 @@
 # yum源知识
+## yum类型
+- EPEL(Redhat扩展软件yum源)
+http://mirrors.ustc.edu.cn/fedora/epel/
+- remi(PHP/MySQL yum源)
+ http://rpms.famillecollet.com/
+- webtatic(PHP7 yum源)
+https://mirror.webtatic.com/yum/
+- Nginx官方
+- zabbix官方
+- MySQL官方
+
 ## 国内厂家yum源
 - [阿里云](http://mirrors.aliyun.com)
 - [网易](http://mirrors.163.com/)
