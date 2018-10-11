@@ -37,6 +37,9 @@ acme.sh --issue --dns dns_dp -d *gs.xxx.cn
 ~/.acme.sh/account.conf
 
 https://blog.csdn.net/wr410/article/details/79559369
+
+acme.sh --renew -d *.gs.xxx.cn --force
+cat *.gs.xxx.cn.cer *.gs.xxx.cn.csr ca.cer *.gs.xxx.cn.key
 ```
 
 # FQA

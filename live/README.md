@@ -111,3 +111,16 @@ git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
 cd ffmpeg
 ./configure
 make && make install
+
+使用ffmpeg命令推流
+```
+for((;;)); do \
+	./objs/ffmpeg/ffmpeg -re -i ./doc/source.200kbps.768x320.flv \
+	-vcodec copy -acodec copy \
+	-f flv -y rtmp://10.1.16.151/live/livestream; \
+	sleep 1; \
+done
+```
+使用fmle推流
+
+播放器：https://www.videolan.org/
