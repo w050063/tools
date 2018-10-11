@@ -9,12 +9,7 @@
 - LEDE开源路由器固件
 - [KoolShare论坛LEDE固件](http://koolshare.cn/forum.php)
 
-# U盘安装部署说明
-- 下载软件win32diskimager
-- 下载固件openwrt-koolshare-mod-v2.22-r8838-af7317c5b6-x86-64-combined-squashfs.img.gz
-- 设置启动盘
-- 华硕电脑ESC设置U盘启动
-- 设置PC地址设置连接路由器默认WEB 192.168.1.1 用户名 root 密码 koolshare
+
 
 # 软路由系统
 - Openwrt(LEDE)
