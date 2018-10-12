@@ -3,8 +3,6 @@
 - H3C查看目录: http://www.h3c.com/cn/Products___Technology/Products/Router/
 
 
-
-
 参数说明案例:
 - 华三（H3C） MSR3620-DP
 GE通常就是千兆以太网 COMBO口么也是千兆口，但是需要配模块，可以用光模块，也可以用电口。光口就是可以接光纤，电口就是跟GE一样了，所以叫COMBO口。
@@ -18,6 +16,16 @@ MSR3610-X1   3600元左右
 H3C MSR 36-10路由器
 H3C MSR 36-20路由器
 
-H3C MSR 36-40路由器(焦雷推荐) 主机+电源 5000~7500元
+H3C MSR 36-40路由器(推荐) 主机+电源 5000~7500元
 H3C MSR 36-60路由器
 http://detail.zol.com.cn/ProductComp_param_377297-377298-377299.html
+
+# to-do-list
+- 设备选型、询价、购买
+  - 模块、端口数量
+  - 功能
+  - 电源
+- 设备到位配置核对、检查
+- 设备基础配置、上机架
+- 掌握web配置方法(基础知识必须掌握)
+- [常见cli命令](cli.md)
