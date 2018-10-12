@@ -1,7 +1,4 @@
-
-https://lede-project.org/
-
-
+# KoolShare
 
 # U盘安装部署说明
 - 下载软件win32diskimager
