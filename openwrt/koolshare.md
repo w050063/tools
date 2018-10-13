@@ -28,3 +28,15 @@ dbcp 192.168.200.0/24
 - http://koolshare.cn/thread-116123-1-1.html
 /etc/config/network
 /etc/init.d/network reload
+# 安装软件包
+opkg是一个轻量快速的套件管理系统，目前已成为 Opensource 界嵌入式系统标准。常用于路由、交换机等嵌入式设备中，用来管理软件包的安装升级与下载。
+常用命令
+```
+opkg update 更新可以获取的软件包列表
+opkg upgrade 对已经安装的软件包升级
+opkg list 获取软件列表
+opkg install mtr 安装指定的软件包
+opkg remove 卸载已经安装的指定的软件包
+```
+# to-do-list
+- Let's Encrypt配置HTTPS

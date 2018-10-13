@@ -82,3 +82,6 @@ https://github.com/DIYgod/RSSHub
 - 对内推动产品功能迭代、体验测试、销售培训，对外竞品分析、需求调研、扩充对外宣讲资料
 - 推动xxx,yyy,zzz公司项目进展
 - 其他业务拓展等等
+
+
+LeB6lf2HlZ_qtH
