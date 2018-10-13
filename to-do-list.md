@@ -30,6 +30,8 @@
 - url监控：https://github.com/urlooker
 - SwitchHosts: https://oldj.github.io/SwitchHosts/
 - https://gitlab.com/fuhui jfrog
+- Centos7下Rinetd安装与应用
+https://my.oschina.net/lionel45/blog/1796980
 ## 简历筛选
 1、简历关键字提Hadoop，但是没有提到hdfs、spark、zookeeper、hbase、pig、hive且薪资要求不高
 
