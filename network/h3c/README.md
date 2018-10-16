@@ -29,3 +29,9 @@ http://detail.zol.com.cn/ProductComp_param_377297-377298-377299.html
 - 设备基础配置、上机架
 - 掌握web配置方法(基础知识必须掌握)
 - [常见cli命令](cli.md)
+
+
+# 无线AP
+- aruba(安移通)
+- H3C
+- TP-Link
