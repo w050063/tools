@@ -16,6 +16,14 @@ telnet ipAddress port
 - tcpdump
 - Burp Suite
 
+[root@cdn01 ~]# tcpdump  host 111.207.242.99
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
+16:45:23.288042 IP 10.0.0.23.36203 > 111.207.242.99.isakmp: [|isakmp]     	nc -vuz 111.207.242.99 500
+16:45:36.676953 IP 10.0.0.23.44180 > 111.207.242.99.isakmp: [|isakmp]      	nc -vuz 111.207.242.99 500
+16:45:41.082449 IP 10.0.0.23.57668 > 111.207.242.99.ipsec-nat-t: [|isakmp] 	nc -vuz 111.207.242.99 4500
+16:45:47.331486 IP 10.0.0.23.46032 > 111.207.242.99.l2tp:  [|l2tp]          nc -vuz 111.207.242.99 1701 
+
 
 5 网络{
 
