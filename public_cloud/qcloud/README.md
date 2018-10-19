@@ -14,6 +14,10 @@
   - 域名证书
 
 ## CVM 云服务器
+- 计费详细规则(一定要算详细根据各自业务评估后选择)
+
+https://cloud.tencent.com/document/product/213/10579
+
 ## CDB 云数据库
 [腾讯云API调试工具](https://wx.yuczou.club/api.html)
 
