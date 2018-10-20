@@ -30,10 +30,14 @@ physdiskwrite
 参考资料：
 - https://en.wikipedia.org/wiki/List_of_router_and_firewall_distributions
 
-
+# 科学上网
+- 华硕（ASUS）RT-AC86U
+- 斐讯
+- 小米路由器
 黑群晖
 # to-do-list
-
+- startwind v2v converter https://www.starwindsoftware.com/converter
+- ESXi
 # 参考资料
 - http://www.openwrt.org.cn
 - https://lede-project.org/
