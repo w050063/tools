@@ -26,3 +26,25 @@ https://blog.csdn.net/kaulctin/article/details/68080043
 - 磁盘检查URL错误，无法访问
 
 > 编写自定义脚本-->添加定时任务
+## VPN
+### L2TP
+
+认证方式支持
+- PAP
+- MS-CHAP v2
+
+```
+/usr/syno/etc/packages/VPNCenter/
+/var/packages/VPNCenter/target/sbin/vpnauthd -t
+/usr/sbin/xl2tpd -c /usr/syno/etc/packages/VPNCenter/l2tp/xl2tpd.conf -p /var/run/xl2tpd.pid
+cat /usr/syno/etc/packages/VPNCenter/l2tp/options.xl2tpd
+
+https://forum.huawei.com/enterprise/en/thread-411139-1-1.html
+
+display interface Virtual-PPP 0
+
+require-mschap-v2
+refuse-mschap
+refuse-chap
+refuse-pap
+```
