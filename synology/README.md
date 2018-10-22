@@ -1,4 +1,10 @@
 # 群晖相关知识总结
+## 选购
+- 配置
+- 硬盘
+## 安装配置
+- 安装系统
+- 网络设置
 ## 配置LDAP
 ## 设置权限
 ## 日常管理
@@ -48,3 +54,9 @@ refuse-mschap
 refuse-chap
 refuse-pap
 ```
+
+## to-do-list
+- google chrome插件(Synology Download Station)
+- 如何安装docker(需要在官网手动下载安装包安装)
+- [监控摄像](https://www.synology.cn/zh-cn/compatibility/camera)
+- [闲置 Android 设备做摄像头，在群晖 Surveillance Station 中实现智能监控](https://www.appinn.com/surveillance-station-with-android-ip-camera/)
