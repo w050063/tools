@@ -14,6 +14,75 @@ save                            # 保存当前配置
 display this                    # 查看接口配置
 display interface Virtual-PPP 0 # 查看端口状态
 
+sys
+dis ip routing-table 114.114.114.114
+dis cur | incl route
+undo ip route-static 0.0.0.0 0 GigabitEthernet0/2 192.168.28.254
+dis cur | incl route
+dis cur | incl dns
+dis int brie
+dis cur int g 0/0
+dis cur int g 0/1
+int g 0/1
+dis this
+undo bandwidth
+dis this
+ping 10.1.15.1
+dis ip routing-table 8.8.8.8
+
+dis arp
+tracert -a 10.1.16.1 114.114.114.114
+dis int brie
+interface GigabitEthernet0/2
+dis this
+undo bandwidth
+dns server 10.0.84.54
+
+acl ad 3000
+dis this
+rule 100 permit ip source 10.1.16.0 0.0.0.255
+dis this
+int g 0/2
+dis this
+nat outbound 3000
+dis this
+
+sys
+dis cpu-usage
+dis memory
+sys
+sysname nmcrouter-new
+dis this
+dis int brie
+dis cur int g 0/3
+acl ad 3001
+dis this
+rule 100 permit ip source 10.1.16.201 0
+dis this
+policy-based-route 1 node 10
+if-match acl 3001
+dis this
+dis cur | incl 219.141.227.1
+apply next-hop 111.207.242.97
+dis this
+quit
+
+dis int brie
+int g 0/0
+dis this
+ip policy-based-route 1
+dis this
+quit
+save
+system-view
+acl advanced 3001
+display this
+rule 121 permit ip source 10.1.16.206 0
+rule 120 permit ip source 10.1.16.9 0
+display this
+save
+
+
 排错问题大招
 通过命令查看一下l2tpvpn的建立过程，并将整个回话过程记录一下,看下建立过程,和整个认证过程.然后把这些信息收集一下提交给产品线分析一下.
 <h3c>T m
