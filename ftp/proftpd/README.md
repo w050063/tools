@@ -8,6 +8,7 @@
 - 集成LDAP
 
 # FQA
+- 腾讯云相关服务器异常无法连接
 
 # 参考资料
 - http://www.proftpd.org/docs/contrib/mod_ldap.html
