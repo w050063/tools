@@ -82,6 +82,19 @@ rule 120 permit ip source 10.1.16.9 0
 display this
 save
 
+绑定MAC地址
+system-view
+dhcp server ip-pool lan1
+static-bind ip-address 10.1.16.231  mask 255.255.255.0 hardware-address 3497-f6c1-3617 or undo static-bind ip-address 10.1.16.231
+display this
+quit
+quit
+reset dhcp server ip-in-use ip 10.1.16.3
+save
+
+在pc上释放并重新获取IP
+ipconfig /release
+ipconfig /renew
 
 排错问题大招
 通过命令查看一下l2tpvpn的建立过程，并将整个回话过程记录一下,看下建立过程,和整个认证过程.然后把这些信息收集一下提交给产品线分析一下.
