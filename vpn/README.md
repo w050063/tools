@@ -1,10 +1,9 @@
 # L2TP/ipsec
 - https://github.com/hwdsl2/setup-ipsec-vpn (推荐)
-- 默认端口: UDP 1701 500 4500
+- 默认端口: UDP 1701/L2TP 500/isakmp 4500/nat-t-ike
 
 # OpenVPN
 - 默认端口: TCP/UDP 1194
-
 
 # PPTP
 - 默认端口: TCP 1723
@@ -19,3 +18,7 @@ https://blog.csdn.net/l1028386804/article/details/72180246
 - https://github.com/kitten/setup-strong-strongswan
 - https://github.com/xelerance/xl2tpd
 - vpn服务商：https://github.com/pritunl
+
+# vpn常见错误码
+- https://support.microsoft.com/en-us/help/824864/list-of-error-codes-for-dial-up-connections-or-vpn-connections
+- https://www.bestvpn.com/guides/vpn-error-code-mean/#vpn-error-code-809

@@ -35,6 +35,8 @@ https://blog.csdn.net/kaulctin/article/details/68080043
 ## VPN
 ### L2TP
 
+设置教程：https://www.synology.com/zh-cn/knowledgebase/DSM/help/VPNCenter/vpn_setup
+
 认证方式支持
 - PAP
 - MS-CHAP v2
@@ -54,6 +56,20 @@ refuse-mschap
 refuse-chap
 refuse-pap
 ```
+```
+VPN Passthrough是一个用来解决隧道加密数据通过NAT设备的方法。它的典型应用环境有如下两种:
+VPN客户端 ------> NAT路由器 ------ Internet ------ VPN服务器
+VPN服务器 ------> NAT路由器 ------ Internet ------ VPN 服务器/客户端
+
+第一种情况是你的笔记本或PC通过一台NAT路由器上网，在笔记本或PC上运行相应的VPN客户端软件，建立VPN连接到公司的VPN服务器。
+
+第二种情况是你的VPN服务器通过一台NAT路由器上网，其它分支点的VPN服务器或VPN用户需要建立VPN连接到你的VPN服务器。
+
+VPN Passthrough用来处理加密的IPsec (ESP)或PPTP (GRE)数据包不包含明文源端口和目标端口的情况。ESP是IP protocol 50，GRE是IP protocol 47，它们不像标准的TCP或UDP那样有明确的端口。所以NAT设备不知道如何处理进入的ESP或GRE数据包，或不知道如何为外出的ESP或GRE数据包进行端口转换。打开VPN Passthrough将指导NAT“pass through”这些ESP或GRE数据包。对于外出的ESP或GRE，只进行地址转换及其它一些必要的NAT转换，但不尝试转换端口；对于进入的ESP或GRE数据包，将它们关联到所属的VPN客户端，而不使用端口信息。
+```
+- L2TP iPhone手机可以联，Win7/Mac Error 809
+  - http://koolshare.cn/thread-31253-1-1.html
+  - https://vkelk.wordpress.com/2012/10/28/windows-72008-error-809-l2tp-vpn/
 
 ## to-do-list
 - google chrome插件(Synology Download Station)
