@@ -3,6 +3,7 @@
 - dnsmasq搭建简易DNS服务器
 - bind9
   - https://github.com/Matty9191/bind-query-log-statistics
+- [dnsforwarder](https://github.com/holmium/dnsforwarder)
 
 ## 云DNS服务
 - DNSPod https://github.com/DNSPod
@@ -32,4 +33,3 @@ https://github.com/molin1987/DNS
 
 
 dnsforwarder
-https://github.com/holmium/dnsforwarder
