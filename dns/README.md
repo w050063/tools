@@ -32,4 +32,7 @@ https://github.com/molin1987/DNS
 
 
 
-dnsforwarder
+## DNS安全
+- 子域名枚举
+  - [Sublist3r](https://github.com/aboul3la/Sublist3r)  ddnsto.com koolshare论坛
+  - [subDomainsBrute](https://github.com/lijiejie/subDomainsBrute)
