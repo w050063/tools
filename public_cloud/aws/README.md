@@ -23,6 +23,14 @@ CloudFormer是亚马逊提供的一个工具，用来给已有的AWS资源创建
 ## S3
 ## AWS Glue
 https://aws.amazon.com/cn/glue/
+https://docs.aws.amazon.com/zh_cn/glue/latest/dg/what-is-glue.html
+
+jdbc-->glue
+- https://www.cdata.com/kb/tech/mysql-jdbc-aws-glue.rst
+- https://dzone.com/articles/extract-data-into-aws-glue-using-jdbc-drivers-and
+- https://aws.amazon.com/cn/blogs/big-data/use-aws-glue-to-run-etl-jobs-against-non-native-jdbc-data-sources/
+- https://www.progress.com/tutorials/jdbc/accessing-data-using-jdbc-on-aws-glue
+
 ## Amazon Athena
 https://aws.amazon.com/cn/athena/
 ## IAM安全
