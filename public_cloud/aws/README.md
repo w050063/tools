@@ -21,6 +21,10 @@ CloudFormer是亚马逊提供的一个工具，用来给已有的AWS资源创建
 要使用CloudFormer首先要创建一个Stack，CloudFormer就被部署到一台EC2机器上，通过这个Stack返回的Outputs的URL我们可以一步步勾选使用到的资源，最终生成一个Template，该Template会自动放置到你的S3中。
 ## MySQL
 ## S3
+## AWS Glue
+https://aws.amazon.com/cn/glue/
+## Amazon Athena
+https://aws.amazon.com/cn/athena/
 ## IAM安全
 ## 其他
 # 参考资料

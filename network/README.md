@@ -76,10 +76,10 @@ listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
         -s 0             # 抓取数据包时默认抓取长度为68字节。加上-S 0 后可以抓到完整的数据包
         -c 100           # 只抓取100个数据包
         dst port ! 22    # 不抓取目标端口是22的数据包
-        tcpdump tcp port 22                 # 抓包
-        tcpdump -n -vv udp port 53          # 抓udp的dns包 并显示ip
-        tcpdump port 10001 -A -s0           # 完整显示ascii数据包
-
+        tcpdump tcp port 22                         # 抓包
+        tcpdump -n -vv udp port 53                  # 抓udp的dns包 并显示ip
+        tcpdump port 10001 -A -s0                   # 完整显示ascii数据包
+        tcpdump -i eno1 -vvv -n host 223.104.3.170  # -n 显示IP -i指定接口 host指定IP
     }
 
     网卡流量查看{
