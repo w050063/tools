@@ -34,6 +34,8 @@ def generate_data():
     for i in domain_name_list:
         # print i
         json_data = get_ssl_cert_data(i)
+        if result.strip() == "":
+            result = "-1"
         value = json_data
         temp_dict = {
             "endpoint": falconEndpoint,
