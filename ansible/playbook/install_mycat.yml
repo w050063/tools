@@ -1,0 +1,15 @@
+---
+- import_playbook: create_work_dir.yml
+- import_playbook: install_jdk.yml
+- import_playbook: install_tools_packages.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - mycat_version: Mycat-server-1.6-RELEASE-20161028204710-linux.tar.gz
+  tasks:
+  - name: rsync {{ mycat_version }}
+    shell: cd /data0/src/ && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ mycat_version }} .
+    tags: rsync_packages
