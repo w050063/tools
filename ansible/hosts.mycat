@@ -1,0 +1,7 @@
+[mycat-server]
+server1 ansible_ssh_host=192.168.200.100 wan_ip=192.168.200.100
+
+[mycat-node]
+dn1 ansible_ssh_host=192.168.200.100 wan_ip=192.168.200.100
+dn2 ansible_ssh_host=192.168.200.101 wan_ip=192.168.200.101
+dn3 ansible_ssh_host=192.168.200.102 wan_ip=192.168.200.102
