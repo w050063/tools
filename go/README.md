@@ -39,7 +39,9 @@ alias depe="env http_proxy=127.0.0.1:1080 https_proxy=127.0.0.1:1080 dep ensure 
 
 ### 参考资料
 - 资料汇总
-  - [Go语言圣经](https://books.studygolang.com/gopl-zh/index.html)
+  - [Go语言圣经](#)
+    - [中文版](https://books.studygolang.com/gopl-zh/index.html)
+    - [原版](http://www.gopl.io/)
   - [示例代码](github.com/adonovan/gopl.io/)
   - https://github.com/jobbole/awesome-go-cn
   - https://github.com/Unknwon/the-way-to-go_ZH_CN

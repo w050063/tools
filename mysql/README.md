@@ -82,6 +82,7 @@ https://blog.csdn.net/aosica321/article/details/53433837
 ### SQL
 ### 分库分表
 - amoeba
+- [sharding-sphere](https://github.com/sharding-sphere/sharding-sphere)
 
 ## 参考资料
 - https://github.com/Neeky/mysqltools
