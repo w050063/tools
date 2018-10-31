@@ -78,7 +78,9 @@ maps
 官方安装指南：https://www.terraform.io/intro/getting-started/install.html
 官网文档：https://www.terraform.io/docs/index.html
 ```
-
+git clone http://github.com/mds1455975151/tools.git
+cd tools/ansible/playbook
+ansible-playbook install_terraform.yml -l localhost
 ```
 # 参考资料
 - https://github.com/ramitsurana/terraform-ansible-setup
