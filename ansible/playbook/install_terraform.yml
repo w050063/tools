@@ -1,0 +1,37 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - version: terraform_0.11.10_linux_amd64.zip
+  tasks:
+  - name: create /usr/local/terraform dir
+    file:
+      path: /usr/local/terraform
+      mode: 0755
+      state: directory
+    tags: create_depe_dir
+
+  - name: rsync {{ version }}
+    shell: cd /data0/src/ && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ version }} .
+    tags: rsync_file
+
+  - name: unzip {{ version }}
+    shell: cd /data0/src/ && unzip -o {{ version }} -d /usr/local/terraform/
+    tags: unzip_terraform
+
+  - name: rsync terraform_env.sh
+    copy:
+      src: files/terraform/terraform_env.sh
+      dest: /data0/src/terraform_env.sh
+      owner: root
+      group: root
+      mode: 0755
+    tags: rsync_env_scripts
+
+  - name: terraform env setup
+    shell: sh /data0/src/terraform_env.sh
+    tags: config_terraform_env
