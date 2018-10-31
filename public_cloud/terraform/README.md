@@ -1,4 +1,4 @@
-# Terraform功能简介
+# Terraform概述
 
 Terraform是IT 基础架构自动化编排工具，它的口号是 "Write,Plan, and create Infrastructure as Code", 基础架构即代码。
 
@@ -14,6 +14,8 @@ Terraform是IT 基础架构自动化编排工具，它的口号是 "Write,Plan, 
 
 Terraform的意义在于，通过同一套规则和命令来操作不同的云平台（包括私有云）。
 
+官网地址：https://www.terraform.io/
+模块仓库地址：https://registry.terraform.io/
 # Terraform知识准备
 
 核心文件有2个，一个是编排文件，一个是状态文件
@@ -27,26 +29,57 @@ terraform.tfstate：本地状态文件，相当于本地的云服务状态的备
 这个大家不需要担心，前面介绍过Terraform是目的式的编排，会按照预设结果完成编排并最终同步更新本地文件。
 
 Provider：Terraform定制的一套接口，跟OpenStack里Dirver、Java里Interface的概念是一样的，阿里云、AWS、私有云等如果想接入进来被Terraform编排和管理就要实现一套Provider，而这些实现对于Terraform的顶层使用者来说是无感知的。
+```
+terraform init  # 安装依赖各个公有云sdk等
+terraform apply
+terraform show
+terraform destroy
+
+# Input Variables
+定义变量
+variable "access_key" {}
+variable "secret_key" {}
+variable "region" {
+  default = "us-east-1"
+}
+
+变量引用
+provider "aws" {
+  access_key = "${var.access_key}"
+  secret_key = "${var.secret_key}"
+  region     = "${var.region}"
+}
+
+变量传递赋值
+命令行传递
+$ terraform apply \
+  -var 'access_key=foo' \
+  -var 'secret_key=bar'
+
+读取文件内容传递
+$ cat terraform.tfvars
+access_key = "foo"
+secret_key = "bar"
+$ terraform apply \
+  -var-file="secret.tfvars" \
+  -var-file="production.tfvars"
+
+数据结构
+list
+maps
+
+# Output Variables
+
+# modules
+
+```
 
 # Terraform安装
 官方安装指南：https://www.terraform.io/intro/getting-started/install.html
-
-本质是下载二进制的文件安装到linux中，然后通过terraform命令来操作。
-
-安装后需要在path中配置terraform
+官网文档：https://www.terraform.io/docs/index.html
 ```
-export PATH=$PATH:/path/to/dir
-export PATH=$PATH:/home/terraform
-source ~/.bashrc
+
 ```
-source只是让配置立刻生效，如果要永久生效需要直接修改文件
-
-方案1：在/etc/profile文件中添加变量【对所有用户生效（永久的）】
-
-# vi /etc/profile
-
-export CLASSPATH=./JAVA_HOME/lib;$JAVA_HOME/jre/lib
-方案2：在用户目录下的.bash_profile文件中增加变量【对单一用户生效（永久的）】
 # 参考资料
 - https://github.com/ramitsurana/terraform-ansible-setup
 - https://ramitsurana.github.io/terraform-ansible-setup/
