@@ -32,6 +32,7 @@
 - https://gitlab.com/fuhui jfrog
 - Centos7下Rinetd安装与应用
 https://my.oschina.net/lionel45/blog/1796980
+- [百度短地址](https://dwz.cn/#/?_k=d0n92o)
 ## 简历筛选
 1、简历关键字提Hadoop，但是没有提到hdfs、spark、zookeeper、hbase、pig、hive且薪资要求不高
 
