@@ -22,13 +22,15 @@ https://github.com/kubernetes/examples
 
 # to-do-list
 - ~~账号注册体验$300美元体验~~
+- [ansible and google](ansible.md)
+- Google Cloud Platform using Terraform
+
+
 
 # FQA
 - google Cloud shell使用
 ```
-gcloud compute --project \
-    "axiomatic-port-221011" ssh --zone
-<backend-zone> <backend-name>
+gcloud compute --project "axiomatic-port-221011" ssh --zone <backend-zone> <backend-name>
 所有操作都是sudo执行
 
 
