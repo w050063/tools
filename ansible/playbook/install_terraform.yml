@@ -3,24 +3,32 @@
 
 - hosts: all
   remote_user: root
+  become: yes
   gather_facts: true
   vars:
-    - version: terraform_0.11.10_linux_amd64.zip
+    terraform_version: terraform_0.11.10_linux_amd64.zip
+    terraform_inventory_version: terraform-inventory_v0.7-pre_linux_amd64.zip
   tasks:
   - name: create /usr/local/terraform dir
     file:
-      path: /usr/local/terraform
+      path: /usr/local/terraform/bin/
       mode: 0755
       state: directory
     tags: create_depe_dir
 
-  - name: rsync {{ version }}
+  - name: rsync app packages
     shell: cd /data0/src/ && \
-           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ version }} .
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ item }} .
+    with_items:
+      - "{{ terraform_version }}"
+      - "{{ terraform_inventory_version }}"
     tags: rsync_file
 
-  - name: unzip {{ version }}
-    shell: cd /data0/src/ && unzip -o {{ version }} -d /usr/local/terraform/
+  - name: unzip app packages
+    shell: cd /data0/src/ && unzip -o {{ item }} -d /usr/local/terraform/bin/
+    with_items:
+      - "{{ terraform_version }}"
+      - "{{ terraform_inventory_version }}"
     tags: unzip_terraform
 
   - name: rsync terraform_env.sh

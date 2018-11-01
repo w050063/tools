@@ -6,7 +6,7 @@ sed -i '/\/usr\/local\/terraform\//d' /etc/profile
 cat>>/etc/profile<<EOF
 
 # terraform bin PATH setup
-export PATH=\$PATH:/usr/local/terraform/
+export PATH=\$PATH:/usr/local/terraform/bin/
 EOF
 source /etc/profile
 
