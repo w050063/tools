@@ -37,3 +37,7 @@ https://aws.amazon.com/cn/athena/
 ## 其他
 # 参考资料
 - https://www.cnblogs.com/syaving/p/8649729.html
+
+# to-do-list
+- 添加一个服务账号，用于各类API调用使用
+- 

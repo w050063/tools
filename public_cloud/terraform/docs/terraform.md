@@ -79,3 +79,7 @@ output.tf                   -- 输出
 ```
 # to-do-list
 - terraform-inventory
+- tencent
+- aliyun
+- google
+- aws
