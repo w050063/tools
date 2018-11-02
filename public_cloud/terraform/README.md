@@ -46,7 +46,7 @@ ansible-playbook install_terraform.yml -l localhost
 # 参考资料
 - https://github.com/ramitsurana/terraform-ansible-setup
 - https://ramitsurana.github.io/terraform-ansible-setup/
-- https://www.terraform.io/docs/providers/google/index.html
+- google cloud https://www.terraform.io/docs/providers/google/index.html
 - 腾讯 https://www.terraform.io/docs/providers/tencentcloud/index.html
 - [Terraform/Ansible on Cloud--基础设施和应用管理实践](https://yq.aliyun.com/articles/118719)
 - https://github.com/shuaibiyy/awesome-terraform

@@ -17,5 +17,5 @@ markdown-image-paste
 markdown-table-editor
 markdown-themeable-pdf
 pdf-view
-language-hcl
+language-terraform
 ```

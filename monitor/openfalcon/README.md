@@ -23,7 +23,7 @@
 - ~~自动添加监控Screen(常用监控项简化查看方式)~~
 - Open-Falcon自监控 添加各个服务的端口 及falcon-task tycs-anteye
 - Open-Falcon邮件报警信息修改
-  邮件最后附带报警地址修改/data0/open-falcon/alarm/config-->api-->dashboard地址，然后重启
+  ~~邮件最后附带报警地址修改/data0/open-falcon/alarm/config-->api-->dashboard地址，然后重启~~
 - ~~ansible-playbook安装openfalcon~~
 - 监控规模评估，选择部署模式（单机\集群）
 - ~~服务器申请，服务规划~~
@@ -48,6 +48,11 @@
 - 点击hostname跳转到http://IP:1998页面
 - dashboard如何更新
 - ~~利用snmp监控交换机或者路由器~~
+- 不同报警方式
+  - ~~邮件~~
+  - 微信 https://github.com/Yanjunhui/chat
+  - 钉钉
+  - ~~短信~~
 ```
 git clone https://github.com/open-falcon/dashboard.git
 cd dashboard
