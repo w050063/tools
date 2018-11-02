@@ -23,6 +23,7 @@
 - ~~自动添加监控Screen(常用监控项简化查看方式)~~
 - Open-Falcon自监控 添加各个服务的端口 及falcon-task tycs-anteye
 - Open-Falcon邮件报警信息修改
+  邮件最后附带报警地址修改/data0/open-falcon/alarm/config-->api-->dashboard地址，然后重启
 - ~~ansible-playbook安装openfalcon~~
 - 监控规模评估，选择部署模式（单机\集群）
 - ~~服务器申请，服务规划~~
