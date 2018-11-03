@@ -10,11 +10,16 @@
       owner: root
       group: root
       mode: 0664
+    tags: rsync_config
 
   - name: rsync start process
     shell: /usr/bin/rsync --daemon
+    tags: rsync_service
 
   - name: rsync add /etc/rc.local
     lineinfile:
       path: /etc/rc.local
       line: /usr/bin/rsync --daemon >/dev/null 2>&1
+    when:
+      - ansible_os_family == "RedHat"
+    tags: boot_service

@@ -1,13 +1,21 @@
 --- 
 - hosts: all
   remote_user: root
-  gather_facts: false
+  gather_facts: true
   vars:
     - http_user: supervisor 
     - http_passwd: 09348c20a019be0318387c08df7a783d
   tasks:
-  - name: supervisor install
+  - name: RedHat os install supervisor
     yum: state=latest name=supervisor
+    when:
+      - ansible_os_family == "RedHat"
+    tags: install_supervisor_packages
+
+  - name: Debian or Kali GNU/Linux os install supervisor
+    apt: state=latest name=supervisor
+    when:
+      - ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
     tags: install_supervisor_packages
 
   - name: rsync supervisord.conf
@@ -19,22 +27,67 @@
       mode: 0664
       backup: yes
     notify: restart supervisord
+    when:
+      - ansible_os_family == "RedHat"
     tags: rsync_supervisor_conf
 
-  - name: make sure a service is running
+  - name: rsync supervisord.conf
+    template:
+      src: files/supervisord.conf-Debian.j2
+      dest: /etc/supervisor/supervisord.conf
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    notify: restart supervisord
+    when:
+      - ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
+    tags: rsync_supervisor_conf
+
+  - name: RedHat os make sure a service is running
     systemd: 
       state: started 
       name: supervisord
+    when: 
+      - ansible_os_family == "RedHat"
     tags: supervisord_service_running
 
-  - name: enable service and ensure it is not masked
+  - name:  Debian or Kali GNU/Linux os make sure a service is running
+    systemd: 
+      state: started 
+      name: supervisor
+    when: 
+      - ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
+    tags: supervisord_service_running
+
+  - name: RedHat os enable service and ensure it is not masked
     systemd:
       name: supervisord
       enabled: yes
       masked: no
+    when:
+      - ansible_os_family == "RedHat"
+    tags: supervisor_service_start
+
+  - name: Debian or Kali GNU/Linux os enable service and ensure it is not masked
+    systemd:
+      name: supervisor
+      enabled: yes
+      masked: no
+    when: 
+      - ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
     tags: supervisor_service_start
 
   handlers:
     - name: restart supervisord
       service: name=supervisord enabled=yes state=restarted
+      when: 
+        ansible_os_family == "RedHat"
+      tags: restart_supervisord
+
+  handlers:
+    - name: restart supervisord
+      service: name=supervisor enabled=yes state=restarted
+      when: 
+        ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
       tags: restart_supervisord
