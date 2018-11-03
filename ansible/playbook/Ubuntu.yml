@@ -1,7 +1,7 @@
 ---
 # Tasks specific for Ubuntu systems
 
-- name: Ubuntu os tools packages install
+- name: Ubuntu or Kali GNU/Linux or Debian os tools packages install
   apt: 
     name: "{{ item }}"
     state: latest 
@@ -45,4 +45,6 @@
     - wget
     - whois
     - python
+    - yum
+    - net-tools
   tags: install_tools_packages

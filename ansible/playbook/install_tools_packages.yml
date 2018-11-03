@@ -11,10 +11,10 @@
     when:
       - ansible_os_family == "RedHat"
 
-  - name: Ubuntu os tools packages install
+  - name: Ubuntu or Kali GNU/Linux or Debian tools packages install
     include: "Ubuntu.yml"
     when:
-      - ansible_os_family == "Debian"
+      - ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
 
   - name: Mac os tools packages install
     include: "MacOS.yml"
