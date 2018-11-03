@@ -1,0 +1,46 @@
+--- 
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: false
+  tasks:
+  - name: rsysc /etc/ipsec.secrets
+    template:
+      src: files/l2tp/ipsec.secrets.j2
+      dest: /etc/ipsec.secrets
+      owner: root
+      group: root
+      mode: 0755
+      backup: yes
+    notify: restart service
+    tags: rsync_config
+
+  - name: rsysc /etc/ppp/chap-secrets
+    template:
+      src: files/l2tp/chap-secrets.j2
+      dest: /etc/ppp/chap-secrets
+      owner: root
+      group: root
+      mode: 0755
+      backup: yes
+    notify: restart service
+    tags: rsync_config
+
+  - name: rsysc /etc/ipsec.d/passwd
+    template:
+      src: files/l2tp/passwd.j2
+      dest: /etc/ipsec.d/passwd
+      owner: root
+      group: root
+      mode: 0755
+      backup: yes
+    notify: restart service
+    tags: rsync_config
+
+  handlers:
+    - name: restart service
+      service: name={{ item }} enabled=yes state=restarted
+      with_items:
+        - ipsec
+        - xl2tpd
+      tags: restart_service

@@ -1,0 +1,153 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: true
+  vars:
+    - smk_owner: dongsheng
+    - smk_contact: dognsheng.ma@lemongrassmedia.cn
+    - smk_mailhost: localhost
+  tasks:
+  - name: packages install
+    yum: name={{ item }} state=latest
+    with_items:
+      - perl 
+      - perl-Net-Telnet 
+      - perl-Net-DNS 
+      - perl-LDAP 
+      - perl-libwww-perl 
+      - perl-IO-Socket-SSL 
+      - perl-Socket6  
+      - perl-Time-HiRes 
+      - perl-ExtUtils-MakeMaker 
+      - rrdtool
+      - rrdtool-perl 
+      - curl 
+      - httpd 
+      - httpd-devel 
+      - gcc 
+      - make  
+      - wget 
+      - libxml2-devel 
+      - libpng-devel 
+      - glib 
+      - pango 
+      - pango-devel 
+      - freetype 
+      - freetype-devel 
+      - fontconfig 
+      - cairo 
+      - cairo-devel 
+      - libart_lgpl 
+      - libart_lgpl-devel
+      # smokeping
+      - perl-Module-CoreList
+      - perl-Test-NoWarnings
+      - perl-IPC-Cmd
+      - perl-Sys-Syslog
+      # echoping
+      - popt
+      - popt-devel 
+      - libidn 
+      - libidn-devel
+    tags: install_packages
+
+  - name: install fping
+    shell: cd /data0/src/ && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/fping-3.10.tar.gz . && \
+           tar -zxf fping-3.10.tar.gz && \
+           cd fping-3.10 && \
+           ./configure && \
+           make && \
+           make install
+    tags: install_fping
+
+  - name: install echoping
+    shell: cd /data0/src/ && \ 
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/echoping-6.0.2.tar.gz . && \
+           tar -zxf echoping-6.0.2.tar.gz && \
+           cd echoping-6.0.2 && \
+           ./configure && \
+           make && \
+           make install
+    tags: install_echoping
+
+  - name: install smokeping
+    shell: cd /data0/src/ && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/smokeping-2.7.0.tar.gz . && \
+           tar -zxf smokeping-2.7.0.tar.gz && \
+           cd smokeping-2.7.0 && \
+           ./configure --prefix=/usr/local/smokeping && \
+           /usr/bin/gmake install
+    tags: install_smokeping
+
+  - name: create work dir
+    file:
+      path: "/usr/local/smokeping/{{ item }}"
+      owner: apache
+      group: apache
+      mode: 0755
+      state: directory
+    with_items:
+      - cache
+      - data
+      - var
+    tags: create_work_dir
+
+  - name: smokeping config
+    shell: chmod 600 /usr/local/smokeping/etc/smokeping_secrets.dist && \
+           \cp /usr/local/smokeping/htdocs/smokeping.fcgi.dist /usr/local/smokeping/htdocs/smokeping.fcgi
+    tags: smokeping_config
+
+
+  - name: rsysc smokeping.conf
+    template:
+      src: "files/smokeping/{{ item }}.j2"
+      dest: "/usr/local/smokeping/etc/{{ item }}"
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    with_items:
+      - config
+      - targets
+    tags: rsync_smokeping_config
+
+  - name: start smokeping
+    shell: /usr/local/smokeping/bin/smokeping
+    tags: start_smokeping
+
+  - name: apache setup admin
+    shell: htpasswd -c /usr/local/smokeping/htdocs/htpasswd admin
+    tags: add_user_passwd
+
+  - name: rsysc smokeping.conf
+    template:
+      src: files/smokeping/smokeping.conf.j2
+      dest: /etc/httpd/conf.d/smokeping.conf
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    notify: restart apache
+    tags: rsync_apache_conf
+
+  - name: make sure a service is running
+    systemd:
+      state: started
+      name: apache
+    tags: apache_service_running
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: apache
+      enabled: yes
+      masked: no
+    tags: apache_service_start
+
+  handlers:
+    - name: restart apache
+      service: name=httpd enabled=yes state=restarted
+      tags: restart_apache

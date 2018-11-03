@@ -1,9 +1,23 @@
 ---
 - hosts: all
   remote_user: root
+  sudo: yes
   gather_facts: true
   vars:
+    - install_type: yum     # yum|source
+    - aliyun_mirror: true   # true|false
   tasks:
   - name: maven install
     yum: name=maven state=latest
+    when: install_type == 'yum'
     tags: install_maven
+
+  - name: deploy settings.xml
+    template:
+      src: files/maven/settings.xml.j2
+      dest: ~/.m2/settings.xml
+      owner: root
+      group: root
+      mode: 0644
+    when: aliyun_mirror == 'true'
+    tags: deploy_maven_config

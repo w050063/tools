@@ -4,47 +4,65 @@
 
 - hosts: all
   remote_user: root
+  sudo: yes
   gather_facts: true
   vars:
     - cloudera_version: '5.15.1'
-    - mysql_connector_java_version: '8.0.11'
-    - install_type: 'local'                     # download|local
-    - repo_url: '192.168.200.100'
   tasks:
-  - name: create user cloudera-scm
+  - name: install tools packages
+    yum:
+      state: latest 
+      name: "{{item}}"
+    with_items:
+      - psmisc
+    tags: install_tools
+
+  - name: download packages
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ item }} .
+    with_items:
+      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel'
+      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel.sha1'
+      - 'manifest.json'
+      - 'cloudera-manager-centos7-cm{{ cloudera_version }}_x86_64.tar.gz'
+      - 'mysql-connector-java-8.0.12.tar.gz'
+    tags: download_app_packages
+
+  - name: unzip mysql-connector-java-8.0.12.tar.gz
+    unarchive: 
+      src: "/data0/src/mysql-connector-java-8.0.12.tar.gz"
+      dest: /data0/src
+      remote_src: yes
+    tags: unzip_mysql_jdbc_packages
+
+  - name: unzip app packages
+    unarchive: 
+      src: "/data0/src/cloudera-manager-centos7-cm{{ cloudera_version }}_x86_64.tar.gz"
+      dest: /opt/
+      remote_src: yes
+    tags: unzip_app_packages
+  
+  - name: parcel
+    shell: cp -f /data0/src/{{ item }} /opt/cloudera/parcel-repo/
+    with_items:
+      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel'
+      - 'CDH-{{ cloudera_version }}-1.cdh{{ cloudera_version }}.p0.4-el7.parcel.sha1'
+      - 'manifest.json'
+    tags: parcel
+
+  - name: mysql-connector-java
+    shell: cp -f /data0/src/mysql-connector-java-8.0.12/mysql-connector-java-8.0.12.jar /opt/cm-5.15.1/share/cmf/lib/
+    tags: mysql-connector-java
+
+  - name:
+    # shell: /opt/cm-5.15.1/share/cmf/schema/scm_prepare_database.sh mysql cm -hlocalhost -uroot -p123456 --scm-host localhost scm scm scm
     shell: useradd --system \
                    --home=/opt/cm-5.15.1/run/cloudera-scm-server/ \
                    --no-create-home \
                    --shell=/bin/false \
                    --comment "Cloudera SCM User" cloudera-scm
-    ignore_errors: yes
-    tags: add_user_cloudera
+  - name: start server
+    shell: /opt/cm-5.15.1/etc/init.d/cloudera-scm-server start 
 
-  - name: other setup
-    shell: echo never > /sys/kernel/mm/transparent_hugepage/defrag; \
-           echo never > /sys/kernel/mm/transparent_hugepage/enabled; \
-           echo 10 > /proc/sys/vm/swappiness
-    tags: other_setup
-
-  - name: boot settings /etc/rc.local    
-    lineinfile:      
-      path: /etc/rc.local     
-      line: "\n# cloudera setup at {{ ansible_date_time.date }} by madongsheng\n
-                 echo never > /sys/kernel/mm/transparent_hugepage/defrag\n
-                 echo never > /sys/kernel/mm/transparent_hugepage/enabled"    
-    tags: boot_settings
-
-  - name: vm.swappiness
-    lineinfile:
-      path: /etc/sysctl.d/99-sysctl.conf
-      line: "vm.swappiness = 10"
-    tags: boot_settings
-
-  - name: rsysc cloudera-manager.repo
-    template:
-      src: files/cloudera/cloudera-cdh5.repo.j2
-      dest: /etc/yum.repos.d/cloudera-cdh5.repo
-      owner: root
-      group: root
-      mode: 0644
-    tags: rsync_cloudera_repo
+  - name: start agent
+    shell: /opt/cm-5.15.1/etc/init.d/cloudera-scm-agent start 

@@ -1,0 +1,143 @@
+---
+- import_playbook: install_jdk.yml
+- import_playbook: install_nginx.yml
+
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: true
+  vars:
+    - graylog_version: 2.4.3-1
+    - graylog_message_journal_max_age: "24h"
+    - graylog_message_journal_max_size: "10gb"
+    - graylog_elasticsearch_shards: 4
+    - graylog_elasticsearch_replicas: 1
+    - graylog_jvm_heap_size: "4g"
+  tasks:
+  #- name: install graylog repository
+  #  shell: rpm -Uvh https://packages.graylog2.org/repo/packages/graylog-2.4-repository_latest.rpm
+  #  ignore_errors: yes
+  #  tags: install_graylog_repo
+
+  #- name: install graylog server packages
+  #  shell: rpm -ivh https://packages.graylog2.org/repo/el/stable/2.4/x86_64/graylog-server-{{ graylog_version }}.noarch.rpm
+  #  ignore_errors: yes
+  #  tags: install_graylog_packages
+  
+  - name: download graylog-server-{{ graylog_version }}.noarch.rpm
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/graylog-server-{{ graylog_version }}.noarch.rpm .
+    tags: download_graylog_packages
+
+  - name: install graylog server packages
+    shell: rpm -ivh /data0/src/graylog-server-2.4.3-1.noarch.rpm
+    ignore_errors: yes
+    tags: install_graylog_packages
+
+  - name: graylog-server packages install
+    yum: state=latest name={{ item }}
+    with_items:
+      - pwgen
+      # - graylog-server
+    tags: install_graylog-server
+
+  - name: rsync /etc/graylog/server/server.conf
+    template:
+      src: files/graylog-server/server.conf.j2
+      dest: /etc/graylog/server/server.conf
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_graylog_server_conf
+
+  - name: rsync /etc/sysconfig/graylog-server
+    template:
+      src: files/graylog-server/graylog-server.j2
+      dest: /etc/sysconfig/graylog-server
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    notify: restart graylog-server
+    tags: rsync_graylog_jvm_conf
+
+  - name: install the graylog custom plugins (lemongrassmedia)
+    copy:
+      src: files/graylog-server/{{ item }}
+      dest: /usr/share/graylog-server/plugin/{{ item }}
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      # - graylog-plugin-splunk-0.6.3.jar
+      - graylog-plugin-splunk-0.6.9.jar
+    tags: graylog_server_plugin_install
+
+  - name: create the graylog custom plugins config file dir
+    file:
+      path: "{{ item }}"
+      mode: 0755
+      state: directory
+    with_items:
+      - "/home/graylog_conf/"
+    tags: create_work_dir
+
+  - name: install the graylog custom plugins config file (lemongrassmedia)
+    copy:
+      src: files/graylog-server/{{ item }}
+      dest: /home/graylog_conf/
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      #- BI.xml
+      - loveworld-tlog-extensions.xml
+      - loveworld-tlog-tencent-v1.2.8.xml
+    tags: graylog_server_plugin_install
+  
+  #- name: install the graylog custom config,example:input\output\dashboard (lemongrassmedia)
+  #  copy:
+  #    src: files/graylog-server/{{ item }}
+  #    dest: /usr/share/graylog-server/contentpacks/{{ item }}
+  #    owner: root
+  #    group: root
+  #    mode: 0664
+  #  with_items:
+  #    - loveworld_content_pack.json
+  #  tags: rsync_graylog_config
+
+  #- name: make sure a service is running
+  #  systemd: 
+  #    state: started 
+  #    name: graylog-server
+  #  tags: graylog_server_service_running
+
+  - name: print change graylog server config
+    debug:
+      msg: "please change graylog server config and start service(es/mongodb/api configs)"
+    tags: print_change_graylog_server_config
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: graylog-server
+      enabled: yes
+      masked: no
+    tags: graylog_server_service_start
+
+  - name: rsync /etc/nginx/conf.d/graylog.conf
+    template:
+      src: files/graylog-server/graylog.conf
+      dest: /etc/nginx/conf.d/graylog.conf
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_graylog_nginx_conf
+
+  - name: nginx restart
+    shell: systemctl restart nginx
+    tags: restart_nginx
+
+  handlers:
+    - name: restart graylog-server
+      service: name=graylog-server enabled=yes state=restarted
+      tags: restart_graylog_server

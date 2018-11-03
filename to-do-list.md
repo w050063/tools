@@ -34,6 +34,7 @@
 https://my.oschina.net/lionel45/blog/1796980
 - [百度短地址](https://dwz.cn/#/?_k=d0n92o)
 - 企业应用如何解决Multi-Cloud的基础设施管理及应用部署问题 terraform
+- 自建游戏加速器 | openvpn+udpspeeder+udp2raw全局加速方案
 ## 简历筛选
 1、简历关键字提Hadoop，但是没有提到hdfs、spark、zookeeper、hbase、pig、hive且薪资要求不高
 

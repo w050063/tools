@@ -1,0 +1,41 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: false
+  tasks:
+  - name: download packages
+    shell: cd /data0/src && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ item }} .
+    with_items:
+      - 'semaphore_2.5.1_linux_amd64.rpm'
+    tags: download_app_packages
+
+  - name: ansible semaphore install
+    shell: rpm -ivh /data0/src/semaphore_2.5.1_linux_amd64.rpm
+    ignore_errors: yes
+    tags: install_semaphore
+
+  - name: create work dir
+    file:
+      path: /etc/semaphore/
+      state: directory
+      owner: root
+      group: root
+      mode: 0755
+    tags: create_work_dir
+
+  - name: deploy ansible semaphore config
+    template:
+      src: files/ansible-semaphore/config.json
+      dest: /etc/semaphore/config.json
+      owner: root
+      group: root
+      mode: 0644
+    tags: deploy_app_config
+
+  - name: start ansible semaphore
+    shell: cd /etc/semaphore/ && nohup semaphore -config /etc/semaphore/config.json &
+    tags: start_service

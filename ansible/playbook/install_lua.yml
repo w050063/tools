@@ -1,0 +1,14 @@
+--- 
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: true
+  vars:
+    - install_type: yum          # yum|sources
+  tasks:
+  - name: lua install
+    yum: name={{ item }} state=latest
+    with_items:
+      - lua
+    when: install_type == "yum"
+    tags: install_lua

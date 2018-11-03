@@ -1,0 +1,102 @@
+---
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: false
+  vars:
+    - td_agent_version: ""
+    - td_agent_log_dir: "/data0/td-agent"
+  tasks:
+  #- name: wget td-agent-3.2.0-0.el7.x86_64.rpm
+  #  get_url: 
+  #    url: http://packages.treasuredata.com.s3.amazonaws.com/3/redhat/7/x86_64/td-agent-3.2.0-0.el7.x86_64.rpm 
+  #    dest: /data0/src/
+  #  tags: wget_td_agent_packages
+
+  - name: download td-agent-3.2.0-0.el7.x86_64.rpm
+    shell: cd /data0/src/ && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/td-agent-3.2.0-0.el7.x86_64.rpm .
+    tags: wget_td_agent_packages
+
+  - name: td-agent install
+    shell: yum install -y /data0/src/td-agent-3.2.0-0.el7.x86_64.rpm
+    ignore_errors: yes
+    tags: install_td_agent_packages
+
+  - name: rsync td-agent.conf 
+    template:
+      src: files/td-agent/td-agent.conf.j2
+      dest: /etc/td-agent/td-agent.conf
+      owner: root
+      group: root
+      mode: 0664
+      backup: yes
+    notify: restart td-agent
+    tags: rsync_td_agent_config
+
+  - name: mkdir td-agent data and log dir
+    file:
+      path: /data0/td-agent
+      owner: td-agent
+      group: td-agent
+      mode: 0755
+      state: directory
+    tags: create_app_work_dir
+
+  - name: install td-agent plugins
+    shell: /opt/td-agent/embedded/bin/fluent-gem install {{ item }}
+    with_items:
+      - fluent-plugin-input-gelf
+      - fluent-plugin-rewrite-tag-filter
+      - fluent-plugin-record-reformer
+    tags: install_td_agent_plugins
+
+  - name: rsync /etc/rc.d/init.d/td-agent
+    template:
+      src: files/td-agent/td-agent.init.j2
+      dest: /etc/rc.d/init.d/td-agent
+      owner: root
+      group: root
+      mode: 0755
+    notify: restart td-agent
+    tags: rsync_td_agent_config
+    
+  - name: rsync /etc/logrotate.d/td-agent
+    template:
+      src: files/td-agent/td-agent.logrotate.j2
+      dest: /etc/logrotate.d/td-agent
+      owner: root
+      group: root
+      mode: 0664
+    notify: restart td-agent
+    tags: rsync_fluent_config
+
+  - name: rsync /usr/lib/systemd/system/td-agent.service
+    template:
+      src: files/td-agent/td-agent.systemd.j2
+      dest: /usr/lib/systemd/system/td-agent.service
+      owner: root
+      group: root
+      mode: 0755
+    notify: restart td-agent
+    tags: rsync_fluent_config
+
+  - name: systemctl daemon-reload
+    shell: systemctl daemon-reload
+    tags: td_agent_daemon_reload
+
+  - name: make sure a service is running
+    systemd: state=started name=td-agent
+    tags: start_service
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: td-agent
+      enabled: yes
+      masked: no
+    tags: service_boot
+
+  handlers:
+    - name: restart td-agent
+      service: name=td-agent enabled=yes state=restarted
+      tags: restart_td_agent

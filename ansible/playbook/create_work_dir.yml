@@ -1,11 +1,14 @@
 --- 
 - hosts: all
   remote_user: root
+  sudo: yes
   gather_facts: false
   tasks:
   - name: create work dir
     file:
       path: "{{ item }}"
+      owner: root
+      group: root
       mode: 0755
       state: directory
     with_items:

@@ -1,0 +1,18 @@
+---
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: true
+  vars:
+  tasks:
+  - import_tasks: install_nginx_include.yml
+    vars:
+      install_type: yum          # yum_default|yum|sources
+      os_type: centos            # centos|rhel
+      nginx_version: 1.14.0
+
+  - import_tasks: install_php_include.yml
+    vars:
+      php_version: "71"            # PHP version 56|70|71|72
+      install_type: "yum_default"  # yum_default|yum|sources
+      restart_flag: "false"

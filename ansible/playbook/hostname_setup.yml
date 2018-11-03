@@ -1,6 +1,7 @@
 ---
 - hosts: all
   remote_user: root
+  sudo: yes
   gather_facts: true
   vars:
     - hostnames_file: "/etc/hosts"

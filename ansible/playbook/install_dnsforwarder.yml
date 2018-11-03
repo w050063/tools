@@ -1,0 +1,76 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: true
+  vars:
+    - logon: true
+    - bind_ip: 0.0.0.0
+  tasks:
+  - name: git clone tools repo
+    git:
+      repo: 'https://github.com/holmium/dnsforwarder.git'
+      dest: /data0/src/dnsforwarder
+      version: 6
+      accept_hostkey: yes
+      update: yes
+      force: yes
+    tags: checkout_git_repo
+
+  - name: dnsforwarder install
+    shell: cd /data0/src/dnsforwarder && \
+           ./configure && \
+           autoreconf -f -i && \
+           make && \ 
+           make install
+    tags: install_dnsforwarder
+
+  - name: create work dir
+    file:
+      path: "{{ item }}"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+    with_items:
+      - /root/.dnsforwarder
+      - /etc/dnsforwarder
+    tags: create_work_dir
+
+  - name: rsync /etc/dnsforwarder/config
+    template:
+      src: "files/dnsforwarder/{{ item }}.j2"
+      dest: "/etc/dnsforwarder/{{ item }}"
+      owner: root
+      group: root
+      mode: 0644
+    with_items:
+      - group-tcp.txt
+      - group-tcp-overseas.txt
+      - group-udp.txt
+      - group-udp-overseas.txt
+    notify: restart dnsforwarder
+    tags: rsync_config
+
+  - name: rsync /etc/dnsforwarder/config
+    template:
+      src: "files/dnsforwarder/{{ item }}.j2"
+      dest: "/root/.dnsforwarder/{{ item }}"
+      owner: root
+      group: root
+      mode: 0644
+    with_items:
+      - config
+    notify: restart dnsforwarder
+    tags: rsync_config
+
+  - name: start dnsforwarder service
+    shell: /usr/local/bin/dnsforwarder -d
+    tags: start_dnsforwarder
+
+  handlers:
+    - name: restart dnsforwarder
+      shell: pkill dnsforwarder; /usr/local/bin/dnsforwarder -d 
+      tags: restart_nginx

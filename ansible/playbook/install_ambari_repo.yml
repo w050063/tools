@@ -4,6 +4,7 @@
 
 - hosts: all
   remote_user: root
+  sudo: yes
   gather_facts: false
   tasks:
   - name: tools install

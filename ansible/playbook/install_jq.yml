@@ -1,0 +1,25 @@
+--- 
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: false
+  vars:
+    - install_type: download  # download|local
+  tasks:
+  - name: rsync jq
+    copy:
+      src: files/jq
+      dest: /usr/bin/jq
+      owner: root
+      group: root
+      mode: 0755
+    when: install_type == 'local'
+    tags: install_jq
+
+  - name: download and install jq
+    get_url:
+      url: "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"
+      dest: /usr/bin/jq
+      mode: 0755
+    when: install_type == 'download'
+    tags: download_install_jq
