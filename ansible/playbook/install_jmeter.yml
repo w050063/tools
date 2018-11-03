@@ -1,18 +1,16 @@
 ---
+- import_playbook: create_work_dir.yml
 - import_playbook: install_jdk.yml
 - import_playbook: install_tools_packages.yml
 
 - hosts: all
   remote_user: root
+  sudo: yes
   gather_facts: true
+  vars:
+    - jmeter_version: 4.0
+    - jar_file: loveserver-jmeter-1.3.1-jar-with-dependencies.jar
   tasks:
-  - name: create /data0/src/ dir
-    file:
-      path: /data0/src/
-      mode: 0755
-      state: directory
-    tags: create_tmp_dir
-
   - name: create /usr/local/jmeter dir
     file:
       path: /usr/local/jmeter
@@ -20,22 +18,22 @@
       state: directory
     tags: create_depe_dir
 
-  - name: rsync apache-jmeter-4.0.zip
-    copy:
-      src: files/apache-jmeter-4.0.zip
-      dest: /data0/src/
-      owner: root
-      group: root
-      mode: 0664
+  - name: rsync apache-jmeter-{{ jmeter_version }}.zip
+    shell: cd /data0/src/ && \
+           rsync -avz {{ REPO_IP }}::DATA/devops/packages/apache-jmeter-{{ jmeter_version }}.zip .
     tags: rsync_jmeter_file
+
+  #- name: download apache-jmeter-{{ jmeter_version }}.zip
+  #  get_url: url=https://mirrors.tuna.tsinghua.edu.cn/apache/jmeter/binaries/apache-jmeter-{{ jmeter_version }}.zip dest=/data0/src/
+  #  tags: download_jmeter_packages
  
-  - name: unzip apache-jmeter-4.0.zip
-    shell: cd /data0/src/ && unzip -o apache-jmeter-4.0.zip -d /usr/local/jmeter/
+  - name: unzip apache-jmeter-{{ jmeter_version }}.zip
+    shell: cd /data0/src/ && unzip -o apache-jmeter-{{ jmeter_version }}.zip -d /usr/local/jmeter/
     tags: unzip_jmeter
 
   - name: rsync jmeter_env.sh
     copy:
-      src: files/jmeter_env.sh
+      src: files/jmeter/jmeter_env.sh
       dest: /data0/src/jmeter_env.sh
       owner: root
       group: root
@@ -48,14 +46,40 @@
 
   - name: rsync jmeter.properties
     copy:
-      src: files/jmeter.properties.nmc
-      dest: /usr/local/jmeter/apache-jmeter-4.0/bin/jmeter.properties
+      src: files/jmeter/jmeter.properties.nmc
+      dest: /usr/local/jmeter/apache-jmeter-{{ jmeter_version }}/bin/jmeter.properties
       owner: root
       group: root
       mode: 0664
     tags: rsync_jmeter_conf
 
+  - name: clear old ext jar
+    shell: cd /usr/local/jmeter/apache-jmeter-{{ jmeter_version }}/lib/ext/ && rm -f loveserver-jmeter-*-jar-with-dependencies.jar
+    tags: clear_old_jar
+
+  #- name: rsync ext jar
+  #  shell: cd /data0/src/ && \
+  #         rsync -avz {{ REPO_IP }}::DATA/devops/packages/{{ jar_file }} .
+  #  notify: restart jmeter
+  #  tags: rsync_jmeter_file
+
+  - name: rsync ext jar
+    copy:
+      src: "files/jmeter/{{ jar_file }}"
+      dest: /usr/local/jmeter/apache-jmeter-{{ jmeter_version }}/lib/ext/
+      owner: root
+      group: root
+      mode: 0664
+    notify: restart jmeter
+    tags: rsync_jmeter_ext_jar
+
   - name: start jmeter-server
-    #shell: cd  /usr/local/jmeter/apache-jmeter-4.0/bin/ && nohup sh jmeter-server &
-    shell: cd  /usr/local/jmeter/apache-jmeter-4.0/bin/ && nohup sh jmeter-server -Djava.rmi.server.hostname={{ ansible_eth0.ipv4.address }} &
+    shell: cd /usr/local/jmeter/apache-jmeter-{{ jmeter_version }}/bin/ && \
+           nohup sh jmeter-server -Djava.rmi.server.hostname={{ ansible_eth0.ipv4.address }} &
     tags: start_jmeter
+
+  handlers:
+    - name: restart jmeter
+      shell: killall java; cd /usr/local/jmeter/apache-jmeter-{{ jmeter_version }}/bin/ && \
+           nohup sh jmeter-server -Djava.rmi.server.hostname={{ ansible_eth0.ipv4.address }} &
+      tags: restart_jmeter

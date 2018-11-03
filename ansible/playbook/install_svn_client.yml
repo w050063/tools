@@ -1,0 +1,25 @@
+---
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: false
+  vars:
+    - install_type: yum              # yum|sources
+  tasks:
+  - name: rsysc svn repo file
+    copy:
+      src: files/svn/wandisco-svn.repo
+      dest: /etc/yum.repos.d/
+      owner: root
+      group: root
+      mode: 0664
+    tags: rsync_repo_file
+    
+  - name: svn install
+    yum: name={{ item }} state=latest
+    with_items:
+      - subversion-1.8.19-1
+      - cyrus-sasl 
+      - cyrus-sasl-plain 
+      - cyrus-sasl-ldap
+    tags: install_svn

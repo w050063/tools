@@ -3,14 +3,17 @@
 
 - hosts: all
   remote_user: root
-  gather_facts: false
+  sudo: yes
+  gather_facts: true
   vars:
+    - dnsmasq_ip_address: '10.1.16.153'
     - dnsmasq_upstream_servers:
       - 223.5.5.5
       - 223.6.6.6
       - 114.114.114.114
       - 8.8.8.8
     - dnsmasq_hosts_files: 'dnsmasq.hosts'
+    - dnsmasq_resolv_files: 'resolv.dnsmasq.conf'
     - dnsmasq_cache_size: '1000'
   tasks:
   - name: dnsmasq install
@@ -19,8 +22,26 @@
 
   - name: rsync dnsmasq.hosts
     copy:
-      src: files/dnsmasq/dnsmasq.hosts
-      dest: /etc/dnsmasq.hosts
+      src: files/dnsmasq/{{ item }}
+      dest: '/etc/{{ item }}'
+      owner: root
+      group: root
+      mode: 0664 
+    with_items:
+      - 'dnsmasq.hosts'
+      - 'resolv.dnsmasq.conf'
+    tags: rsync_dnsmasq_hosts
+
+  - name: rsync custom-domains.conf
+    template:
+      src: files/dnsmasq/{{ item }}.j2
+      dest: '/etc/dnsmasq.d/{{ item }}'
+      owner: root
+      group: root
+      mode: 0664
+    with_items:
+      - 'custom-domains.conf'
+      # - 'squid-cache-domains.conf'
     tags: rsync_dnsmasq_hosts
 
   - name: set configuration file
@@ -28,6 +49,9 @@
       src: files/dnsmasq/dnsmasq.conf.j2
       dest: /etc/dnsmasq.conf
       validate: 'dnsmasq --test --conf-file=%s'
+      owner: root
+      group: root
+      mode: 0644
     notify: restart dnsmasq
     tags: rsync_dnsmasq_file
 
@@ -35,6 +59,9 @@
     get_url:
       url: "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/install.sh"
       dest: /data0/src/
+      owner: root
+      group: root
+      mode: 0755
     tags: download_dnsmasq_china_list
 
   - name: install dnsmasq-china-list
@@ -51,6 +78,13 @@
       enabled: yes
       masked: no
     tags: service_boot
+
+  - name: print messages
+    debug:
+      msg: '{{ item }}'
+    with_items:
+      - 'ping linux-node01.example.com'
+    tags: print_messages
 
   handlers:
     - name: restart dnsmasq

@@ -1,0 +1,48 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: false
+  tasks:
+  - name: nodejs install
+    yum: name={{ item }} state=latest
+    with_items:
+      - nodejs
+    tags: install_nodejs
+
+  - name: log.io install
+    shell: npm install -g log.io --prefix /usr/local/log.io --user='root'
+    tags: install_logio
+
+  #- name: create work dir
+  #  file:
+  #    path: /var/log/log.io/
+  #    state: directory
+  #    mode: 0755
+  #    owner: root
+  #    group: root
+  #  tags: create_work_dir
+
+  #- name: deploy config file
+  #  template:
+  #    src: files/log.io/supervisord.ini.j2
+  #    dest: /etc/supervisord.d/log.io-server.ini
+  #    owner: root
+  #    group: root
+  #    mode: 0644
+  #  tags: deploy_supervisord_ini
+
+  #- name: start log.io-server
+  #  shell: supervisorctl update
+  #  tags: supervisor_update
+
+  - name: start log.io-server
+    shell: cd /usr/local/log.io/bin/ && nohup ./log.io-server &
+    tags: start_logio
+
+  - name: print messages
+    debug:
+      msg: 'http://{ip}:28778'
+    tags: print_messages

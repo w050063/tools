@@ -1,0 +1,39 @@
+---
+- import_playbook: create_work_dir.yml
+
+- hosts: all
+  remote_user: root
+  sudo: yes
+  gather_facts: true
+  vars:
+    - squid_http_port: '80'
+  tasks:
+  - name: squid install
+    yum: name=squid state=latest
+    tags: install_squid
+
+  - name: set configuration file
+    template:
+      src: files/squid/squid.conf.j2
+      dest: /etc/squid/squid.conf
+      owner: root
+      group: squid
+      mode: 0640
+    notify: restart squid
+    tags: rsync_squid_file
+
+  - name: make sure a service is running
+    systemd: state=started name=squid
+    tags: start_service
+
+  - name: enable service and ensure it is not masked
+    systemd:
+      name: squid
+      enabled: yes
+      masked: no
+    tags: service_boot
+
+  handlers:
+    - name: restart squid
+      service: name=squid enabled=yes state=restarted
+      tags: restart_squid

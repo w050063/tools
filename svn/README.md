@@ -53,3 +53,24 @@ svn list file:///home/svn-root/dongsheng/script
 /usr/bin/svn --username user --password passwd export  $Code$File ${SvnPath}src/$File    # 导出个别文件
 /usr/bin/svn --username user --password passwd export -r 版本号 svn路径 本地路径 --force   # 导出指定版本
 ```
+
+# to-do-list
+svnsync要求svn版本1.4+
+svnsync是Subversion的远程版本库镜像工具，它允许你把一个版本库的内容录入到另一个。
+
+在任何镜像场景中，有两个版本库：源版本库，镜像(或“sink”)版本库，源版本库就是svnsync获取修订版本的库，镜像版本库是源版本库修订版本的目标，两个版本库可以是在本地或远程—它们只是通过URL跟踪。
+
+svnsync进程只需要对源版本库有读权限；它不会尝试修改它。但是很明显，svnsync可以读写访问镜像版本库。
+
+svnadmin create svn-mirror
+$ svnsync initialize svn://jenkins.dev.worldoflove.cn/loveworld \
+                     svn://193.112.50.123/svn-mirror \
+                     --username madongsheng --password madongsheng
+Copied properties for revision 0.
+
+# initialize 可以简写为 init 所以上面的命令可以写作如下：
+$ svnsync init http://192.168.3.10/svn-mirror \
+                     http://192.168.2.5/Dev-rep \
+                     --username syncuser --password syncpass
+# 注意
+# 提供给svnsync的URL必须是指向目标和源版本库的根目录，这个工具不支持对版本库子树的镜像处理。

@@ -5,6 +5,7 @@
   become: true
   become_user: root
   remote_user: root
+  sudo: yes
   gather_facts: true
   vars:
     - app_version: '4.0.6.3'
@@ -58,12 +59,16 @@
     shell: cd /usr/local/falcon-swcollector && nohup ./control start
     tags: start_agent
 
+  - name: change /etc/rc.d/rc.local
+    shell: chmod +x /etc/rc.d/rc.local
+    tags: setup_rc_local
+
   - name: setup service start boot
     lineinfile:
       path: /etc/rc.local
       state: present
       backup: yes
-      line: "cd /usr/local/falcon-swcollector && ./control start >/dev/null 2&1"
+      line: "\n# falcon-swcollector service start at {{ ansible_date_time.date }} by madongsheng\ncd /usr/local/falcon-swcollector && ./control start &"
     tags: setup_service_start_boot
 
   handlers:
