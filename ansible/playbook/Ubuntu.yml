@@ -12,10 +12,10 @@
     - dos2unix
     - gawk
     - gcc
-    - make
     - git
     - grep
     - gzip
+    - make
     - zip
     - htop
     - httping
@@ -40,6 +40,7 @@
     - tmux
     - trash-cli
     - tig
+    - tree
     - unzip
     - vim
     - wget

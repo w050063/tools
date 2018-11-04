@@ -2,6 +2,7 @@
 - hosts: all
   remote_user: root
   gather_facts: true
+  sudo: yes
   vars:
     - http_user: supervisor 
     - http_passwd: 09348c20a019be0318387c08df7a783d
@@ -10,13 +11,13 @@
     yum: state=latest name=supervisor
     when:
       - ansible_os_family == "RedHat"
-    tags: install_supervisor_packages
+    tags: install_supervisor_packages_redhat
 
   - name: Debian or Kali GNU/Linux os install supervisor
     apt: state=latest name=supervisor
     when:
       - ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
-    tags: install_supervisor_packages
+    tags: install_supervisor_packages_debian
 
   - name: rsync supervisord.conf
     template:
@@ -39,7 +40,7 @@
       group: root
       mode: 0664
       backup: yes
-    notify: restart supervisord
+    notify: restart supervisor
     when:
       - ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
     tags: rsync_supervisor_conf
@@ -85,9 +86,8 @@
         ansible_os_family == "RedHat"
       tags: restart_supervisord
 
-  handlers:
-    - name: restart supervisord
+    - name: restart supervisor
       service: name=supervisor enabled=yes state=restarted
       when: 
         ansible_os_family == "Debian" or ansible_os_family == "Kali GNU/Linux"
-      tags: restart_supervisord
+      tags: restart_supervisor
