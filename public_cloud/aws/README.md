@@ -40,4 +40,4 @@ https://aws.amazon.com/cn/athena/
 
 # to-do-list
 - 添加一个服务账号，用于各类API调用使用
-- 
+- AWS lightsail
