@@ -39,5 +39,9 @@ opkg install mtr 安装指定的软件包
 opkg remove 卸载已经安装的指定的软件包
 ```
 # to-do-list
-- Let's Encrypt配置HTTPS
-- [ddnsto内网穿透](http://koolshare.cn/thread-116500-1-1.html)
+- ~~Let's Encrypt配置HTTPS~~
+- ~~[ddnsto内网穿透](http://koolshare.cn/thread-116500-1-1.html)~~
+- ~~签到狗~~
+- ~~固件更新~~
+- ~~koolproxy 去广告~~
+- ~~科学上网插件~~
