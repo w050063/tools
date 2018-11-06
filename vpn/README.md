@@ -22,3 +22,8 @@ https://blog.csdn.net/l1028386804/article/details/72180246
 # vpn常见错误码
 - https://support.microsoft.com/en-us/help/824864/list-of-error-codes-for-dial-up-connections-or-vpn-connections
 - https://www.bestvpn.com/guides/vpn-error-code-mean/#vpn-error-code-809
+
+
+# 好用的VPN部署脚本
+- https://github.com/ToyoDAdoubi
+- https://github.com/teddysun/shadowsocks_install
