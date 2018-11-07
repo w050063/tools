@@ -55,3 +55,4 @@ ansible-playbook install_terraform.yml -l localhost
 - [Terraform/Ansible on Cloud--基础设施和应用管理实践](https://yq.aliyun.com/articles/118719)
 - https://github.com/shuaibiyy/awesome-terraform
 - https://github.com/wardviaene/terraform-course
+- https://www.cnblogs.com/hackcrack/tag/terraform/
