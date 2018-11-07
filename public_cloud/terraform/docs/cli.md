@@ -1,27 +1,48 @@
+# 概述
 命令行功能讲解
-# 什么是资源
-基础设施和服务统称为资源，如私有网络、子网、物理机、虚拟机、镜像、专线、NAT网关等等都可以称之为资源。
-
-Terraform把资源大致分为两类：
-- resource
 ```
-resource "资源类名" "映射到本地的唯一资源名" {
-  参数 = 值
-  ...
-}
-```
-这类资源一般是抽象的真正的云服务资源，支持增删改，如私有网络、NAT网关、虚拟机实例
+/usr/local/terraform/bin/terraform -h   
+Usage: terraform [-version] [-help] <command> [args]
 
-- data source
-```
-data "资源类名" "映射到本地的唯一资源名" {
-  参数 = 值
-  ...
-}
-```
-这类资源一般是固定的一些可读资源，如可用区列表、镜像列表。大部分情况下，resource资源也会封装一个data source方法，用于资源查询
+The available commands for execution are listed below.
+The most common, useful commands are shown first, followed by
+less common or more advanced commands. If you're just getting
+started with Terraform, stick with the common commands. For the
+other commands, please read the help and docs before usage.
 
+Common commands:
+   apply              Builds or changes infrastructure
+   console            Interactive console for Terraform interpolations
+   destroy            Destroy Terraform-managed infrastructure
+   env                Workspace management
+   fmt                Rewrites config files to canonical format
+   get                Download and install modules for the configuration
+   graph              Create a visual graph of Terraform resources
+   import             Import existing infrastructure into Terraform
+   init               Initialize a Terraform working directory
+   output             Read an output from a state file
+   plan               Generate and show an execution plan
+   providers          Prints a tree of the providers used in the configuration
+   push               Upload this Terraform module to Atlas to run
+   refresh            Update local state file against real resources
+   show               Inspect Terraform state or plan
+   taint              Manually mark a resource for recreation
+   untaint            Manually unmark a resource as tainted
+   validate           Validates the Terraform files
+   version            Prints the Terraform version
+   workspace          Workspace management
 
+All other commands:
+   debug              Debug output management (experimental)
+   force-unlock       Manually unlock the terraform state
+   state              Advanced state management
+```
+设置命令行补全
+```
+# cat ~/.bashrc
+terraform -install-autocomplete
+```
+# 常用命令总结
 ```
 mkdir gcloud              # 创建项目目录
 terraform init            # 安装依赖各个公有云sdk等
