@@ -1,3 +1,4 @@
+命令行功能讲解
 # 什么是资源
 基础设施和服务统称为资源，如私有网络、子网、物理机、虚拟机、镜像、专线、NAT网关等等都可以称之为资源。
 
@@ -22,7 +23,6 @@ data "资源类名" "映射到本地的唯一资源名" {
 
 
 ```
-
 mkdir gcloud              # 创建项目目录
 terraform init            # 安装依赖各个公有云sdk等
 terraform plan            # 预览计划
@@ -32,7 +32,6 @@ terraform show            # 展示现在状态
 terraform destroy         # 销毁云服务，将tf中的云服务清理干净
 terraform graph | dot -Tsvg > graph.svg     # graph命令结合graphviz工具生成资源执行计划图
 terraform apply -var "machine_type=n1-standard-1" -var "image=centos-7"   # 指定变量值
-
 
 # Input Variables
 定义变量
@@ -51,17 +50,13 @@ provider "aws" {
 
 变量传递赋值
 命令行传递
-$ terraform apply \
-  -var 'access_key=foo' \
-  -var 'secret_key=bar'
+$ terraform apply -var 'access_key=foo' -var 'secret_key=bar'
 
 读取文件内容传递
 $ cat terraform.tfvars
 access_key = "foo"
 secret_key = "bar"
-$ terraform apply \
-  -var-file="secret.tfvars" \
-  -var-file="production.tfvars"
+$ terraform apply -var-file="secret.tfvars" -var-file="production.tfvars"
 
 数据结构
 list
@@ -79,9 +74,3 @@ resource.tf                 -- 资源定义
 data.tf                     -- 包文件定义
 output.tf                   -- 输出
 ```
-# to-do-list
-- terraform-inventory
-- tencent
-- aliyun
-- google
-- aws

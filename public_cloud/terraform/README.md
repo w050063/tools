@@ -43,6 +43,14 @@ git clone http://github.com/mds1455975151/tools.git
 cd tools/ansible/playbook
 ansible-playbook install_terraform.yml -l localhost
 ```
+# to-do-list
+- terraform-inventory
+- tencent
+- aliyun
+- google
+- aws
+
+
 # 参考资料
 - https://github.com/ramitsurana/terraform-ansible-setup
 - https://ramitsurana.github.io/terraform-ansible-setup/
