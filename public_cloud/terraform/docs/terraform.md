@@ -23,14 +23,16 @@ data "资源类名" "映射到本地的唯一资源名" {
 
 ```
 
-mkdir gcloud      # 创建项目目录
-terraform init    # 安装依赖各个公有云sdk等
-terraform plan    # 预览计划
-terraform graph   # 生成执行计划图
-terraform apply   # 真正执行编排
-terraform show    # 展示现在状态
-terraform destroy # 销毁云服务，将tf中的云服务清理干净
+mkdir gcloud              # 创建项目目录
+terraform init            # 安装依赖各个公有云sdk等
+terraform plan            # 预览计划
+terraform graph           # 生成执行计划图
+terraform apply           # 真正执行编排
+terraform show            # 展示现在状态
+terraform destroy         # 销毁云服务，将tf中的云服务清理干净
 terraform graph | dot -Tsvg > graph.svg     # graph命令结合graphviz工具生成资源执行计划图
+terraform apply -var "machine_type=n1-standard-1" -var "image=centos-7"   # 指定变量值
+
 
 # Input Variables
 定义变量

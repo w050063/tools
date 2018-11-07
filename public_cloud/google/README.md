@@ -1,7 +1,16 @@
+# 概述
+官网地址：https://cloud.google.com/
+
+有免费试用12个月政策(12个月时间$300用于消费)
 # 服务列表
+截止到2018.11.07日目前共有7大类，30+个产品/服务
+
+
 ## 计算
 ### Compute Engine
 - 计算实例没有重装功能
+- 重启IP不会变化
+- Google Cloud VM的Disk可以在线动态的进行大小的调整(待实践)
 - 案例：使用MongoDB构建待办事项应用
 https://github.com/GoogleCloudPlatform/todomvc-mongodb.git
 

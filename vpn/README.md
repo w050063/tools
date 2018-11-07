@@ -27,3 +27,7 @@ https://blog.csdn.net/l1028386804/article/details/72180246
 # 好用的VPN部署脚本
 - https://github.com/ToyoDAdoubi
 - https://github.com/teddysun/shadowsocks_install
+
+# ss Web管理界面
+- https://github.com/ssrpanel
+- https://lala.im/931.html
