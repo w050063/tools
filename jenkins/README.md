@@ -1,21 +1,21 @@
-## 资料
+# 概述
 - https://github.com/Neilpang/AutoArchive
 
-### jenkins-pipeline-examples
+# jenkins-pipeline-examples
 - https://github.com/kitconcept/jenkins-pipeline-examples
 - https://github.com/carlossg/jenkins-swarm-slave-docker
 - https://github.com/hibernate/ci.hibernate.org
 - https://github.com/maxfields2000/dockerjenkins_tutorial
 - https://github.com/GoogleCloudPlatform/kube-jenkins-imager
 
-### 插件
+# 插件
 - user build vars
 - build-name-setter
 
-### JX
+# JX
 https://github.com/jenkins-x/jx
 
-### API
+# API
 - 普通触发(建议使用账号名和token,非密码)
 ```
 curl -X POST http://localhost:8080/job/xxx-ci-auto/build --user madongsheng:xxxx
@@ -27,7 +27,7 @@ curl -X POST http://localhost:8080/job/xxx-ci-auto/buildWithParameters -d 'branc
 # 邮件通知规则
 - 构建失败，自动给最后一次提交代码的人员及项目负责人发生通知
 
-### 自定义主题
+# 自定义主题
 - https://wiki.jenkins.io/display/JENKINS/Simple+Theme+Plugin
 - http://afonsof.com/jenkins-material-theme/
 
