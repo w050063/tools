@@ -1,6 +1,36 @@
-# tools
-tools 运维工具总结
-123
+# tools 运维工具总结
+
+- [前言](README.md)
+- [Linux篇](#)
+  - [Linux基础](os/README.md)
+  - [bash基础](shell)
+  - [os](os)
+- [Windows篇](windows/README.md)
+- [公有云](public_cloud)
+  - [AWS](public_cloud/aws)
+  - [GCP](public_cloud/google)
+  - [Aliyun](public_cloud/aliyun)
+  - [Qcloud](public_cloud/qcloud)
+  - [Terraform](public_cloud/terraform)
+  - [Packer](public_cloud/packer)
+  - [Spinnaker](public_cloud/spinnaker)
+- [自动化运维管理](#)
+  - [DevOps](#)
+  - [Jenkins](jenkins)
+  - [GitLab](git/gitlab)
+  - [Ansible](ansible)
+  - [SaltStack](saltstack)
+  - [监控](monitor)
+  - [CDN](cdn)
+  - [DNS](dns)
+  - [容器](containers)
+  - [虚拟化](virtualization)
+- [数据库管理](#)
+  - [MySQL](mysql)
+  - [Redis](redis)
+  - [大数据](bigdata)
+- [其他](#)
+  - [OpenWrt](openwrt)
 
 # 参考资料
 - https://github.com/meetbill/op_practice_book
