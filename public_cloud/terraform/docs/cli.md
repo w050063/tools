@@ -53,6 +53,7 @@ terraform show            # 展示现在状态
 terraform destroy         # 销毁云服务，将tf中的云服务清理干净
 terraform graph | dot -Tsvg > graph.svg     # graph命令结合graphviz工具生成资源执行计划图
 terraform apply -var "machine_type=n1-standard-1" -var "image=centos-7"   # 指定变量值
+terraform apply -var "machine_type=n1-standard-1" -var "image=ubuntu1604-lts"   # 指定变量值
 
 # Input Variables
 定义变量

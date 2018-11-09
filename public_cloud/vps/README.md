@@ -1,12 +1,12 @@
 # 概述
 # VPS
-- [openvz](https://openvz.org/)
 - [linode](https://www.linode.com/)
+- [搬瓦工](Bandwagonhost.com) 镜像站:https://www.bwh8.net/
 - [onevps](https://www.onevps.com/)
+- [openvz](https://openvz.org/)
 - [ConoHa](#)
 - [HostDare](#)
 - https://hostus.us/
-- Bandwagonhost.com
 
 web面板
 - [WDCP](https://www.wdlinux.cn/wdcp/)
