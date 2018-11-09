@@ -2,10 +2,10 @@
 ## MySQL概述
 ## MySQL安装部署
 ``` bash
-wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/install_mysql.sh
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/db/mysql/install_mysql.sh
 sh install_mysql.sh
 
-wget https://raw.githubusercontent.com/mds1455975151/tools/master/mysql/uninstall_mysql.sh
+wget https://raw.githubusercontent.com/mds1455975151/tools/master/db/mysql/uninstall_mysql.sh
 sh uninstall_mysql.sh
 ```
 ## MySQL备份还原
